@@ -1,0 +1,7 @@
+package com.example.Finoana.Core;
+
+public class AbstractEntity {
+	
+	private Long id;
+
+}

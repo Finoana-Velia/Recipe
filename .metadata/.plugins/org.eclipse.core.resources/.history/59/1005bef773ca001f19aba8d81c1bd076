@@ -1,0 +1,9 @@
+package com.example.Finoana.Core;
+
+public class AbstractEntity {
+	
+	private Long id;
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
+
+}

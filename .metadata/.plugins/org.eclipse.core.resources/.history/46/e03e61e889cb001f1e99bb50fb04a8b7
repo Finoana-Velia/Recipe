@@ -1,0 +1,5 @@
+package com.example.Finoana.Exception;
+
+public class NotAuthorizedException {
+
+}

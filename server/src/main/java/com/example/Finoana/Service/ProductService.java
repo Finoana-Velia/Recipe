@@ -10,7 +10,7 @@ public interface ProductService {
 
 	Page<ProductDto> findProductName(String name,Pageable pageable);
 	ProductDto findProductById(Long id);
-	ProductDto createProduct(Product product);
-	ProductDto updateProduct(Long id,Product product);
+	ProductDto createProduct(ProductDto product);
+	ProductDto updateProduct(Long id,ProductDto product);
 	void deleteProductById(Long id);
 }

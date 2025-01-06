@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Override
 	public Page<ProductDto> findProductName(String name, Pageable pageable) {
-		return this.productRepository.findProductByName(name, pageable).map(
+		return this.productRepository.findProductByName("%"+name+"%", pageable).map(
 					product -> toDto(product,ProductDto.class)
 				);
 	}
@@ -38,17 +38,26 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public ProductDto createProduct(Product product) {
-		product.setCreatedAt(LocalDateTime.now());
-		Product productSave = this.productRepository.save(product);
-		return toDto(productSave,ProductDto.class);
+	public ProductDto createProduct(ProductDto product) {
+		Product productMapped = toEntity(product, Product.class);
+		productMapped.setCreatedAt(LocalDateTime.now());
+		Product productSaved = this.productRepository.save(productMapped);
+		return toDto(productSaved,ProductDto.class);
 	}
 
 	@Override
-	public ProductDto updateProduct(Long id, Product product) {
+	public ProductDto updateProduct(Long id, ProductDto productDto) {
+		Product product = toEntity(productDto, Product.class);
+		product.setUpdatedAt(LocalDateTime.now());
 		return this.productRepository.findById(id)
-				.map(productFound -> this.productRepository.save(product))
-				.map(productUpdate -> toDto(product,ProductDto.class)).orElseThrow(
+				.map(productFound -> {
+					if(product.getImage() == null) {
+						product.setImage(productFound.getImage());
+					}
+					Product productUpdate = this.productRepository.save(product);
+					return toDto(productUpdate,ProductDto.class);
+				})
+				.orElseThrow(
 						() -> new ResourceNotFoundException("Product with id " + id + " not found")
 				);
 	}

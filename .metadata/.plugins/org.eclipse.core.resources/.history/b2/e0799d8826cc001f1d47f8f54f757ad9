@@ -1,0 +1,74 @@
+package com.example.Finoana.Controller;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.Finoana.Dto.ProductDto;
+import com.example.Finoana.Service.ProductService;
+
+import lombok.AllArgsConstructor;
+
+@RestController
+@AllArgsConstructor
+@RequestMapping("/api/v1/products")
+public class ProductController {
+
+	private ProductService productService;
+	
+	@GetMapping
+	public ResponseEntity<Page<ProductDto>> findByName(
+			@RequestParam(defaultValue="")String name,
+			@RequestParam int page,
+			@RequestParam int size
+			){
+		PageRequest request = PageRequest.of(page, size);
+		Page<ProductDto> products = this.productService.findProductName(name, request);
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(products);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<ProductDto> findroductById(
+			@PathVariable Long id
+			) {
+		ProductDto product = this.productService.findProductById(id);
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(product);
+	}
+	
+	@GetMapping("/image")
+	@ResponseBody
+	public byte[] getImage(Long id) {
+		return null;
+	}
+	
+	@PostMapping
+	public ResponseEntity<ProductDto> saveProduct() {
+		return null;
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<ProductDto> updateProduct(
+			@PathVariable Long id
+			){
+		return null;
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+		return null;
+	}
+}

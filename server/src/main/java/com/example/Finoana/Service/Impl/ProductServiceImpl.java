@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService{
 	private ProductRepository productRepository;
 	
 	@Override
-	public Page<ProductDto> findProductName(String name, Pageable pageable) {
+	public Page<ProductDto> findProductByName(String name, Pageable pageable) {
 		return this.productRepository.findProductByName("%"+name+"%", pageable).map(
 					product -> toDto(product,ProductDto.class)
 				);

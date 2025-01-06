@@ -28,7 +28,7 @@ public class Product {
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	private String name;
-	private BigDecimal price;
+	private double price;
 	private int quantity;
 	private String image;
 	

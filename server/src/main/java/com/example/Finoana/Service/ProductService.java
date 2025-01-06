@@ -8,7 +8,7 @@ import com.example.Finoana.Entity.Product;
 
 public interface ProductService {
 
-	Page<ProductDto> findProductName(String name,Pageable pageable);
+	Page<ProductDto> findProductByName(String name,Pageable pageable);
 	ProductDto findProductById(Long id);
 	ProductDto createProduct(ProductDto product);
 	ProductDto updateProduct(Long id,ProductDto product);

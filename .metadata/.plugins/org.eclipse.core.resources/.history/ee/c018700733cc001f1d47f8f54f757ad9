@@ -1,0 +1,103 @@
+package com.example.Finoana.Sevices;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+
+import com.example.Finoana.Dto.ProductDto;
+import com.example.Finoana.Entity.Product;
+import com.example.Finoana.Repository.ProductRepository;
+import com.example.Finoana.Service.Impl.ProductServiceImpl;
+
+@ExtendWith(MockitoExtension.class)
+public class ProductTestService {
+	
+	@Mock
+	ProductRepository productRepository;
+	
+	@InjectMocks
+	ProductServiceImpl productService;
+	
+	List<Product> productList;
+	PageRequest request;
+	
+	
+	@BeforeEach
+	void setUp() {
+		productList = generateProduct();
+		request = PageRequest.of(0,10);
+	}
+	
+	@Test
+	@DisplayName("Test find product by name")
+	void testFindByName() {
+		String name = "Coca cola";
+		Product product = productList.get(0);
+		 
+		when(productRepository.findProductByName("%"+name+"%", request))
+		.thenReturn(new PageImpl<>(List.of(product)));
+		
+		Page<ProductDto> response = productService.findProductByName(name, request);
+		
+		assertAll(
+				() -> assertNotNull(response),
+				() -> assertEquals("Coca Cola",response.getContent().get(0).getName())
+				);
+	}
+	
+	List<Product> generateProduct(){
+		return List.of(
+				Product.builder()
+				.name("Coca Cola")
+				.image("coca.jpeg")
+				.price(1500.00)
+				.quantity(10)
+				.build(),
+				Product.builder()
+				.name("T-shirt")
+				.image("coca.jpeg")
+				.price(1500.00)
+				.quantity(10)
+				.build(),
+				Product.builder()
+				.name("Smart Watch")
+				.image("coca.jpeg")
+				.price(1500.00)
+				.quantity(10)
+				.build(),
+				Product.builder()
+				.name("Pizza")
+				.image("coca.jpeg")
+				.price(1500.00)
+				.quantity(10)
+				.build(),
+				Product.builder()
+				.name("Super Shoes")
+				.image("coca.jpeg")
+				.price(1500.00)
+				.quantity(10)
+				.build(),
+				Product.builder()
+				.name("Laptop")
+				.image("coca.jpeg")
+				.price(1500.00)
+				.quantity(10)
+				.build()
+				);
+	}
+
+}

@@ -47,7 +47,7 @@ public class ProductController {
 			@RequestParam int size
 			){
 		PageRequest request = PageRequest.of(page, size);
-		Page<ProductDto> products = this.productService.findProductName(name, request);
+		Page<ProductDto> products = this.productService.findProductByName(name, request);
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(products);

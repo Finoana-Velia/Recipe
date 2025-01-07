@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="ProductTestService" project="server" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.example.Finoana.Sevices.ProductTestService" time="2.0" displayname="ProductTestService" uniqueid="[engine:junit-jupiter]/[class:com.example.Finoana.Sevices.ProductTestService]">
-    <testcase name="testFindByName" classname="com.example.Finoana.Sevices.ProductTestService" time="2.0" displayname="Test find product by name" uniqueid="[engine:junit-jupiter]/[class:com.example.Finoana.Sevices.ProductTestService]/[method:testFindByName()]"/>
-  </testsuite>
-</testrun>

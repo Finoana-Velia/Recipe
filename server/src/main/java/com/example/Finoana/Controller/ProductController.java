@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.Finoana.Core.FileManagement;
 import com.example.Finoana.Dto.ProductDto;
-import com.example.Finoana.Entity.Product;
 import com.example.Finoana.Service.ProductService;
 
 import static com.example.Finoana.Core.FileManagement.getFile;
@@ -43,8 +41,8 @@ public class ProductController {
 	@GetMapping
 	public ResponseEntity<Page<ProductDto>> findByName(
 			@RequestParam(defaultValue="")String name,
-			@RequestParam int page,
-			@RequestParam int size
+			@RequestParam(defaultValue="0") int page,
+			@RequestParam(defaultValue="10") int size
 			){
 		PageRequest request = PageRequest.of(page, size);
 		Page<ProductDto> products = this.productService.findProductByName(name, request);

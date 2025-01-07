@@ -51,9 +51,10 @@ public class ProductServiceImpl implements ProductService{
 		product.setUpdatedAt(LocalDateTime.now());
 		return this.productRepository.findById(id)
 				.map(productFound -> {
-					if(product.getImage() == null) {
+					if(product.getImage() == null || product.getImage() == "") {
 						product.setImage(productFound.getImage());
 					}
+					product.setCreatedAt(productFound.getCreatedAt());
 					Product productUpdate = this.productRepository.save(product);
 					return toDto(productUpdate,ProductDto.class);
 				})

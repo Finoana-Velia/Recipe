@@ -5,6 +5,7 @@ import { SuperQualityComponent } from '../super-quality/super-quality.component'
 import { AboutComponent } from '../../about/about.component';
 import { CustomerComponent } from '../../customer/customer.component';
 import { SubscribeComponent } from '../../subscribe/subscribe.component';
+import { FooterComponent } from '../../../layout/footer/footer.component';
 
 @Component({
   selector: 'app-product-list',
@@ -14,7 +15,8 @@ import { SubscribeComponent } from '../../subscribe/subscribe.component';
     SuperQualityComponent,
     AboutComponent,
     CustomerComponent,
-    SubscribeComponent
+    SubscribeComponent,
+    FooterComponent
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'

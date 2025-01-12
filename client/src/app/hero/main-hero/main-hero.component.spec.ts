@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubscribeComponent } from './subscribe.component';
+import { MainHeroComponent } from './main-hero.component';
 
-describe('SubscribeComponent', () => {
-  let component: SubscribeComponent;
-  let fixture: ComponentFixture<SubscribeComponent>;
+describe('MainHeroComponent', () => {
+  let component: MainHeroComponent;
+  let fixture: ComponentFixture<MainHeroComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SubscribeComponent]
+      imports: [MainHeroComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SubscribeComponent);
+    fixture = TestBed.createComponent(MainHeroComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

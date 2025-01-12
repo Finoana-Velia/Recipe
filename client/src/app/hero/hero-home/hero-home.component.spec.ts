@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SuperQualityComponent } from './super-quality.component';
+import { HeroHomeComponent } from './hero-home.component';
 
-describe('SuperQualityComponent', () => {
-  let component: SuperQualityComponent;
-  let fixture: ComponentFixture<SuperQualityComponent>;
+describe('HeroHomeComponent', () => {
+  let component: HeroHomeComponent;
+  let fixture: ComponentFixture<HeroHomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SuperQualityComponent]
+      imports: [HeroHomeComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SuperQualityComponent);
+    fixture = TestBed.createComponent(HeroHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

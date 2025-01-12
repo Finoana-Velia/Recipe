@@ -2,15 +2,14 @@ import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-customer',
+  selector: 'app-hero-customer',
   imports: [
     NgForOf
   ],
-  templateUrl: './customer.component.html',
-  styleUrl: './customer.component.css'
+  templateUrl: './hero-customer.component.html',
+  styleUrl: './hero-customer.component.css'
 })
-export class CustomerComponent {
-
+export class HeroCustomerComponent {
   customers = [
     {
       completeName : "John Doe",
@@ -21,5 +20,4 @@ export class CustomerComponent {
       rate : 8.5
     }
   ]
-
 }

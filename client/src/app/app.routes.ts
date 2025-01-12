@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainComponent } from './layout/main/main.component';
-import { ProductListComponent } from './feature/product/product-list/product-list.component';
+import { MainHeroComponent } from './hero/main-hero/main-hero.component';
 
 export const routes: Routes = [
-    { path : "", component : ProductListComponent},
+    { path : "", component : MainHeroComponent},
 ];

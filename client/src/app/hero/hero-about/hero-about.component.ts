@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
-import { Product } from '../product/product-modal/product';
+import { Product } from '../../feature/product/product-modal/product';
 import { NgForOf } from '@angular/common';
 
 @Component({
-  selector: 'app-about',
+  selector: 'app-hero-about',
   imports: [
     NgForOf
   ],
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.css'
+  templateUrl: './hero-about.component.html',
+  styleUrl: './hero-about.component.css'
 })
-export class AboutComponent {
-
+export class HeroAboutComponent {
   product : Product[] = [
     {
       name : "Coca Cola",

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Product } from '../../feature/product/product-modal/product';
 import { NgForOf } from '@angular/common';
 
 @Component({
@@ -11,7 +10,7 @@ import { NgForOf } from '@angular/common';
   styleUrl: './hero-about.component.css'
 })
 export class HeroAboutComponent {
-  product : Product[] = [
+  product : any[] = [
     {
       name : "Coca Cola",
       price : 1500.00

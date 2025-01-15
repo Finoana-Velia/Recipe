@@ -12,16 +12,19 @@ import { NgForOf } from '@angular/common';
 export class HeroAboutComponent {
   product : any[] = [
     {
-      name : "Coca Cola",
-      price : 1500.00
+      name : "veliafinoanapatrick@gmail.com",
+      title : "Email Us",
+      icons : "fa fa-envelope"
     },
     {
-      name : "Pizza",
-      price : 10000.00,
+      name : "+ 261 32 52 699 40",
+      title : "Call Us",
+      icons : "fa fa-phone"
     },
     {
-      name : "T-shirt",
-      price : 500.00
+      name : "105 Garden Road New York",
+      title : "Location",
+      icons : ''
     },
   ]
 }

@@ -24,7 +24,7 @@ export class HeroAboutComponent {
     {
       name : "105 Garden Road New York",
       title : "Location",
-      icons : ''
+      icons : 'fa fa-location-arrow'
     },
   ]
 }

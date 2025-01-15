@@ -13,11 +13,13 @@ export class HeroCustomerComponent {
   customers = [
     {
       completeName : "John Doe",
-      rate : 7.5
+      rate : 7.5,
+      imgUrl : "images/chief3.png"
     },
     {
-      completeName : "Jane Dowson",
-      rate : 8.5
+      completeName : "Joe Dowson",
+      rate : 8.5,
+      imgUrl : "images/chief2.png"
     }
   ]
 }

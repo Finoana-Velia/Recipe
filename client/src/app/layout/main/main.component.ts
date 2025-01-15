@@ -8,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class MainComponent {
 
+  toggleChange : boolean = true;
+
+  change() {
+    this.toggleChange = !this.toggleChange;
+  }
+
 }

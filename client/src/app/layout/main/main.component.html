@@ -1,5 +1,83 @@
-<header>
-  <nav>
+<div class="flex">
+  <div class="bg-lime-500 h-screen p-5 pt-8 {{toggleChange ? 'w-72' : 'w-20'}} duration-300 relative">
     
-  </nav>
-</header>
+    <button 
+      class="bg-white rounded-full w-8 h-8 
+      flex justify-center items-center 
+      rounded-full absolute -right-3 top-9
+      border border-lime-600"
+      (click)="change()"
+    >
+      <i class="fa fa-arrow-left text-lime-500 text-3xl {{toggleChange ? 'rotate-180' : ''}}"></i>
+    </button>
+    
+    <div class="{{ toggleChange ? 'w-50 h-40' : 'w-[40px] h-[40px]'}} duration-300 p-0">
+      <img src="images/Ginyard-removebg-preview.png" class="w-full h-full object-cover" alt="">
+    </div>
+    
+    <ul class="pt-2">
+      <li class="text-lime-900 text-xl 
+      flex items-center gap-x-4 
+      cursor-pointer p-2
+      hover:bg-lime-200 rounded-md mt-2 ml-1">
+        <i class="fa fa-dashboard text-2xl block float-left"></i>
+        <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Dashboard</span>
+      </li>
+      <li class="text-lime-900 text-xl 
+      flex items-center gap-x-4 
+      cursor-pointer p-2
+      hover:bg-lime-200 rounded-md mt-2 ml-1">
+        <i class="fa fa-cutlery text-2xl block float-left"></i>
+        <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Products</span>
+        <i class="fa fa-chevron-right text-md rotate-90"></i>
+        
+      </li>
+      <ul>
+        <li>
+          Drinks
+        </li>
+        <li>
+          Dish
+        </li>
+        <li>
+          Pizza
+        </li>
+        <li>
+          Noodles
+        </li>
+      </ul>
+      <li class="text-lime-900 text-xl 
+      flex items-center gap-x-4 
+      cursor-pointer p-2
+      hover:bg-lime-200 rounded-md mt-2 ml-1">
+        <i class="fa fa-user text-2xl block float-left"></i>
+        <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Chef</span>
+      </li>
+      <li class="text-lime-900 text-xl 
+      flex items-center gap-x-4 
+      cursor-pointer p-2
+      hover:bg-lime-200 rounded-md mt-2 ml-1">
+        <i class="fa fa-ticket text-2xl block float-left"></i>
+        <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Tickets</span>
+      </li>
+
+      <li class="text-lime-900 text-xl 
+      flex items-center gap-x-4 
+      cursor-pointer p-2
+      hover:bg-lime-200 rounded-md mt-9 ml-1">
+        <i class="fa fa-cogs text-2xl block float-left"></i>
+        <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Settings</span>
+      </li>
+      <li class="text-lime-900 text-xl 
+      flex items-center gap-x-4 
+      cursor-pointer p-2
+      hover:bg-lime-200 rounded-md mt-2 ml-1">
+        <i class="fa fa-sign-out text-2xl block float-left"></i>
+        <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Logout</span>
+      </li>
+    </ul>
+  </div>
+  <div class="p-7">
+    <h1 class="text-2xl font-semibold">Home Page</h1>
+  </div>
+</div>

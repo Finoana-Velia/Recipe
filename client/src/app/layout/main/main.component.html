@@ -16,64 +16,77 @@
     </div>
     
     <ul class="pt-2">
-      <li class="text-lime-900 text-xl 
-      flex items-center gap-x-4 
-      cursor-pointer p-2
-      hover:bg-lime-200 rounded-md mt-2 ml-1">
-        <i class="fa fa-dashboard text-2xl block float-left"></i>
-        <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Dashboard</span>
+      <li>
+        <a class="text-lime-900 text-xl 
+        flex items-center gap-x-4 
+        cursor-pointer p-2
+        hover:bg-lime-200 rounded-md mt-2 ml-1">
+          <i class="fa fa-dashboard text-2xl block float-left"></i>
+          <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Dashboard</span>
+        </a>
       </li>
       <li class="text-lime-900 text-xl 
       flex items-center gap-x-4 
       cursor-pointer p-2
-      hover:bg-lime-200 rounded-md mt-2 ml-1">
+      hover:bg-lime-200 rounded-md mt-2 ml-1" (click)="openSubmenu()">
         <i class="fa fa-cutlery text-2xl block float-left"></i>
         <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Products</span>
-        <i class="fa fa-chevron-right text-md rotate-90"></i>
-        
+        <i *ngIf="toggleChange" class="fa fa-chevron-right text-md {{toggleSubMenu ? 'rotate-90' : ''}}"></i>
       </li>
-      <ul>
+      <ul class="duration-300" *ngIf="toggleSubMenu && toggleChange">
         <li>
-          Drinks
+          <a class="text-lime-800 text-sm flex items-center gap-x-4
+          curosor-pointer p-2 px-5 hover:bg-lime-200 rounded-md">Drinks</a>
         </li>
         <li>
-          Dish
+          <a class="text-lime-800 text-sm flex items-center gap-x-4
+          curosor-pointer p-2 px-5 hover:bg-lime-200 rounded-md">Pizzas</a>
         </li>
         <li>
-          Pizza
+          <a class="text-lime-800 text-sm flex items-center gap-x-4
+          curosor-pointer p-2 px-5 hover:bg-lime-200 rounded-md">Dishs</a>
         </li>
         <li>
-          Noodles
+          <a class="text-lime-800 text-sm flex items-center gap-x-4
+          curosor-pointer p-2 px-5 hover:bg-lime-200 rounded-md">Noodles</a>
         </li>
       </ul>
-      <li class="text-lime-900 text-xl 
-      flex items-center gap-x-4 
-      cursor-pointer p-2
-      hover:bg-lime-200 rounded-md mt-2 ml-1">
-        <i class="fa fa-user text-2xl block float-left"></i>
-        <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Chef</span>
+      <li>
+        <a class="text-lime-900 text-xl 
+        flex items-center gap-x-4 
+        cursor-pointer p-2
+        hover:bg-lime-200 rounded-md mt-2 ml-1">
+          <i class="fa fa-user text-2xl block float-left"></i>
+          <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Chef</span>
+        </a>
       </li>
-      <li class="text-lime-900 text-xl 
-      flex items-center gap-x-4 
-      cursor-pointer p-2
-      hover:bg-lime-200 rounded-md mt-2 ml-1">
-        <i class="fa fa-ticket text-2xl block float-left"></i>
-        <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Tickets</span>
+      <li>
+        <a class="text-lime-900 text-xl 
+        flex items-center gap-x-4 
+        cursor-pointer p-2
+        hover:bg-lime-200 rounded-md mt-2 ml-1">
+          <i class="fa fa-ticket text-2xl block float-left"></i>
+          <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Tickets</span> 
+        </a>
       </li>
 
-      <li class="text-lime-900 text-xl 
-      flex items-center gap-x-4 
-      cursor-pointer p-2
-      hover:bg-lime-200 rounded-md mt-9 ml-1">
-        <i class="fa fa-cogs text-2xl block float-left"></i>
-        <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Settings</span>
+      <li>
+        <a class="text-lime-900 text-xl 
+        flex items-center gap-x-4 
+        cursor-pointer p-2
+        hover:bg-lime-200 rounded-md mt-9 ml-1">
+          <i class="fa fa-cogs text-2xl block float-left"></i>
+          <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Settings</span>
+        </a>
       </li>
-      <li class="text-lime-900 text-xl 
-      flex items-center gap-x-4 
-      cursor-pointer p-2
-      hover:bg-lime-200 rounded-md mt-2 ml-1">
-        <i class="fa fa-sign-out text-2xl block float-left"></i>
-        <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Logout</span>
+      <li>
+        <a class="text-lime-900 text-xl 
+        flex items-center gap-x-4 
+        cursor-pointer p-2
+        hover:bg-lime-200 rounded-md mt-2 ml-1">
+          <i class="fa fa-sign-out text-2xl block float-left"></i>
+          <span class="font-medium flex-1 {{ !toggleChange ? 'hidden' : ''}} duration-500">Logout</span>
+        </a>
       </li>
     </ul>
   </div>

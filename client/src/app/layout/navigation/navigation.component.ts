@@ -11,10 +11,16 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class NavigationComponent {
 
+  hidden : boolean = false;
+
   constructor(private router : Router){}
 
   register(){
     this.router.navigate(['register']);
+  }
+
+  toggleHidden(){
+    this.hidden = !this.hidden;
   }
 
 }

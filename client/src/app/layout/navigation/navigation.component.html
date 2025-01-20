@@ -1,5 +1,4 @@
-<!-- it miss absolute class in header -->
-<header class="absolute z-10 w-full">
+<!-- <header class="absolute z-10 w-full">
     <nav class="flex justify-between items-center">
         <a href="#" class="outline-none">
             <img 
@@ -9,25 +8,24 @@
                 height="29"
             />
         </a>
-        <!-- <ul class="flex-1 flex justify-center items-center gap-16 max-lg:hidden"> -->
-        <ul class="flex-1 flex justify-center items-center gap-16">
+        <ul class="flex-1 flex justify-center items-center gap-16 max-lg:hidden">
             <li>
-                <a class="font-monts errat leading-normal text-lg text-slate-gray">
+                <a hre="#" class="leading-normal text-lg text-slate-gray">
                     Home
                 </a>
             </li>
             <li>
-                <a href="#products" class="font-monts errat leading-normal text-lg text-slate-gray">
+                <a href="#products" class="leading-normal text-lg text-slate-gray">
                     Products
                 </a>
             </li>
             <li>
-                <a href="#about us" class="font-monts errat leading-normal text-lg text-slate-gray">
+                <a href="#about us" class="leading-normal text-lg text-slate-gray">
                     About Us
                 </a>
             </li>
             <li>
-                <a href="#contact" class="font-monts errat leading-normal text-lg text-slate-gray">
+                <a href="#contact" class="leading-normal text-lg text-slate-gray">
                     Contact Us
                 </a>
             </li>
@@ -50,4 +48,67 @@
         
 
     </nav>
+
+</header> -->
+
+<header class="w-full z-10 {{hidden ? '' : 'absolute'}}">
+    <nav class="flex justify-between items-center">
+        <a href="">
+            <img 
+                src="images/Ginyard-removebg-preview.png"
+                alt="logo"
+                width="130"
+                height="29"
+            />
+        </a>
+        <ul class="flex flex-1 justify-center items-center gap-16 max-lg:hidden">
+            <li>
+                <a hre="#" class="leading-normal text-lg text-slate-gray">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="#products" class="leading-normal text-lg text-slate-gray">
+                    Products
+                </a>
+            </li>
+            <li>
+                <a href="#about us" class="leading-normal text-lg text-slate-gray">
+                    About Us
+                </a>
+            </li>
+            <li>
+                <a href="#contact" class="leading-normal text-lg text-slate-gray">
+                    Contact Us
+                </a>
+            </li>
+        </ul>
+        <div class="max-lg:hidden">
+            <a href="#" class="font-bold mx-1" routerLink="auth">
+                Sign In
+            </a>
+            <button class="border-2 border-lime-900 mx-5 rounded-[20px] px-5 py-2 text-lime-900
+            hover:text-white hover:bg-lime-400 hover:border-lime-400 font-bold" (click)="register()">
+                Sign Up
+            </button>
+        </div>
+        <button class="hidden max-lg:block mr-10 text-3xl" (click)="toggleHidden()">
+            <i class="fa fa-bars text-8xl"></i>
+        </button>
+    </nav>
+    <div class="hidden {{hidden ? 'max-lg:block duration-300' : ''}}">
+        <ul class="gap-16 p-5 duration-300">
+            <li class="text-lg my-5">Home</li>
+            <li class="text-lg my-5">Products</li>
+            <li class="text-lg my-5">About us</li>
+            <li class="text-lg my-5">Contact us</li>
+        </ul>
+        <div class="p-5">
+            <a href="" class="font-bold mx-1">Login</a>
+            <button class="border-2 border-lime-900 mx-5 rounded-[20px] px-5 py-2 text-lime-900
+            hover:text-white hover:bg-lime-400 hover:border-lime-400 font-bold" (click)="register()">
+                Sign Up
+            </button>
+        </div>
+    </div>
 </header>

@@ -1,0 +1,97 @@
+<div class="flex justify-between items-center max-sm:block">
+    <h2 class="text-3xl font-bold text-lime-900">Chef List</h2>
+    <form class="flex justify-center items-center relative">
+        <input type="text" placeholder="Chef's name"
+         class="bg-white px-5 py-2 text-xl w-full rounded-full"
+        >  
+        <button class="absolute right-3">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+</div>
+
+<div class="mt-5">
+    <div class="min-h-[350px] w-full bg-white shadow-xl p-1">
+        <table class="w-full">
+            <thead class="font-bold text-xl bg-lime-400">
+                <th>Id</th>
+                <th>Profile</th>
+                <th>Complete Name</th>
+                <th>Mark</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                <tr class="border-b border-gray-200 py-2">
+                    <td>1</td>
+                    <td>
+                        <div class="w-[70px] h-[70px] m-auto">
+                            <img src="images/chief1.jpg" alt="" class="w-full h-full object-cover rounded-full">
+                        </div> 
+                    </td>
+                    <td>First chef</td>
+                    <td>6.5</td>
+                    <td>
+                        <div class="flex justify-center items-center">
+                            <a routerLink="/auth/chef/form" class="bg-blue-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a class="bg-red-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="border-b border-gray-200 py-2">
+                    <td>2</td>
+                    <td>
+                        <div class="w-[70px] h-[70px] m-auto">
+                            <img src="images/chief2.png" alt="" class="w-full h-full object-cover rounded-full">
+                        </div> 
+                    </td>
+                    <td>Second chef</td>
+                    <td>7.5</td>
+                    <td>
+                        <div class="flex justify-center items-center">
+                            <a routerLink="/auth/chef/form" class="bg-blue-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a class="bg-red-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="border-b border-gray-200 py-2">
+                    <td>3</td>
+                    <td>
+                        <div class="w-[70px] h-[70px] m-auto">
+                            <img src="images/chief3.png" alt="" class="w-full h-full object-cover rounded-full">
+                        </div> 
+                    </td>
+                    <td>Third chef</td>
+                    <td>8</td>
+                    <td>
+                        <div class="flex justify-center items-center">
+                            <a 
+                                class="bg-blue-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1"
+                                routerLink="/auth/chef/form"
+                            >
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a class="bg-red-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center mt-2">
+            <button class="px-7 py-1 bg-lime-400 text-white rounded-full" routerLink="/auth/chef/form">
+                <i class="fa fa-plus"></i>
+                Add
+            </button>
+        </div>
+        <app-pagination></app-pagination>
+    </div>
+</div>

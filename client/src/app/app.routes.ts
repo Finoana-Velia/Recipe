@@ -4,6 +4,8 @@ import { MainHeroComponent } from './hero/main-hero/main-hero.component';
 import { AuthComponent } from './core/components/auth/auth.component';
 import { RegisterComponent } from './core/components/register/register.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { ChefListComponent } from './features/chef/components/chef-list/chef-list.component';
+import { ChefFormComponent } from './features/chef/components/chef-form/chef-form.component';
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
@@ -11,7 +13,9 @@ export const routes: Routes = [
     { path : "register", component : RegisterComponent},
     { path : "auth", component : MainComponent,
         children : [
-            { path : '', component : DashboardComponent}
+            { path : '', component : DashboardComponent},
+            { path : 'chef', component : ChefListComponent},
+            { path : 'chef/form', component : ChefFormComponent}
         ]
     }
 ];

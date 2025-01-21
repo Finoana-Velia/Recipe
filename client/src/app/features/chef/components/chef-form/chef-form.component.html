@@ -1,0 +1,54 @@
+<h2 class="text-3xl font-bold text-lime-900">Chef form</h2>
+<div class="mt-5 min-h-[350px] w-full bg-white shadow-xl p-1">
+    <div class="grid grid-cols-2 gap-2 max-md:grid-cols-1">
+        <div class="w-full h-full text-center">
+            <h3 class="text-3xl font-bold">Profile</h3>  
+            <div class="w-[250px] h-[250px] mx-auto my-10 border border-lime-500 rounded-full flex justify-center items-center relative">
+                <img src="images/chief1.jpg" alt="" class="w-full h-full object-cover rounded-full">
+                <button class="bg-lime-400 p-1 flex justify-center items-center text-white rounded-full absolute bottom-0 right-0">
+                    <i class="fa fa-camera"></i>
+                </button>
+            </div>
+        </div>
+        <div class="w-full h-full p-2">
+            <h3 class="text-3xl font-bold text-lime-900 text-center">Information</h3>
+            <form action="">
+                <div class="grid grid-cols-2 my-5 gap-2">
+                    <input type="text" class="px-5 py-2 bg-gray-100 outline-none w-full" placeholder="First name">
+                    <input type="text" class="px-5 py-2 bg-gray-100 outline-none w-full" placeholder="Last name">
+                </div>
+                <div class="grid grid-cols-2 my-5 gap-2">
+                   <div>
+                        <label for="birthdate">Birthdate</label>
+                        <input type="date" class="px-5 py-2 bg-gray-100 outline-none w-full">
+                   </div>
+                   <div>
+                        <label for="gender">Gender</label>
+                        <select id="gender" class="px-5 py-2 outline-none w-full text-xl">
+                            <option value="MAN">MAN</option>
+                            <option value="WOMAN">WOMAN</option>
+                            <option value="OTHERS">OTHERS</option>
+                        </select>
+                    </div>
+                </div>
+                <select class="px-5 py-2 bg-gray-100 outline-none w-full">
+                    <option value="">Specialities...</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="Drinks">Drinks</option>
+                    <option value="Dish">Dish</option>
+                    <option value="Pizzas">Pizzas</option>
+                </select>
+                <textarea placeholder="Description" class="px-5 py-2 bg-gray-100 outline-none w-full my-5 h-[150px]"></textarea>
+                <div>
+                    <button class="px-5 py-2 bg-blue-600 text-white mx-1 rounded-[10px]">
+                        <i class="fa fa-save"></i>
+                        Save
+                    </button>
+                    <button class="px-5 py-2 bg-red-500 text-white mx-1 rounded-[10px]">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.Finoana.Dto.ProductDto;
+import com.example.Finoana.Dto.ProductRequestDto;
+import com.example.Finoana.Dto.ProductResponseDto;
 import com.example.Finoana.Service.ProductService;
 
 import static com.example.Finoana.Core.FileManagement.getFile;
@@ -39,23 +41,23 @@ public class ProductController {
 	private ProductService productService;
 	
 	@GetMapping
-	public ResponseEntity<Page<ProductDto>> findByName(
+	public ResponseEntity<Page<ProductResponseDto>> findByName(
 			@RequestParam(defaultValue="")String name,
 			@RequestParam(defaultValue="0") int page,
 			@RequestParam(defaultValue="10") int size
 			){
 		PageRequest request = PageRequest.of(page, size);
-		Page<ProductDto> products = this.productService.findProductByName(name, request);
+		Page<ProductResponseDto> products = this.productService.findProductByName(name, request);
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(products);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<ProductDto> findroductById(
+	public ResponseEntity<ProductResponseDto> findroductById(
 			@PathVariable Long id
 			) {
-		ProductDto product = this.productService.findProductById(id);
+		ProductResponseDto product = this.productService.findProductById(id);
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(product);
@@ -69,11 +71,11 @@ public class ProductController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ProductDto> saveProduct(
-			ProductDto product,
+	public ResponseEntity<ProductResponseDto> saveProduct(
+			ProductRequestDto product,
 			@RequestParam MultipartFile file
 			) throws Exception{
-		ProductDto productResponse;
+		ProductResponseDto productResponse;
 		if(!file.isEmpty()) {
 			product.setImage(file.getOriginalFilename());
 			productResponse = this.productService.createProduct(product);
@@ -86,13 +88,13 @@ public class ProductController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<ProductDto> updateProduct(
+	public ResponseEntity<ProductResponseDto> updateProduct(
 			@PathVariable Long id,
-			ProductDto product,
+			ProductRequestDto product,
 			@RequestParam(required = false) MultipartFile file
 			) throws Exception {
 		product.setId(id);
-		ProductDto productResponse;
+		ProductResponseDto productResponse;
 		if(file != null) {
 			product.setImage(file.getOriginalFilename());
 			productResponse = this.productService.updateProduct(id, product);

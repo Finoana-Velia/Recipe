@@ -21,6 +21,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import com.example.Finoana.Dto.ProductDto;
+import com.example.Finoana.Dto.ProductResponseDto;
 import com.example.Finoana.Entity.Product;
 import com.example.Finoana.Exception.ResourceNotFoundException;
 import com.example.Finoana.Repository.ProductRepository;
@@ -54,7 +55,7 @@ public class ProductTestService {
 		when(productRepository.findProductByName("%"+name+"%", request))
 		.thenReturn(new PageImpl<>(List.of(product)));
 		
-		Page<ProductDto> response = productService.findProductByName(name, request);
+		Page<ProductResponseDto> response = productService.findProductByName(name, request);
 		
 		assertAll(
 				() -> assertNotNull(response),
@@ -68,7 +69,7 @@ public class ProductTestService {
 		when(productRepository.findProductByName("%%", request))
 		.thenReturn(new PageImpl<>(productList));
 		
-		Page<ProductDto> response = productService.findProductByName("",request);
+		Page<ProductResponseDto> response = productService.findProductByName("",request);
 		
 		assertAll(
 				() -> assertNotNull(response),
@@ -84,7 +85,7 @@ public class ProductTestService {
 	void testFindByIdSucceed() {
 		Long id = 1L;
 		when(productRepository.findById(id)).thenReturn(Optional.of(productList.get(0)));
-		ProductDto response = productService.findProductById(id);
+		ProductResponseDto response = productService.findProductById(id);
 		
 		assertAll(
 				() -> assertNotNull(response),

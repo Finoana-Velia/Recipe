@@ -5,6 +5,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.Finoana.Dto.ProductDto;
+import com.example.Finoana.Dto.ProductRequestDto;
+import com.example.Finoana.Dto.ProductResponseDto;
 import com.example.Finoana.Entity.Product;
 import com.example.Finoana.Exception.ResourceNotFoundException;
 import com.example.Finoana.Repository.ProductRepository;
@@ -22,31 +24,31 @@ public class ProductServiceImpl implements ProductService{
 	private ProductRepository productRepository;
 	
 	@Override
-	public Page<ProductDto> findProductByName(String name, Pageable pageable) {
+	public Page<ProductResponseDto> findProductByName(String name, Pageable pageable) {
 		return this.productRepository.findProductByName("%"+name+"%", pageable).map(
-					product -> toDto(product,ProductDto.class)
+					product -> toDto(product,ProductResponseDto.class)
 				);
 	}
 
 	@Override
-	public ProductDto findProductById(Long id) {
+	public ProductResponseDto findProductById(Long id) {
 		return this.productRepository.findById(id).map(
-					product -> toDto(product, ProductDto.class)
+					product -> toDto(product, ProductResponseDto.class)
 				).orElseThrow(
 						() -> new ResourceNotFoundException("Product with id "+ id +" is not found")
 				);
 	}
 
 	@Override
-	public ProductDto createProduct(ProductDto product) {
+	public ProductResponseDto createProduct(ProductRequestDto product) {
 		Product productMapped = toEntity(product, Product.class);
 		productMapped.setCreatedAt(LocalDateTime.now());
 		Product productSaved = this.productRepository.save(productMapped);
-		return toDto(productSaved,ProductDto.class);
+		return toDto(productSaved,ProductResponseDto.class);
 	}
 
 	@Override
-	public ProductDto updateProduct(Long id, ProductDto productDto) {
+	public ProductResponseDto updateProduct(Long id, ProductRequestDto productDto) {
 		Product product = toEntity(productDto, Product.class);
 		product.setUpdatedAt(LocalDateTime.now());
 		return this.productRepository.findById(id)
@@ -56,7 +58,7 @@ public class ProductServiceImpl implements ProductService{
 					}
 					product.setCreatedAt(productFound.getCreatedAt());
 					Product productUpdate = this.productRepository.save(product);
-					return toDto(productUpdate,ProductDto.class);
+					return toDto(productUpdate,ProductResponseDto.class);
 				})
 				.orElseThrow(
 						() -> new ResourceNotFoundException("Product with id " + id + " not found")

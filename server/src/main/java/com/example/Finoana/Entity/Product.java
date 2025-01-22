@@ -1,10 +1,11 @@
 package com.example.Finoana.Entity;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,4 +33,6 @@ public class Product {
 	private int quantity;
 	private String image;
 	
+	@Enumerated(EnumType.STRING)
+	private Category category;
 }

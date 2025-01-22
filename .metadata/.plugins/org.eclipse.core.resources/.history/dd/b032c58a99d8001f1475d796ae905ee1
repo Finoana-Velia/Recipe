@@ -1,0 +1,154 @@
+package com.example.Finoana.Sevices;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+
+import com.example.Finoana.Dto.ProductDto;
+import com.example.Finoana.Entity.Product;
+import com.example.Finoana.Exception.ResourceNotFoundException;
+import com.example.Finoana.Repository.ProductRepository;
+import com.example.Finoana.Service.Impl.ProductServiceImpl;
+
+@ExtendWith(MockitoExtension.class)
+public class ProductTestService {
+	
+	@Mock
+	ProductRepository productRepository;
+	
+	@InjectMocks
+	ProductServiceImpl productService;
+	
+	List<Product> productList;
+	PageRequest request;
+	
+	
+	@BeforeEach
+	void setUp() {
+		productList = generateProduct();
+		request = PageRequest.of(0,10);
+	}
+	
+	@Test
+	@DisplayName("Test find product by name")
+	void testFindByName() {
+		String name = "Coca cola";
+		Product product = productList.get(0);
+		 
+		when(productRepository.findProductByName("%"+name+"%", request))
+		.thenReturn(new PageImpl<>(List.of(product)));
+		
+		Page<ProductDto> response = productService.findProductByName(name, request);
+		
+		assertAll(
+				() -> assertNotNull(response),
+				() -> assertEquals("Coca Cola",response.getContent().get(0).getName())
+				);
+	}
+	
+	@Test
+	@DisplayName("Test find product by name with an empty value")
+	void testFindByEmptyName() {
+		when(productRepository.findProductByName("%%", request))
+		.thenReturn(new PageImpl<>(productList));
+		
+		Page<ProductDto> response = productService.findProductByName("",request);
+		
+		assertAll(
+				() -> assertNotNull(response),
+				() -> assertEquals(6,response.getContent().size()),
+				() -> assertEquals("T-shirt.jpeg",response.getContent().get(1).getImage()),
+				() -> assertEquals(1800.00,response.getContent().get(2).getPrice()),
+				() -> assertEquals(10,response.getContent().get(3).getQuantity())
+				);
+	}
+	
+	@Test
+	@DisplayName("test find by id succeed")
+	void testFindByIdSucceed() {
+		Long id = 1L;
+		when(productRepository.findById(id)).thenReturn(Optional.of(productList.get(0)));
+		ProductDto response = productService.findProductById(id);
+		
+		assertAll(
+				() -> assertNotNull(response),
+				() -> assertEquals("Coca Cola",response.getName()),
+				() -> assertEquals("coca.jpeg",response.getImage()),
+				() -> assertEquals(1500.00, response.getPrice()),
+				() -> assertEquals(10,response.getQuantity())
+				);
+		
+	}
+	
+	@Test
+	@DisplayName("test find by id failed")
+	void testFindByIdFailed() {
+		Long id = 300L;
+		when(productRepository.findById(id)).thenReturn(Optional.empty());
+		
+		assertThrows(ResourceNotFoundException.class,
+				() -> productService.findProductById(id)
+				);
+		
+	}
+	
+	
+	
+	List<Product> generateProduct(){
+		return List.of(
+				Product.builder()
+				.name("Coca Cola")
+				.image("coca.jpeg")
+				.price(1500.00)
+				.quantity(10)
+				.build(),
+				Product.builder()
+				.name("T-shirt")
+				.image("T-shirt.jpeg")
+				.price(2000.00)
+				.quantity(10)
+				.build(),
+				Product.builder()
+				.name("Smart Watch")
+				.image("Smart.jpeg")
+				.price(1800.00)
+				.quantity(10)
+				.build(),
+				Product.builder()
+				.name("Pizza")
+				.image("Pizza.jpeg")
+				.price(1000.00)
+				.quantity(10)
+				.build(),
+				Product.builder()
+				.name("Super Shoes")
+				.image("Super.jpeg")
+				.price(1400.00)
+				.quantity(10)
+				.build(),
+				Product.builder()
+				.name("Laptop")
+				.image("Laptop.jpeg")
+				.price(2500.00)
+				.quantity(10)
+				.build()
+				);
+	}
+
+}

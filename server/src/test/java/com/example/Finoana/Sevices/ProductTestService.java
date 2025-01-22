@@ -20,7 +20,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
-import com.example.Finoana.Dto.ProductDto;
 import com.example.Finoana.Dto.ProductResponseDto;
 import com.example.Finoana.Entity.Product;
 import com.example.Finoana.Exception.ResourceNotFoundException;

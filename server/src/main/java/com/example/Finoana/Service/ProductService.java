@@ -3,7 +3,6 @@ package com.example.Finoana.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.example.Finoana.Dto.ProductDto;
 import com.example.Finoana.Dto.ProductRequestDto;
 import com.example.Finoana.Dto.ProductResponseDto;
 import com.example.Finoana.Entity.Product;

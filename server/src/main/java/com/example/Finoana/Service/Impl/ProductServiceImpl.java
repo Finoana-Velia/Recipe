@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.example.Finoana.Dto.ProductDto;
 import com.example.Finoana.Dto.ProductRequestDto;
 import com.example.Finoana.Dto.ProductResponseDto;
 import com.example.Finoana.Entity.Product;

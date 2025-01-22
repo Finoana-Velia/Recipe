@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.Finoana.Dto.ProductDto;
 import com.example.Finoana.Dto.ProductRequestDto;
 import com.example.Finoana.Dto.ProductResponseDto;
 import com.example.Finoana.Service.ProductService;

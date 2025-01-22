@@ -1,0 +1,13 @@
+package com.example.Finoana.Entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public enum Category {
+	DRINKS("Drinks"),PIZZAS("Pizzas")
+	,DISHS("Dishs"),NOODLES("Noodles");
+	
+	private String value;
+}

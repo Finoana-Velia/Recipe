@@ -15,7 +15,6 @@ INDEX VERSION 1.134+/home/finoana/Projects/E-commerce/.metadata/.plugins/org.ecl
 3709627734.index
 1755004578.index
 156238499.index
-1328996958.index
 3839842918.index
 3533343969.index
 2705399382.index

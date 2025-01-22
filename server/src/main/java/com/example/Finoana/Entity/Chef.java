@@ -2,9 +2,11 @@ package com.example.Finoana.Entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,7 +35,9 @@ public class Chef {
 	private LocalDate birthDate;
 	private String profile;
 	private Gender gender;
-	private Set<Category> specialities;
+	
+	@ElementCollection
+	private List<Category> specialities;
 	
 	@Lob
 	@Column(columnDefinition = "TEXT")

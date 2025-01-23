@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ChefRequestDto {
 	private Long id;
+	private String name;
 	private LocalDate birthDate;
 	private String profile;
 	private Gender gender;

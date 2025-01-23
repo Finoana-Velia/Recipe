@@ -17,10 +17,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ChefResponseDto {
 	private Long id;
+	private String name;
 	private LocalDate birthDate;
 	private String profile;
 	private Gender gender;
 	private Set<Category> specialities;
 	private String description;
-	private List<Product> products;
 }

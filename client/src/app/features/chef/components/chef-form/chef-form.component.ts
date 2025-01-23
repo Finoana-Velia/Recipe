@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChefService } from '../../service/chef.service';
+
 
 @Component({
   selector: 'app-chef-form',
@@ -7,5 +9,15 @@ import { Component } from '@angular/core';
   styleUrl: './chef-form.component.css'
 })
 export class ChefFormComponent {
+
+  url? : string | ArrayBuffer | null;
+
+  @ViewChild('profile') profile ! : ElementRef;
+
+  chefId! : number;
+
+  constructor(private chefService : ChefService) {}
+
+  
 
 }

@@ -14,9 +14,9 @@ export enum Category {
 export interface Chef {
     id : number;
     name : string;
-    bithDate : Date;
+    birthDate : Date;
     profile : string;
-    gender : Gender;
+    gender : Gender | string;
     specialities : Category[] | null;
-    description : string,
+    description : string | null,
 }

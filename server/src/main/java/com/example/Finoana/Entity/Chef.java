@@ -35,9 +35,7 @@ public class Chef {
 	private LocalDate birthDate;
 	private String profile;
 	private Gender gender;
-	
-	@ElementCollection
-	private List<Category> specialities;
+	private Category speciality;
 	
 	@Lob
 	@Column(columnDefinition = "TEXT")

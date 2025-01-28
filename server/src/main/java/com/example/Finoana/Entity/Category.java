@@ -6,7 +6,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-@Embeddable
 public enum Category {
 	DRINKS("Drinks"),PIZZAS("Pizzas")
 	,DISHS("Dishs"),NOODLES("Noodles");

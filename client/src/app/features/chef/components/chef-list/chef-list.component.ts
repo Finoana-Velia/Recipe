@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PaginationComponent } from '../../../../core/components/pagination/pagination.component';
 import { Router, RouterLink } from '@angular/router';
+import { ChefService } from '../../service/chef.service';
 
 @Component({
   selector: 'app-chef-list',
@@ -11,9 +12,16 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './chef-list.component.html',
   styleUrl: './chef-list.component.css'
 })
-export class ChefListComponent {
+export class ChefListComponent implements OnInit{
   
-  constructor(private router : Router) {}
+  constructor(
+    private router : Router,
+    private chefService : ChefService
+  ) {}
+
+  ngOnInit(): void {
+    this.chefService.findAll().subscribe();
+  }
 
 
 }

@@ -1,4 +1,4 @@
-GitRepositoriesView.GitDirectories=/home/finoana/Projects/Movies/backMovie/.git\:
-GitRepositoriesView.GitDirectories.relative=/home/finoana/Projects/Movies/backMovie/.git\:
+GitRepositoriesView.GitDirectories=/home/finoana/Projects/Movie/.git\:/home/finoana/Projects/Movies/backMovie/.git\:
+GitRepositoriesView.GitDirectories.relative=/home/finoana/Projects/Movie/.git\:/home/finoana/Projects/Movies/backMovie/.git\:
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1

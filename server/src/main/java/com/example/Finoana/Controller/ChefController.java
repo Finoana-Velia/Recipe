@@ -43,7 +43,7 @@ public class ChefController {
 			@RequestParam(defaultValue="10")int size
 			){
 		PageRequest request = PageRequest.of(page,size != 0 ? size : Integer.MAX_VALUE);
-		Page<ChefResponseDto> response = this.chefService.searchChefByName(name, request);
+		Page<ChefResponseDto> response = this.chefService.searchChefByName("%"+name+"%", request);
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 	

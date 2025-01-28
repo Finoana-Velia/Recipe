@@ -8,7 +8,7 @@ import { map } from 'rxjs';
 })
 export class ChefService {
 
-  private url = "http://localhost/8080/api/v1/chefs";
+  private url = "http://localhost:8080/api/v1/chefs";
 
   constructor(private http : HttpClient) { }
 

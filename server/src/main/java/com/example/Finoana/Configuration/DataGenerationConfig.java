@@ -1,0 +1,36 @@
+package com.example.Finoana.Configuration;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.example.Finoana.Entity.Category;
+import com.example.Finoana.Entity.Chef;
+import com.example.Finoana.Entity.Gender;
+import com.example.Finoana.Repository.ChefRepository;
+
+@Configuration
+public class DataGenerationConfig {
+
+	@Bean
+	CommandLineRunner commandLineRunner(ChefRepository chefRepository) {
+		return args -> chefRepository.saveAll(generateChef());
+	}
+	
+	private List<Chef> generateChef(){
+		return List.of(
+				Chef.builder()
+				.name("John Doe")
+				.birthDate(LocalDate.now())
+				.profile("chef1.png")
+				.gender(Gender.MAN)
+				.speciality(Category.DRINKS)
+				.description("Long Description")
+				.build()
+				);
+	}
+}

@@ -17,6 +17,6 @@ export interface Chef {
     birthDate : Date;
     profile : string;
     gender : Gender | string;
-    specialities : Category[] | null;
+    speciality : Category | string;
     description : string | null,
 }

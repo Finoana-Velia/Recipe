@@ -16,10 +16,10 @@ import com.example.Finoana.Repository.ChefRepository;
 @Configuration
 public class DataGenerationConfig {
 
-	@Bean
-	CommandLineRunner commandLineRunner(ChefRepository chefRepository) {
-		return args -> chefRepository.saveAll(generateChef());
-	}
+//	@Bean
+//	CommandLineRunner commandLineRunner(ChefRepository chefRepository) {
+//		return args -> chefRepository.saveAll(generateChef());
+//	}
 	
 	private List<Chef> generateChef(){
 		return List.of(

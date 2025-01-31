@@ -40,7 +40,7 @@ export class ChefFormComponent {
       nonNullable : true,
       validators : Validators.required
     }),
-    specialities : new FormControl([],{
+    speciality : new FormControl("",{
       nonNullable : true,
       validators : Validators.required
     }),
@@ -86,7 +86,7 @@ export class ChefFormComponent {
       name : this.firstName + " " + this.lastName,
       birthDate : this.birthDate,
       gender : this.gender,
-      specialities : this.specialities,
+      speciality : this.speciality,
       description : this.description
     }
   }
@@ -108,8 +108,8 @@ export class ChefFormComponent {
     return this._chefForm.controls.gender.value;
   }
 
-  get specialities() {
-    return this._chefForm.controls.specialities.value;
+  get speciality() {
+    return this._chefForm.controls.speciality.value;
   }
 
   get description() {

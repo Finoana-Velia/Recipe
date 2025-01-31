@@ -5,7 +5,6 @@
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Core.ErrorType"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="jakarta.persistence.EnumType"/>
     <fullyQualifiedTypeName name="jakarta.persistence.GenerationType"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="org.apache.commons.io.IOUtils"/>
@@ -16,4 +15,5 @@
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Gender"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Category"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.EnumType"/>
 </qualifiedTypeNameHistroy>

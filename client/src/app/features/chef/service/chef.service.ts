@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Chef } from '../model/chef';
 import { map } from 'rxjs';
+import { PageResponse } from '../../../core/models/PageResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class ChefService {
     params = params.set('size', size.toString());
     params = params.set('name',name);
 
-    return this.http.get<Chef>(this.url,{params}).pipe(
-      map(response => console.log(response))
+    return this.http.get<PageResponse>(this.url,{params}).pipe(
+      map(response => {return response})
     );
   }
 
@@ -30,6 +31,8 @@ export class ChefService {
   }
 
   createChef(chef : any, file : File){
+    console.log(chef);
+    
     const formData = new FormData();
     formData.append('file',file);
 

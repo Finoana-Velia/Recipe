@@ -19,6 +19,6 @@ public class ChefRequestDto {
 	private LocalDate birthDate;
 	private String profile;
 	private Gender gender;
-	private Set<Category> specialities;
+	private Category speciality;
 	private String description;
 }

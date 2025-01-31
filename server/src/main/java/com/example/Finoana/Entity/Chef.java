@@ -8,6 +8,8 @@ import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,7 +36,11 @@ public class Chef {
 	private String name;
 	private LocalDate birthDate;
 	private String profile;
+	
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
+	
+	@Enumerated(EnumType.STRING)
 	private Category speciality;
 	
 	@Lob

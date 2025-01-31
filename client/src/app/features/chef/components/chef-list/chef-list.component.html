@@ -17,7 +17,7 @@
                 <th>Id</th>
                 <th>Profile</th>
                 <th>Complete Name</th>
-                <th>Mark</th>
+                <th>Speciality</th>
                 <th>Actions</th>
             </thead>
             <tbody>
@@ -38,12 +38,12 @@
                             </div> 
                         </td>
                         <td>{{chef.name}}</td>
-                        <td>8</td>
+                        <td>{{chef.speciality}}</td>
                         <td>
                             <div class="flex justify-center items-center">
                                 <a 
                                     class="bg-blue-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1"
-                                    routerLink="/auth/chef/form"
+                                    [routerLink]="['/auth/chef/form', chef.id]"
                                 >
                                     <i class="fa fa-edit"></i>
                                 </a>

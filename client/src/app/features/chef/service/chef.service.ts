@@ -26,7 +26,7 @@ export class ChefService {
 
   findById(id : number) {
     return this.http.get<Chef>(`${this.url}/${id}`).pipe(
-      map(response => console.log(response))
+      map(response => {return response})
     );
   }
 

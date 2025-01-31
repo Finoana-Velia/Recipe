@@ -15,7 +15,8 @@ export const routes: Routes = [
         children : [
             { path : '', component : DashboardComponent},
             { path : 'chef', component : ChefListComponent},
-            { path : 'chef/form', component : ChefFormComponent}
+            { path : 'chef/form', component : ChefFormComponent},
+            { path : 'chef/form/:id', component : ChefFormComponent}
         ]
     }
 ];

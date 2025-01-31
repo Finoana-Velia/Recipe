@@ -1,8 +1,8 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChefService } from '../../service/chef.service';
 import { Validators, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Chef, Gender } from '../../model/chef';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-chef-form',
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './chef-form.component.html',
   styleUrl: './chef-form.component.css'
 })
-export class ChefFormComponent {
+export class ChefFormComponent implements OnInit{
 
   url? : string | ArrayBuffer | null;
 
@@ -49,8 +49,52 @@ export class ChefFormComponent {
 
   constructor(
     private chefService : ChefService,
-    private router : Router
+    private router : Router,
+    private activatedRoute : ActivatedRoute
   ) {}
+
+  ngOnInit(): void {
+    if(this.activatedRoute.snapshot.params['id']) {
+      this.chefId = this.activatedRoute.snapshot.params['id'];
+      this.chefService.findById(this.chefId).subscribe(
+        response => {
+          this._chefForm = new FormGroup({
+            profile : new FormControl(),
+            firstName : new FormControl(this.getFirstName(response.name),{
+              nonNullable : true,
+              validators : Validators.required
+            }),
+            lastName : new FormControl(this.getLastName(response.name),{
+              nonNullable : true,
+              validators : Validators.required
+            }),
+            birthDate : new FormControl(response.birthDate, {
+              nonNullable : true,
+              validators : Validators.required
+            }),
+            gender : new FormControl(response.gender,{
+              nonNullable : true,
+              validators : Validators.required
+            }),
+            speciality : new FormControl(response.speciality,{
+              nonNullable : true,
+              validators : Validators.required
+            }),
+            description : new FormControl(response.description)
+          });
+          this.url = this.chefService.findProfile(response.id);
+        }
+      )
+    }
+  }
+
+  getFirstName(name : string) {
+    return name.split(" ")[0];
+  }
+
+  getLastName(name : string) {
+    return name.split(" ")[1];
+  }
 
   onSelectFile(event : any){
     if(event.target.files){
@@ -68,8 +112,6 @@ export class ChefFormComponent {
   }
 
   onSubmit() {
-    // console.log("Chef recieved");
-    // console.log(this.generatedChefValue());
     this.chefService.createChef(
       this.generatedChefValue(),
       this.profileValue

@@ -64,7 +64,7 @@ public class ChefController {
 	public ResponseEntity<ChefResponseDto> createChef(
 			ChefRequestDto chef,
 			@RequestParam MultipartFile file) throws Exception{
-		ChefResponseDto chefResponse;
+		ChefResponseDto chefResponse = null;
 		if(!file.isEmpty()) {
 			chef.setProfile(file.getOriginalFilename());
 			chefResponse = this.chefService.createChef(chef);

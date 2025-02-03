@@ -84,7 +84,7 @@ public class ChefController {
 			) throws Exception{
 		chef.setId(id);
 		ChefResponseDto chefResponse;
-		if(!file.isEmpty()) {
+		if(file != null) {
 			chef.setProfile(file.getOriginalFilename());
 			chefResponse = this.chefService.updateChef(id, chef);
 			updateFile(file,"chefs",id);

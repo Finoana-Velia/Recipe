@@ -7,7 +7,7 @@ import { HeroQualityComponent } from '../hero-quality/hero-quality.component';
 import { HeroAboutComponent } from '../hero-about/hero-about.component';
 import { HeroCustomerComponent } from '../hero-customer/hero-customer.component';
 import { HeroSubscribeComponent } from '../hero-subscribe/hero-subscribe.component';
-import { ProductService } from '../../features/product/product.service';
+
 
 @Component({
   selector: 'app-main-hero',
@@ -26,12 +26,10 @@ import { ProductService } from '../../features/product/product.service';
 })
 export class MainHeroComponent implements OnInit{
 
-  constructor(private productService : ProductService){}
+  constructor(){}
 
   ngOnInit(): void {
-    this.productService.searchForProducts().subscribe(
-      response => console.log(response)
-    );
+  
   }
 
 

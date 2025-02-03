@@ -31,8 +31,7 @@ export class ChefService {
   }
 
   createChef(chef : any, file : File){
-    console.log(chef);
-    
+     
     const formData = new FormData();
     formData.append('file',file);
 

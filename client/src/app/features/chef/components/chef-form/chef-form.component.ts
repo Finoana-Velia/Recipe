@@ -112,16 +112,31 @@ export class ChefFormComponent implements OnInit{
   }
 
   onSubmit() {
-    this.chefService.createChef(
-      this.generatedChefValue(),
-      this.profileValue
-    ).subscribe(
-      response => {
-        console.log(response);
-        this.router.navigate(['/auth/chef']);
-      }
-    )
+    if(this.chefId) {
+      this.chefService.updateChef(
+        this.chefId,
+        this.generatedChefValue(),
+        this.profileValue
+      ).subscribe(
+        response => {
+          alert("chef updated");
+          this.router.navigate(['/auth/chef']);
+        }
+      );
+    }else {
+      this.chefService.createChef(
+        this.generatedChefValue(),
+        this.profileValue
+      ).subscribe(
+        response => {
+          console.log(response);
+          this.router.navigate(['/auth/chef']);
+        }
+      );
+    }
   }
+
+  
 
   generatedChefValue() : Partial<Chef> {
     return {

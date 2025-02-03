@@ -6,3 +6,16 @@
 a {
     cursor : pointer;
 }
+
+th {
+    padding : 10px;
+    color : #fff;
+}
+tr {
+    text-align: center;
+    cursor : pointer;
+}
+
+tr:hover {
+    background : #ecfccd;
+}

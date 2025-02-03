@@ -2,7 +2,7 @@
   <div class="bg-lime-500 h-screen p-5 pt-8 {{toggleChange ? 'w-72' : 'w-20'}} duration-300 relative">
     
     <button 
-      class="bg-white rounded-full w-8 h-8 
+      class="bg-white w-8 h-8 
       flex justify-center items-center 
       rounded-full absolute -right-3 top-9
       border border-lime-600"
@@ -35,7 +35,7 @@
       </li>
       <ul class="duration-300" *ngIf="toggleSubMenu && toggleChange">
         <li>
-          <a class="text-lime-800 text-sm flex items-center gap-x-4
+          <a routerLink="/auth/product" class="text-lime-800 text-sm flex items-center gap-x-4
           curosor-pointer p-2 px-5 hover:bg-lime-200 rounded-md">All</a>
         </li>
         <li>
@@ -49,7 +49,7 @@
         <li>
           <a class="text-lime-800 text-sm flex items-center gap-x-4
           curosor-pointer p-2 px-5 hover:bg-lime-200 rounded-md">Dishs</a>
-        </li>
+        </li> 
         <li>
           <a class="text-lime-800 text-sm flex items-center gap-x-4
           curosor-pointer p-2 px-5 hover:bg-lime-200 rounded-md">Noodles</a>

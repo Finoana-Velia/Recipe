@@ -6,6 +6,7 @@ import { RegisterComponent } from './core/components/register/register.component
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ChefListComponent } from './features/chef/components/chef-list/chef-list.component';
 import { ChefFormComponent } from './features/chef/components/chef-form/chef-form.component';
+import { ProductListComponent } from './features/product/components/product-list/product-list.component';
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
@@ -16,7 +17,8 @@ export const routes: Routes = [
             { path : '', component : DashboardComponent},
             { path : 'chef', component : ChefListComponent},
             { path : 'chef/form', component : ChefFormComponent},
-            { path : 'chef/form/:id', component : ChefFormComponent}
+            { path : 'chef/form/:id', component : ChefFormComponent},
+            { path : 'product', component : ProductListComponent},
         ]
     }
 ];

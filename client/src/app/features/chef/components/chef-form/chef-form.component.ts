@@ -119,7 +119,7 @@ export class ChefFormComponent implements OnInit{
         this.profileValue
       ).subscribe(
         response => {
-          alert("chef updated");
+          console.log(response);
           this.router.navigate(['/auth/chef']);
         }
       );

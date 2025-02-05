@@ -1,11 +1,17 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ChefService } from '../../../chef/service/chef.service';
+import { Chef } from '../../../chef/model/chef';
+import { NgForOf } from '@angular/common';
+import { ProductRequest } from '../../models/product';
+import { ProductService } from '../../service/product.service';
 
 @Component({
   selector: 'app-product-form',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgForOf
   ],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.css'
@@ -16,6 +22,7 @@ export class ProductFormComponent implements OnInit {
 
   url? : string | ArrayBuffer | null;
   id! : number;
+  chefList! : Chef[];
 
   _productForm = new FormGroup({
     image : new FormControl(),
@@ -35,15 +42,23 @@ export class ProductFormComponent implements OnInit {
       nonNullable : true,
       validators : Validators.required
     }),
-    chef : new FormControl(null,{
+    chef : new FormControl(0,{
       nonNullable : true,
       validators : Validators.required
     })
   });
 
-  constructor(private activatedRoute : ActivatedRoute) {}
+  constructor(
+    private activatedRoute : ActivatedRoute,
+    private chefService : ChefService,
+    private productService : ProductService,
+    private router : Router
+  ) {}
 
   ngOnInit(): void {
+    this.chefService.findAll(0,0).subscribe(
+      response => this.chefList = response.content
+    );
     if(this.activatedRoute.snapshot.params['id']){
       this.id = this.activatedRoute.snapshot.params['id'];
     }
@@ -59,10 +74,55 @@ export class ProductFormComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = () => {
         this.url = reader.result;
-        this._productForm.controls.image.setValue(event.targer.files[0]);
+        this._productForm.controls.image.setValue(event.target.files[0]);
       }
     }
   }
 
+  onSubmit() {
+    // console.log("Result getted after submit");
+    // console.log(this.generatedProductValue());
+    // console.log("File getted");
+    // console.log(this.imageValue);
+    if(!this.id) {
+      this.productService.createProduct(
+        this.generatedProductValue(),
+        this.imageValue
+      ).subscribe(
+        response => {
+          console.log(response);
+          this.router.navigate(['/auth/product']);
+        }
+      )
+    }
+  }
 
+  generatedProductValue() : Partial<ProductRequest> {
+    return {
+      name : this.name,
+      price : this.price,
+      category : this.category,
+      idChef : this.chef
+    }
+  }
+
+  get name() {
+    return this._productForm.controls.name.value;
+  }
+
+  get price() {
+    return this._productForm.controls.price.value;
+  }
+  
+  get category() {
+    return this._productForm.controls.category.value;
+  } 
+
+  get chef() {
+    return this._productForm.controls.chef.value;
+  }
+
+  get imageValue() {
+    return this._productForm.controls.image.value;
+  }
 }

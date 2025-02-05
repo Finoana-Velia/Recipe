@@ -1,7 +1,7 @@
 package com.example.Finoana.Entity;
 
 import java.time.LocalDateTime;
-
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -9,6 +9,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,4 +37,8 @@ public class Product {
 	
 	@Enumerated(EnumType.STRING)
 	private Category category;
+	
+	@ManyToOne
+	@JoinColumn(name = "chef_id")
+	private Chef chef;
 }

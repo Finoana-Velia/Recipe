@@ -21,35 +21,46 @@
                 <th>Actions</th>
             </thead>
             <tbody>
-                <tr class="border-b border-gray-200 py-2">
-                    <td>1</td>
-                    <td>
-                        <div class="w-[70px] h-[70px] m-auto">
-                            <img 
-                                src="images/17244-caramel-topped-ice-cream-dessert-600x600.jpg" 
-                                alt="images" 
-                                class="w-full h-full object-cover rounded-[5px]"
-                            >
-                        </div>
-                    </td>
-                    <td>Caramel au beu...</td>
-                    <td>Dessert</td>
-                    <td>10</td>
-                    <td>
-                        <i class="fa fa-dollar"></i>
-                        10
-                    </td>
-                    <td>
-                        <div class="flex justify-center items-center">
-                            <a class="bg-blue-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            <a class="bg-red-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
+                @if(productResponse.content.length == 0) {
+                    <p>No Product saved for the moment</p>
+                }@else {
+                    <tr class="border-b border-gray-200 py-2" *ngFor="let product of productResponse.content">
+                        <td>{{product.id}}</td>
+                        <td>
+                            <div class="w-[70px] h-[70px] m-auto">
+                                
+                                @if(product.image){
+                                    <img 
+                                        [src]="getImage(product.id)" 
+                                        [alt]="product.image" 
+                                        class="w-full h-full object-cover rounded-[5px]"
+                                    >
+                                }@else {
+                                    <div class="flex justify-center items-center bg-gray-200 w-full h-full">
+                                        <i class="fa fa-picture-o rounded-[5px]"></i>
+                                    </div>
+                                }
+                            </div>
+                        </td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.category}}</td>
+                        <td>{{product.quantity}}</td>
+                        <td>
+                            <i class="fa fa-dollar"></i>
+                            {{product.price}}
+                        </td>
+                        <td>
+                            <div class="flex justify-center items-center">
+                                <a class="bg-blue-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a class="bg-red-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
 

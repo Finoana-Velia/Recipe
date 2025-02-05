@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.Finoana.Dto.ProductRequestDto;
 import com.example.Finoana.Dto.ProductResponseDto;
+import com.example.Finoana.Entity.Chef;
 import com.example.Finoana.Entity.Product;
 import com.example.Finoana.Exception.ResourceNotFoundException;
+import com.example.Finoana.Repository.ChefRepository;
 import com.example.Finoana.Repository.ProductRepository;
 import com.example.Finoana.Service.ProductService;
 import static com.example.Finoana.Core.EntityMapper.*;
@@ -21,6 +23,7 @@ import lombok.AllArgsConstructor;
 public class ProductServiceImpl implements ProductService{
 
 	private ProductRepository productRepository;
+	private final ChefRepository chefRepostitory;
 	
 	@Override
 	public Page<ProductResponseDto> findProductByName(String name, Pageable pageable) {
@@ -42,6 +45,12 @@ public class ProductServiceImpl implements ProductService{
 	public ProductResponseDto createProduct(ProductRequestDto product) {
 		Product productMapped = toEntity(product, Product.class);
 		productMapped.setCreatedAt(LocalDateTime.now());
+		if(product.getIdChef() != null) {
+			Chef chef = this.chefRepostitory.findById(product.getIdChef()).orElseThrow(
+					() -> new ResourceNotFoundException("the chef with id : " + product.getIdChef() + " is not found")
+					);
+			productMapped.setChef(chef);
+		}
 		Product productSaved = this.productRepository.save(productMapped);
 		return toDto(productSaved,ProductResponseDto.class);
 	}
@@ -56,6 +65,12 @@ public class ProductServiceImpl implements ProductService{
 						product.setImage(productFound.getImage());
 					}
 					product.setCreatedAt(productFound.getCreatedAt());
+					if(productDto.getIdChef() != null) {
+						Chef chef = this.chefRepostitory.findById(productDto.getIdChef()).orElseThrow(
+								() -> new ResourceNotFoundException("the chef with id : " + productDto.getIdChef() + " is not found")
+								);
+						product.setChef(chef);
+					}
 					Product productUpdate = this.productRepository.save(product);
 					return toDto(productUpdate,ProductResponseDto.class);
 				})

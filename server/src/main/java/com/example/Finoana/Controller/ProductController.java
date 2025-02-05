@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.Finoana.Dto.ProductRequestDto;
 import com.example.Finoana.Dto.ProductResponseDto;
 import com.example.Finoana.Service.ProductService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static com.example.Finoana.Core.FileManagement.getFile;
 import static com.example.Finoana.Core.FileManagement.registerFile;
@@ -71,16 +72,18 @@ public class ProductController {
 	
 	@PostMapping
 	public ResponseEntity<ProductResponseDto> saveProduct(
-			ProductRequestDto product,
+			@RequestParam String product,
 			@RequestParam MultipartFile file
 			) throws Exception{
+		ObjectMapper objectMapper = new ObjectMapper();
+		ProductRequestDto request = objectMapper.readValue(product, ProductRequestDto.class);
 		ProductResponseDto productResponse;
-		if(!file.isEmpty()) {
-			product.setImage(file.getOriginalFilename());
-			productResponse = this.productService.createProduct(product);
+		if(file != null) {
+			request.setImage(file.getOriginalFilename());
+			productResponse = this.productService.createProduct(request);
 			registerFile(file,"products",productResponse.getId());
 		}else {
-			productResponse = this.productService.createProduct(product);
+			productResponse = this.productService.createProduct(request);
 		}
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(productResponse);
@@ -89,7 +92,7 @@ public class ProductController {
 	@PutMapping("/{id}")
 	public ResponseEntity<ProductResponseDto> updateProduct(
 			@PathVariable Long id,
-			ProductRequestDto product,
+			@RequestParam ProductRequestDto product,
 			@RequestParam(required = false) MultipartFile file
 			) throws Exception {
 		product.setId(id);

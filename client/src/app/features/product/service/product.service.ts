@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
+import { PageResponse } from '../../../core/models/PageResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class ProductService {
     params = params.set('size',size.toString());
     params = params.set('name',name.toString());
 
-    return this.http.get<any>(this.url,{params}).pipe(
+    return this.http.get<PageResponse>(this.url,{params}).pipe(
       map(response => {return response})
     );
   }
@@ -41,6 +42,10 @@ export class ProductService {
     return this.http.put<any>(this.url + `/${id}`,formData).pipe(
       map(response => console.log(response))
     );
+  }
+
+  getImage(id : number) {
+    return this.url + "/image?id=" + id;
   }
   
 }

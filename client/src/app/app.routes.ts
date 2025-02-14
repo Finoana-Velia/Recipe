@@ -12,6 +12,7 @@ import { DishsListComponent } from './features/product/components/dishs-list/dis
 import { PizzasListComponent } from './features/product/components/pizzas-list/pizzas-list.component';
 import { DrinksListComponent } from './features/product/components/drinks-list/drinks-list.component';
 import { NoodlesListComponent } from './features/product/components/noodles-list/noodles-list.component';
+import { MainClientComponent } from './client/components/main-client/main-client.component';
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
@@ -30,6 +31,11 @@ export const routes: Routes = [
             { path : 'product/noodles', component : NoodlesListComponent},
             { path : 'product/form', component : ProductFormComponent},
             { path : 'product/form/:id', component : ProductFormComponent}
+        ]
+    },
+    { path : "user", component : MainClientComponent,
+        children : [
+            { path : "" , component : MainClientComponent}
         ]
     }
 ];

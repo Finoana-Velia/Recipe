@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { PageResponse } from '../../../core/models/PageResponse';
+import { ProductResponse } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,11 @@ export class ProductService {
     );
   }
 
+  findById(id : number) {
+    return this.http.get<ProductResponse>(`${this.url}/${id}`).pipe(
+      map( response => {return response})
+    );
+  }
 
   createProduct(product : any,file : File){
     const formData = new FormData();
@@ -37,7 +43,7 @@ export class ProductService {
   updateProduct(id : number, product : any, file : File){
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("product",JSON.stringify(product));
+    formData.append("productDto",JSON.stringify(product));
 
     return this.http.put<any>(this.url + `/${id}`,formData).pipe(
       map(response => console.log(response))

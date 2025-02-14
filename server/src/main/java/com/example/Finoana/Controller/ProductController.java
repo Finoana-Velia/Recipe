@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.Finoana.Dto.ProductRequestDto;
 import com.example.Finoana.Dto.ProductResponseDto;
+import com.example.Finoana.Entity.Category;
 import com.example.Finoana.Service.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -46,12 +47,24 @@ public class ProductController {
 			@RequestParam(defaultValue="0") int page,
 			@RequestParam(defaultValue="10") int size
 			){
-		PageRequest request = PageRequest.of(page, size);
+		PageRequest request = PageRequest.of(page, size == 0 ? Integer.MAX_VALUE : size);
 		Page<ProductResponseDto> products = this.productService.findProductByName(name, request);
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(products);
 	}
+	
+//	@GetMapping("/category/{category}")
+//	public ResponseEntity<Page<ProductResponseDto>> findByCategory(
+//				@PathVariable String category,
+//				@RequestParam(defaultValue="0")int page,
+//				@RequestParam(defaultValue="10")int size
+//			) {
+//		PageRequest request = PageRequest.of(page, size != 0 ? size : Integer.MAX_VALUE);
+//		Page<ProductResponseDto> products = this.productService.findProductByCategory(category, request);
+//		return ResponseEntity.status(HttpStatus.OK)
+//				.body(products);
+//	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<ProductResponseDto> findroductById(
@@ -92,9 +105,12 @@ public class ProductController {
 	@PutMapping("/{id}")
 	public ResponseEntity<ProductResponseDto> updateProduct(
 			@PathVariable Long id,
-			@RequestParam ProductRequestDto product,
+//			@RequestParam ProductRequestDto product,
+			@RequestParam String productDto,
 			@RequestParam(required = false) MultipartFile file
 			) throws Exception {
+		ObjectMapper objectMapper = new ObjectMapper();
+		ProductRequestDto product = objectMapper.readValue(productDto, ProductRequestDto.class);
 		product.setId(id);
 		ProductResponseDto productResponse;
 		if(file != null) {

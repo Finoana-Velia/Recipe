@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.Finoana.Dto.ProductRequestDto;
 import com.example.Finoana.Dto.ProductResponseDto;
+import com.example.Finoana.Entity.Category;
 import com.example.Finoana.Entity.Chef;
 import com.example.Finoana.Entity.Product;
 import com.example.Finoana.Exception.ResourceNotFoundException;
@@ -30,6 +31,28 @@ public class ProductServiceImpl implements ProductService{
 		return this.productRepository.findProductByName("%"+name+"%", pageable).map(
 					product -> toDto(product,ProductResponseDto.class)
 				);
+	}
+	
+	@Override
+	public Page<ProductResponseDto> findProductByCategory(String category, Pageable pageable) {
+		Page<Product> products;
+		switch(category) {
+			case "Dishs" : 
+				products = this.productRepository.findProductByCategory(Category.DISHS, pageable);
+			case "Pizzas" : 
+				products = this.productRepository.findProductByCategory(Category.PIZZAS, pageable);
+			case "Drinks" : 
+				products = this.productRepository.findProductByCategory(Category.DRINKS, pageable);
+			case "Noodles" : 
+				products = this.productRepository.findProductByCategory(Category.NOODLES, pageable);
+			default : 
+				products = this.productRepository.findAll(pageable);
+		}
+		
+		Page<ProductResponseDto> response = products.map(
+				product -> toDto(product,ProductResponseDto.class)
+				);
+		return response;
 	}
 
 	@Override

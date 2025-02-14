@@ -13,7 +13,8 @@
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Gender"/>
-    <fullyQualifiedTypeName name="com.example.Finoana.Entity.Category"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="jakarta.persistence.EnumType"/>
+    <fullyQualifiedTypeName name="java.util.Locale.Category"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Entity.Category"/>
 </qualifiedTypeNameHistroy>

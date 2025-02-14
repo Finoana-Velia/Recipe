@@ -61,6 +61,34 @@ export class ProductFormComponent implements OnInit {
     );
     if(this.activatedRoute.snapshot.params['id']){
       this.id = this.activatedRoute.snapshot.params['id'];
+      this.productService.findById(this.id).subscribe(
+        response => {
+          this._productForm = new FormGroup({
+            image : new FormControl(),
+            name : new FormControl(response.name,{
+              nonNullable : true,
+              validators : Validators.required
+            }),
+            quantity : new FormControl(response.quantity,{
+              nonNullable : true,
+              validators : Validators.required
+            }),
+            price : new FormControl(response.price,{
+              nonNullable : true,
+              validators : Validators.required
+            }),
+            category : new FormControl(response.category,{
+              nonNullable : true,
+              validators : Validators.required
+            }),
+            chef : new FormControl(response.chef.id,{
+              nonNullable : true,
+              validators : Validators.required
+            })
+          });
+          this.url = this.productService.getImage(this.id);
+        }
+      )
     }
   }
 
@@ -80,12 +108,19 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log("Result getted after submit");
-    // console.log(this.generatedProductValue());
-    // console.log("File getted");
-    // console.log(this.imageValue);
     if(!this.id) {
       this.productService.createProduct(
+        this.generatedProductValue(),
+        this.imageValue
+      ).subscribe(
+        response => {
+          console.log(response);
+          this.router.navigate(['/auth/product']);
+        }
+      )
+    }else {
+      this.productService.updateProduct(
+        this.id,
         this.generatedProductValue(),
         this.imageValue
       ).subscribe(
@@ -102,6 +137,7 @@ export class ProductFormComponent implements OnInit {
       name : this.name,
       price : this.price,
       category : this.category,
+      quantity : this.quantity,
       idChef : this.chef
     }
   }
@@ -112,6 +148,10 @@ export class ProductFormComponent implements OnInit {
 
   get price() {
     return this._productForm.controls.price.value;
+  }
+
+  get quantity() {
+    return this._productForm.controls.quantity.value;
   }
   
   get category() {

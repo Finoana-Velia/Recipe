@@ -51,7 +51,10 @@
                         </td>
                         <td>
                             <div class="flex justify-center items-center">
-                                <a class="bg-blue-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1">
+                                <a 
+                                    class="bg-blue-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1"
+                                    [routerLink]="['/auth/product/form', product.id]"
+                                >
                                     <i class="fa fa-edit"></i>
                                 </a>
                                 <a class="bg-red-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1">

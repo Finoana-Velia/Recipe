@@ -1,11 +1,43 @@
-import { Component } from '@angular/core';
+import { NgClass, NgForOf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'app-new-recipe',
-  imports: [],
+  imports: [
+    NgClass,
+    NgForOf
+  ],
   templateUrl: './new-recipe.component.html',
   styleUrl: './new-recipe.component.css'
 })
-export class NewRecipeComponent {
+export class NewRecipeComponent implements OnInit{
+
+
+  isActive = "Drinks";
+  recipes! : any[];
+  
+  constructor(private recipeService : RecipeService){}
+
+  ngOnInit(): void {
+    this.recipes = this.recipeService.findAll().filter(item => item.category == this.isActive);
+  }
+
+  toggleActive(type : string) {
+    if(type == this.isActive) {
+      return "bg-gray-100 border-b-lime-400 duration-100 border-b-8 text-2xl p-5 min-w-10 cursor-pointer";
+    }
+    return "text-2xl p-5 min-w-10 cursor-pointer";
+  }
+
+  active(type : string) {
+    this.isActive = type;
+    this.recipes = this.recipeService.findAll().filter(item => item.category == this.isActive);
+    console.log("Type active : " + this.isActive);
+    console.log("Recipe list : ");
+    console.log(this.recipes);
+  }
+
+  
 
 }

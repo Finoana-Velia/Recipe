@@ -1,1 +1,15 @@
-<p>menu-client works!</p>
+<div class="relative">
+    <button 
+        class="border border-gray-300 bg-white text-gray-500 text-lg px-3 py-1 rounded"
+        (click)="toggleDropped()"
+    >
+        Dropdown
+    </button>
+    @if(isDropped) {
+        <div class="absolute top-full rounded-lg p-3 mt-1 shadow-md duration-200 flex flex-col">
+            <a class="p-2 hover:bg-gray-300">Home</a>
+            <a class="p-2 hover:bg-gray-300">Features</a>
+            <a class="p-2 hover:bg-gray-300">About us</a>
+        </div>
+    }
+</div>

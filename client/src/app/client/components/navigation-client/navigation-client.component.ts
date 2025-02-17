@@ -8,4 +8,18 @@ import { Component } from '@angular/core';
 })
 export class NavigationClientComponent {
 
+  menu = false;
+  notification = false;
+
+
+  toggleMenu() {
+    this.menu = !this.menu;
+    this.notification = false;
+  }
+
+  toggleNotification() {
+    this.notification = !this.notification;
+    this.menu = false;
+  }
+
 }

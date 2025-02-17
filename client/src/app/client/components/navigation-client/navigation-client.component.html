@@ -39,13 +39,68 @@
                     <a href=""><i class="fa fa-cart-arrow-down"></i></a>
                 </li>
                 <li class="text-2xl relative">
-                    <a href=""><i class="fa fa-bell"></i></a>
+                    <a (click)="toggleNotification()"><i class="fa fa-bell"></i></a>
                     <div class="absolute top-0 right-0 bg-red-500 rounded-full w-[10px] h-[10px]"></div>
+                    @if(notification) {
+                        <div class="absolute top-full right-0 rounded-lg p-3 mt-1 shadow-md duration-300 bg-white z-10 min-w-[300px]">
+                            <h3 class="text-xl p-3">Notifications</h3>
+                            <ul >
+                                <li>
+                                    <a class="flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white">
+                                        <i class="fa fa-user"></i>
+                                        <div>
+                                            <h5 >New Products</h5>
+                                            <p class="text-sm text-gray-200">Today</p>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white">
+                                        <i class="fa fa-user"></i>
+                                        <div>
+                                            <h5 >New Products</h5>
+                                            <p class="text-sm text-gray-200">Today</p>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white">
+                                        <i class="fa fa-user"></i>
+                                        <div>
+                                            <h5 >New Products</h5>
+                                            <p class="text-sm text-gray-200">Today</p>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <button class="text-xl p-3">
+                                View All
+                            </button>
+                        </div>
+                    }
                 </li>
             </ul>
-            <a href="" class="flex justify-center items-center">
-                <img src="images/chief3.png" alt="profile" width="50" height="50" class="rounded-full">
-            </a>
+            <div class="relative">
+                <a class="flex justify-center items-center" (click)="toggleMenu()">
+                    <img src="images/chief3.png" alt="profile" width="50" height="50" class="rounded-full">
+                </a>
+                @if(menu) {
+                    <ul class="absolute top-full right-0 mr-10 rounded-lg p-3 mt-1 shadow-md duration-300 bg-white z-10 min-w-[200px]">
+                        <li>
+                            <a class="text-xl flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white">
+                                <i class="fa fa-user"></i>
+                                Edit Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-xl flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white">
+                                <i class="fa fa-sign-out"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                }
+            </div>
         </div>
     </nav>
 </header>

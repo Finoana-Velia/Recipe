@@ -13,6 +13,8 @@ import { PizzasListComponent } from './features/product/components/pizzas-list/p
 import { DrinksListComponent } from './features/product/components/drinks-list/drinks-list.component';
 import { NoodlesListComponent } from './features/product/components/noodles-list/noodles-list.component';
 import { MainClientComponent } from './client/components/main-client/main-client.component';
+import { CartComponent } from './client/components/cart/cart.component';
+import { MarketPlaceComponent } from './client/components/market-place/market-place.component';
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
@@ -35,7 +37,8 @@ export const routes: Routes = [
     },
     { path : "user", component : MainClientComponent,
         children : [
-            { path : "" , component : MainClientComponent}
+            { path : "" , component : MarketPlaceComponent},
+            { path : "cart", component : CartComponent}
         ]
     }
 ];

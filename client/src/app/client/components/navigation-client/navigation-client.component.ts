@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navigation-client',
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './navigation-client.component.html',
   styleUrl: './navigation-client.component.css'
 })

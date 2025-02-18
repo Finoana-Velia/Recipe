@@ -1,27 +1,37 @@
 <section class="w-full flex xl:flex-row flex-col justify-center min-h-screen gap-10 max-container pt-28">
-    <div class="w-1/2">
+    <div class="w-2/3">
         <h1 class="text-4xl text-lime-500 text-center">Your cart</h1>
         <div class="flex flex-wrap w-full gap-6 py-10 px-5">
-            <div class="gap-2 flex">
+            <!-- <div class="gap-2 flex">
                 <div class="w-20 h-20">
                     <img src="images/Recette_de_Nouilles_Sautees_aux_Legumes.webp" alt="" class="w-full h-full object-cover object-center rounded">
                 </div>
-            </div>
-            <div class="gap-2 flex">
-                <div class="w-20 h-20">
-                    <img src="images/Easy-Vegan-Pad-Thai_3680.jpg" alt="" class="w-full h-full object-cover object-center rounded">
+            </div> -->
+
+            <article class="card" *ngFor="let prod of invoice.products">
+                <div class="image-container">
+                    <img src="images/Recette_de_Nouilles_Sautees_aux_Legumes.webp" alt="">
                 </div>
-            </div>
-            <div class="gap-2 flex">
-                <div class="w-20 h-20">
-                    <img src="images/manhattan-4000x4000-primary-ig-9c3d894510284e9d8fbd9c518d00790b.jpg" alt="" class="w-full h-full object-cover object-center rounded">
+                <div class="informations">
+                    <div class="flex justify-between items-center py-2">
+                        <h2>Product Name</h2>
+                        <button class="text-red-500 remove">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="actions">
+                        <div class="btn-card">
+                            <button (click)="decrementProduct()">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <p>{{productCount}}</p>
+                            <button (click)="incrementProduct()">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>  
                 </div>
-            </div>
-            <div class="gap-2 flex">
-                <div class="w-20 h-20">
-                    <img src="images/17244-caramel-topped-ice-cream-dessert-600x600.jpg" alt="" class="w-full h-full object-cover object-center rounded">
-                </div>
-            </div>
+            </article>
             
         </div>
     </div>
@@ -31,28 +41,28 @@
             <p>Subtotal</p>
             <p>
                 <i class="fa fa-dollar"></i>
-                0
+                {{invoice.subtotal}}
             </p>
         </div>
         <div class="flex justify-between py-2">
             <p>Discount</p>
             <p>
                 <i class="fa fa-dollar"></i>
-                0
+                {{invoice.discount}}
             </p>
         </div>
         <div class="flex justify-between border-b py-2 border-gray-200">
             <p>Delivery fee</p>
             <p>
                 <i class="fa fa-dollar"></i>
-                0
+                {{invoice.delivery}}
             </p>
         </div>
         <div class="flex justify-between py-2">
             <p class="font-bold">Total</p>
             <p>
                 <i class="fa fa-dollar"></i>
-                0
+                {{invoice.total}}
             </p>
         </div>
         <div class="w-full relative flex justify-center items-center">

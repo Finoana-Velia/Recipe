@@ -7,7 +7,6 @@ import { ChefClientComponent } from '../chef-client/chef-client.component';
   selector: 'app-market-place',
   imports: [
     NewRecipeComponent,
-    MenuClientComponent,
     ChefClientComponent
   ],
   templateUrl: './market-place.component.html',

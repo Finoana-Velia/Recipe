@@ -1,6 +1,8 @@
 import { NgClass, NgForOf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
+import { InvoiceService } from '../../services/invoice.service';
+import { Invoice } from '../../models/Invoice';
 
 @Component({
   selector: 'app-new-recipe',
@@ -16,8 +18,12 @@ export class NewRecipeComponent implements OnInit{
 
   isActive = "Drinks";
   recipes! : any[];
+  invoice! : Invoice;
   
-  constructor(private recipeService : RecipeService){}
+  constructor(
+    private recipeService : RecipeService,
+    private invoiceService : InvoiceService
+  ){}
 
   ngOnInit(): void {
     this.recipes = this.recipeService.findAll().filter(item => item.category == this.isActive);
@@ -33,9 +39,10 @@ export class NewRecipeComponent implements OnInit{
   active(type : string) {
     this.isActive = type;
     this.recipes = this.recipeService.findAll().filter(item => item.category == this.isActive);
-    console.log("Type active : " + this.isActive);
-    console.log("Recipe list : ");
-    console.log(this.recipes);
+  }
+
+  addToCart(product : any) {
+    this.invoiceService.addToCart(product);
   }
 
   

@@ -84,11 +84,16 @@
                             <i class="fa fa-star text-lime-400"></i>
                         </li>  
                     </ul>
+                    <p class="font-bold text-lime-500">
+                        <i class="fa fa-dollar"></i>
+                        {{rec.price}}
+                    </p>
                     <div class="block justify-between">
-                        
-                        <button class="font-bold p-1 text-white bg-lime-400 rounded-[10px]">
-                            <i class="fa fa-dollar"></i>
-                            {{rec.price}}
+                        <button 
+                            class="font-bold p-1 text-white bg-lime-400 rounded-[10px]"
+                            (click)="addToCart(rec)"
+                        >
+                           Buy
                         </button>
                     </div>
                 </div>

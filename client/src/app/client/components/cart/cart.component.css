@@ -1,0 +1,99 @@
+article {
+    position : relative;
+    overflow : hidden;
+    border : 1px black solid;
+    border-radius : 1.5rem;
+    margin : 10px;
+}
+
+.image-container {
+    width : 219px;
+    height : 219px;
+}
+
+.image-container img {
+    width : 100%;
+    height : 100%;
+    object-fit : cover;
+    object-position : center;
+    border-radius : 1.5rem;
+}
+
+.informations {
+    width : 200px;
+    background : #fff;
+    padding : 1.5rem 2rem;
+    box-shadow : 0 8px 2px rgba(0,0,0,0.7);
+    border-radius : 1rem;
+    position : absolute;
+    bottom : -9rem;
+    left : 0;
+    right : 0;
+    margin-inline : auto;
+    opacity: 0;
+    transition : opacity 1s 1s;
+}
+
+.informatons h2 {
+    font-size : 1.5rem;
+    font-weight : 500;
+    margin-bottom : .75rem;
+}
+
+.btn-card {
+    display : flex;
+    justify-content : space-between;
+    align-items : center;
+}
+
+article:hover .informations {
+    animation : showInfo 1s forwards;
+    opacity : 1;
+    transition : opacity .3s;
+}
+
+article:hover {
+    animation : removeOverflow 2s forwards;
+}
+
+article:not(:hover) {
+    animation : showOverflow 2s forwards;
+}
+
+article:not(:hover) .informations{
+    animation : removeInfo 1s forwards;
+}
+
+@keyframes showInfo {
+    50% {
+        transform : translateY(-10rem);
+    }
+    100% {
+        transform : translateY(-7rem);
+    }
+}
+
+@keyframes removeOverflow {
+    to {
+        overflow : initial;
+    }
+}
+
+@keyframes showOverflow {
+    0% {
+        overflow : initial;
+        pointer-events : none;
+    }
+}
+
+@keyframes removeInfo {
+    0% {
+        transform : translateY(-7rem);
+    }
+    50% {
+        transform : translateY(-10rem);
+    }
+    100% {
+        transform : translateY(.5rem);
+    }
+}

@@ -15,6 +15,7 @@ import { NoodlesListComponent } from './features/product/components/noodles-list
 import { MainClientComponent } from './client/components/main-client/main-client.component';
 import { CartComponent } from './client/components/cart/cart.component';
 import { MarketPlaceComponent } from './client/components/market-place/market-place.component';
+import { FavoriteComponent } from './client/components/favorite/favorite.component';
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
@@ -38,7 +39,8 @@ export const routes: Routes = [
     { path : "user", component : MainClientComponent,
         children : [
             { path : "" , component : MarketPlaceComponent},
-            { path : "cart", component : CartComponent}
+            { path : "cart", component : CartComponent},
+            { path : "favorite" , component  : FavoriteComponent}
         ]
     }
 ];

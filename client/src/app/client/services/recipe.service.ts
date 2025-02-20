@@ -121,13 +121,7 @@ export class RecipeService {
     category : string
   } [] = [];
 
-  private favorites : {
-    id : number,
-    image : string,
-    name : string,
-    price : number,
-    category : string
-  } [] = [];
+  private favorites : any[] = [];
 
   constructor() { }
 
@@ -141,6 +135,16 @@ export class RecipeService {
 
   getFavorites() {
     return this.favorites;
+  }
+
+  toggleFavorite(product : any){
+    const favorite = this.favorites.find(item => item.id == product.id);
+    if(favorite) {
+      let index = this.favorites.findIndex(item => item.id == product.id);
+      this.favorites.splice(index,1);
+    }else {
+      this.favorites.push(product);
+    }
   }
 
   addToCart(product : any) {

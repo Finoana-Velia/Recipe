@@ -18,6 +18,7 @@ export class NewRecipeComponent implements OnInit{
   isActive = "Drinks";
   recipes! : any[];
   invoice! : Invoice;
+  favorites! : any[];
   
   constructor(
     private recipeService : RecipeService,
@@ -25,6 +26,7 @@ export class NewRecipeComponent implements OnInit{
 
   ngOnInit(): void {
     this.recipes = this.recipeService.findAll().filter(item => item.category == this.isActive);
+    this.favorites = this.recipeService.getFavorites();
   }
 
   toggleActive(type : string) {
@@ -41,6 +43,21 @@ export class NewRecipeComponent implements OnInit{
 
   addToCart(product : any) {
     this.recipeService.addToCart(product);
+  }
+
+  addFavorite(product : any) {
+    this.recipeService.toggleFavorite(product);
+    this.favorites = this.recipeService.getFavorites();
+  }
+
+  isFavorite(id : number) {
+    const icon = "fa fa-heart";
+    const favorite = this.recipeService.getFavorites()
+    .find(item => item.id == id);
+    if(favorite) {
+      return icon;
+    }
+    return icon + "-o";
   }
 
 }

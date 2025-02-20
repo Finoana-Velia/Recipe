@@ -1,7 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Invoice } from '../../models/Invoice';
-import { InvoiceService } from '../../services/invoice.service';
 import { NgForOf } from '@angular/common';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,21 +13,34 @@ import { NgForOf } from '@angular/common';
 })
 export class CartComponent implements OnInit{
 
-  productCount = 1;
   invoice! : Invoice;
+  cartContent! : any[];
 
-  constructor(private invoiceService : InvoiceService) {}
+  constructor(private recipeService : RecipeService) {}
   
   
   ngOnInit(): void {
-    this.invoice = this.invoiceService.getInvoice();
+    this.updateInvoice();
+    this.cartContent = this.recipeService.getCartItem();
   }
 
-  incrementProduct() {
-    this.productCount++;
+  updateInvoice() {
+    this.invoice = this.recipeService.getInvoice();
   }
 
-  decrementProduct() {
-    this.productCount--;
+  removeToCart(product : any) {
+    this.recipeService.removeToCart(product);
+    this.updateInvoice();
   }
+
+  addToCart(product : any) {
+    this.recipeService.addToCart(product);
+    this.updateInvoice();
+  }
+
+  decrementItem(product : any) {
+    this.recipeService.reduceItem(product);
+    this.updateInvoice();
+  }
+
 }

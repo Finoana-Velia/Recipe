@@ -88,7 +88,10 @@
                         <i class="fa fa-dollar"></i>
                         {{rec.price}}
                     </p>
-                    <div class="block justify-between">
+                    <div class="w-full flex justify-between items-center">
+                        <button class="font-bold text-red-500">
+                            <i class="fa fa-heart-o"></i>
+                        </button>
                         <button 
                             class="font-bold p-1 text-white bg-lime-400 rounded-[10px]"
                             (click)="addToCart(rec)"

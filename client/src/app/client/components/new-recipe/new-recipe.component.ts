@@ -1,7 +1,6 @@
 import { NgClass, NgForOf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { InvoiceService } from '../../services/invoice.service';
 import { Invoice } from '../../models/Invoice';
 
 @Component({
@@ -22,7 +21,6 @@ export class NewRecipeComponent implements OnInit{
   
   constructor(
     private recipeService : RecipeService,
-    private invoiceService : InvoiceService
   ){}
 
   ngOnInit(): void {
@@ -42,9 +40,7 @@ export class NewRecipeComponent implements OnInit{
   }
 
   addToCart(product : any) {
-    this.invoiceService.addToCart(product);
+    this.recipeService.addToCart(product);
   }
-
-  
 
 }

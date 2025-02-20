@@ -8,24 +8,24 @@
                 </div>
             </div> -->
 
-            <article class="card" *ngFor="let prod of invoice.products">
+            <article class="card" *ngFor="let prod of cartContent">
                 <div class="image-container">
-                    <img src="images/Recette_de_Nouilles_Sautees_aux_Legumes.webp" alt="">
+                    <img [src]="prod.image" alt="">
                 </div>
                 <div class="informations">
                     <div class="flex justify-between items-center py-2">
-                        <h2>Product Name</h2>
-                        <button class="text-red-500 remove">
+                        <h2>{{prod.name}}</h2>
+                        <button class="text-red-500 remove" (click)="removeToCart(prod)">
                             <i class="fa fa-trash"></i>
                         </button>
                     </div>
                     <div class="actions">
                         <div class="btn-card">
-                            <button (click)="decrementProduct()">
+                            <button (click)="decrementItem(prod)">
                                 <i class="fa fa-minus"></i>
                             </button>
-                            <p>{{productCount}}</p>
-                            <button (click)="incrementProduct()">
+                            <p>{{prod.quantity}}</p>
+                            <button (click)="addToCart(prod)">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>

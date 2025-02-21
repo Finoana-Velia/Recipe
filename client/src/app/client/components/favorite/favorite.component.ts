@@ -22,4 +22,12 @@ export class FavoriteComponent implements OnInit{
     this.favorites = this.recipeService.getFavorites();
   }
 
+  addToCart(product : any) {
+    this.recipeService.addToCart(product);
+  }
+
+  toggleFavorite(product : any) {
+    this.recipeService.toggleFavorite(product);
+  }
+
 }

@@ -16,6 +16,7 @@ import { MainClientComponent } from './client/components/main-client/main-client
 import { CartComponent } from './client/components/cart/cart.component';
 import { MarketPlaceComponent } from './client/components/market-place/market-place.component';
 import { FavoriteComponent } from './client/components/favorite/favorite.component';
+import { ProfileUserComponent } from './client/components/profile-user/profile-user.component';
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
@@ -40,7 +41,8 @@ export const routes: Routes = [
         children : [
             { path : "" , component : MarketPlaceComponent},
             { path : "cart", component : CartComponent},
-            { path : "favorite" , component  : FavoriteComponent}
+            { path : "favorite" , component  : FavoriteComponent},
+            { path : "profile" , component : ProfileUserComponent}
         ]
     }
 ];

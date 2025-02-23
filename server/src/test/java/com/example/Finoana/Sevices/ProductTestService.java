@@ -74,8 +74,7 @@ public class ProductTestService {
 				() -> assertNotNull(response),
 				() -> assertEquals(6,response.getContent().size()),
 				() -> assertEquals("T-shirt.jpeg",response.getContent().get(1).getImage()),
-				() -> assertEquals(1800.00,response.getContent().get(2).getPrice()),
-				() -> assertEquals(10,response.getContent().get(3).getQuantity())
+				() -> assertEquals(1800.00,response.getContent().get(2).getPrice())
 				);
 	}
 	
@@ -90,8 +89,7 @@ public class ProductTestService {
 				() -> assertNotNull(response),
 				() -> assertEquals("Coca Cola",response.getName()),
 				() -> assertEquals("coca.jpeg",response.getImage()),
-				() -> assertEquals(1500.00, response.getPrice()),
-				() -> assertEquals(10,response.getQuantity())
+				() -> assertEquals(1500.00, response.getPrice())
 				);
 		
 	}
@@ -116,37 +114,31 @@ public class ProductTestService {
 				.name("Coca Cola")
 				.image("coca.jpeg")
 				.price(1500.00)
-				.quantity(10)
 				.build(),
 				Product.builder()
 				.name("T-shirt")
 				.image("T-shirt.jpeg")
 				.price(2000.00)
-				.quantity(10)
 				.build(),
 				Product.builder()
 				.name("Smart Watch")
 				.image("Smart.jpeg")
 				.price(1800.00)
-				.quantity(10)
 				.build(),
 				Product.builder()
 				.name("Pizza")
 				.image("Pizza.jpeg")
 				.price(1000.00)
-				.quantity(10)
 				.build(),
 				Product.builder()
 				.name("Super Shoes")
 				.image("Super.jpeg")
 				.price(1400.00)
-				.quantity(10)
 				.build(),
 				Product.builder()
 				.name("Laptop")
 				.image("Laptop.jpeg")
 				.price(2500.00)
-				.quantity(10)
 				.build()
 				);
 	}

@@ -14,8 +14,8 @@ public class ProductResponseDto {
 	private Long id;
 	private String name;
 	private double price;
-	private int quantity;
 	private String image;
 	private Category category;
+	private boolean availability;
 	private Chef chef;
 }

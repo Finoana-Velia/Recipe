@@ -5,7 +5,7 @@ export interface ProductRequest {
     name : string;
     price : number;
     image : string;
-    quantity : number;
+    availability : boolean;
     category : Category | string;
     idChef : number | null;
 }
@@ -15,7 +15,7 @@ export interface ProductResponse {
     name : string;
     price : number;
     image : string;
-    quantity : number;
+    availability : boolean;
     category : Category | string ;
     chef : Chef;
 }

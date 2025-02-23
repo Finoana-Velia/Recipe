@@ -1,0 +1,31 @@
+package com.example.Finoana.Entity;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Embedded;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+
+public class Account {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
+	
+	private String firstName;
+	private String LastName;
+	private LocalDate birthDate;
+	
+	@Embedded
+	private Contact contact;
+	
+	
+	
+
+}

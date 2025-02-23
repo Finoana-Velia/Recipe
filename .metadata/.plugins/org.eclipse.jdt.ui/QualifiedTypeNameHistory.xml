@@ -6,7 +6,6 @@
     <fullyQualifiedTypeName name="com.example.Finoana.Core.ErrorType"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="jakarta.persistence.GenerationType"/>
-    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="org.apache.commons.io.IOUtils"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.PageRequest"/>
     <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
@@ -17,4 +16,9 @@
     <fullyQualifiedTypeName name="jakarta.persistence.EnumType"/>
     <fullyQualifiedTypeName name="java.util.Locale.Category"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Category"/>
+    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Dto.AccountResponseDto"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Entity.Account"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Entity.Location"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Entity.Contact"/>
 </qualifiedTypeNameHistroy>

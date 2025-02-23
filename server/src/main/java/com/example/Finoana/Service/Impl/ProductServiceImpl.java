@@ -68,12 +68,16 @@ public class ProductServiceImpl implements ProductService{
 	public ProductResponseDto createProduct(ProductRequestDto product) {
 		Product productMapped = toEntity(product, Product.class);
 		productMapped.setCreatedAt(LocalDateTime.now());
+		
 		if(product.getIdChef() != null) {
 			Chef chef = this.chefRepostitory.findById(product.getIdChef()).orElseThrow(
 					() -> new ResourceNotFoundException("the chef with id : " + product.getIdChef() + " is not found")
 					);
 			productMapped.setChef(chef);
 		}
+		System.out.println("Aiza zao ity");
+		System.out.println(productMapped);
+		System.out.println("");
 		Product productSaved = this.productRepository.save(productMapped);
 		return toDto(productSaved,ProductResponseDto.class);
 	}

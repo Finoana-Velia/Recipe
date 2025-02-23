@@ -30,7 +30,7 @@ export class ProductFormComponent implements OnInit {
       nonNullable : true,
       validators : Validators.required
     }),
-    quantity : new FormControl(0,{
+    availability : new FormControl(true,{
       nonNullable : true,
       validators : Validators.required
     }),
@@ -42,7 +42,7 @@ export class ProductFormComponent implements OnInit {
       nonNullable : true,
       validators : Validators.required
     }),
-    chef : new FormControl(0,{
+    chef : new FormControl<number|null>(null,{
       nonNullable : true,
       validators : Validators.required
     })
@@ -69,7 +69,7 @@ export class ProductFormComponent implements OnInit {
               nonNullable : true,
               validators : Validators.required
             }),
-            quantity : new FormControl(response.quantity,{
+            availability : new FormControl(response.availability,{
               nonNullable : true,
               validators : Validators.required
             }),
@@ -81,7 +81,7 @@ export class ProductFormComponent implements OnInit {
               nonNullable : true,
               validators : Validators.required
             }),
-            chef : new FormControl(response.chef.id,{
+            chef : new FormControl<number | null>(response.chef.id,{
               nonNullable : true,
               validators : Validators.required
             })
@@ -137,7 +137,7 @@ export class ProductFormComponent implements OnInit {
       name : this.name,
       price : this.price,
       category : this.category,
-      quantity : this.quantity,
+      availability : this.availability,
       idChef : this.chef
     }
   }
@@ -150,8 +150,8 @@ export class ProductFormComponent implements OnInit {
     return this._productForm.controls.price.value;
   }
 
-  get quantity() {
-    return this._productForm.controls.quantity.value;
+  get availability() {
+    return this._productForm.controls.availability.value;
   }
   
   get category() {

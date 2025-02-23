@@ -1,0 +1,22 @@
+package com.example.Finoana.Dto;
+
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+public class InvoiceRequestDto {
+	private Long id;
+	private String reference;
+	private double total;
+	private double discount;
+	private double deliveryFee;
+	private List<Long> productIds;
+	private Long idAccount;
+}

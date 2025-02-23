@@ -28,12 +28,14 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
+	
 	private String name;
 	private double price;
-	private int quantity;
 	private String image;
+	private boolean availability;
 	
 	@Enumerated(EnumType.STRING)
 	private Category category;

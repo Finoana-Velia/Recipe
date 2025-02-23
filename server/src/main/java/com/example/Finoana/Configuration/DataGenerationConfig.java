@@ -8,9 +8,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.example.Finoana.Entity.Account;
 import com.example.Finoana.Entity.Category;
 import com.example.Finoana.Entity.Chef;
+import com.example.Finoana.Entity.Contact;
 import com.example.Finoana.Entity.Gender;
+import com.example.Finoana.Entity.Location;
+import com.example.Finoana.Entity.Product;
+import com.example.Finoana.Repository.AccountRepository;
 import com.example.Finoana.Repository.ChefRepository;
 
 @Configuration
@@ -20,6 +25,53 @@ public class DataGenerationConfig {
 //	CommandLineRunner commandLineRunner(ChefRepository chefRepository) {
 //		return args -> chefRepository.saveAll(generateChef());
 //	}
+	
+	@Bean
+	CommandLineRunner commandLineRunner(AccountRepository accountRepository) {
+		return args -> accountRepository.saveAll(generateAccount());
+	}
+	
+	
+	private List<Account> generateAccount() {
+		return List.of(
+				Account.builder()
+				.firstName("John")
+				.lastName("Doe")
+				.birthDate(LocalDate.now())
+				.location(
+						Location.builder()
+						.address("109 Garden Road")
+						.city("New York city")
+						.proviceState("New York")
+						.build()
+				)
+				.contact(
+						Contact.builder()
+						.email("john@example.com")
+						.phone("1234567890")
+						.build()
+				)
+				.build(),
+				Account.builder()
+				.firstName("Jane")
+				.lastName("Dowson")
+				.birthDate(LocalDate.now())
+				.location(
+						Location.builder()
+						.address("42 Sunset Street")
+						.city("Miami")
+						.proviceState("Floride")
+						.build()
+				)
+				.contact(
+						Contact.builder()
+						.email("jane@mail.com")
+						.phone("897564321")
+						.build()
+				)
+				.build()
+				);
+	}
 	
 	private List<Chef> generateChef(){
 		return List.of(

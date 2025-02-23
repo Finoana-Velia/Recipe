@@ -29,12 +29,16 @@
                         class="px-5 py-2 bg-gray-100 outline-none w-full my-2"
                         formControlName="name"    
                     >
-                    <input 
+                    <!-- <input 
                         type="number" 
                         placeholder="Quantity" 
                         class="px-5 py-2 bg-gray-100 outline-none w-full my-2"
                         formControlName="quantity"
-                    >
+                    > -->
+                    <div class="gap-5 my-2 flex items-center">
+                        <label for="isOut">Aviablility</label>
+                        <input type="checkbox" formControlName="availability" checked>
+                    </div>
                     <div class="flex items-center justify-center relative">
                         <input 
                             type="number" 

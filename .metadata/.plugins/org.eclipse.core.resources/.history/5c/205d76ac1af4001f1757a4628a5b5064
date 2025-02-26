@@ -1,0 +1,4 @@
+package com.example.Finoana.Service;
+
+public interface NotificationService {
+}

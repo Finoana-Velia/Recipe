@@ -7,9 +7,13 @@ import org.springframework.stereotype.Service;
 import com.example.Finoana.Dto.ChefRequestDto;
 import com.example.Finoana.Dto.ChefResponseDto;
 import com.example.Finoana.Entity.Chef;
+import com.example.Finoana.Entity.EntityType;
+import com.example.Finoana.Entity.Notification;
+import com.example.Finoana.Entity.OperationType;
 import com.example.Finoana.Exception.ResourceNotFoundException;
 import com.example.Finoana.Repository.ChefRepository;
 import com.example.Finoana.Service.ChefService;
+import com.example.Finoana.Service.NotificationService;
 
 import static com.example.Finoana.Core.EntityMapper.*;
 
@@ -22,6 +26,7 @@ import lombok.AllArgsConstructor;
 public class ChefServiceImpl implements ChefService{
 
 	private ChefRepository chefRepository;
+	private NotificationService notificationService;
 	
 	@Override
 	public Page<ChefResponseDto> searchChefByName(String name, Pageable request) {
@@ -43,6 +48,7 @@ public class ChefServiceImpl implements ChefService{
 	public ChefResponseDto createChef(ChefRequestDto chef) {
 		Chef chefEntity = toEntity(chef,Chef.class);
 		chefEntity.setCreatedAt(LocalDateTime.now());
+		this.generateNotification(chefEntity, OperationType.CREATE);
 		return toDto(this.chefRepository.save(chefEntity),ChefResponseDto.class);
 	}
 
@@ -57,6 +63,7 @@ public class ChefServiceImpl implements ChefService{
 					}
 					chefEntity.setUpdatedAt(LocalDateTime.now());
 					Chef chefUpdated = this.chefRepository.save(chefEntity);
+					this.generateNotification(chefUpdated, OperationType.UPDATE);
 					return toDto(chefUpdated, ChefResponseDto.class);
 				}).orElseThrow(
 						() -> new ResourceNotFoundException("Chef with id :" + id + " is not found")
@@ -65,7 +72,35 @@ public class ChefServiceImpl implements ChefService{
 
 	@Override
 	public void deleteById(Long id) {
-		this.chefRepository.deleteById(id);
+		this.chefRepository.findById(id).map(
+				chef -> {
+					this.generateNotification(chef, OperationType.DELETE);
+					this.chefRepository.deleteById(id);
+					return null;
+				}
+				)
+		.orElseThrow(
+				() -> new ResourceNotFoundException("Chef with the id " + id + " was not found") 
+				);
 	}
 
+	private void generateNotification(Chef chef,OperationType operationType) {
+		String message = "";
+		if(operationType.equals(OperationType.CREATE)) {
+			message = " was added in the list";
+		}
+		if(operationType.equals(OperationType.UPDATE)) {
+			message = " informations was updated";
+		}
+		if(operationType.equals(OperationType.DELETE)) {
+			message = " was remove from the list";
+		}
+		this.notificationService.save(Notification.builder()
+				.createdAt(LocalDateTime.now())
+				.idEntity(chef.getId())
+				.operationType(operationType)
+				.entityType(EntityType.CHEF)
+				.message(chef.getName() + message)
+				.build());
+	}
 }

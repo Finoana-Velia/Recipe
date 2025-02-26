@@ -1,0 +1,7 @@
+package com.example.Finoana.Entity;
+
+public enum OperationType {
+	CREATE("New"),
+	UPDATE("has changed"),
+	DELETE("anymore")
+}

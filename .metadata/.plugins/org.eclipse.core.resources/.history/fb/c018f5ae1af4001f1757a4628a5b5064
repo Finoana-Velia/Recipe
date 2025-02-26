@@ -1,0 +1,17 @@
+package com.example.Finoana.Entity;
+
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
+public class Notification {
+	
+	private Long id;
+	private String message;
+	
+	@Enumerated(EnumType.STRING)
+	private OperationType operationType;
+	
+	@Enumerated(EnumType.STRING)
+	private EntityType entityType;
+
+}

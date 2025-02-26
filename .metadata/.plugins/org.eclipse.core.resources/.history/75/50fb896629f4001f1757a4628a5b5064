@@ -1,0 +1,75 @@
+package com.example.Finoana.Service.Impl;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.example.Finoana.Dto.ChefResponseDto;
+import com.example.Finoana.Dto.InvoiceResponseDto;
+import com.example.Finoana.Dto.NotificationDto;
+import com.example.Finoana.Dto.ProductResponseDto;
+import com.example.Finoana.Entity.Notification;
+import com.example.Finoana.Entity.OperationType;
+import com.example.Finoana.Exception.ResourceNotFoundException;
+import com.example.Finoana.Repository.NotificationRepository;
+import com.example.Finoana.Service.AccountService;
+import com.example.Finoana.Service.ChefService;
+import com.example.Finoana.Service.InvoiceService;
+import com.example.Finoana.Service.NotificationService;
+import com.example.Finoana.Service.ProductService;
+
+import static com.example.Finoana.Core.EntityMapper.*;
+
+import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
+
+@Service
+@AllArgsConstructor
+public class NotificationServiceImpl implements NotificationService{
+	
+	private final ChefService chefService;
+	private final AccountService accountService;
+	private final ProductService productService;
+	private final InvoiceService invoiceService;
+	private final NotificationRepository notificationRepository;
+	
+	@Override
+	public Page<NotificationDto> findAll(Pageable request) {
+		return this.notificationRepository.findAll(request).map(
+				notification -> toDto(notification,NotificationDto.class)
+				);
+	}
+
+	@Override
+	public NotificationDto findById(Long id) {
+		return this.notificationRepository.findById(id).map(
+				notification -> toDto(notification,NotificationDto.class)
+				).orElseThrow(
+						() -> new ResourceNotFoundException("Notification " + id + " not found")
+						);
+	}
+
+	@Override
+	public <T> NotificationDto save(T entity, OperationType operation) {
+		Notification notification = new Notification();
+		notification.setCreatedAt(LocalDateTime.now());
+		if(entity instanceof ChefResponseDto) {
+			notification.setMessage("Chef ");
+		}
+		return null;
+	}
+	
+	private ChefResponseDto findChefById(Long id) {
+		return this.chefService.findById(id);
+	}
+	
+	private ProductResponseDto findProductById(Long id) {
+		return this.productService.findProductById(id);
+	}
+	
+	private InvoiceResponseDto findInvoiceById(Long id) {
+		return this.invoiceService.findById(id);
+	}
+
+}

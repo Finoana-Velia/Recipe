@@ -8,10 +8,14 @@ import com.example.Finoana.Dto.ProductRequestDto;
 import com.example.Finoana.Dto.ProductResponseDto;
 import com.example.Finoana.Entity.Category;
 import com.example.Finoana.Entity.Chef;
+import com.example.Finoana.Entity.EntityType;
+import com.example.Finoana.Entity.Notification;
+import com.example.Finoana.Entity.OperationType;
 import com.example.Finoana.Entity.Product;
 import com.example.Finoana.Exception.ResourceNotFoundException;
 import com.example.Finoana.Repository.ChefRepository;
 import com.example.Finoana.Repository.ProductRepository;
+import com.example.Finoana.Service.NotificationService;
 import com.example.Finoana.Service.ProductService;
 import static com.example.Finoana.Core.EntityMapper.*;
 
@@ -25,6 +29,7 @@ public class ProductServiceImpl implements ProductService{
 
 	private ProductRepository productRepository;
 	private final ChefRepository chefRepostitory;
+	private final NotificationService notificationService;
 	
 	@Override
 	public Page<ProductResponseDto> findProductByName(String name, Pageable pageable) {
@@ -76,6 +81,7 @@ public class ProductServiceImpl implements ProductService{
 			productMapped.setChef(chef);
 		}
 		Product productSaved = this.productRepository.save(productMapped);
+		this.generateNotification(productSaved, OperationType.CREATE);
 		return toDto(productSaved,ProductResponseDto.class);
 	}
 
@@ -96,6 +102,7 @@ public class ProductServiceImpl implements ProductService{
 						product.setChef(chef);
 					}
 					Product productUpdate = this.productRepository.save(product);
+					this.generateNotification(productUpdate, OperationType.UPDATE);
 					return toDto(productUpdate,ProductResponseDto.class);
 				})
 				.orElseThrow(
@@ -105,7 +112,35 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public void deleteProductById(Long id) {
-		this.productRepository.deleteById(id);
+		this.productRepository.findById(id).map(
+				porduct -> {
+					this.generateNotification(porduct, OperationType.DELETE);
+					this.productRepository.deleteById(id);
+					return null;
+				}
+				).orElseThrow(
+						() -> new ResourceNotFoundException("product " + id + " not found")
+						);
+	}
+	
+	private void generateNotification(Product product,OperationType operationType) {
+		String message = "";
+		if(operationType.equals(OperationType.CREATE)) {
+			message = "Try our new recipe " + product.getName() + "made by our chef " + product.getChef().getName();
+		}
+		if(operationType.equals(OperationType.UPDATE)) {
+			message = "There is changed for " + product.getName() + " informations";
+		}
+		if(operationType.equals(OperationType.DELETE)) {
+			message = product.getName() + " no longer exists on the menu";
+		}
+		this.notificationService.save(Notification.builder()
+				.createdAt(LocalDateTime.now())
+				.idEntity(product.getId())
+				.operationType(operationType)
+				.entityType(EntityType.PRODUCT)
+				.message(message)
+				.build());
 	}
 
 }

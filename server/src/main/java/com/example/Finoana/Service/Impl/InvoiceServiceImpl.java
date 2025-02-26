@@ -7,13 +7,18 @@ import org.springframework.stereotype.Service;
 import com.example.Finoana.Dto.InvoiceRequestDto;
 import com.example.Finoana.Dto.InvoiceResponseDto;
 import com.example.Finoana.Entity.Account;
+import com.example.Finoana.Entity.EntityType;
 import com.example.Finoana.Entity.Invoice;
+import com.example.Finoana.Entity.Notification;
+import com.example.Finoana.Entity.OperationType;
 import com.example.Finoana.Entity.Product;
 import com.example.Finoana.Exception.ResourceNotFoundException;
 import com.example.Finoana.Repository.AccountRepository;
 import com.example.Finoana.Repository.InvoiceRepository;
 import com.example.Finoana.Repository.ProductRepository;
 import com.example.Finoana.Service.InvoiceService;
+import com.example.Finoana.Service.NotificationService;
+
 import static com.example.Finoana.Core.EntityMapper.*;
 
 import java.time.LocalDateTime;
@@ -30,6 +35,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 	private InvoiceRepository invoiceRepository;
 	private ProductRepository productRepository;
 	private AccountRepository accountRepository;
+	private NotificationService notificationService;
 	
 	@Override
 	public Page<InvoiceResponseDto> searchInvoiceByReference(String reference, Pageable request) {
@@ -64,6 +70,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 				);
 		invoiceMapped.setProducts(productList);
 		Invoice invoiceSaved = this.invoiceRepository.save(invoiceMapped);
+		this.generateNotification(invoiceSaved, OperationType.CREATE);	
 		return toDto(invoiceSaved, InvoiceResponseDto.class);
 	}
 
@@ -87,6 +94,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 							);
 					invoiceEntity.setProducts(productList);
 					Invoice invoiceSaved = this.invoiceRepository.save(invoiceEntity);
+					this.generateNotification(invoiceSaved, OperationType.UPDATE);
 					return toDto(invoiceSaved, InvoiceResponseDto.class);
 				})
 				.orElseThrow(
@@ -96,10 +104,14 @@ public class InvoiceServiceImpl implements InvoiceService{
 
 	@Override
 	public void deleteById(Long id) {
-		if(this.invoiceRepository.existsById(id)) {
-			throw new ResourceNotFoundException("Invoice with id : " + id + " is not found");
-		}
-		this.invoiceRepository.deleteById(id);
+		this.invoiceRepository.findById(id).map(invoice -> {
+			this.generateNotification(invoice, OperationType.DELETE);
+			this.invoiceRepository.deleteById(id);
+			return null;
+		}).orElseThrow(
+				() -> new ResourceNotFoundException("Product with id " + id + " was not found")
+				);	
+	
 	}
 	
 	private Account findAccountById(Long id) {
@@ -112,6 +124,23 @@ public class InvoiceServiceImpl implements InvoiceService{
 		return this.productRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("Product not found")
 				);
+	}
+	
+	private void generateNotification(Invoice invoice,OperationType operationType) {
+		String message = "";
+		if(operationType.equals(OperationType.CREATE)) {
+			message = invoice.getAccount().getFirstName() + " placed an order";
+		}
+		if(operationType.equals(OperationType.UPDATE)) {
+			message = invoice.getAccount().getFirstName() + " has moved forward";
+		}
+		this.notificationService.save(Notification.builder()
+				.createdAt(LocalDateTime.now())
+				.idEntity(invoice.getId())
+				.operationType(operationType)
+				.entityType(EntityType.INVOICE)
+				.message(message)
+				.build());
 	}
 	
 

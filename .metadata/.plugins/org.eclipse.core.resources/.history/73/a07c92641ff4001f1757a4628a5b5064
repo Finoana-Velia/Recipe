@@ -1,0 +1,11 @@
+package com.example.Finoana.Service;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.example.Finoana.Dto.NotificationDto;
+
+public interface NotificationService {
+	Page<NotificationDto> findAll(Pageable request);
+	NotificationDto findById(Long id);
+}

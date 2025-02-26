@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import com.example.Finoana.Entity.Contact;
+import com.example.Finoana.Entity.Gender;
 import com.example.Finoana.Entity.Location;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +21,10 @@ public class AccountRequestDto {
 	private String firstName;
 	private String lastName;
 	private LocalDate birthDate;
+	private String profilePicture;
+	private Gender gender;
 	private Location location;
 	private Contact contact;
-	private Set<Long> invoiceIds;
+//	private Set<Long> invoiceIds;
+//	private Set<Long> idProducts;
 }

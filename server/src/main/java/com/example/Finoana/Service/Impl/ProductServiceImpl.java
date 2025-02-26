@@ -75,9 +75,6 @@ public class ProductServiceImpl implements ProductService{
 					);
 			productMapped.setChef(chef);
 		}
-		System.out.println("Aiza zao ity");
-		System.out.println(productMapped);
-		System.out.println("");
 		Product productSaved = this.productRepository.save(productMapped);
 		return toDto(productSaved,ProductResponseDto.class);
 	}

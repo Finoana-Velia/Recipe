@@ -42,7 +42,7 @@ public class DataGenerationConfig {
 						Location.builder()
 						.address("109 Garden Road")
 						.city("New York city")
-						.proviceState("New York")
+						.provinceState("New York")
 						.build()
 				)
 				.contact(
@@ -60,7 +60,7 @@ public class DataGenerationConfig {
 						Location.builder()
 						.address("42 Sunset Street")
 						.city("Miami")
-						.proviceState("Floride")
+						.provinceState("Floride")
 						.build()
 				)
 				.contact(

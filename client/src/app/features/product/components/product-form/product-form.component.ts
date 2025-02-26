@@ -81,7 +81,7 @@ export class ProductFormComponent implements OnInit {
               nonNullable : true,
               validators : Validators.required
             }),
-            chef : new FormControl<number | null>(response.chef.id,{
+            chef : new FormControl<number | null>(response.chef ? response.chef.id : null,{
               nonNullable : true,
               validators : Validators.required
             })

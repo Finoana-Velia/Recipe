@@ -62,11 +62,11 @@
                     <!-- <input type="text" placeholder="Chef" class="px-5 py-2 bg-gray-100 outline-none w-full my-2"> -->
                     
                     <select formControlName="chef" class="px-5 py-2 bg-gray-100 outline-none w-full my-2">
-                        @if(chefList.length != 0 || chefList){
-                            <option value="0">Choose chef..</option>
+                        @if(chefList){
+                            <option value="null">Choose chef..</option>
                             <option *ngFor="let chef of chefList" [value]="chef.id">{{chef.name}}</option>
                         }@else {
-                            <option value="0">no chef for the moment</option>
+                            <option value="null">no chef for the moment</option>
                         }
                     </select>
                     <div class="flex items-center justify-around">

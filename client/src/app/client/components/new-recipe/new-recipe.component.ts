@@ -7,7 +7,7 @@ import { Invoice } from '../../models/Invoice';
   selector: 'app-new-recipe',
   imports: [
     NgClass,
-    NgForOf
+    NgForOf,
   ],
   templateUrl: './new-recipe.component.html',
   styleUrl: './new-recipe.component.css'

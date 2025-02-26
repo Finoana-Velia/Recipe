@@ -1,5 +1,7 @@
 package com.example.Finoana.Service.Impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.Finoana.Dto.AccountRequestDto;
@@ -41,6 +43,9 @@ public class AccountServiceImpl implements AccountService{
 		return this.accountRepository.findById(id)
 				.map(accountFound -> {
 					Account accountEntity = toEntity(account,Account.class);
+					if(accountEntity.getProfilePicture() == null) {
+						accountEntity.setProfilePicture(accountFound.getProfilePicture());
+					}
 					accountEntity.setCreatedAt(accountFound.getCreatedAt());
 					accountEntity.setUpdatedAt(LocalDateTime.now());
 					Account accountSaved = this.accountRepository.save(accountEntity);
@@ -49,6 +54,13 @@ public class AccountServiceImpl implements AccountService{
 				.orElseThrow(
 						() -> new ResourceNotFoundException("Account : " + id + " not found")
 						);
+	}
+
+	@Override
+	public Page<AccountResponseDto> findAll(Pageable request) {
+		return this.accountRepository.findAll(request).map(
+				account -> toDto(account,AccountResponseDto.class)
+				);
 	}
 
 }

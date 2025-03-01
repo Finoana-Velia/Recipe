@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.example.Finoana.Core.EntityMapper"/>
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Core.ErrorType"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="jakarta.persistence.GenerationType"/>
     <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
-    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Gender"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
@@ -18,8 +15,13 @@
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Account"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Location"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Contact"/>
-    <fullyQualifiedTypeName name="org.springframework.data.domain.PageRequest"/>
     <fullyQualifiedTypeName name="jakarta.persistence.EnumType"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Core.FileManagement"/>
     <fullyQualifiedTypeName name="org.apache.commons.io.IOUtils"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.GenerationType"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Core.EntityMapper"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.PageRequest"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Entity.Notification"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Entity.EntityType"/>
 </qualifiedTypeNameHistroy>

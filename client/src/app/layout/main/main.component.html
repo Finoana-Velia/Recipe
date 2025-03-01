@@ -95,17 +95,35 @@
     </ul>
   </div>
   <div class="bg-lime-100 w-full h-screen">
-    <nav class="flex justify-between items-center bg-white p-3">
+    <nav class="flex justify-between items-center bg-slate-50 p-3">
       <h1 class="text-2xl font-semibold"></h1>
       <div class="flex justify-center items-center gap-10">
         <ul class="flex gap-10">
           <li class="text-2xl relative">
-            <a href=""><i class="fa fa-cart-arrow-down"></i></a>
-          </li>
-          <li class="text-2xl relative">
-            <a href=""><i class="fa fa-bell"></i></a>
+            <a (click)="toggleNotification()"><i class="fa fa-bell"></i></a>
             <div class="absolute top-0 right-0 bg-red-500 rounded-full text-white w-[10px] h-[10px]">
             </div>
+
+            @if(notificationMenu) {
+              <div class="absolute top-full right-0 rounded-lg p-3 mt-1 shadow-lg duration-300 bg-white z-10 min-w-[300px]">
+                <h3 class="text-xl p-3">Notifications</h3>
+                <ul>
+                  <li>
+                    <a class="flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white">
+                      <i class="fa fa-user"></i>
+                      <div>
+                        <p>new product</p>
+                        <p class="text-sm text-gray-200">Date</p> 
+                      </div>
+                    </a>
+                  </li>
+                </ul>  
+                <button class="text-xl p-3">
+                  View All
+                </button>
+              </div>
+            }
+          
           </li>
         </ul>
         <img src="images/chief3.png" alt="" width="50" height="50" class="rounded-full">

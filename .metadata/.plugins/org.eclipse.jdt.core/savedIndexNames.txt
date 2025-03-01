@@ -5,8 +5,8 @@ INDEX VERSION 1.134+/home/finoana/Projects/E-commerce/.metadata/.plugins/org.ecl
 3205298084.index
 3656894279.index
 2726533260.index
-1247885992.index
 2614499904.index
+1247885992.index
 137188322.index
 3469207872.index
 2460332635.index
@@ -33,8 +33,8 @@ INDEX VERSION 1.134+/home/finoana/Projects/E-commerce/.metadata/.plugins/org.ecl
 3156336012.index
 3986823691.index
 3613303640.index
-2737687991.index
 1562669959.index
+2737687991.index
 2308112625.index
 2795136360.index
 2094027465.index

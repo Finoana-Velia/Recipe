@@ -48,8 +48,9 @@ public class ChefServiceImpl implements ChefService{
 	public ChefResponseDto createChef(ChefRequestDto chef) {
 		Chef chefEntity = toEntity(chef,Chef.class);
 		chefEntity.setCreatedAt(LocalDateTime.now());
+		Chef chefSaved = this.chefRepository.save(chefEntity);
 		this.generateNotification(chefEntity, OperationType.CREATE);
-		return toDto(this.chefRepository.save(chefEntity),ChefResponseDto.class);
+		return toDto(chefSaved,ChefResponseDto.class);
 	}
 
 	@Override

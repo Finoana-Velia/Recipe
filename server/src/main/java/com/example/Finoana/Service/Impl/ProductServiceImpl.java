@@ -126,7 +126,10 @@ public class ProductServiceImpl implements ProductService{
 	private void generateNotification(Product product,OperationType operationType) {
 		String message = "";
 		if(operationType.equals(OperationType.CREATE)) {
-			message = "Try our new recipe " + product.getName() + "made by our chef " + product.getChef().getName();
+			message = "Try our new recipe " + product.getName();
+			if(product.getChef() != null) {
+				message += "made by our chef " + product.getChef().getName();
+			}
 		}
 		if(operationType.equals(OperationType.UPDATE)) {
 			message = "There is changed for " + product.getName() + " informations";

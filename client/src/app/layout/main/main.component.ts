@@ -16,6 +16,7 @@ export class MainComponent {
 
   toggleChange : boolean = true;
   toggleSubMenu : boolean = false;
+  notificationMenu : boolean = false;
 
   change() {
     this.toggleChange = !this.toggleChange;
@@ -23,6 +24,10 @@ export class MainComponent {
 
   openSubmenu() {
     this.toggleSubMenu = !this.toggleSubMenu;
+  }
+
+  toggleNotification() {
+    this.notificationMenu = !this.notificationMenu;
   }
 
 }

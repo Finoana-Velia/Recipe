@@ -1,6 +1,7 @@
 package com.example.Finoana.Dto;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 import com.example.Finoana.Entity.Contact;
@@ -22,7 +23,7 @@ public class AccountResponseDto {
 	private Long id;
 	private String firstName;
 	private String lastName;
-	private LocalDate birthDate;
+	private Date birthDate;
 	private String profilePicture;
 	private Gender gender;
 	private Location location;

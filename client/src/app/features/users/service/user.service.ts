@@ -26,28 +26,22 @@ export class UserService {
     );
   }
 
-  create(account : any, file : File) {
+  createAccount(account : any, file : File) {
     const formData = new FormData();
-    formData.append('file',file);
-
-    Object.keys(account).forEach(key => {
-      formData.append(key, account[key]);
-    });
+    formData.append('profileUser',file);
+    formData.append('accountRequest', JSON.stringify(account));
 
     return this.http.post<any>(this.url,formData).pipe(
       map(response => console.log(response))
     );
   }
 
-  update(id : number, account : any, file : File) {
+  updateAccount(id : number,account : any, file : File) {
     const formData = new FormData();
     formData.append('file',file);
+    formData.append('accountRequest',JSON.stringify(account));
 
-    Object.keys(account).forEach(key => {
-      formData.append(key, account[key]);
-    });
-
-    return this.http.put<any>(this.url,formData).pipe(
+    return this.http.put<any>(`${this.url}/${id}`,formData).pipe(
       map(response => console.log(response))
     );
   }

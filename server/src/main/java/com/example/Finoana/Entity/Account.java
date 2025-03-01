@@ -2,6 +2,7 @@ package com.example.Finoana.Entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,7 +39,7 @@ public class Account {
 	
 	private String firstName;
 	private String lastName;
-	private LocalDate birthDate;
+	private Date birthDate;
 	private String profilePicture;
 	
 	@Enumerated(EnumType.STRING)

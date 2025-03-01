@@ -21,7 +21,7 @@ export interface Account {
     firstName : string,
     lastName : string,
     birthDate : Date,
-    profile : File,
+    profile : string,
     gender : Gender | string | null
     contact : Contact,
     location : Location,

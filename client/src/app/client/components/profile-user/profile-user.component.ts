@@ -3,6 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UserService } from '../../../features/users/service/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Account } from '../../../features/users/model/Account';
+import { errorContext } from 'rxjs/internal/util/errorContext';
 
 @Component({
   selector: 'app-profile-user',
@@ -87,22 +88,19 @@ export class ProfileUserComponent {
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = () => {
         this.url = reader.result;
-        this.profilePic.setValue(event.target.files[0]);
+        this._formUser.controls.profile.setValue(event.target.files[0]);
       }
     }
   }
 
   onSubmit() {
-    this.userService.create(
+    this.userService.createAccount(
       this.generateAccount(),
       this.profilePic
     ).subscribe(
       response => console.log(response),
-      error => {
-        alert("there is an error somewhere");
-        console.error(error);
-      }
-    )
+      error => alert("error")
+    );
   }
 
   generateAccount() : Partial<Account> {
@@ -110,7 +108,6 @@ export class ProfileUserComponent {
       firstName : this.personnal.firstName.value,
       lastName : this.personnal.lastName.value,
       birthDate : this.personnal.birthDate.value,
-      profile : this.profilePic,
       gender : this.personnal.gender.value
       ,
       contact : {
@@ -122,10 +119,10 @@ export class ProfileUserComponent {
         city : this.location.city.value,
         provinceState : this.location.provinceState.value,
       },
-      auth : {
-        username : this.security.username.value,
-        password : this.security.newPassword.value
-      }
+      // auth : {
+      //   username : this.security.username.value,
+      //   password : this.security.newPassword.value
+      // }
 
     }
   }

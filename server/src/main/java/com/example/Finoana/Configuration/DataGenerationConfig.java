@@ -2,6 +2,7 @@ package com.example.Finoana.Configuration;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
@@ -37,7 +38,8 @@ public class DataGenerationConfig {
 				Account.builder()
 				.firstName("John")
 				.lastName("Doe")
-				.birthDate(LocalDate.now())
+				.birthDate(new Date())
+				.gender(Gender.MAN)
 				.location(
 						Location.builder()
 						.address("109 Garden Road")
@@ -55,7 +57,8 @@ public class DataGenerationConfig {
 				Account.builder()
 				.firstName("Jane")
 				.lastName("Dowson")
-				.birthDate(LocalDate.now())
+				.birthDate(new Date())
+				.gender(Gender.MAN)
 				.location(
 						Location.builder()
 						.address("42 Sunset Street")

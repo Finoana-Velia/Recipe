@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.Finoana.Dto.AccountRequestDto;
 import com.example.Finoana.Dto.AccountResponseDto;
 import com.example.Finoana.Service.AccountService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import static com.example.Finoana.Core.FileManagement.*;
 
 import java.io.File;
@@ -57,37 +59,40 @@ public class AccountController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<AccountResponseDto> create(
-			AccountRequestDto account,
-			@RequestParam MultipartFile file
-		) throws Exception {
-		//AccountResponseDto accountCreated = this.accountService.createAccount(account);
-		AccountResponseDto accountCreated = null;
-		if(!file.isEmpty()) {
+	public ResponseEntity<AccountResponseDto> saveAccount(
+			@RequestParam String accountRequest,
+			@RequestParam(name="profileUser") MultipartFile file
+			) throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		AccountRequestDto account = mapper.readValue(accountRequest, AccountRequestDto.class);
+		AccountResponseDto accountResponse;
+		if(file != null) {
 			account.setProfilePicture(file.getOriginalFilename());
-			accountCreated = this.accountService.createAccount(account);
-			registerFile(file,"accounts",accountCreated.getId());
+			accountResponse = this.accountService.createAccount(account);
+			registerFile(file,"account",accountResponse.getId());
 		}else {
-			accountCreated = this.accountService.createAccount(account);
+			accountResponse = this.accountService.createAccount(account);
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body(accountCreated);
+		return ResponseEntity.status(HttpStatus.CREATED).body(accountResponse);
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<AccountResponseDto> update(
 			@PathVariable Long id,
-			AccountRequestDto account,
-			@RequestParam(required = false) MultipartFile file
+			@RequestParam String accountRequest,
+			@RequestParam(required = false,name = "profileUser") MultipartFile file
 			) throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		AccountRequestDto account = mapper.readValue(accountRequest, AccountRequestDto.class);
 		account.setId(id);
-		AccountResponseDto accountUpdated = null;
+		AccountResponseDto accountResponse;
 		if(file != null) {
 			account.setProfilePicture(file.getOriginalFilename());
-			accountUpdated = this.accountService.updateAccount(id, account);
-			updateFile(file,"accounts",id);
+			accountResponse = this.accountService.updateAccount(id, account);
+			updateFile(file,"account",accountResponse.getId());
 		}else {
-			accountService.updateAccount(id, account);
+			accountResponse = this.accountService.updateAccount(id,account);
 		}
-		return ResponseEntity.status(HttpStatus.OK).body(accountUpdated);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(accountResponse);
 	}
 }

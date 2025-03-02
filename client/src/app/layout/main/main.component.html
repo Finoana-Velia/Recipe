@@ -105,22 +105,39 @@
             </div>
 
             @if(notificationMenu) {
-              <div class="absolute top-full right-0 rounded-lg p-3 mt-1 shadow-lg duration-300 bg-white z-10 min-w-[300px]">
-                <h3 class="text-xl p-3">Notifications</h3>
-                <ul>
-                  <li>
-                    <a class="flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white">
-                      <i class="fa fa-user"></i>
-                      <div>
-                        <p>new product</p>
-                        <p class="text-sm text-gray-200">Date</p> 
-                      </div>
-                    </a>
-                  </li>
-                </ul>  
-                <button class="text-xl p-3">
-                  View All
-                </button>
+              <div class="absolute top-full right-0 rounded-lg p-3 mt-1 shadow-lg duration-300 bg-white z-10 min-w-[370px]">
+                <h3 class="text-xl p-3 font-bold">Notifications</h3>
+                @if(notifications.length !== 0) {
+                  <ul>
+                    <li *ngFor="let notif of notifications">
+                      <a class="flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white">
+                        @if(notif.entityType === 'INVOICE'){
+                          <div class="px-4"><i class="fa fa-truck"></i></div>
+                        }@else {
+                          <img 
+                            [src]="imageNotified(notif.entityType,notif.idEntity)" 
+                            alt="image-notification" 
+                            [ngClass]="imageClassNotified(notif.entityType)">
+                        }
+                        <div>
+                          <p class="text-lg">{{notif.message}}</p>
+                          <p class="text-sm text-gray-400">{{notif.createdAt}}</p> 
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                } @else {
+                  <p class="px-2 text-sm">No notifications</p>
+                }
+                @if(!isAll) {
+                  <button class="text-xl p-3 text-lime-500" (click)="viewAll()">
+                    View more
+                  </button>
+                }@else {
+                  <button class="text-xl p-3 text-rose-500" (click)="viewLess()">
+                    View less
+                  </button>
+                }
               </div>
             }
           

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 
@@ -12,7 +12,10 @@ export class NotificationService {
   constructor(private http : HttpClient) { }
 
   findAll(page = 0, size = 5) {
-    return this.http.get<any>(this.url).pipe(
+    let params = new HttpParams();
+    params = params.set('page',page.toString());
+    params = params.set('size',size.toString());
+    return this.http.get<any>(this.url, {params}).pipe(
       map(response => {return response})
     )
   }

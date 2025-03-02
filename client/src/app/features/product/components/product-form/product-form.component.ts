@@ -114,8 +114,8 @@ export class ProductFormComponent implements OnInit {
         this.imageValue
       ).subscribe(
         response => {
-          console.log(response);
           this.router.navigate(['/auth/product']);
+          location.reload();
         }
       )
     }else {
@@ -125,7 +125,6 @@ export class ProductFormComponent implements OnInit {
         this.imageValue
       ).subscribe(
         response => {
-          console.log(response);
           this.router.navigate(['/auth/product']);
         }
       )

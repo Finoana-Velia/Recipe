@@ -1,5 +1,7 @@
 package com.example.Finoana.Controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,16 @@ public class NotificationController {
 			){
 		PageRequest request = PageRequest.of(page, size != 0 ? size : Integer.MAX_VALUE);
 		Page<NotificationDto> notifications = this.notificationService.findAll(request);
+		return ResponseEntity.status(HttpStatus.OK).body(notifications);
+	}
+	
+	@GetMapping("/user/{id}")
+	public ResponseEntity<Page<NotificationDto>> notificationForUsers(
+			@PathVariable Long id,
+			@RequestParam(defaultValue="0")int page,
+			@RequestParam(defaultValue="5")int size) {
+		PageRequest request = PageRequest.of(page, size);
+		Page<NotificationDto> notifications = this.notificationService.notificationForUsers(id,request);
 		return ResponseEntity.status(HttpStatus.OK).body(notifications);
 	}
 	

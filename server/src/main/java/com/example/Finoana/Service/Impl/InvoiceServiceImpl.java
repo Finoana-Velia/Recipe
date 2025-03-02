@@ -136,7 +136,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 		}
 		this.notificationService.save(Notification.builder()
 				.createdAt(LocalDateTime.now())
-				.idEntity(invoice.getId())
+				.idEntity(invoice.getAccount().getId())
 				.operationType(operationType)
 				.entityType(EntityType.INVOICE)
 				.message(message)

@@ -15,6 +15,7 @@ import com.example.Finoana.Service.NotificationService;
 import static com.example.Finoana.Core.EntityMapper.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 
@@ -44,6 +45,12 @@ public class NotificationServiceImpl implements NotificationService{
 	public NotificationDto save(Notification notification) {
 		Notification notificationSaved = this.notificationRepository.save(notification);
 		return toDto(notificationSaved,NotificationDto.class);
+	}
+
+	@Override
+	public Page<NotificationDto> notificationForUsers(Long id,Pageable request) {
+		return this.notificationRepository.notificationForUsers(id,request).map(
+				notification -> toDto(notification,NotificationDto.class));
 	}
 	
 

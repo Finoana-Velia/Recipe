@@ -92,7 +92,7 @@
                         <li>
                             <a 
                                 class="text-xl flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white"
-                                routerLink="/user/profile"
+                                [routerLink]="['/user/profile', idUser]"
                             >
                                 <i class="fa fa-user"></i>
                                 Edit Profile

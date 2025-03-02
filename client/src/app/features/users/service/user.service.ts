@@ -38,9 +38,9 @@ export class UserService {
 
   updateAccount(id : number,account : any, file : File) {
     const formData = new FormData();
-    formData.append('file',file);
+    formData.append('profileUser',file);
     formData.append('accountRequest',JSON.stringify(account));
-
+    
     return this.http.put<any>(`${this.url}/${id}`,formData).pipe(
       map(response => console.log(response))
     );

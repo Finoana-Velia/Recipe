@@ -42,7 +42,8 @@ export const routes: Routes = [
             { path : "" , component : MarketPlaceComponent},
             { path : "cart", component : CartComponent},
             { path : "favorite" , component  : FavoriteComponent},
-            { path : "profile" , component : ProfileUserComponent}
+            { path : "profile" , component : ProfileUserComponent},
+            { path : "profile/:id", component : ProfileUserComponent}
         ]
     }
 ];

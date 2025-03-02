@@ -15,6 +15,7 @@ export class NavigationClientComponent implements OnInit{
   menu = false;
   notification = false;
   cartContent = false;
+  idUser : number = 1;
 
   constructor(private recipeService : RecipeService){}
 

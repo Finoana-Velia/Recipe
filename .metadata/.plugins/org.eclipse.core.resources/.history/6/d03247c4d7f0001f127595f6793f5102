@@ -1,9 +1,0 @@
-package com.example.Finoana.Repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.example.Finoana.Entity.Invoice;
-
-public interface InvoiceRepository extends JpaRepository<Invoice,Long>{
-
-}

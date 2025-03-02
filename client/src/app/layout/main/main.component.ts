@@ -71,7 +71,7 @@ export class MainComponent implements OnInit{
   }
 
   imageClassNotified(type : string) {
-    const mainClass = 'w-[70px] h-[70px]'; 
+    const mainClass = 'w-full h-full object-cover object-center'; 
     if(type === "PRODUCT") {
       return mainClass + " rounded";
     }else {

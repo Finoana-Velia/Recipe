@@ -114,10 +114,12 @@
                         @if(notif.entityType === 'INVOICE'){
                           <div class="px-4"><i class="fa fa-truck"></i></div>
                         }@else {
-                          <img 
+                          <div class="w-[70px] h-[70px]">
+                            <img 
                             [src]="imageNotified(notif.entityType,notif.idEntity)" 
                             alt="image-notification" 
                             [ngClass]="imageClassNotified(notif.entityType)">
+                          </div>
                         }
                         <div>
                           <p class="text-lg">{{notif.message}}</p>

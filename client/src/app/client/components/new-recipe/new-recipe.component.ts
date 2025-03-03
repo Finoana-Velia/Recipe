@@ -32,7 +32,6 @@ export class NewRecipeComponent implements OnInit{
     this.productService.findAll("",0,0).subscribe(
       response => {
         this.recipes = response.content;
-        console.log(this.recipes);
         this.recipesActive = this.recipes.filter(item => item.category == this.isActive);
       }
     )

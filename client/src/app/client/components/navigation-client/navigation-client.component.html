@@ -45,40 +45,39 @@
                     <a (click)="toggleNotification()"><i class="fa fa-bell"></i></a>
                     <div class="absolute top-0 right-0 bg-red-500 rounded-full w-[10px] h-[10px]"></div>
                     @if(notification) {
-                        <div class="absolute top-full right-0 rounded-lg p-3 mt-1 shadow-md duration-300 bg-white z-10 min-w-[300px]">
+                        <div class="absolute top-full right-0 rounded-lg p-3 mt-1 shadow-md duration-300 bg-white z-10 min-w-[400px]">
                             <h3 class="text-xl p-3">Notifications</h3>
-                            <ul >
-                                <li>
-                                    <a class="flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white">
-                                        <i class="fa fa-user"></i>
-                                        <div>
-                                            <h5 >New Products</h5>
-                                            <p class="text-sm text-gray-200">Today</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white">
-                                        <i class="fa fa-user"></i>
-                                        <div>
-                                            <h5 >New Products</h5>
-                                            <p class="text-sm text-gray-200">Today</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white">
-                                        <i class="fa fa-user"></i>
-                                        <div>
-                                            <h5 >New Products</h5>
-                                            <p class="text-sm text-gray-200">Today</p>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                            <button class="text-xl p-3">
-                                View All
-                            </button>
+                            @if(notifList.length !== 0) {
+                                <ul>
+                                    <li *ngFor="let notif of notifList">
+                                        <a class="flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white">
+                                            <div class="w-[70px] h-[70px]">
+                                                <img 
+                                                [src]="imageNotified(notif.entityType,notif.idEntity)" 
+                                                alt="notification-image"
+                                                [ngClass]="imageClassNotified(notif.entityType)"
+                                                >
+                                            </div>
+
+                                            <div>
+                                                <p class="text-lg">{{notif.message}}</p>
+                                                <p class="text-sm text-gray-400">{{notif.createdAt}}</p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            }@else {
+                                <p class="px-2 text-sm">No notifications</p>
+                            }
+                            @if(!isAll) {
+                                <button class="text-xl p-3" (click)="viewAll()">
+                                    View more
+                                </button>
+                            }@else {
+                                <button class="text-xl p-3" (click)="viewLess()">
+                                    View less
+                                </button>
+                            }
                         </div>
                     }
                 </li>

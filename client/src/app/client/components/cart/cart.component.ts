@@ -12,7 +12,7 @@ import { RecipeService } from '../../services/recipe.service';
   styleUrl: './cart.component.css'
 })
 export class CartComponent implements OnInit{
-
+  
   invoice! : Invoice;
   cartContent! : any[];
 

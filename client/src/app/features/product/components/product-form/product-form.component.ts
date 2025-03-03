@@ -115,7 +115,6 @@ export class ProductFormComponent implements OnInit {
       ).subscribe(
         response => {
           this.router.navigate(['/auth/product']);
-          location.reload();
         }
       )
     }else {

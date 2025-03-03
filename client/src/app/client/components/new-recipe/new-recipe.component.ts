@@ -2,6 +2,7 @@ import { NgClass, NgForOf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { Invoice } from '../../models/Invoice';
+import { ProductService } from '../../../features/product/service/product.service';
 
 @Component({
   selector: 'app-new-recipe',
@@ -15,17 +16,27 @@ import { Invoice } from '../../models/Invoice';
 export class NewRecipeComponent implements OnInit{
 
 
-  isActive = "Drinks";
+  isActive = "DRINKS";
   recipes! : any[];
   invoice! : Invoice;
   favorites! : any[];
+  recipesActive! : any;
   
   constructor(
     private recipeService : RecipeService,
+    private productService : ProductService
   ){}
 
   ngOnInit(): void {
-    this.recipes = this.recipeService.findAll().filter(item => item.category == this.isActive);
+
+    this.productService.findAll("",0,0).subscribe(
+      response => {
+        this.recipes = response.content;
+        console.log(this.recipes);
+        this.recipesActive = this.recipes.filter(item => item.category == this.isActive);
+      }
+    )
+    // this.recipes = this.recipeService.findAll().filter(item => item.category == this.isActive);
     this.favorites = this.recipeService.getFavorites();
   }
 
@@ -38,7 +49,8 @@ export class NewRecipeComponent implements OnInit{
 
   active(type : string) {
     this.isActive = type;
-    this.recipes = this.recipeService.findAll().filter(item => item.category == this.isActive);
+    // this.recipes = this.recipeService.findAll().filter(item => item.category == this.isActive);
+    this.recipesActive = this.recipes.filter(item => item.category == this.isActive);
   }
 
   addToCart(product : any) {
@@ -58,6 +70,10 @@ export class NewRecipeComponent implements OnInit{
       return icon;
     }
     return icon + "-o";
+  }
+
+  findProductImage(id : number) {
+    return this.productService.getImage(id);
   }
 
 }

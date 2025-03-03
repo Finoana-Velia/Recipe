@@ -1,37 +1,24 @@
-<section 
+@if(chefs.length !== 0) {
+    <section 
     id="chefs"
     class="w-full gap-10 max-container "
 >
     <div class="text-center mt-5">
         <h2 class="text-4xl text-lime-400 font-bold">Our Professional Chef</h2>
         <div class="mt-10 flex flex-wrap gap-10 justify-center items-center py-5">
-            <div class="w-[300px] max-h-[250px] shadow-xl flex flex-col justify-center items-center py-2">
+
+            <div class="w-[300px] max-h-[250px] shadow-xl flex flex-col justify-center items-center py-2" *ngFor="let chef of chefs">
                 <div class="w-[150px] h-[150px] rounded-full bg-gray-400">
-                    <img src="images/chief3.png" alt="" class="w-full h-full rounded-full object-cover -object-center">
+                    <img [src]="findChefPicture(chef.id)" [alt]="chef.profile" class="w-full h-full rounded-full object-cover -object-center">
                 </div>
                 <div class="mt-1 py-2">
-                    <h4 class="text-2xl font-bold text-lime-400">John Doe</h4>
-                    <p class="text-xl">Drinks</p>
+                    <h4 class="text-2xl font-bold text-lime-400">{{chef.name}}</h4>
+                    <p class="text-xl">{{chef.speciality}}</p>
                 </div>
             </div>
-            <div class="w-[300px] max-h-[250px] shadow-xl flex flex-col justify-center items-center py-2">
-                <div class="w-[150px] h-[150px] rounded-full bg-gray-400">
-                    <img src="images/chief3.png" alt="" class="w-full h-full rounded-full object-cover -object-center">
-                </div>
-                <div class="mt-1 py-2">
-                    <h4 class="text-2xl font-bold text-lime-400">John Doe</h4>
-                    <p class="text-xl">Drinks</p>
-                </div>
-            </div>
-            <div class="w-[300px] max-h-[250px] shadow-xl flex flex-col justify-center items-center py-2">
-                <div class="w-[150px] h-[150px] rounded-full bg-gray-400">
-                    <img src="images/chief3.png" alt="" class="w-full h-full rounded-full object-cover -object-center">
-                </div>
-                <div class="mt-1 py-2">
-                    <h4 class="text-2xl font-bold text-lime-400">John Doe</h4>
-                    <p class="text-xl">Drinks</p>
-                </div>
-            </div>
+            
         </div>
     </div>
 </section>
+
+}

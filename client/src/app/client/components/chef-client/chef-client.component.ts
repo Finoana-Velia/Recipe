@@ -1,11 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ChefService } from '../../../features/chef/service/chef.service';
+import { NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-chef-client',
-  imports: [],
+  imports: [
+    NgForOf
+  ],
   templateUrl: './chef-client.component.html',
   styleUrl: './chef-client.component.css'
 })
-export class ChefClientComponent {
+export class ChefClientComponent implements OnInit{
+
+  chefs! : any;
+
+  constructor(private chefService : ChefService) {}
+
+  ngOnInit(): void {
+    this.chefService.findAll(0,0).subscribe(
+      response => this.chefs = response.content
+    );
+  }
+
+  findChefPicture(id : number) {
+    return this.chefService.findProfile(id);
+  }
 
 }

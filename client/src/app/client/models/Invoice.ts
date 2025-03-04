@@ -15,6 +15,6 @@ export interface InvoiceRequest {
     total : number,
     discount : number | null,
     deliveryFee : number | null,
-    productsIds : any[],
+    productIds : any[],
     idAccount : number,
 }

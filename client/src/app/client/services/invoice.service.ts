@@ -8,7 +8,7 @@ import { InvoiceRequest } from '../models/Invoice';
 })
 export class InvoiceService {
 
-  private url = "http://localhost:8080/api/v1/invoice";
+  private url = "http://localhost:8080/api/v1/invoices";
 
   private cart : {
     id : number,
@@ -68,6 +68,13 @@ export class InvoiceService {
     return this.discount;
   }
 
+  sendInvoiceRequest(invoice : any) {
+    this.cart = [];
+    return this.http.post<any>(this.url,invoice).pipe(
+      map(response => console.log(response))
+    );
+  }
+
   getInvoice() : InvoiceRequest {
     const deliveryFee = 5;
     const subtotal = this.cart.reduce((sum, item) => 
@@ -84,7 +91,7 @@ export class InvoiceService {
       total : total,
       discount : discountValue,
       deliveryFee : deliveryFee,
-      productsIds : this.productIds,
+      productIds : this.productIds,
       idAccount : 1,
     }
   }

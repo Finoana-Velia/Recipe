@@ -4,6 +4,7 @@ import { NgForOf } from '@angular/common';
 import { RecipeService } from '../../services/recipe.service';
 import { InvoiceService } from '../../services/invoice.service';
 import { ProductService } from '../../../features/product/service/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -18,11 +19,13 @@ export class CartComponent implements OnInit{
   invoice! : any;
   cartContent! : any[];
   discount! : number;
+  dialog : boolean = false;
 
   constructor(
     private recipeService : RecipeService,
     private invoiceService : InvoiceService,
-    private productService : ProductService
+    private productService : ProductService,
+    private router : Router
   ) {}
   
   
@@ -56,14 +59,23 @@ export class CartComponent implements OnInit{
   }
 
   onSubmit() {
-    // this.invoiceService.sendInvoiceRequest(
-    //   this.generateInvoice()
-    // ).subscribe(
-    //   response => console.log(response)
-    // )
-    console.log(this.invoiceService.getInvoice());
+    if(this.invoiceService.getCart().length != 0){
+      this.invoiceService.sendInvoiceRequest(
+        this.invoiceService.getInvoice()
+      ).subscribe(
+        response => {
+          this.dialog = false;
+          this.router.navigate(['/user']);
+        }
+      )
+    }else {
+      alert("There is not artile in the cart");
+    }
   }
 
+  toggleDialog() {
+    this.dialog = !this.dialog;
+  }
   
 
 }

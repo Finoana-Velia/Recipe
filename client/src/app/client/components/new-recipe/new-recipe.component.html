@@ -91,15 +91,19 @@
                         {{rec.price}}
                     </p>
                     <div class="w-full flex justify-between items-center">
-                        <button class="font-bold text-red-500" (click)="addFavorite(rec)">
+                        <button class="font-bold text-rose-500" (click)="addFavorite(rec)">
                             <i [ngClass]="isFavorite(rec.id)"></i>
                         </button>
-                        <button 
-                            class="font-bold p-1 text-white bg-lime-400 rounded-[10px] w-11"
-                            (click)="addToCart(rec)"
-                        >
-                            <i class="fa fa-cart-arrow-down"></i>
-                        </button>
+                        @if(rec.availability) {
+                            <button 
+                                class="font-bold p-1 text-white bg-lime-400 rounded-[10px] w-11"
+                                (click)="addToCart(rec)"
+                            >
+                                <i class="fa fa-cart-arrow-down"></i>
+                            </button>
+                        }@else {
+                            <p class="text-xl font-bold text-red-500 cursor-default">SOLD OUT</p>
+                        }
                     </div>
                 </div>
             </div>

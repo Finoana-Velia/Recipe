@@ -1,7 +1,9 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Invoice } from '../../models/Invoice';
+import { Invoice, InvoiceRequest } from '../../models/Invoice';
 import { NgForOf } from '@angular/common';
 import { RecipeService } from '../../services/recipe.service';
+import { InvoiceService } from '../../services/invoice.service';
+import { ProductService } from '../../../features/product/service/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,34 +15,55 @@ import { RecipeService } from '../../services/recipe.service';
 })
 export class CartComponent implements OnInit{
   
-  invoice! : Invoice;
+  invoice! : any;
   cartContent! : any[];
+  discount! : number;
 
-  constructor(private recipeService : RecipeService) {}
+  constructor(
+    private recipeService : RecipeService,
+    private invoiceService : InvoiceService,
+    private productService : ProductService
+  ) {}
   
   
   ngOnInit(): void {
     this.updateInvoice();
-    this.cartContent = this.recipeService.getCartItem();
+    this.cartContent = this.invoiceService.getCart();
+  }
+
+  findImage(id : number) {
+    return this.productService.getImage(id);
   }
 
   updateInvoice() {
-    this.invoice = this.recipeService.getInvoice();
+    this.invoice = this.invoiceService.getInvoice();
+    this.discount = this.invoiceService.getDiscount();
   }
 
   removeToCart(product : any) {
-    this.recipeService.removeToCart(product);
+    this.invoiceService.removeToCart(product);
     this.updateInvoice();
   }
 
   addToCart(product : any) {
-    this.recipeService.addToCart(product);
+    this.invoiceService.addToCart(product);
     this.updateInvoice();
   }
 
   decrementItem(product : any) {
-    this.recipeService.reduceItem(product);
+    this.invoiceService.reduceQuantity(product);
     this.updateInvoice();
   }
+
+  onSubmit() {
+    // this.invoiceService.sendInvoiceRequest(
+    //   this.generateInvoice()
+    // ).subscribe(
+    //   response => console.log(response)
+    // )
+    console.log(this.invoiceService.getInvoice());
+  }
+
+  
 
 }

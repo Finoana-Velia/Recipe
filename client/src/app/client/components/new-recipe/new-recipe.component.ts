@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { Invoice } from '../../models/Invoice';
 import { ProductService } from '../../../features/product/service/product.service';
+import { InvoiceService } from '../../services/invoice.service';
 
 @Component({
   selector: 'app-new-recipe',
@@ -24,7 +25,8 @@ export class NewRecipeComponent implements OnInit{
   
   constructor(
     private recipeService : RecipeService,
-    private productService : ProductService
+    private productService : ProductService,
+    private invoiceService : InvoiceService
   ){}
 
   ngOnInit(): void {
@@ -32,6 +34,7 @@ export class NewRecipeComponent implements OnInit{
     this.productService.findAll("",0,0).subscribe(
       response => {
         this.recipes = response.content;
+        console.log(this.recipes);
         this.recipesActive = this.recipes.filter(item => item.category == this.isActive);
       }
     )
@@ -53,7 +56,7 @@ export class NewRecipeComponent implements OnInit{
   }
 
   addToCart(product : any) {
-    this.recipeService.addToCart(product);
+    this.invoiceService.addToCart(product);
   }
 
   addFavorite(product : any) {

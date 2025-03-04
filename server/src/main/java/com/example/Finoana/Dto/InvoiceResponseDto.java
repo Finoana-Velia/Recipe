@@ -20,6 +20,7 @@ public class InvoiceResponseDto {
 	private String reference;
 	private LocalDate date;
 	private boolean isDelivered;
+	private double subtotal;
 	private double total;
 	private double discount;
 	private double deliveryFee;

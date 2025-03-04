@@ -64,6 +64,22 @@ article:not(:hover) .informations{
     animation : removeInfo 1s forwards;
 }
 
+.dialog {
+    position : fixed;
+    top : 0;
+    left : 0;
+    display : flex;
+    justify-content: center;
+    align-items : center;
+    background : rgba(77,77,77,0.7);
+    transition : all 0.4s;
+    visibility : visible;
+    opacity : 1;
+    height : 100vh;
+    width : 100%;
+    overflow-y : hidden;
+}
+
 @keyframes showInfo {
     50% {
         transform : translateY(-10rem);

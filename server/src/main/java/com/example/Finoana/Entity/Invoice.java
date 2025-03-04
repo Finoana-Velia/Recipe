@@ -35,7 +35,7 @@ public class Invoice {
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	
-	
+	private double subtotal;
 	private double total;
 	private double discount;
 	private double deliveryFee;

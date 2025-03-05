@@ -63,10 +63,10 @@ export class CartComponent implements OnInit{
       this.invoiceService.sendInvoiceRequest(
         this.invoiceService.getInvoice()
       ).subscribe(
-        response => {
-          this.router.navigate(['/user']);
-        }
-      )
+        response => console.log(response)
+      );
+      this.dialog = false;
+      this.router.navigate(['user']);
     }else {
       alert("There is not artile in the cart");
     }

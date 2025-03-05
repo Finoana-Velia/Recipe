@@ -64,7 +64,6 @@ export class CartComponent implements OnInit{
         this.invoiceService.getInvoice()
       ).subscribe(
         response => {
-          this.dialog = false;
           this.router.navigate(['/user']);
         }
       )

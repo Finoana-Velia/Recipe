@@ -1,0 +1,80 @@
+package com.example.Finoana.Core;
+
+import java.io.IOException;
+
+import org.springframework.stereotype.Component;
+
+import com.example.Finoana.Dto.InvoiceResponseDto;
+import com.example.Finoana.Entity.Account;
+import com.example.Finoana.Service.InvoiceService;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
+
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
+
+@Component
+@AllArgsConstructor
+public class PdfGenerator {
+	
+	private InvoiceService invoiceService;
+	
+	public void exportInvoice(HttpServletResponse response,Long id) throws DocumentException, IOException {
+		InvoiceResponseDto invoice = this.invoiceService.findById(id);
+		
+		Document document = new Document(PageSize.HALFLETTER);
+		PdfWriter.getInstance(document, response.getOutputStream());
+		
+		document.open();	
+	}
+	
+	private void header(Document document,Account account ) throws Exception{
+		/* Image */
+		String logoPath = "src/main/resources/static/Ginyard-removebg-preview.png";
+		Image image = Image.getInstance(logoPath);
+		image.setAlignment(Paragraph.ALIGN_LEFT);
+		
+		/* Company's informations */
+//		Font bakeryFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+//		bakeryFont.setSize(12); 
+//		
+//		Paragraph p = new Paragraph("message",bakeryFont);
+//		p.setAlignment(Paragraph.ALIGN_LEFT);
+		document.add(image);
+		document.add(
+				this.setElement(
+						PdfElement.builder()
+						.text("developermail@example.com")
+						.font(FontFactory.getFont(FontFactory.HELVETICA))
+						.fontSize(12)
+						.align(Paragraph.ALIGN_LEFT)
+						.build() 
+						)
+				);
+		document.add(
+				this.setElement(
+						PdfElement.builder()
+						.text("+123456789")
+						.font(FontFactory.getFont(FontFactory.HELVETICA))
+						.fontSize(12)
+						.align(Paragraph.ALIGN_LEFT)
+						.build()
+						)
+				);
+	}
+	
+	private Paragraph setElement(PdfElement element) {
+		element.getFont().setSize(element.getFontSize());
+		Paragraph paragraph = new Paragraph(element.getText(),element.getFont());
+		paragraph.setAlignment(element.getAlign());
+		return paragraph;
+	}
+
+	
+}

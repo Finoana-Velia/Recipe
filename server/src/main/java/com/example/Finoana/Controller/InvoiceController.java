@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Finoana.Core.PdfGenerator;
 import com.example.Finoana.Dto.InvoiceRequestDto;
 import com.example.Finoana.Dto.InvoiceResponseDto;
 import com.example.Finoana.Service.InvoiceService;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -26,6 +28,7 @@ import lombok.AllArgsConstructor;
 public class InvoiceController {
 	
 	private final InvoiceService invoiceService;
+	private final PdfGenerator pdfGenerator;
 	
 	@GetMapping
 	public ResponseEntity<Page<InvoiceResponseDto>> searchInvoice(
@@ -46,9 +49,11 @@ public class InvoiceController {
 	
 	@PostMapping
 	public ResponseEntity<InvoiceResponseDto> create(
+			HttpServletResponse response,
 			@RequestBody InvoiceRequestDto invoice
-			){
+			) throws Exception{
 		InvoiceResponseDto invoiceResponse = this.invoiceService.createInvoice(invoice);
+		this.pdfGenerator.exportInvoice(response, invoiceResponse);
 		return ResponseEntity.status(HttpStatus.CREATED).body(invoiceResponse);
 	}
 	

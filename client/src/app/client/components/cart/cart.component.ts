@@ -20,6 +20,7 @@ export class CartComponent implements OnInit{
   cartContent! : any[];
   discount! : number;
   dialog : boolean = false;
+  idInvoice! : number;
 
   constructor(
     private recipeService : RecipeService,
@@ -74,6 +75,25 @@ export class CartComponent implements OnInit{
 
   toggleDialog() {
     this.dialog = !this.dialog;
+  }
+
+  exportInvoice(id : number) {
+    this.invoiceService.exportRequest(id).subscribe(
+      response => {
+        let downloadUrl = URL.createObjectURL(response);
+        let link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = "invoice_" + id + this.formatDate(new Date) + ".pdf";
+        link.click();
+      }
+    );
+  }
+
+  private formatDate(date : Date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}${month}${day}`;
   }
   
 

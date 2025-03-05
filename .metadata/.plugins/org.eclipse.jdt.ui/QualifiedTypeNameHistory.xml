@@ -24,4 +24,11 @@
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Notification"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.EntityType"/>
+    <fullyQualifiedTypeName name="com.lowagie.text.PageSize"/>
+    <fullyQualifiedTypeName name="com.lowagie.text.pdf.PdfWriter"/>
+    <fullyQualifiedTypeName name="com.lowagie.text.Image"/>
+    <fullyQualifiedTypeName name="com.lowagie.text.Paragraph"/>
+    <fullyQualifiedTypeName name="com.lowagie.text.FontFactory"/>
+    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
 </qualifiedTypeNameHistroy>

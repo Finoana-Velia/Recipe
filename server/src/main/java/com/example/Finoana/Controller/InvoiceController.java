@@ -1,7 +1,13 @@
 package com.example.Finoana.Controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -49,11 +55,9 @@ public class InvoiceController {
 	
 	@PostMapping
 	public ResponseEntity<InvoiceResponseDto> create(
-			HttpServletResponse response,
 			@RequestBody InvoiceRequestDto invoice
 			) throws Exception{
 		InvoiceResponseDto invoiceResponse = this.invoiceService.createInvoice(invoice);
-		this.pdfGenerator.exportInvoice(response, invoiceResponse);
 		return ResponseEntity.status(HttpStatus.CREATED).body(invoiceResponse);
 	}
 	
@@ -71,6 +75,25 @@ public class InvoiceController {
 	public ResponseEntity<Void> deleteInvoice(@PathVariable Long id){
 		this.invoiceService.deleteById(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
+
+	@GetMapping("/export/{id}")
+	public ResponseEntity<byte[]> exportToPdf(@PathVariable Long id) throws Exception {
+		InvoiceResponseDto invoice = this.invoiceService.findById(id);
+		byte[] pdfBytes = this.pdfGenerator.export(invoice);
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd");
+		String currentDate = dateFormatter.format(new Date());
+		String fileName = "invoice_" + id + currentDate + ".pdf";
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentDisposition(
+				ContentDisposition
+				.attachment()
+				.filename(fileName)
+				.build());
+		
+		return new ResponseEntity<>(pdfBytes,headers,HttpStatus.OK);
 	}
 
 }

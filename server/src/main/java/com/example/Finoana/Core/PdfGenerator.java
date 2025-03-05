@@ -1,5 +1,7 @@
 package com.example.Finoana.Core;
 
+import java.io.ByteArrayOutputStream;
+
 import org.springframework.stereotype.Component;
 
 import com.example.Finoana.Dto.InvoiceResponseDto;
@@ -19,20 +21,24 @@ import lombok.AllArgsConstructor;
 @Component
 public class PdfGenerator {
 	
-	public void exportInvoice(HttpServletResponse response,InvoiceResponseDto invoice) throws Exception {
+	public byte[] export(InvoiceResponseDto invoice) throws Exception {
 		
 		Document document = new Document(PageSize.HALFLETTER);
-		PdfWriter.getInstance(document, response.getOutputStream());
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PdfWriter.getInstance(document, outputStream);
 		
 		document.open();
-		this.header(document, invoice.getAccount());
+		this.header(document,invoice.getAccount());
 		document.close();
+		
+		return outputStream.toByteArray();
 	}
 	
-	private void header(Document document,Account account ) throws Exception{
+	private void header(Document document,Account account) throws Exception{
 		/* Image */
 		String logoPath = "src/main/resources/static/Ginyard-removebg-preview.png";
 		Image image = Image.getInstance(logoPath);
+		image.scaleAbsolute(75, 75);
 		image.setAlignment(Paragraph.ALIGN_LEFT);
 	
 		document.add(image);

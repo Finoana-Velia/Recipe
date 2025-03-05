@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { InvoiceRequest } from '../models/Invoice';
 
 @Injectable({
@@ -71,8 +71,12 @@ export class InvoiceService {
   sendInvoiceRequest(invoice : any) {
     this.cart = [];
     return this.http.post<any>(this.url,invoice).pipe(
-      map(response => console.log(response))
+      map(response => {return response})
     );
+  }
+
+  exportRequest(id : number) : Observable<Blob> {
+    return this.http.get(`${this.url}/export/${id}`, {responseType : 'blob'});
   }
 
   getInvoice() : InvoiceRequest {

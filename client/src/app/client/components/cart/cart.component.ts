@@ -5,6 +5,7 @@ import { RecipeService } from '../../services/recipe.service';
 import { InvoiceService } from '../../services/invoice.service';
 import { ProductService } from '../../../features/product/service/product.service';
 import { Router } from '@angular/router';
+import { formatDate } from '../../util/FormatDate';
 
 @Component({
   selector: 'app-cart',
@@ -64,7 +65,7 @@ export class CartComponent implements OnInit{
       this.invoiceService.sendInvoiceRequest(
         this.invoiceService.getInvoice()
       ).subscribe(
-        response => console.log(response)
+        response => this.exportInvoice(response.id)
       );
       this.dialog = false;
       this.router.navigate(['user']);
@@ -83,18 +84,18 @@ export class CartComponent implements OnInit{
         let downloadUrl = URL.createObjectURL(response);
         let link = document.createElement("a");
         link.href = downloadUrl;
-        link.download = "invoice_" + id + this.formatDate(new Date) + ".pdf";
+        link.download = "invoice_" + id + formatDate(new Date()) + ".pdf";
         link.click();
       }
     );
   }
 
-  private formatDate(date : Date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}${month}${day}`;
-  }
+  // private formatDate(date : Date) {
+  //   const year = date.getFullYear();
+  //   const month = String(date.getMonth() + 1).padStart(2, '0');
+  //   const day = String(date.getDate()).padStart(2, '0');
+  //   return `${year}${month}${day}`;
+  // }
   
 
 }

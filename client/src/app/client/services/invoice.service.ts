@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { InvoiceRequest } from '../models/Invoice';
+import { formatDate } from '../util/FormatDate';
 
 @Injectable({
   providedIn: 'root'
@@ -88,7 +89,7 @@ export class InvoiceService {
     const discountValue = (total * this.discount) / 100;
     total -= discountValue;
     return {
-      reference : new Date() + "/" + 1,
+      reference : formatDate(new Date()) + "/" + 1,
       date : new Date(),
       isDelivered : false,
       subtotal : subtotal,

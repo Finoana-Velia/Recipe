@@ -28,13 +28,14 @@ public class PdfGenerator {
 		PdfWriter.getInstance(document, outputStream);
 		
 		document.open();
-		this.header(document,invoice.getAccount());
+		this.header(document,invoice);
+		this.body(document, invoice.getAccount());
 		document.close();
 		
 		return outputStream.toByteArray();
 	}
 	
-	private void header(Document document,Account account) throws Exception{
+	private void header(Document document,InvoiceResponseDto invoice) throws Exception{
 		/* Image */
 		String logoPath = "src/main/resources/static/Ginyard-removebg-preview.png";
 		Image image = Image.getInstance(logoPath);
@@ -62,6 +63,43 @@ public class PdfGenerator {
 						.build()
 						)
 				);
+		document.add(
+				this.setElement(PdfElement.builder()
+						.text(invoice.getId() + invoice.getReference())
+						.font(FontFactory.getFont(FontFactory.HELVETICA))
+						.fontSize(12)
+						.align(Paragraph.ALIGN_LEFT)
+						.build())
+				);
+	}
+	
+	private void body(Document document, Account account) {
+		document.add(
+				this.setElement(PdfElement.builder()
+						.text("Client informations")
+						.font(FontFactory.getFont(FontFactory.HELVETICA_BOLD))
+						.fontSize(14)
+						.align(Paragraph.ALIGN_CENTER)
+						.build())
+				);
+		document.add(this.setElement(PdfElement.builder()
+				.text("Complete Name : " + account.getFirstName() + " " + account.getLastName())
+				.font(FontFactory.getFont(FontFactory.HELVETICA))
+				.fontSize(12)
+				.align(Paragraph.ALIGN_LEFT)
+				.build()));
+		document.add(this.setElement(PdfElement.builder()
+				.text("Email : " + account.getContact().getEmail())
+				.font(FontFactory.getFont(FontFactory.HELVETICA))
+				.fontSize(12)
+				.align(Paragraph.ALIGN_LEFT)
+				.build()));
+		document.add(this.setElement(PdfElement.builder()
+				.text("Phone : " + account.getContact().getPhone())
+				.font(FontFactory.getFont(FontFactory.HELVETICA))
+				.fontSize(12)
+				.align(Paragraph.ALIGN_LEFT)
+				.build()));
 	}
 	
 	private Paragraph setElement(PdfElement element) {

@@ -1,0 +1,126 @@
+package com.example.Finoana.Core;
+
+import java.io.ByteArrayOutputStream;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.example.Finoana.Dto.InvoiceResponseDto;
+import com.example.Finoana.Entity.Account;
+import com.example.Finoana.Entity.Product;
+import com.example.Finoana.Service.InvoiceService;
+import com.lowagie.text.Document;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.Image;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfTable;
+import com.lowagie.text.pdf.PdfWriter;
+
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
+
+@Component
+public class PdfGenerator {
+	
+	public byte[] export(InvoiceResponseDto invoice) throws Exception {
+		
+		Document document = new Document(PageSize.HALFLETTER);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		PdfWriter.getInstance(document, outputStream);
+		
+		document.open();
+		this.header(document,invoice);
+		this.body(document, invoice.getAccount());
+		document.close();
+		
+		return outputStream.toByteArray();
+	}
+	
+	private void header(Document document,InvoiceResponseDto invoice) throws Exception{
+		/* Image */
+		String logoPath = "src/main/resources/static/Ginyard-removebg-preview.png";
+		Image image = Image.getInstance(logoPath);
+		image.scaleAbsolute(75, 75);
+		image.setAlignment(Paragraph.ALIGN_LEFT);
+	
+		document.add(image);
+		document.add(
+				this.setElement(
+						PdfElement.builder()
+						.text("developermail@example.com")
+						.font(FontFactory.getFont(FontFactory.HELVETICA))
+						.fontSize(12)
+						.align(Paragraph.ALIGN_LEFT)
+						.build() 
+						)
+				);
+		document.add(
+				this.setElement(
+						PdfElement.builder()
+						.text("+123456789")
+						.font(FontFactory.getFont(FontFactory.HELVETICA))
+						.fontSize(12)
+						.align(Paragraph.ALIGN_LEFT)
+						.build()
+						)
+				);
+		document.add(
+				this.setElement(PdfElement.builder()
+						.text(invoice.getId() + invoice.getReference())
+						.font(FontFactory.getFont(FontFactory.HELVETICA))
+						.fontSize(12)
+						.align(Paragraph.ALIGN_LEFT)
+						.build())
+				);
+	}
+	
+	private void body(Document document, Account account) {
+		document.add(this.setElement(PdfElement.builder()
+				.text("Client informations")
+				.font(FontFactory.getFont(FontFactory.HELVETICA_BOLD))
+				.fontSize(14)
+				.align(Paragraph.ALIGN_CENTER)
+				.build()));
+		document.add(this.setElement(PdfElement.builder()
+				.text("Complete Name : " + account.getFirstName() + " " + account.getLastName())
+				.font(FontFactory.getFont(FontFactory.HELVETICA))
+				.fontSize(12)
+				.align(Paragraph.ALIGN_LEFT)
+				.build()));
+		document.add(this.setElement(PdfElement.builder()
+				.text("Email : " + account.getContact().getEmail())
+				.font(FontFactory.getFont(FontFactory.HELVETICA))
+				.fontSize(12)
+				.align(Paragraph.ALIGN_LEFT)
+				.build()));
+		document.add(this.setElement(PdfElement.builder()
+				.text("Phone : " + account.getContact().getPhone())
+				.font(FontFactory.getFont(FontFactory.HELVETICA))
+				.fontSize(12)
+				.align(Paragraph.ALIGN_LEFT)
+				.build()));
+	}
+	
+	private void poductTable(Document document,List<Product> products) {
+		/* Config table */
+		PdfPTable table = new PdfPTable(4);
+		table.setWidthPercentage(100);
+		table.setWidths(new float[] {3.5f, 3.5f, 3.5f, 3.5f});
+		table.setSpacingBefore(10);
+		
+		/* Header */
+		
+	}
+	
+	private Paragraph setElement(PdfElement element) {
+		element.getFont().setSize(element.getFontSize());
+		Paragraph paragraph = new Paragraph(element.getText(),element.getFont());
+		paragraph.setAlignment(element.getAlign());
+		return paragraph;
+	}
+
+	
+}

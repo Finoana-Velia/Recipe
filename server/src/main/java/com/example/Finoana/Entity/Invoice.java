@@ -30,6 +30,7 @@ public class Invoice {
 	private Long id;
 	private String reference;
 	private LocalDate date;
+	private String deliveryAdress;
 	private boolean isDelivered;
 	
 	private LocalDateTime createdAt;

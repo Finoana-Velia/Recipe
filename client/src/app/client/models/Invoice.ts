@@ -10,6 +10,7 @@ export interface Invoice {
 export interface InvoiceRequest {
     reference : string,
     date : Date,
+    deliveryAdress : string,
     isDelivered : boolean,
     subtotal : number;
     total : number,

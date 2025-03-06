@@ -6,11 +6,13 @@ import { InvoiceService } from '../../services/invoice.service';
 import { ProductService } from '../../../features/product/service/product.service';
 import { Router } from '@angular/router';
 import { formatDate } from '../../util/FormatDate';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
   imports: [
-    NgForOf
+    NgForOf,
+    ReactiveFormsModule
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
@@ -22,6 +24,13 @@ export class CartComponent implements OnInit{
   discount! : number;
   dialog : boolean = false;
   idInvoice! : number;
+
+  _deliveryForm = new FormGroup({
+    deliveryAdress : new FormControl("",{
+      nonNullable : true,
+      validators : Validators.required
+    })
+  })
 
   constructor(
     private recipeService : RecipeService,
@@ -41,7 +50,7 @@ export class CartComponent implements OnInit{
   }
 
   updateInvoice() {
-    this.invoice = this.invoiceService.getInvoice();
+    this.invoice = this.invoiceService.getInvoice(this.deliveryAddress);
     this.discount = this.invoiceService.getDiscount();
   }
 
@@ -61,16 +70,16 @@ export class CartComponent implements OnInit{
   }
 
   onSubmit() {
-    if(this.invoiceService.getCart().length != 0){
+    if(this.invoiceService.getCart().length != 0 && !this._deliveryForm.invalid){
       this.invoiceService.sendInvoiceRequest(
-        this.invoiceService.getInvoice()
+        this.invoiceService.getInvoice(this.deliveryAddress)
       ).subscribe(
         response => this.exportInvoice(response.id)
       );
       this.dialog = false;
       this.router.navigate(['user']);
     }else {
-      alert("There is not artile in the cart");
+      alert("Order not send");
     }
   }
 
@@ -88,6 +97,10 @@ export class CartComponent implements OnInit{
         link.click();
       }
     );
+  }
+
+  get deliveryAddress() {
+    return this._deliveryForm.controls.deliveryAdress.value;
   }
 
   // private formatDate(date : Date) {

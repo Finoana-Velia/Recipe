@@ -33,4 +33,7 @@
     <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
     <fullyQualifiedTypeName name="java.text.DateFormat"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpHeaders"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Repository.ChefRepository"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Entity.Product"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Repository.ProductRepository"/>
 </qualifiedTypeNameHistroy>

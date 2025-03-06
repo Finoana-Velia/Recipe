@@ -1,0 +1,8 @@
+server.port = 8080
+spring.datasource.url=jdbc:msql://localhost:3306/bakery_test?createDatabaseIfNotExist=true
+spring.datasource.username=root
+spring.datasource.password=
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.servlet.multipart.max-file-size=20000KB
+spring.servlet.multipart.max-request-size=20000KB

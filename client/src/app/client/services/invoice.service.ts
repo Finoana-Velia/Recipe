@@ -25,7 +25,6 @@ export class InvoiceService {
   private productIds : any[] = [];
 
   private discount = 0;
-  private maxLength = 10
 
   constructor(private http : HttpClient) { }
   
@@ -35,9 +34,8 @@ export class InvoiceService {
 
   addToCart(product : any) {
     this.productIds.push(product.id);
-    if(this.productIds.length >= this.maxLength) {
-      this.maxLength += 10;
-      this.discount += 5;
+    if(this.productIds.length == 10) {
+      this.discount = 5;
     }
     const alreadyGet = this.cart.find(item => item.id === product.id);
     if(alreadyGet) {
@@ -50,18 +48,23 @@ export class InvoiceService {
   removeToCart(product : any) {
     let index = this.cart.findIndex(item => item.id == product.id);
     this.cart.splice(index,1);
+    this.productIds = this.productIds.filter(item => item !== product.id);
+    this.decrementDiscount();
   }
 
   reduceQuantity(product : any) {
-    let index = this.productIds.findIndex(item => item.id === product.id);
+    let index = this.productIds.findIndex(item => item === product.id);
     this.productIds.splice(index,1);
+    this.decrementDiscount();
     const alreadyGet = this.cart.find(item => item.id === product.id);
     if(alreadyGet) {
       alreadyGet.quantity == 1 ? this.removeToCart(product) : alreadyGet.quantity--;
     }
-    if(this.productIds.length <= this.maxLength) {
-      this.maxLength -= 10;
-      this.discount -= 5;
+  }
+
+  decrementDiscount() {
+    if(this.productIds.length < 10) {
+      this.discount = 0;
     }
   }
 
@@ -70,9 +73,13 @@ export class InvoiceService {
   }
 
   sendInvoiceRequest(invoice : any) {
-    this.cart = [];
     return this.http.post<any>(this.url,invoice).pipe(
-      map(response => {return response})
+      map(response => {
+        this.cart = [];
+        this.productIds = [];
+        this.discount = 0;
+        return response
+      })
     );
   }
 
@@ -80,7 +87,7 @@ export class InvoiceService {
     return this.http.get(`${this.url}/export/${id}`, {responseType : 'blob'});
   }
 
-  getInvoice() : InvoiceRequest {
+  getInvoice(address : string) : InvoiceRequest {
     const deliveryFee = 5;
     const subtotal = this.cart.reduce((sum, item) => 
       sum + item.price*item.quantity,0
@@ -91,6 +98,7 @@ export class InvoiceService {
     return {
       reference : formatDate(new Date()) + "/" + 1,
       date : new Date(),
+      deliveryAdress : address,
       isDelivered : false,
       subtotal : subtotal,
       total : total,

@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import com.example.Finoana.Entity.Account;
 import com.example.Finoana.Entity.Category;
@@ -18,6 +19,7 @@ import com.example.Finoana.Entity.Location;
 import com.example.Finoana.Entity.Product;
 import com.example.Finoana.Repository.AccountRepository;
 import com.example.Finoana.Repository.ChefRepository;
+import com.example.Finoana.Repository.ProductRepository;
 
 @Configuration
 public class DataGenerationConfig {
@@ -28,8 +30,38 @@ public class DataGenerationConfig {
 //	}
 	
 	@Bean
-	CommandLineRunner commandLineRunner(AccountRepository accountRepository) {
-		return args -> accountRepository.saveAll(generateAccount());
+	CommandLineRunner commandLineRunner(
+			AccountRepository accountRepository,
+			ChefRepository chefRepository,
+			ProductRepository productRepository) {
+		return args -> {
+			chefRepository.saveAll(generateChef());
+			accountRepository.saveAll(generateAccount());
+			productRepository.saveAll(generateProduct(chefRepository));
+		};
+	}
+	
+	
+	private List<Product> generateProduct(ChefRepository chefRepository) {
+		Chef chef = chefRepository.getReferenceById(1L);
+		return List.of(
+				Product.builder()
+				.name("Amaretto")
+				.price(2.50)
+				.image("Amaretto.png")
+				.availability(true)
+				.category(Category.DRINKS)
+				.chef(chef)
+				.build(),
+				Product.builder()
+				.name("Moscow mule")
+				.price(2.00)
+				.image("moscow.jpg")
+				.availability(true)
+				.category(Category.DRINKS)
+				.chef(chef)
+				.build()
+				);
 	}
 	
 	
@@ -79,7 +111,7 @@ public class DataGenerationConfig {
 	private List<Chef> generateChef(){
 		return List.of(
 				Chef.builder()
-				.name("John Doe")
+				.name("Jack Daniels")
 				.birthDate(LocalDate.now())
 				.profile("chef1.png")
 				.gender(Gender.MAN)

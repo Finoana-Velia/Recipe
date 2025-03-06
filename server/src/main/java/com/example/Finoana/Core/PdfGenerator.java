@@ -1,11 +1,13 @@
 package com.example.Finoana.Core;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import com.example.Finoana.Dto.InvoiceResponseDto;
 import com.example.Finoana.Entity.Account;
+import com.example.Finoana.Entity.Product;
 import com.example.Finoana.Service.InvoiceService;
 import com.lowagie.text.Document;
 import com.lowagie.text.Font;
@@ -13,6 +15,10 @@ import com.lowagie.text.FontFactory;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfTable;
 import com.lowagie.text.pdf.PdfWriter;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,7 +35,9 @@ public class PdfGenerator {
 		
 		document.open();
 		this.header(document,invoice);
-		this.body(document, invoice.getAccount());
+		this.body(document, invoice.getAccount(),invoice.getDeliveryAdress());
+		this.productTable(document,invoice.getProducts());
+		this.footer(document, invoice);
 		document.close();
 		
 		return outputStream.toByteArray();
@@ -73,15 +81,13 @@ public class PdfGenerator {
 				);
 	}
 	
-	private void body(Document document, Account account) {
-		document.add(
-				this.setElement(PdfElement.builder()
-						.text("Client informations")
-						.font(FontFactory.getFont(FontFactory.HELVETICA_BOLD))
-						.fontSize(14)
-						.align(Paragraph.ALIGN_CENTER)
-						.build())
-				);
+	private void body(Document document, Account account, String address) {
+		document.add(this.setElement(PdfElement.builder()
+				.text("Client informations")
+				.font(FontFactory.getFont(FontFactory.HELVETICA_BOLD))
+				.fontSize(14)
+				.align(Paragraph.ALIGN_CENTER)
+				.build()));
 		document.add(this.setElement(PdfElement.builder()
 				.text("Complete Name : " + account.getFirstName() + " " + account.getLastName())
 				.font(FontFactory.getFont(FontFactory.HELVETICA))
@@ -100,6 +106,68 @@ public class PdfGenerator {
 				.fontSize(12)
 				.align(Paragraph.ALIGN_LEFT)
 				.build()));
+		document.add(this.setElement(PdfElement.builder()
+				.text("Address : " + address)
+				.font(FontFactory.getFont(FontFactory.HELVETICA))
+				.fontSize(12)
+				.align(Paragraph.ALIGN_LEFT)
+				.build()));
+	}
+	
+	private void footer(Document document,InvoiceResponseDto invoice) {
+		document.add(this.setElement(PdfElement.builder()
+				.text("Discount : " + invoice.getDiscount())
+				.font(FontFactory.getFont(FontFactory.HELVETICA_BOLD))
+				.fontSize(12)
+				.align(Paragraph.ALIGN_RIGHT)
+				.build()));
+		
+		document.add(this.setElement(PdfElement.builder()
+				.text("Delivery fee : " + invoice.getDeliveryFee())
+				.font(FontFactory.getFont(FontFactory.HELVETICA_BOLD))
+				.fontSize(12)
+				.align(Paragraph.ALIGN_RIGHT)
+				.build()));
+		
+		document.add(this.setElement(PdfElement.builder()
+				.text("Total : " + invoice.getTotal())
+				.font(FontFactory.getFont(FontFactory.HELVETICA_BOLD))
+				.fontSize(12)
+				.align(Paragraph.ALIGN_RIGHT)
+				.build()));
+	}
+	
+	private void productTable(Document document,List<Product> products) {
+		/* Config table */
+		PdfPTable table = new PdfPTable(3);
+		table.setWidthPercentage(100);
+		table.setWidths(new float[] { 1f, 3.5f, 2.5f});
+		table.setSpacingBefore(10);
+		
+		/* table header */
+		this.setCell(table,"qty");
+		this.setCell(table, "Product");
+		this.setCell(table,"Price");
+		
+		/* Collumn */
+		for(Product product : products) {
+			table.addCell("1");
+			table.addCell(product.getName());
+			table.addCell(String.valueOf(product.getPrice()));
+		}
+	
+		document.add(table);
+	}
+	
+	
+	
+	private void setCell(PdfPTable table,String title) {
+		PdfPCell cell = new PdfPCell();
+		cell.setPadding(5);
+		Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+		cell.setPhrase(new Phrase(title,font));
+		table.addCell(cell);
+			
 	}
 	
 	private Paragraph setElement(PdfElement element) {
@@ -108,6 +176,5 @@ public class PdfGenerator {
 		paragraph.setAlignment(element.getAlign());
 		return paragraph;
 	}
-
 	
 }

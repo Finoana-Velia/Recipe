@@ -70,10 +70,9 @@
                 {{invoice.total}}
             </p>
         </div>
-        <div class="w-full relative flex justify-center items-center">
-            <input type="text" class="bg-gray-300 p-2 rounded" placeholder="Add Promo Code">
-            <button class="text-white bg-lime-500 right-0 p-2 rounded" (click)="exportInvoice(1)">Apply</button>
-        </div>
+        <form class="w-full relative flex justify-center items-center" [formGroup]="_deliveryForm">
+            <input type="text" class="bg-gray-300 p-2 rounded" placeholder="Delivery address" formControlName="deliveryAdress">
+        </form>
         <button class="w-full text-white rounded mt-1 p-2 bg-lime-500" (click)="toggleDialog()">
             <i class="fa fa-truck"></i>
             Delivery

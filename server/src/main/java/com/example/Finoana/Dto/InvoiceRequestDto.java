@@ -16,6 +16,7 @@ public class InvoiceRequestDto {
 	private Long id;
 	private String reference;
 	private LocalDate date;
+	private String deliveryAdress;
 	private boolean isDelivered;
 	private double subtotal;
 	private double total;

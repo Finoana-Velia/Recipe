@@ -1,7 +1,11 @@
 <div class="p-10 flex justify-between items-center">
     <div class="flex">
         <label for="size">Show by</label>
-        <select id="size" class="mx-1 px-2 text-xl border-b border-gray-200 shadow-md">
+        <select 
+            id="size" 
+            class="mx-1 px-2 text-xl border-b border-gray-200 shadow-md"
+            [(ngModel)]="pagination.size" (ngModelChange)="onSelectOption()"
+        >
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="50">50</option>
@@ -9,14 +13,20 @@
         </select>
     </div>
         <ul class="flex justify-center items-center">
-            <li>
-                <a class="bg-gray-300 p-1">
+            <li [ngClass]="pagination.number == 0 ? 'cursor-not-allowed' : ''">
+                <a
+                    (click)="changePage(pagination.number - 1, pagination.size,pagination.totalPages)" 
+                    [ngClass]="blockIncrementPage(pagination.number)"
+                >
                     <i class="fa fa-chevron-left"></i>
                 </a>
             </li>
-            <li>1/10</li>
-            <li>
-                <a class="bg-gray-300 p-1">
+            <li>{{pagination.number + 1}}/{{pagination.totalPages}}</li>
+            <li [ngClass]="pagination.number + 1 == pagination.totalPages || pagination.totalPages == null ? 'cursor-not-allowed' : ''">
+                <a 
+                    (click)="changePage(pagination.number + 1, pagination.size, pagination.totalPages)"
+                    [ngClass]="blockDecrementPage(pagination.number,pagination.totalPages)"
+                >
                     <i class="fa fa-chevron-right"></i>
                 </a>
             </li>

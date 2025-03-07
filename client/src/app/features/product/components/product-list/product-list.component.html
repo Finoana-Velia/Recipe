@@ -1,8 +1,15 @@
 <div class="flex justify-between items-center max-sm:block">
     <h2 class="text-3xl font-bold text-amber-500">Product List</h2>
     <form class="flex justify-center items-center relative">
-        <input type="text" placeholder="Recipe name" class="bg-white px-5 py-2 text-xl w-full rounded-full">
-        <button class="absolute right-3">
+        <input 
+            type="text" 
+            placeholder="Recipe name" 
+            class="bg-white px-5 py-2 text-xl w-full rounded-full"
+            [(ngModel)]="search"
+            (change)="onChange(search)"
+            name="search"
+        >
+        <button type="button" class="absolute right-3">
             <i class="fa fa-search"></i>
         </button>
     </form>
@@ -83,7 +90,8 @@
             </button>
         </div>
 
-        <app-pagination></app-pagination>
+        <app-pagination
+        (data)="dataFromPagination($event)" [pagination]="productResponse"></app-pagination>
     </div>
 </div>
 

@@ -1,6 +1,12 @@
+export interface Pagination {
+    page : number,
+    size : number,
+    totalPage : number
+}
+
 export interface PageResponse {
     content : any[],
-    totalPage : number,
+    totalPages : number,
     size : number,
     number : number
 }

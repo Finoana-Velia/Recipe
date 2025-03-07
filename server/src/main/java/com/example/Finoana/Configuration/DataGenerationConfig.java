@@ -112,7 +112,7 @@ public class DataGenerationConfig {
 		return List.of(
 				Chef.builder()
 				.name("Jack Daniels")
-				.birthDate(LocalDate.now())
+				.birthDate(LocalDate.of(1986, 12, 12))
 				.profile("chef1.png")
 				.gender(Gender.MAN)
 				.speciality(Category.DRINKS)

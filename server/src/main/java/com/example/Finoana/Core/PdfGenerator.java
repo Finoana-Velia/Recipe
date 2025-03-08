@@ -16,6 +16,7 @@ import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
+import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfTable;
@@ -147,14 +148,27 @@ public class PdfGenerator {
 		/* table header */
 		this.setCell(table,"qty");
 		this.setCell(table, "Product");
-		this.setCell(table,"Price");
+		this.setCell(table,"Price ($)");
 		
 		/* Collumn */
 		for(Product product : products) {
-			table.addCell("1");
-			table.addCell(product.getName());
-			table.addCell(String.valueOf(product.getPrice()));
+			PdfPCell cell = new PdfPCell();
+			cell.setBorder(Rectangle.LEFT | Rectangle.RIGHT);
+			cell.setPhrase(new Phrase("1"));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(product.getName()));
+			table.addCell(cell);
+			cell.setPhrase(new Phrase(String.valueOf(product.getPrice())));
+			table.addCell(cell);
 		}
+		
+		for(int i = 0; i <= 3; i++) {
+			PdfPCell bottomCell = new PdfPCell();
+			bottomCell.setBorder(Rectangle.BOTTOM);
+			bottomCell.setPhrase(new Phrase(""));
+			table.addCell(bottomCell);
+		}
+		
 	
 		document.add(table);
 	}

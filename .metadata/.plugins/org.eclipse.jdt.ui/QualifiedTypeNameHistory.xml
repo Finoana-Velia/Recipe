@@ -36,4 +36,5 @@
     <fullyQualifiedTypeName name="com.example.Finoana.Repository.ChefRepository"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Product"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Repository.ProductRepository"/>
+    <fullyQualifiedTypeName name="com.lowagie.text.Rectangle"/>
 </qualifiedTypeNameHistroy>

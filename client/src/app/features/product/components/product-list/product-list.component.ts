@@ -36,7 +36,9 @@ export class ProductListComponent implements OnInit{
   }
 
   onChange(search : string) {
-    this.productService.findAll(search).subscribe(
+    this.productService.findAll(search,
+      this.productResponse.number,
+      this.productResponse.size).subscribe(
       response => this.productResponse = response
     );
   }

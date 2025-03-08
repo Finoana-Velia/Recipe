@@ -3,7 +3,10 @@
     <form class="flex justify-center items-center relative">
         <input type="text" placeholder="Chef's name"
          class="bg-white px-5 py-2 text-xl w-full rounded-full"
-        >  
+         [(ngModel)]="search"
+         name="search"
+         (change)="onChange(search)"
+         >  
         <button class="absolute right-3">
             <i class="fa fa-search"></i>
         </button>
@@ -64,6 +67,6 @@
                 Add
             </button>
         </div>
-        <app-pagination></app-pagination>
+        <app-pagination (data)="dataFromPagination($event)" [pagination]="pageResponse"></app-pagination>
     </div>
 </div>

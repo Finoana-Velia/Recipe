@@ -2,15 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { PaginationComponent } from '../../../../core/components/pagination/pagination.component';
 import { Router, RouterLink } from '@angular/router';
 import { ChefService } from '../../service/chef.service';
-import { PageResponse } from '../../../../core/models/PageResponse';
+import { PageResponse, Pagination } from '../../../../core/models/PageResponse';
 import { NgForOf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-chef-list',
   imports: [
     PaginationComponent,
     RouterLink,
-    NgForOf
+    NgForOf,
+    FormsModule
   ],
   templateUrl: './chef-list.component.html',
   styleUrl: './chef-list.component.css'
@@ -18,6 +20,8 @@ import { NgForOf } from '@angular/common';
 export class ChefListComponent implements OnInit{
 
   pageResponse! : PageResponse;
+  search : string = "";
+
 
   constructor(
     private router : Router,
@@ -34,5 +38,16 @@ export class ChefListComponent implements OnInit{
     return this.chefService.findProfile(id);
   }
 
+  onChange(search : string) {
+    this.chefService.findAll(this.pageResponse.number,this.pageResponse.size,search).subscribe(
+      response => this.pageResponse = response
+    );
+  } 
+
+  dataFromPagination(event : Pagination) {
+    this.chefService.findAll(event.page,event.size,this.search).subscribe(
+      response => this.pageResponse = response
+    );
+  }
 
 }

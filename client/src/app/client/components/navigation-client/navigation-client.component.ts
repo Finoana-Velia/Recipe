@@ -3,8 +3,8 @@ import { RouterLink } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
 import { NotificationService } from '../../../core/services/notification.service';
 import { NgClass, NgForOf } from '@angular/common';
-import { ProductService } from '../../../features/product/service/product.service';
-import { ChefService } from '../../../features/chef/service/chef.service';
+import { ProductService } from '../../../admin/service/product.service';
+import { ChefService } from '../../../admin/service/chef.service';
 
 @Component({
   selector: 'app-navigation-client',

@@ -3,7 +3,7 @@ import { Invoice, InvoiceRequest } from '../../models/Invoice';
 import { NgForOf } from '@angular/common';
 import { RecipeService } from '../../services/recipe.service';
 import { InvoiceService } from '../../services/invoice.service';
-import { ProductService } from '../../../features/product/service/product.service';
+import { ProductService } from '../../../admin/service/product.service';
 import { Router } from '@angular/router';
 import { formatDate } from '../../util/FormatDate';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';

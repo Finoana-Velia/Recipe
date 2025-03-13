@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChefService } from '../../../features/chef/service/chef.service';
+import { ChefService } from '../../../admin/service/chef.service';
 import { NgForOf } from '@angular/common';
 
 @Component({

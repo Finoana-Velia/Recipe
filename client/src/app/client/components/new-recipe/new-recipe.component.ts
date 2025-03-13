@@ -2,7 +2,7 @@ import { NgClass, NgForOf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { Invoice } from '../../models/Invoice';
-import { ProductService } from '../../../features/product/service/product.service';
+import { ProductService } from '../../../admin/service/product.service';
 import { InvoiceService } from '../../services/invoice.service';
 
 @Component({

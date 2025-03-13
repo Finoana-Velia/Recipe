@@ -1,9 +1,8 @@
 import { NgClass } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../../../features/users/service/user.service';
+import { UserService } from '../../../admin/service/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Account } from '../../../features/users/model/Account';
-import { errorContext } from 'rxjs/internal/util/errorContext';
+import { Account } from '../../../admin/models/Account';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

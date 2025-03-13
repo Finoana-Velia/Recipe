@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ChefService } from '../../service/chef.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chef } from '../../models/chef';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-chef-form',
@@ -50,7 +51,8 @@ export class ChefFormComponent implements OnInit {
     constructor(
       private chefService : ChefService,
       private router : Router,
-      private activatedRoute : ActivatedRoute
+      private activatedRoute : ActivatedRoute,
+      private location : Location
     ) {}
   
     ngOnInit(): void {
@@ -136,6 +138,9 @@ export class ChefFormComponent implements OnInit {
       }
     }
   
+    goBack() {
+      this.location.back();
+    }
     
   
     generatedChefValue() : Partial<Chef> {

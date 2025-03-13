@@ -1,4 +1,4 @@
-import { NgForOf } from '@angular/common';
+import { Location, NgForOf } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Chef } from '../../models/chef';
@@ -53,7 +53,8 @@ constructor(
   private activatedRoute : ActivatedRoute,
   private chefService : ChefService,
   private productService : ProductService,
-  private router : Router
+  private router : Router,
+  private location : Location
 ) {}
 
 ngOnInit(): void {
@@ -129,6 +130,10 @@ onSubmit() {
       }
     )
   }
+}
+
+goBack() {
+  this.location.back();
 }
 
 generatedProductValue() : Partial<ProductRequest> {

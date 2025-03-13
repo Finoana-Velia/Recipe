@@ -11,9 +11,13 @@ import { ChefComponent } from './admin/components/chef/chef.component';
 import { ChefFormComponent } from './admin/components/chef-form/chef-form.component';
 import { ProductComponent } from './admin/components/product/product.component';
 import { ProductFormComponent } from './admin/components/product-form/product-form.component';
+import { AuthComponent } from './visitor/components/auth/auth.component';
+import { RegisterComponent } from './visitor/components/register/register.component';
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
+    { path : "login" , component : AuthComponent},
+    { path : "register", component : RegisterComponent},
     // { path : "login", component : AuthComponent},
     // { path : "register", component : RegisterComponent},
     { path : "auth", component : MainComponent,

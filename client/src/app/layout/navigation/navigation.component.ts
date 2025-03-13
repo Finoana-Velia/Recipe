@@ -16,8 +16,8 @@ export class NavigationComponent {
   constructor(private router : Router){}
 
   register(){
-    // this.router.navigate(['register']);
-    this.router.navigate(['user']);
+    this.router.navigate(['register']);
+    //this.router.navigate(['user']);
   }
 
   toggleHidden(){

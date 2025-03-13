@@ -45,7 +45,7 @@
                     <a (click)="toggleNotification()"><i class="fa fa-bell"></i></a>
                     <div class="absolute top-0 right-0 bg-red-500 rounded-full w-[10px] h-[10px]"></div>
                     @if(notification) {
-                        <div class="absolute top-full right-0 rounded-lg p-3 mt-1 shadow-md duration-300 bg-white z-10 min-w-[400px]">
+                        <div class="absolute top-full right-0 rounded-lg p-3 mt-1 shadow-md duration-300 bg-white z-100 min-w-[400px]">
                             <h3 class="text-xl p-3">Notifications</h3>
                             @if(notifList.length !== 0) {
                                 <ul>
@@ -91,7 +91,7 @@
                     <img src="images/chief3.png" alt="profile" width="50" height="50" class="rounded-full">
                 </a>
                 @if(menu) {
-                    <ul class="absolute top-full right-0 mr-10 rounded-lg p-3 mt-1 shadow-md duration-300 bg-white z-10 min-w-[200px]">
+                    <ul class="absolute top-full right-0 mr-10 rounded-lg p-3 mt-1 shadow-md duration-300 bg-white z-100 min-w-[200px]">
                         <li>
                             <a 
                                 class="text-xl flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white"

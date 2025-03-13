@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 import { MainHeroComponent } from './hero/main-hero/main-hero.component';
-import { AuthComponent } from './core/components/auth/auth.component';
-import { RegisterComponent } from './core/components/register/register.component';
 import { MainClientComponent } from './client/components/main-client/main-client.component';
 import { CartComponent } from './client/components/cart/cart.component';
 import { MarketPlaceComponent } from './client/components/market-place/market-place.component';
@@ -16,8 +14,8 @@ import { ProductFormComponent } from './admin/components/product-form/product-fo
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
-    { path : "login", component : AuthComponent},
-    { path : "register", component : RegisterComponent},
+    // { path : "login", component : AuthComponent},
+    // { path : "register", component : RegisterComponent},
     { path : "auth", component : MainComponent,
         children : [
             { path : '', component : DashboardComponent},

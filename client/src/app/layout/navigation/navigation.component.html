@@ -31,13 +31,13 @@
             </li>
         </ul>
         <div class="max-lg:hidden">
-            <a class="font-bold mx-1" routerLink="login">
+            <a class="font-bold mx-1" routerLink="/login">
                 Sign In
             </a>
-            <button class="border-2 border-lime-900 mx-5 rounded-[20px] px-5 py-2 text-lime-900
-            hover:text-white hover:bg-lime-400 hover:border-lime-400 font-bold" (click)="register()">
+            <a class="border-2 border-lime-900 mx-5 rounded-[20px] px-5 py-2 text-lime-900
+            hover:text-white hover:bg-lime-400 hover:border-lime-400 font-bold" routerLink="/register">
                 Sign Up
-            </button>
+            </a>
         </div>
         <button class="hidden max-lg:block mr-10 text-3xl" (click)="toggleHidden()">
             @if(hidden){
@@ -55,9 +55,9 @@
             <li class="text-lg my-5">Contact us</li>
         </ul>
         <div class="p-5">
-            <a href="" class="font-bold mx-1">Login</a>
+            <a href="" class="font-bold mx-1" routerLink="/login">Sign In</a>
             <button class="border-2 border-lime-900 mx-5 rounded-[20px] px-5 py-2 text-lime-900
-            hover:text-white hover:bg-lime-400 hover:border-lime-400 font-bold" (click)="register()">
+            hover:text-white hover:bg-lime-400 hover:border-lime-400 font-bold" routerLink="/register">
                 Sign Up
             </button>
         </div>

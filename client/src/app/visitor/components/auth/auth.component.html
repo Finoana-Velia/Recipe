@@ -1,5 +1,41 @@
 <app-navigation></app-navigation>
-<div class="h-screen bg-lime-100">
+<div class="h-screen bg-lime-100 flex justify-center items-center">
+
+    <section class="bg-white shadow-lg p-5 gap-10 mt-10">
+        <h1 class="font-bold text-xl text-center">Login</h1>
+        <form class="flex flex-col p-5 gap-2">
+            <label for="uore">Username or Email</label>
+            <input type="text" id="uore" class="border rounded outline-none p-2">
+            <label for="password">Password</label>
+            <input type="password" class="border rounded outline-none p-2">
+            <button type="submit" id="password" class="bg-lime-500 text-white p-2 rounded font-bold">Connect</button>
+            <div class="flex justify-between items-center gap-2">
+                <div>
+                    <input type="checkbox" id="keepConnect">
+                    <label for="keepConnect">Keep Session</label>
+                </div>
+    
+                <a class="text-blue-500 hover:underline">Forgot password ?</a>
+            </div>
+        </form>
+        <a class="text-blue-600 flex items-center justify-center">No account yet ?</a>
+        <div class="flex justify-between items-center my-2">
+            <div class="border"></div>
+            <p class="text-slate-400">OR</p>
+            <div class="border"></div>
+        </div>
+        <div class="flex justify-around items-center my-2">
+            <a class="flex justify-center items-center w-12 h-12 border p-2 rounded-full">
+                <img src="icons/Google__G__logo.svg.png" alt="" class="w-full h-full object-center object-cover rounded-full">
+            </a>
+            <a class="flex justify-center items-center w-12 h-12 border p-2 rounded-full">
+                <img src="icons/747.png" alt="" class="w-full h-full object-center object-cover rounded-full">
+            </a>
+            <a class="flex justify-center items-center w-12 h-12 border p-2 rounded-full">
+                <img src="icons/Microsoft_icon.svg.png" alt="" class="w-full h-full object-center object-cover rounded-full">
+            </a>
+        </div>
+    </section>
 
 </div>
 <section class="bg-black padding-x padding-t pb-8 px-5 py-10">

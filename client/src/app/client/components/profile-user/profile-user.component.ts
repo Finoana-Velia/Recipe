@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { Location, NgClass } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../../admin/service/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -67,7 +67,8 @@ export class ProfileUserComponent implements OnInit{
 
   constructor(
     private userService : UserService,
-    private activeRoute : ActivatedRoute
+    private activeRoute : ActivatedRoute,
+    private route : Location
   ) {}
 
   ngOnInit(): void {
@@ -121,6 +122,10 @@ export class ProfileUserComponent implements OnInit{
         }
       )
     }
+  }
+
+  goBack() {
+    this.route.back();
   }
 
   changeActive(part : string) {

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Finoana.Core.EmailSender;
 import com.example.Finoana.Core.PdfGenerator;
 import com.example.Finoana.Dto.InvoiceRequestDto;
 import com.example.Finoana.Dto.InvoiceResponseDto;
@@ -35,6 +36,7 @@ public class InvoiceController {
 	
 	private final InvoiceService invoiceService;
 	private final PdfGenerator pdfGenerator;
+	private final EmailSender emailSender;
 	
 	@GetMapping
 	public ResponseEntity<Page<InvoiceResponseDto>> searchInvoice(
@@ -94,6 +96,12 @@ public class InvoiceController {
 				.build());
 		
 		return new ResponseEntity<>(pdfBytes,headers,HttpStatus.OK);
+	}
+	
+	@GetMapping("/mail")
+	public ResponseEntity<String> sendAnEmail() {
+		this.emailSender.sendEmail("veliafinoanapatrick@gmail.com", "Test your email sender via your spring boot app", "I think your mail is sending successfully this is your HELLO !");
+		return ResponseEntity.status(HttpStatus.OK).body("Email sended");
 	}
 
 }

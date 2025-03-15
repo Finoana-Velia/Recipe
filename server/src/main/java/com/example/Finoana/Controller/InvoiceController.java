@@ -1,7 +1,9 @@
 package com.example.Finoana.Controller;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.springframework.data.domain.Page;
@@ -26,6 +28,9 @@ import com.example.Finoana.Dto.InvoiceRequestDto;
 import com.example.Finoana.Dto.InvoiceResponseDto;
 import com.example.Finoana.Service.InvoiceService;
 
+import static com.example.Finoana.Core.FileManagement.registerDocument;
+
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 
@@ -60,6 +65,8 @@ public class InvoiceController {
 			@RequestBody InvoiceRequestDto invoice
 			) throws Exception{
 		InvoiceResponseDto invoiceResponse = this.invoiceService.createInvoice(invoice);
+		byte[] file = this.pdfGenerator.export(invoiceResponse);
+		registerDocument(file,"invoices",invoiceResponse);
 		return ResponseEntity.status(HttpStatus.CREATED).body(invoiceResponse);
 	}
 	
@@ -84,9 +91,11 @@ public class InvoiceController {
 		InvoiceResponseDto invoice = this.invoiceService.findById(id);
 		byte[] pdfBytes = this.pdfGenerator.export(invoice);
 		
-		DateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd");
-		String currentDate = dateFormatter.format(new Date());
-		String fileName = "invoice_" + id + currentDate + ".pdf";
+//		DateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd");
+//		String currentDate = dateFormatter.format(invoice.getDate());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String invoiceDate = formatter.format(invoice.getDate());
+		String fileName = "invoice_" + id + invoiceDate + ".pdf";
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentDisposition(
@@ -102,6 +111,18 @@ public class InvoiceController {
 	public ResponseEntity<String> sendAnEmail() {
 		this.emailSender.sendEmail("veliafinoanapatrick@gmail.com", "Test your email sender via your spring boot app", "I think your mail is sending successfully this is your HELLO !");
 		return ResponseEntity.status(HttpStatus.OK).body("Email sended");
+	}
+	
+	@GetMapping("/mail/html")
+	public ResponseEntity<Void> sendEmailWithHtml() throws MessagingException {
+		this.emailSender.sendHtmlEmail("sbakery775@gmail.com", "veliafinoanapatrick@gmail.com", "Test sending email from spring");
+		return ResponseEntity.status(HttpStatus.OK).build();
+	}
+	
+	@GetMapping("/mail/html/attachment/{id}")
+	public ResponseEntity<String> sendMailWithAttachment(@PathVariable Long id) throws MessagingException, IOException {
+		this.emailSender.sendMailWithAttachment(id);
+		return ResponseEntity.status(HttpStatus.OK).body("Email send successfully");
 	}
 
 }

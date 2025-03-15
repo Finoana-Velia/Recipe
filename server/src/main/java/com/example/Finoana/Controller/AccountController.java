@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.Finoana.Core.EmailSender;
 import com.example.Finoana.Dto.AccountRequestDto;
 import com.example.Finoana.Dto.AccountResponseDto;
 import com.example.Finoana.Service.AccountService;
@@ -34,6 +35,7 @@ import lombok.AllArgsConstructor;
 public class AccountController {
 
 	private final AccountService accountService;
+	private final EmailSender emailSender;
 	
 	@GetMapping
 	public ResponseEntity<Page<AccountResponseDto>> findAll(
@@ -73,6 +75,7 @@ public class AccountController {
 		}else {
 			accountResponse = this.accountService.createAccount(account);
 		}
+		//this.emailSender.sendWelcomeEmail(accountResponse.getId());
 		return ResponseEntity.status(HttpStatus.CREATED).body(accountResponse);
 	}
 	

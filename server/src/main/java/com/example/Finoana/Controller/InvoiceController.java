@@ -67,6 +67,7 @@ public class InvoiceController {
 		InvoiceResponseDto invoiceResponse = this.invoiceService.createInvoice(invoice);
 		byte[] file = this.pdfGenerator.export(invoiceResponse);
 		registerDocument(file,"invoices",invoiceResponse);
+		//this.emailSender.sendMailWithAttachment(invoiceResponse.getId());	
 		return ResponseEntity.status(HttpStatus.CREATED).body(invoiceResponse);
 	}
 	
@@ -90,9 +91,7 @@ public class InvoiceController {
 	public ResponseEntity<byte[]> exportToPdf(@PathVariable Long id) throws Exception {
 		InvoiceResponseDto invoice = this.invoiceService.findById(id);
 		byte[] pdfBytes = this.pdfGenerator.export(invoice);
-		
-//		DateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd");
-//		String currentDate = dateFormatter.format(invoice.getDate());
+	
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 		String invoiceDate = formatter.format(invoice.getDate());
 		String fileName = "invoice_" + id + invoiceDate + ".pdf";
@@ -105,24 +104,6 @@ public class InvoiceController {
 				.build());
 		
 		return new ResponseEntity<>(pdfBytes,headers,HttpStatus.OK);
-	}
-	
-	@GetMapping("/mail")
-	public ResponseEntity<String> sendAnEmail() {
-		this.emailSender.sendEmail("veliafinoanapatrick@gmail.com", "Test your email sender via your spring boot app", "I think your mail is sending successfully this is your HELLO !");
-		return ResponseEntity.status(HttpStatus.OK).body("Email sended");
-	}
-	
-	@GetMapping("/mail/html")
-	public ResponseEntity<Void> sendEmailWithHtml() throws MessagingException {
-		this.emailSender.sendHtmlEmail("sbakery775@gmail.com", "veliafinoanapatrick@gmail.com", "Test sending email from spring");
-		return ResponseEntity.status(HttpStatus.OK).build();
-	}
-	
-	@GetMapping("/mail/html/attachment/{id}")
-	public ResponseEntity<String> sendMailWithAttachment(@PathVariable Long id) throws MessagingException, IOException {
-		this.emailSender.sendMailWithAttachment(id);
-		return ResponseEntity.status(HttpStatus.OK).body("Email send successfully");
 	}
 
 }

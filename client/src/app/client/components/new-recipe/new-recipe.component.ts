@@ -1,5 +1,5 @@
 import { NgClass, NgForOf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { Invoice } from '../../models/Invoice';
 import { ProductService } from '../../../admin/service/product.service';
@@ -12,9 +12,18 @@ import { InvoiceService } from '../../services/invoice.service';
     NgForOf,
   ],
   templateUrl: './new-recipe.component.html',
-  styleUrl: './new-recipe.component.css'
+  styleUrl: './new-recipe.component.css',
+  schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class NewRecipeComponent implements OnInit{
+onSlideChange() {
+throw new Error('Method not implemented.');
+}
+
+
+onSwiper($event: Event) {
+throw new Error('Method not implemented.');
+}
 
 
   isActive = "DRINKS";

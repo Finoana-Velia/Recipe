@@ -5,10 +5,14 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { CalendarOptions, EventClickArg } from '@fullcalendar/core/index.js';
 import { Invoice } from '../../../client/models/Invoice';
 import { InvoiceService } from '../../../client/services/invoice.service';
+import { ProductService } from '../../service/product.service';
+import { PageResponse } from '../../../core/models/PageResponse';
+import { NgForOf } from '@angular/common';
 @Component({
   selector: 'app-dashboard',
   imports: [
    FullCalendarModule,
+   NgForOf
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
@@ -17,6 +21,7 @@ export class DashboardComponent implements OnInit{
 
   invoices! : any[];
   invoice! : any;
+  products! : PageResponse;
 
   options : CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -24,7 +29,10 @@ export class DashboardComponent implements OnInit{
     eventClick: (arg) => this.handleEventClick(arg),
   }
 
-  constructor(private invoiceService : InvoiceService) {}
+  constructor(
+    private invoiceService : InvoiceService,
+    private productService : ProductService
+  ) {}
 
   ngOnInit(): void {
     this.invoiceService.findAll().subscribe(
@@ -41,10 +49,18 @@ export class DashboardComponent implements OnInit{
         this.options = { events : events};
       }
     );
+
+    this.productService.findAll().subscribe(
+      response => this.products = response
+    )
   }
 
   handleEventClick(arg : any) {
     console.log(arg.event.id);
+  }
+
+  findImage(id : number) {
+    return this.productService.getImage(id);
   }
 
 }

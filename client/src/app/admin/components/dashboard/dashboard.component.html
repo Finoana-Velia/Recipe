@@ -46,14 +46,31 @@ max-lg:grid-cols-1
     </div>
     <div class="bg-white shadow-lg min-h-[300px] p-5">
         <div class="text-2xl font-semibold border-b border-gray-200 pb-1 flex justify-between items-center">
-            <h2>New in the menu</h2>
+            <h2>Menu list</h2>
             <button>
                 <i class="fa fa-bars text-gray-300"></i>
             </button>
         </div>
         <div class="p-1">
             <ul class="max-h-[500px] overflow-y-scroll">
-                <li class="flex justify-between items-center border-b border-gray-200 py-1">
+                @if(products) {
+                    <li class="flex justify-between items-center border-b border-gray-200 py-1" *ngFor="let product of products.content">
+                        <div class="w-11 h-11 rounded-full flex justify-center items-center">
+                            <img [src]="findImage(product.id)" class="w-full h-full object-cover rounded-full">
+                        </div>
+                        <div class="w-[50%]">
+                            <h4 class="font-bold">{{product.name}}</h4>
+                            <p>by {{product.chef.name}}</p>
+                        </div>
+                        <div class="w-11">
+                            <h4 class="font-semi-bold">
+                                <i class="fa fa-dollar"></i>
+                                {{product.price}}
+                            </h4>
+                        </div>
+                    </li>
+                }
+                <!-- <li class="flex justify-between items-center border-b border-gray-200 py-1">
                     <div class="w-11 h-11 rounded-full flex justify-center items-center">
                         <img src="images/17244-caramel-topped-ice-cream-dessert-600x600.jpg" class="w-full h-full object-cover rounded-full">
                     </div>
@@ -112,7 +129,7 @@ max-lg:grid-cols-1
                             70
                         </h4>
                     </div>
-                </li>
+                </li> -->
                 
             </ul>
         </div>

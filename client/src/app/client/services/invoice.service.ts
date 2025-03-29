@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { InvoiceRequest } from '../models/Invoice';
 import { formatDate } from '../util/FormatDate';
+import { PageResponse } from '../../core/models/PageResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,17 @@ export class InvoiceService {
   private discount = 0;
 
   constructor(private http : HttpClient) { }
+
+  findAll(reference = "", page = 0, size = 0) {
+    let params = new HttpParams();
+    params = params.set('reference', reference.toString());
+    params = params.set('page', page.toString());
+    params = params.set('size', size.toString());
+
+    return this.http.get<any>(this.url, {params}).pipe(
+      map(response => {return response})
+    );
+  }
   
   getCart() {
     return this.cart;

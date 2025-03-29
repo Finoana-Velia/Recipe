@@ -39,7 +39,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 	
 	@Override
 	public Page<InvoiceResponseDto> searchInvoiceByReference(String reference, Pageable request) {
-		return this.invoiceRepository.searchInvoiceByReference(reference, request).map(
+		return this.invoiceRepository.searchInvoiceByReference("%" + reference + "%", request).map(
 				invoice -> toDto(invoice,InvoiceResponseDto.class)
 				);
 	}

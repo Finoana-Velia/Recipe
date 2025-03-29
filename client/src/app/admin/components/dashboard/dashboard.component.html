@@ -42,15 +42,7 @@ gap-9
 max-lg:grid-cols-1
 ">
     <div class="bg-white shadow-lg min-h-[300px] p-5">
-        <div class="text-2xl font-semibold border-b border-gray-200 pb-1 flex justify-between items-center">
-            <h2>Card header</h2>
-            <button>
-                <i class="fa fa-bars text-gray-300"></i>
-            </button>
-        </div>
-        <div>
-            <p>Chart should be here</p>
-        </div>
+        <full-calendar [options]="options"></full-calendar>
     </div>
     <div class="bg-white shadow-lg min-h-[300px] p-5">
         <div class="text-2xl font-semibold border-b border-gray-200 pb-1 flex justify-between items-center">
@@ -60,7 +52,7 @@ max-lg:grid-cols-1
             </button>
         </div>
         <div class="p-1">
-            <ul>
+            <ul class="max-h-[500px] overflow-y-scroll">
                 <li class="flex justify-between items-center border-b border-gray-200 py-1">
                     <div class="w-11 h-11 rounded-full flex justify-center items-center">
                         <img src="images/17244-caramel-topped-ice-cream-dessert-600x600.jpg" class="w-full h-full object-cover rounded-full">
@@ -121,6 +113,7 @@ max-lg:grid-cols-1
                         </h4>
                     </div>
                 </li>
+                
             </ul>
         </div>
     </div>

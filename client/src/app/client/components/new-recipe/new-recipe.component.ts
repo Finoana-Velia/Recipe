@@ -1,42 +1,48 @@
 import { NgClass, NgForOf } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { AfterViewInit, Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { Invoice } from '../../models/Invoice';
 import { ProductService } from '../../../admin/service/product.service';
 import { InvoiceService } from '../../services/invoice.service';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-new-recipe',
   imports: [
     NgClass,
     NgForOf,
+    FormsModule
   ],
   templateUrl: './new-recipe.component.html',
   styleUrl: './new-recipe.component.css',
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class NewRecipeComponent implements OnInit{
-onSlideChange() {
-throw new Error('Method not implemented.');
-}
-
-
-onSwiper($event: Event) {
-throw new Error('Method not implemented.');
-}
-
+export class NewRecipeComponent implements OnInit, AfterViewInit{
 
   isActive = "DRINKS";
   recipes! : any[];
   invoice! : Invoice;
   favorites! : any[];
   recipesActive! : any;
+  search : string = "";
   
   constructor(
     private recipeService : RecipeService,
     private productService : ProductService,
     private invoiceService : InvoiceService
   ){}
+
+ ngAfterViewInit() {
+    const swiperContainer = document.querySelector('swiper-container') as any;
+    
+    if (swiperContainer) {
+      swiperContainer.navigation = {
+        nextEl: '.custom-button-next',
+        prevEl: '.custom-button-prev'
+      };
+    }
+  }
 
   ngOnInit(): void {
 
@@ -85,6 +91,12 @@ throw new Error('Method not implemented.');
 
   findProductImage(id : number) {
     return this.productService.getImage(id);
+  }
+
+  onChange(search : string) {
+    this.productService.findAll(search,0,0).subscribe(
+      response => this.recipesActive = response.content.filter(item => item.category == this.isActive)
+    );
   }
 
 }

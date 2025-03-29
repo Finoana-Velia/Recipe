@@ -2,46 +2,39 @@
     id="new-recipe"
     class="w-full min-h-screen gap-10 max-container"
 >
+
     <div class="flex xl:flex-row flex-col justify-center items-center gap-10 pt-28">
         <div class="flex flex-1 flex-col">
             <p class="text-xl text-lime-300">New Recipe</p>
             <h2 class="text-4xl font-bold">Test Our new recipes</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui velit adipisci beatae sequi mollitia exercitationem natus officia necessitatibus, dolorem sed. Esse atque ea quod! Mollitia earum doloribus rem aspernatur deserunt?</p>
-            <div class="mt-2 flex items-center">
-                <button class="text-lime-400 border border-lime-400 rounded-full w-11 h-11 flex justify-center items-center mx-5">
-                    <i class="fa fa-arrow-left"></i>
-                </button>
-                <button class="text-lime-400 border border-lime-400 rounded-full w-11 h-11 flex justify-center items-center mx-5">
-                    <i class="fa fa-arrow-right"></i>
-                </button>
-            </div>
         </div>
-        <swiper-container loop="true" slides-per-view="3" style="width : 50%;"> 
-            <swiper-slide>
+        <swiper-container loop="true" slides-per-view="3" class="w-full xl:w-[50%]"> 
+            <swiper-slide *ngFor="let product of recipes">
                 <div class="w-[150px] h-[200px] bg-gray-500 rounded">
-                    <img src="images/top-recettes-mars-2022-intro-mobile-1649250827.jpg" alt="image"
+                    <img [src]="findProductImage(product.id)" alt="image"
                     class="w-full h-full object-cover object-center rounded">
                 </div>
             </swiper-slide>
-            <swiper-slide>
-                <div class="w-[150px] h-[200px] bg-gray-500 rounded">
-                    <img src="images/top-recettes-mars-2022-intro-mobile-1649250827.jpg" alt="image"
-                    class="w-full h-full object-cover object-center rounded">
-                </div>
-            </swiper-slide>
-            <swiper-slide><div class="w-[150px] h-[200px] bg-gray-500 rounded">
-                <img src="images/top-recettes-mars-2022-intro-mobile-1649250827.jpg" alt="image"
-                class="w-full h-full object-cover object-center rounded">
-            </div></swiper-slide>
-            <swiper-slide><div class="w-[150px] h-[200px] bg-gray-500 rounded">
-                <img src="images/top-recettes-mars-2022-intro-mobile-1649250827.jpg" alt="image"
-                class="w-full h-full object-cover object-center rounded">
-            </div></swiper-slide>
         </swiper-container>
+        
+        
     </div>
     <div class="text-center gap-10 mt-10">
         <h1 class="text-4xl font-bold text-lime-400">Our Menu</h1>
         
+        <form class="flex justify-center items-center relative w-1/2 m-auto">
+            <input 
+                type="text" 
+                placeholder="Search by product name" 
+                class="bg-gray-100 px-5 py-2 my-10 rounded-full w-full outline-none"
+                [(ngModel)]="search"
+                name="search"
+                (change)="onChange(search)"
+            >
+            <button type="submit" class="absolute right-3"><i class="fa fa-search"></i></button>
+        </form>
+
         <ul class="flex justify-center items-center mt-5">
             <li [ngClass]="toggleActive('DRINKS')" (click)="active('DRINKS')">
                 Drinks

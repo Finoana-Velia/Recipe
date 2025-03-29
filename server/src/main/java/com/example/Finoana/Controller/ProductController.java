@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import org.apache.commons.io.IOUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,7 +48,8 @@ public class ProductController {
 			@RequestParam(defaultValue="0") int page,
 			@RequestParam(defaultValue="10") int size
 			){
-		PageRequest request = PageRequest.of(page, size == 0 ? Integer.MAX_VALUE : size);
+		
+		PageRequest request = PageRequest.of(page, size == 0 ? Integer.MAX_VALUE : size,Sort.by("createdAt").descending());
 		Page<ProductResponseDto> products = this.productService.findProductByName(name, request);
 		return ResponseEntity
 				.status(HttpStatus.OK)

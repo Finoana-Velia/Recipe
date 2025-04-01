@@ -15,4 +15,10 @@ import { RouterLink } from '@angular/router';
 })
 export class AuthComponent {
 
+  showPassword : boolean = false;
+
+  showText() {
+    this.showPassword = !this.showPassword;
+  }
+
 }

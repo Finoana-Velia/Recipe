@@ -20,6 +20,7 @@ import com.example.Finoana.Service.ProductService;
 import static com.example.Finoana.Core.EntityMapper.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 
@@ -39,27 +40,13 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public Page<ProductResponseDto> findProductByCategory(String category, Pageable pageable) {
-		Page<Product> products;
-		switch(category) {
-			case "Dishs" : 
-				products = this.productRepository.findProductByCategory(Category.DISHS, pageable);
-			case "Pizzas" : 
-				products = this.productRepository.findProductByCategory(Category.PIZZAS, pageable);
-			case "Drinks" : 
-				products = this.productRepository.findProductByCategory(Category.DRINKS, pageable);
-			case "Noodles" : 
-				products = this.productRepository.findProductByCategory(Category.NOODLES, pageable);
-			default : 
-				products = this.productRepository.findAll(pageable);
-		}
-		
-		Page<ProductResponseDto> response = products.map(
-				product -> toDto(product,ProductResponseDto.class)
-				);
-		return response;
+	public List<ProductResponseDto> findProductByCategoryAndName(Category category) {
+		return this.productRepository.findProductByCategory(category).stream().map(
+				product -> toDto(product, ProductResponseDto.class)
+				).toList();
 	}
-
+	
+	
 	@Override
 	public ProductResponseDto findProductById(Long id) {
 		return this.productRepository.findById(id).map(
@@ -145,5 +132,4 @@ public class ProductServiceImpl implements ProductService{
 				.message(message)
 				.build());
 	}
-
 }

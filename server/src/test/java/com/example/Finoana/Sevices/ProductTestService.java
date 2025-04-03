@@ -21,6 +21,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import com.example.Finoana.Dto.ProductResponseDto;
+import com.example.Finoana.Entity.Category;
 import com.example.Finoana.Entity.Product;
 import com.example.Finoana.Exception.ResourceNotFoundException;
 import com.example.Finoana.Repository.ProductRepository;
@@ -48,7 +49,7 @@ public class ProductTestService {
 	@Test
 	@DisplayName("Test find product by name")
 	void testFindByName() {
-		String name = "Coca cola";
+		String name = "Coca Cola";
 		Product product = productList.get(0);
 		 
 		when(productRepository.findProductByName("%"+name+"%", request))
@@ -73,8 +74,8 @@ public class ProductTestService {
 		assertAll(
 				() -> assertNotNull(response),
 				() -> assertEquals(6,response.getContent().size()),
-				() -> assertEquals("T-shirt.jpeg",response.getContent().get(1).getImage()),
-				() -> assertEquals(1800.00,response.getContent().get(2).getPrice())
+				() -> assertEquals("sprite.png",response.getContent().get(1).getImage()),
+				() -> assertEquals(15.00,response.getContent().get(2).getPrice())
 				);
 	}
 	
@@ -88,8 +89,8 @@ public class ProductTestService {
 		assertAll(
 				() -> assertNotNull(response),
 				() -> assertEquals("Coca Cola",response.getName()),
-				() -> assertEquals("coca.jpeg",response.getImage()),
-				() -> assertEquals(1500.00, response.getPrice())
+				() -> assertEquals("Coca.jpg",response.getImage()),
+				() -> assertEquals(5.00, response.getPrice())
 				);
 		
 	}
@@ -110,37 +111,14 @@ public class ProductTestService {
 	
 	List<Product> generateProduct(){
 		return List.of(
-				Product.builder()
-				.name("Coca Cola")
-				.image("coca.jpeg")
-				.price(1500.00)
-				.build(),
-				Product.builder()
-				.name("T-shirt")
-				.image("T-shirt.jpeg")
-				.price(2000.00)
-				.build(),
-				Product.builder()
-				.name("Smart Watch")
-				.image("Smart.jpeg")
-				.price(1800.00)
-				.build(),
-				Product.builder()
-				.name("Pizza")
-				.image("Pizza.jpeg")
-				.price(1000.00)
-				.build(),
-				Product.builder()
-				.name("Super Shoes")
-				.image("Super.jpeg")
-				.price(1400.00)
-				.build(),
-				Product.builder()
-				.name("Laptop")
-				.image("Laptop.jpeg")
-				.price(2500.00)
-				.build()
+				Product.builder().name("Coca Cola").price(5.00).image("Coca.jpg").availability(true).category(Category.DRINKS).build(),
+				Product.builder().name("Sprite").price(5.00).image("sprite.png").availability(true).category(Category.DRINKS).build(),
+				Product.builder().name("PadThai").price(15.00).image("padthai.jpg").availability(false).category(Category.DISHS).build(),
+				Product.builder().name("Ratatouille").price(12.00).image("ratatouille.jpg").availability(true).category(Category.DISHS).build(),
+				Product.builder().name("Hamburger").price(7.99).image("burger.jpg").availability(true).category(Category.DISHS).build(),
+				Product.builder().name("Paela").price(20.00).image("paela.jpg").availability(false).category(Category.DISHS).build()
 				);
+
 	}
 
 }

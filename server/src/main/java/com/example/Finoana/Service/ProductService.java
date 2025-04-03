@@ -1,5 +1,7 @@
 package com.example.Finoana.Service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -11,7 +13,7 @@ import com.example.Finoana.Entity.Product;
 public interface ProductService {
 
 	Page<ProductResponseDto> findProductByName(String name,Pageable pageable);
-	Page<ProductResponseDto> findProductByCategory(String category, Pageable pageable);
+	List<ProductResponseDto> findProductByCategoryAndName(Category category);
 	ProductResponseDto findProductById(Long id);
 	ProductResponseDto createProduct(ProductRequestDto product);
 	ProductResponseDto updateProduct(Long id,ProductRequestDto product);

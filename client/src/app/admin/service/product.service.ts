@@ -24,6 +24,16 @@ export class ProductService {
     );
   }
 
+  findByCategory(category : string,page = 0, size = 0) {
+    let params = new HttpParams();
+    params = params.set('page', page.toString());
+    params = params.set('size', size.toString());
+
+    return this.http.get<PageResponse>(`${this.url}/category/${category}`, {params}).pipe(
+      map( response => {return response})
+    );
+  }
+
   findById(id : number) {
     return this.http.get<ProductResponse>(`${this.url}/${id}`).pipe(
       map( response => {return response})

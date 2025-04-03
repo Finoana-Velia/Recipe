@@ -13,6 +13,10 @@ import { ProductComponent } from './admin/components/product/product.component';
 import { ProductFormComponent } from './admin/components/product-form/product-form.component';
 import { AuthComponent } from './visitor/components/auth/auth.component';
 import { RegisterComponent } from './visitor/components/register/register.component';
+import { DishListComponent } from './admin/components/dish-list/dish-list.component';
+import { PizzaListComponent } from './admin/components/pizza-list/pizza-list.component';
+import { DrinkListComponent } from './admin/components/drink-list/drink-list.component';
+import { NoodleListComponent } from './admin/components/noodle-list/noodle-list.component';
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
@@ -27,10 +31,10 @@ export const routes: Routes = [
             { path : 'chef/form', component : ChefFormComponent},
             { path : 'chef/form/:id', component : ChefFormComponent},
             { path : 'product', component : ProductComponent},
-            // { path : 'product/dishs', component : DishsListComponent},
-            // { path : 'product/pizzas', component : PizzasListComponent},
-            // { path : 'product/drinks', component : DrinksListComponent},
-            // { path : 'product/noodles', component : NoodlesListComponent},
+            { path : 'product/dishs', component : DishListComponent},
+            { path : 'product/pizzas', component : PizzaListComponent},
+            { path : 'product/drinks', component : DrinkListComponent},
+            { path : 'product/noodles', component : NoodleListComponent},
             { path : 'product/form', component : ProductFormComponent},
             { path : 'product/form/:id', component : ProductFormComponent}
         ]

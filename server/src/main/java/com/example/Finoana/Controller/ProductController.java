@@ -62,7 +62,7 @@ public class ProductController {
 			@PathVariable Category category,
 			@RequestParam(defaultValue="0")int page,
 			@RequestParam(defaultValue="10")int size) {
-		PageRequest request = PageRequest.of(page, size);
+		PageRequest request = PageRequest.of(page, size == 0 ? Integer.MAX_VALUE : size);
 		Page<ProductResponseDto> products = this.productService.findProductByCategory(category,request);
 		return ResponseEntity.status(HttpStatus.OK).body(products);
 	}

@@ -40,10 +40,9 @@ public class ProductServiceImpl implements ProductService{
 	}
 	
 	@Override
-	public List<ProductResponseDto> findProductByCategoryAndName(Category category) {
-		return this.productRepository.findProductByCategory(category).stream().map(
-				product -> toDto(product, ProductResponseDto.class)
-				).toList();
+	public Page<ProductResponseDto> findProductByCategory(Category category, Pageable pageable) {
+		return this.productRepository.findProductByCategory(category, pageable)
+				.map(product -> toDto(product, ProductResponseDto.class));	
 	}
 	
 	

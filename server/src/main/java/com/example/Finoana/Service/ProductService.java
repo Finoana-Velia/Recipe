@@ -13,7 +13,7 @@ import com.example.Finoana.Entity.Product;
 public interface ProductService {
 
 	Page<ProductResponseDto> findProductByName(String name,Pageable pageable);
-	List<ProductResponseDto> findProductByCategoryAndName(Category category);
+	Page<ProductResponseDto> findProductByCategory(Category category,Pageable pageable);
 	ProductResponseDto findProductById(Long id);
 	ProductResponseDto createProduct(ProductRequestDto product);
 	ProductResponseDto updateProduct(Long id,ProductRequestDto product);

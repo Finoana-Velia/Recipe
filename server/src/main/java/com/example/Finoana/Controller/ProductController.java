@@ -58,13 +58,12 @@ public class ProductController {
 	}
 	
 	@GetMapping("/category/{category}")
-	public ResponseEntity<List<ProductResponseDto>> getCategory(
+	public ResponseEntity<Page<ProductResponseDto>> findByCategory(
 			@PathVariable Category category,
-			@RequestParam(defaultValue="")String name) {
-		List<ProductResponseDto> products  = this.productService.findProductByCategoryAndName(category);
-		if(name != "") {
-			products = products.stream().filter(product -> product.getName() == name).toList();
-		}
+			@RequestParam(defaultValue="0")int page,
+			@RequestParam(defaultValue="10")int size) {
+		PageRequest request = PageRequest.of(page, size);
+		Page<ProductResponseDto> products = this.productService.findProductByCategory(category,request);
 		return ResponseEntity.status(HttpStatus.OK).body(products);
 	}
 	

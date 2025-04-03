@@ -44,6 +44,8 @@ public class DataGenerationConfig {
 	
 	private List<Product> generateProduct(ChefRepository chefRepository) {
 		Chef chef = chefRepository.getReferenceById(1L);
+		Chef chef1 = chefRepository.getReferenceById(2L);
+		
 		return List.of(
 				Product.builder()
 				.name("Amaretto")
@@ -60,6 +62,14 @@ public class DataGenerationConfig {
 				.availability(true)
 				.category(Category.DRINKS)
 				.chef(chef)
+				.build(),
+				Product.builder()
+				.name("Ice cream caramel")
+				.price(10.00)
+				.image("caramel.jpg")
+				.availability(false)
+				.category(Category.DISHS)
+				.chef(chef1)
 				.build()
 				);
 	}
@@ -117,6 +127,14 @@ public class DataGenerationConfig {
 				.gender(Gender.MAN)
 				.speciality(Category.DRINKS)
 				.description("Long Description")
+				.build(),
+				Chef.builder()
+				.name("Alfredo Linguini")
+				.birthDate(LocalDate.of(1996, 6, 11))
+				.profile("chef2.png")
+				.gender(Gender.MAN)
+				.speciality(Category.DISHS)
+				.description("The best man to make dishs")
 				.build()
 				);
 	}

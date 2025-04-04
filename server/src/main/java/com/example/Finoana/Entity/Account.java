@@ -37,6 +37,10 @@ public class Account {
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	
+	private String username;
+	private String password;
+	private String role;
+	
 	private String firstName;
 	private String lastName;
 	private Date birthDate;

@@ -21,13 +21,18 @@ import lombok.NoArgsConstructor;
 @Data
 public class AccountResponseDto {
 	private Long id;
+	
+	private String username;
+	
 	private String firstName;
 	private String lastName;
 	private Date birthDate;
 	private String profilePicture;
 	private Gender gender;
+	
 	private Location location;
 	private Contact contact;
+	
 	private Set<Invoice> invoice;
 	private Set<Product> favorites;
 }

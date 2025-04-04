@@ -19,11 +19,16 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AccountRequestDto {
 	private Long id;
+	
+	private String username;
+	private String password;
+	
 	private String firstName;
 	private String lastName;
 	private Date birthDate;
 	private String profilePicture;
 	private Gender gender;
+	
 	private Location location;
 	private Contact contact;
 //	private Set<Long> invoiceIds;

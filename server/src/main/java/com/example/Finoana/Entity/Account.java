@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -37,6 +38,7 @@ public class Account {
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	
+	@Column(unique = true, nullable = false)
 	private String username;
 	private String password;
 	private String role;

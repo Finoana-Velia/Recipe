@@ -24,8 +24,8 @@ public class AuthService implements UserDetailsService{
 	private AccountRepository accountRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<Account> account = accountRepository.findByUsername(username);
+	public UserDetails loadUserByUsername(String identifier) throws UsernameNotFoundException {
+		Optional<Account> account = this.accountRepository.findByUsernameOrEmail(identifier);
 		return account.map(user -> new User(user.getUsername(), user.getPassword(), getGrantedAuthorities(user.getRole())))
 				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 	}

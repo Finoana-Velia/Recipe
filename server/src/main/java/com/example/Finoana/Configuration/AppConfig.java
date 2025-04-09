@@ -19,8 +19,11 @@ public class AppConfig {
 	CorsFilter corsFilter() {
 		CorsConfiguration config = new CorsConfiguration();
 		config.addAllowedOrigin("*");
-		config.addAllowedHeader("*");
-		config.addAllowedMethod("*");
+//		config.addAllowedHeader("*");
+//		config.addAllowedMethod("*");
+		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS","PATCH"));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        config.setExposedHeaders(List.of("Authorization"));
 //		config.setAllowCredentials(true);
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**",config);

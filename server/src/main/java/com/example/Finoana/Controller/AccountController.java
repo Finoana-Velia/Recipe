@@ -60,7 +60,7 @@ public class AccountController {
 		return IOUtils.toByteArray(new FileInputStream(file));
 	}
 	
-	@PostMapping
+	@PostMapping("/save")
 	public ResponseEntity<AccountResponseDto> saveAccount(
 			@RequestParam String accountRequest,
 			@RequestParam(name="profileUser") MultipartFile file

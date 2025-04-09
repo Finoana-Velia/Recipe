@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Chef } from '../models/chef';
-import { map } from 'rxjs';
+import { catchError, map } from 'rxjs';
 import { PageResponse } from '../../core/models/PageResponse';
+import { ErrorHandlerService } from '../../core/services/error-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,10 @@ export class ChefService {
 
   private url = "http://localhost:8080/api/v1/chefs";
 
-  constructor(private http : HttpClient) { }
+  constructor(
+    private http : HttpClient,
+    private errorHandler : ErrorHandlerService
+  ) { }
 
   findAll(page = 0,size = 10, name = "") {
     let params = new HttpParams();
@@ -21,17 +25,24 @@ export class ChefService {
 
     return this.http.get<PageResponse>(this.url,{params}).pipe(
       map(response => {return response})
+      ,catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
   }
 
   findById(id : number) {
     return this.http.get<Chef>(`${this.url}/${id}`).pipe(
       map(response => {return response})
+      ,catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
   }
 
-  createChef(chef : any, file : File){
-     
+  createChef(chef : any, file : File)
     const formData = new FormData();
     formData.append('file',file);
 
@@ -41,6 +52,10 @@ export class ChefService {
 
     return this.http.post<Chef>(this.url,formData).pipe(
       map(response => console.log(response))
+      ,catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
 
   }
@@ -55,6 +70,10 @@ export class ChefService {
 
     return this.http.put<Chef>(`${this.url}/${id}`,formData).pipe(
       map(response => console.log(response))
+      ,catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
   }
 
@@ -65,6 +84,10 @@ export class ChefService {
   deleteChef(id : number) {
     return this.http.delete<void>(`${this.url}/${id}`).pipe(
       map(response => console.log(response))
+      ,catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
   }
 }

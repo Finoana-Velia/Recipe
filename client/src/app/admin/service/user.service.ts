@@ -31,7 +31,7 @@ export class UserService {
     formData.append('profileUser',file);
     formData.append('accountRequest', JSON.stringify(account));
 
-    return this.http.post<any>(this.url,formData).pipe(
+    return this.http.post<any>(`${this.url}/save`,formData).pipe(
       map(response => console.log(response))
     );
   }

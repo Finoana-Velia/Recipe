@@ -9,10 +9,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.Finoana.Entity.Account;
+import com.example.Finoana.Exception.UsernameNotFoundException;
 import com.example.Finoana.Repository.AccountRepository;
 
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class AuthService implements UserDetailsService{
 	private AccountRepository accountRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String identifier) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String identifier) {
 		Optional<Account> account = this.accountRepository.findByUsernameOrEmail(identifier);
 		return account.map(user -> new User(user.getUsername(), user.getPassword(), getGrantedAuthorities(user.getRole())))
 				.orElseThrow(() -> new UsernameNotFoundException("User not found"));

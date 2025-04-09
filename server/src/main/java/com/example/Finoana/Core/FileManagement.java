@@ -62,7 +62,7 @@ public class FileManagement {
 			MultipartFile file,
 			String folderName,
 			Long id
-			) throws Exception{
+			) throws IllegalStateException, IOException {
 		if(!file.isEmpty()) {
 			createMainFolder();
 			createFolder(folderName);
@@ -77,7 +77,7 @@ public class FileManagement {
 			MultipartFile file,
 			String folderName,
 			Long id
-			) throws Exception {
+			) throws IllegalStateException, IOException  {
 		if(!file.isEmpty()) {
 			createMainFolder();
 			createFolder(folderName);

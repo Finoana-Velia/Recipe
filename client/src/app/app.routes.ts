@@ -17,6 +17,9 @@ import { DishListComponent } from './admin/components/dish-list/dish-list.compon
 import { PizzaListComponent } from './admin/components/pizza-list/pizza-list.component';
 import { DrinkListComponent } from './admin/components/drink-list/drink-list.component';
 import { NoodleListComponent } from './admin/components/noodle-list/noodle-list.component';
+import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
+import { InternalServerComponent } from './core/components/internal-server/internal-server.component';
+import { UnauthorizedComponent } from './core/components/unauthorized/unauthorized.component';
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
@@ -47,5 +50,9 @@ export const routes: Routes = [
             { path : "profile" , component : ProfileUserComponent},
             { path : "profile/:id", component : ProfileUserComponent}
         ]
-    }
+    },
+
+    { path : "unauthorized" , component : UnauthorizedComponent},
+    { path : "server-error", component : InternalServerComponent},
+    { path : "**", component : PageNotFoundComponent}
 ];

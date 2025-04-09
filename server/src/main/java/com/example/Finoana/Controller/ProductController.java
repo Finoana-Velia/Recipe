@@ -2,6 +2,8 @@ package com.example.Finoana.Controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -79,7 +82,7 @@ public class ProductController {
 	
 	@GetMapping("/image")
 	@ResponseBody
-	public byte[] getImage(Long id) throws Exception {
+	public byte[] getImage(Long id) throws FileNotFoundException, IOException  {
 		File file = getFile(id,"products");
 		return IOUtils.toByteArray(new FileInputStream(file));
 	}
@@ -88,7 +91,7 @@ public class ProductController {
 	public ResponseEntity<ProductResponseDto> saveProduct(
 			@RequestParam String product,
 			@RequestParam MultipartFile file
-			) throws Exception{
+			) throws Exception {
 		ObjectMapper objectMapper = new ObjectMapper();
 		ProductRequestDto request = objectMapper.readValue(product, ProductRequestDto.class);
 		ProductResponseDto productResponse;
@@ -109,7 +112,7 @@ public class ProductController {
 //			@RequestParam ProductRequestDto product,
 			@RequestParam String productDto,
 			@RequestParam(required = false) MultipartFile file
-			) throws Exception {
+			) throws Exception  {
 		ObjectMapper objectMapper = new ObjectMapper();
 		ProductRequestDto product = objectMapper.readValue(productDto, ProductRequestDto.class);
 		product.setId(id);

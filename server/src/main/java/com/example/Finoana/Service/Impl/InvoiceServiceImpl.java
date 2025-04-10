@@ -104,14 +104,11 @@ public class InvoiceServiceImpl implements InvoiceService{
 
 	@Override
 	public void deleteById(Long id) {
-		this.invoiceRepository.findById(id).map(invoice -> {
-			this.generateNotification(invoice, OperationType.DELETE);
-			this.invoiceRepository.deleteById(id);
-			return null;
-		}).orElseThrow(
-				() -> new ResourceNotFoundException("Product with id " + id + " was not found")
-				);	
-	
+		Invoice invoice = this.invoiceRepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException("Invoice " + id + " not found")
+				);
+		this.generateNotification(invoice, OperationType.DELETE);
+		this.invoiceRepository.deleteById(id);
 	}
 	
 	private Account findAccountById(Long id) {

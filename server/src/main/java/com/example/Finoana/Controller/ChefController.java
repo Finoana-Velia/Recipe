@@ -39,7 +39,6 @@ public class ChefController {
 	private ChefService chefService;
 	
 	@GetMapping
-	@Secured(value = {"ROLE_ADMIN"})
 	public ResponseEntity<Page<ChefResponseDto>> searchChefByName(
 			@RequestParam(defaultValue="")String name,
 			@RequestParam(defaultValue="0")int page,
@@ -64,6 +63,7 @@ public class ChefController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<ChefResponseDto> createChef(
 			ChefRequestDto chef,
 			@RequestParam MultipartFile file) throws Exception{
@@ -80,6 +80,7 @@ public class ChefController {
 	}
 	
 	@PutMapping("/{id}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<ChefResponseDto> updateChef(
 			@PathVariable Long id,
 			ChefRequestDto chef,
@@ -98,7 +99,8 @@ public class ChefController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteById(Long id){
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	public ResponseEntity<Void> deleteById(@PathVariable Long id){
 		this.chefService.deleteById(id);
 		log.warn("Chef with id " + id + " has been deleted");
 		deleteFile(id,"chefs");

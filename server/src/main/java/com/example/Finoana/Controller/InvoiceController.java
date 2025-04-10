@@ -74,6 +74,7 @@ public class InvoiceController {
 	}
 	
 	@PutMapping("/{id}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<InvoiceResponseDto> update(
 			@PathVariable Long id,
 			@RequestBody InvoiceRequestDto invoice
@@ -84,6 +85,7 @@ public class InvoiceController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<Void> deleteInvoice(@PathVariable Long id){
 		this.invoiceService.deleteById(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

@@ -98,15 +98,11 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public void deleteProductById(Long id) {
-		this.productRepository.findById(id).map(
-				porduct -> {
-					this.generateNotification(porduct, OperationType.DELETE);
-					this.productRepository.deleteById(id);
-					return null;
-				}
-				).orElseThrow(
-						() -> new ResourceNotFoundException("product " + id + " not found")
-						);
+		Product product = this.productRepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException("Product " + id + " not found")
+				);
+		this.generateNotification(product, OperationType.DELETE);
+		this.productRepository.deleteById(id);
 	}
 	
 	private void generateNotification(Product product,OperationType operationType) {

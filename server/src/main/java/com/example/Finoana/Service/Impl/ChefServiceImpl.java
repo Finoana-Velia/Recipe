@@ -1,5 +1,6 @@
 package com.example.Finoana.Service.Impl;
 
+import org.modelmapper.internal.bytebuddy.asm.Advice.This;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -73,16 +74,11 @@ public class ChefServiceImpl implements ChefService{
 
 	@Override
 	public void deleteById(Long id) {
-		this.chefRepository.findById(id).map(
-				chef -> {
-					this.generateNotification(chef, OperationType.DELETE);
-					this.chefRepository.deleteById(id);
-					return null;
-				}
-				)
-		.orElseThrow(
-				() -> new ResourceNotFoundException("Chef with the id " + id + " was not found") 
+		Chef chef = this.chefRepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException("Chef with id " + id +" was not found")
 				);
+		this.generateNotification(chef, OperationType.DELETE);
+		this.chefRepository.deleteById(id);	
 	}
 
 	private void generateNotification(Chef chef,OperationType operationType) {

@@ -61,6 +61,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/category/{category}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<Page<ProductResponseDto>> findByCategory(
 			@PathVariable Category category,
 			@RequestParam(defaultValue="0")int page,
@@ -88,6 +89,7 @@ public class ProductController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<ProductResponseDto> saveProduct(
 			@RequestParam String product,
 			@RequestParam MultipartFile file
@@ -107,6 +109,7 @@ public class ProductController {
 	}
 	
 	@PutMapping("/{id}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<ProductResponseDto> updateProduct(
 			@PathVariable Long id,
 //			@RequestParam ProductRequestDto product,
@@ -128,6 +131,7 @@ public class ProductController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
 		productService.deleteProductById(id);
 		log.warn("Product with id : " + id + " was deleted");

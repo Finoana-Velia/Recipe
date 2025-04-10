@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ public class NotificationController {
 	private final NotificationService notificationService;
 	
 	@GetMapping
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<Page<NotificationDto>> findAll(
 			@RequestParam(defaultValue="0") int page,
 			@RequestParam(defaultValue="5")int size
@@ -35,6 +37,7 @@ public class NotificationController {
 	}
 	
 	@GetMapping("/user/{id}")
+	@PreAuthorize("hasAuthority('ROLE_USER')")
 	public ResponseEntity<Page<NotificationDto>> notificationForUsers(
 			@PathVariable Long id,
 			@RequestParam(defaultValue="0")int page,

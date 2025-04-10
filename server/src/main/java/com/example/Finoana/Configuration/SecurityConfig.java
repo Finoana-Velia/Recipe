@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -27,6 +28,7 @@ import lombok.AllArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 @AllArgsConstructor
 public class SecurityConfig {
 	
@@ -39,11 +41,11 @@ public class SecurityConfig {
 		return http
 				.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/auth/login","/api/v1/accounts/save","/api/v1/products").permitAll();
+					auth.requestMatchers("/auth/login","/api/v1/accounts/save").permitAll();
 //					auth.requestMatchers("/api/v1/products","/api/v1/products/image").hasRole("USER");
 //					auth.requestMatchers("/api/v1/chefs","/api/v1/chefs/profile").hasRole("ADMIN");
-//					auth.requestMatchers("/api/v1/poducts", "/api/v1/products/image").permitAll();
-//					auth.requestMatchers("/api/v1/chefs","/api/v1/chefs/profile").permitAll();
+					auth.requestMatchers("/api/v1/products", "/api/v1/products/image").permitAll();
+					auth.requestMatchers("/api/v1/chefs","/api/v1/chefs/profile").permitAll();
 					auth.anyRequest().authenticated();
 				})
 				.exceptionHandling(ex -> ex

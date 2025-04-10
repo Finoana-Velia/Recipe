@@ -7703,3 +7703,6 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.springdoc
 2025-04-10 10:15:16,834 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
 2025-04-10 10:15:16,846 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 3 resources from src/main/resources to target/classes
 2025-04-10 10:15:16,856 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/finoana/Projects/E-commerce/server/src/test/resources
+2025-04-10 10:53:53,154 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
+2025-04-10 10:53:53,168 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 3 resources from src/main/resources to target/classes
+2025-04-10 10:53:53,180 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/finoana/Projects/E-commerce/server/src/test/resources

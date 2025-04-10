@@ -42,23 +42,40 @@ export class ChefService {
     );
   }
 
-  createChef(chef : any, file : File)
+  createChef(chef : any, file : File) {
     const formData = new FormData();
     formData.append('file',file);
-
     Object.keys(chef).forEach(key => {
       formData.append(key, chef[key])
     });
-
+    
     return this.http.post<Chef>(this.url,formData).pipe(
-      map(response => console.log(response))
-      ,catchError(error => {
+      map(response => console.log(response)),
+      catchError(error => {
         this.errorHandler.handleError(error);
         throw new Error("Error during the request processing");
       })
-    );
-
+    )
   }
+
+
+  // createChef(chef : any, file : File)
+  //   const formData = new FormData();
+  //   formData.append('file',file);
+
+  //   Object.keys(chef).forEach(key => {
+  //     formData.append(key, chef[key])
+  //   });
+
+  //   return this.http.post<Chef>(this.url,formData).pipe(
+  //     map(response => console.log(response))
+  //     ,catchError(error => {
+  //       this.errorHandler.handleError(error);
+  //       throw new Error("Error during the request processing");
+  //     })
+  //   );
+
+  // }
 
   updateChef(id : number,chef : any, file : File){
     const formData = new FormData();

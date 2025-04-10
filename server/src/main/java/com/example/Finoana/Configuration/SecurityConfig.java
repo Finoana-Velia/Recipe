@@ -41,7 +41,7 @@ public class SecurityConfig {
 		return http
 				.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/auth/login","/api/v1/accounts/save").permitAll();
+					auth.requestMatchers("/auth/login","/api/v1/accounts/save","/swagger-ui/**").permitAll();
 //					auth.requestMatchers("/api/v1/products","/api/v1/products/image").hasRole("USER");
 //					auth.requestMatchers("/api/v1/chefs","/api/v1/chefs/profile").hasRole("ADMIN");
 					auth.requestMatchers("/api/v1/products", "/api/v1/products/image").permitAll();

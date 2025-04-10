@@ -50,4 +50,5 @@
     <fullyQualifiedTypeName name="org.springframework.web.client.HttpClientErrorException"/>
     <fullyQualifiedTypeName name="org.springframework.web.client.HttpClientErrorException.Forbidden"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Core.ErrorType"/>
+    <fullyQualifiedTypeName name="org.modelmapper.internal.bytebuddy.asm.Advice.This"/>
 </qualifiedTypeNameHistroy>

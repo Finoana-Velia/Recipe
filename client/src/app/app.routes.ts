@@ -20,6 +20,8 @@ import { NoodleListComponent } from './admin/components/noodle-list/noodle-list.
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { InternalServerComponent } from './core/components/internal-server/internal-server.component';
 import { UnauthorizedComponent } from './core/components/unauthorized/unauthorized.component';
+import { authGuard } from './core/guard/auth.guard';
+import { accessGuard } from './core/guard/access.guard';
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
@@ -28,6 +30,8 @@ export const routes: Routes = [
     // { path : "login", component : AuthComponent},
     // { path : "register", component : RegisterComponent},
     { path : "auth", component : MainComponent,
+        canActivate : [authGuard, accessGuard],
+        data : { roles : ['ROLE_ADMIN']},
         children : [
             { path : '', component : DashboardComponent},
             { path : 'chef', component : ChefComponent},
@@ -43,6 +47,8 @@ export const routes: Routes = [
         ]
     },
     { path : "user", component : MainClientComponent,
+        canActivate : [authGuard, accessGuard],
+        data : { roles : ['ROLE_USER']},
         children : [
             { path : "" , component : MarketPlaceComponent},
             { path : "cart", component : CartComponent},

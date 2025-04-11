@@ -4,6 +4,7 @@ import { ChefService } from '../../service/chef.service';
 import { ProductService } from '../../service/product.service';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from '../../../visitor/services/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -29,7 +30,8 @@ export class MainComponent implements OnInit{
   constructor(
     private notificationService : NotificationService,
     private chefService : ChefService,
-    private productService : ProductService
+    private productService : ProductService,
+    private authService : AuthService
   ){}
 
   ngOnInit(): void {
@@ -79,6 +81,9 @@ export class MainComponent implements OnInit{
     }
   }
 
+  signOut() {
+    this.authService.signOut();
+  }
 
 
 }

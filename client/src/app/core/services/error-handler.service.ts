@@ -13,6 +13,9 @@ export class ErrorHandlerService {
     const status : number = error.status;
 
     switch(status) {
+      case 401 : 
+        this.router.navigate(['/unauthorized']);
+        throw new Error("Unauthorized request");
       case 404 : 
        this.router.navigate(['/not-found']);
        throw new Error("Page not found");
@@ -21,16 +24,16 @@ export class ErrorHandlerService {
         throw new Error("Unauthorized request");
       case 500:
         this.router.navigate(['/server-error']);
-        throw new Error("Seomething bad happened; please try again later");
+        throw new Error("Something bad happened; please try again later");
       case 502:
         this.router.navigate(['/server-error']);
-        throw new Error("Seomething bad happened; please try again later");
+        throw new Error("Something bad happened; please try again later");
       case 503:
         this.router.navigate(['/server-error']);
-        throw new Error("Seomething bad happened; please try again later");
+        throw new Error("Something bad happened; please try again later");
       case 504:
         this.router.navigate(['/server-error']);
-        throw new Error("Seomething bad happened; please try again later");
+        throw new Error("Something bad happened; please try again later");
       default : 
       throw new Error("Something bad happened: Please try again later");
     }

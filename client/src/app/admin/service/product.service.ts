@@ -1,17 +1,22 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable, ɵresetJitOptions } from '@angular/core';
+import { catchError, map } from 'rxjs';
 import { PageResponse } from '../../core/models/PageResponse';
 import { ProductResponse } from '../models/product';
+import { environment } from '../../environments/environment';
+import { ErrorHandlerService } from '../../core/services/error-handler.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private url = "http://localhost:8080/api/v1/products";
+  //private url = "http://localhost:8080/api/v1/products";
 
-  constructor(private http : HttpClient) { }
+  private url = environment.url + "products";
+  private token = environment.token;
+
+  constructor(private http : HttpClient, private errorHandler : ErrorHandlerService) { }
 
   findAll(name = "", page = 0, size = 10){
     let params = new HttpParams();
@@ -20,7 +25,11 @@ export class ProductService {
     params = params.set('name',name.toString());
 
     return this.http.get<PageResponse>(this.url,{params}).pipe(
-      map(response => {return response})
+      map(response => {return response}),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
   }
 
@@ -29,14 +38,32 @@ export class ProductService {
     params = params.set('page', page.toString());
     params = params.set('size', size.toString());
 
-    return this.http.get<PageResponse>(`${this.url}/category/${category}`, {params}).pipe(
-      map( response => {return response})
+    const options = {
+      params : params,
+      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+    };
+
+    return this.http.get<PageResponse>(`${this.url}/category/${category}`, options).pipe(
+      map( response => {return response}),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
+      
     );
   }
 
   findById(id : number) {
-    return this.http.get<ProductResponse>(`${this.url}/${id}`).pipe(
-      map( response => {return response})
+    const options = {
+      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+    };
+
+    return this.http.get<ProductResponse>(`${this.url}/${id}`,options).pipe(
+      map( response => {return response}),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
   }
 
@@ -45,8 +72,16 @@ export class ProductService {
     formData.append('file',file);
     formData.append("product",JSON.stringify(product));
 
-    return this.http.post<any>(this.url,formData).pipe(
-      map(response => console.log(response))
+    const options = {
+      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+    }
+
+    return this.http.post<any>(this.url,formData,options).pipe(
+      map(response => console.log(response)),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
   }
 
@@ -55,8 +90,16 @@ export class ProductService {
     formData.append("file", file);
     formData.append("productDto",JSON.stringify(product));
 
-    return this.http.put<any>(this.url + `/${id}`,formData).pipe(
-      map(response => console.log(response))
+    const options = {
+      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+    };
+
+    return this.http.put<any>(this.url + `/${id}`,formData, options).pipe(
+      map(response => console.log(response)),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
   }
 

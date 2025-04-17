@@ -103,7 +103,7 @@ public class ChefController {
 	public ResponseEntity<Void> deleteById(@PathVariable Long id){
 		this.chefService.deleteById(id);
 		log.warn("Chef with id " + id + " has been deleted");
-		deleteFile(id,"chefs");
+		//deleteFile(id,"chefs");
 		return null;
 	}
 

@@ -106,5 +106,19 @@ export class ProductService {
   getImage(id : number) {
     return this.url + "/image?id=" + id;
   }
+
+  deleteProduct(id : number) {
+    const options = {
+      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+    }
+
+    return this.http.delete<void>(`${this.url}/${id}`,options).pipe(
+      map(response => console.log(response)),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
+    )
+  }
   
 }

@@ -70,7 +70,10 @@
                                 >
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <a class="bg-red-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1">
+                                <a 
+                                    class="bg-red-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1"
+                                    (click)="delete(product.id)"
+                                >
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>
@@ -92,6 +95,8 @@
 
         <app-pagination
         (data)="dataFromPagination($event)" [pagination]="productResponse"></app-pagination>
+        
+        <!-- <app-danger-dialog></app-danger-dialog> -->
     </div>
 </div>
 

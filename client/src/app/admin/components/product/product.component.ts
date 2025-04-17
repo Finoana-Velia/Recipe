@@ -5,6 +5,7 @@ import { NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PageResponse, Pagination } from '../../../core/models/PageResponse';
 import { ProductService } from '../../service/product.service';
+import { DangerDialogComponent } from '../../../core/components/danger-dialog/danger-dialog.component';
 
 @Component({
   selector: 'app-product',
@@ -12,12 +13,16 @@ import { ProductService } from '../../service/product.service';
     PaginationComponent,
     RouterLink,
     NgForOf,
-    FormsModule
+    FormsModule,
+    DangerDialogComponent
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
 export class ProductComponent implements OnInit{
+
+  deleteConfirm : boolean = false;
+  openDialog : boolean = false;
 
   productResponse! : PageResponse;
     search : string = "";
@@ -48,6 +53,11 @@ export class ProductComponent implements OnInit{
       .subscribe(
         response => this.productResponse = response
       );
+    }
+
+    delete(id : number) {
+      this.deleteConfirm != this.deleteConfirm;
+      //alert("The product : " + id + " will be deleted");
     }
     
 }

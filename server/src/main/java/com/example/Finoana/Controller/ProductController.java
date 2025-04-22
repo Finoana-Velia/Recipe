@@ -135,7 +135,7 @@ public class ProductController {
 	public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
 		productService.deleteProductById(id);
 		log.warn("Product with id : " + id + " was deleted");
-		deleteFile(id,"products");
+		//deleteFile(id,"products");
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 }

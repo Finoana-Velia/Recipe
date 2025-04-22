@@ -72,7 +72,7 @@
                                 </a>
                                 <a 
                                     class="bg-red-600 text-white rounded-full flex justify-center items-center w-7 h-7 mx-1"
-                                    (click)="delete(product.id)"
+                                    (click)="toggleDialog(product.id)"
                                 >
                                     <i class="fa fa-trash"></i>
                                 </a>
@@ -96,7 +96,7 @@
         <app-pagination
         (data)="dataFromPagination($event)" [pagination]="productResponse"></app-pagination>
         
-        <!-- <app-danger-dialog></app-danger-dialog> -->
+        <app-danger-dialog [isOpen]="dialog" [id]="idDelete" (dialogResponse)="dataFromDialog($event)"></app-danger-dialog>
     </div>
 </div>
 

@@ -1,16 +1,18 @@
-<div class="fixed top-0 left-0 flex justify-center items-center transition-all visible h-screen w-full overflow-y-hidden" id="dialog">
-    <div class="bg-white rounded shadow-md p-8 flex flex-col gap-5">
-        <div class="flex justify-center items-center gap-5">
-            <div class="w-11 h-11 flex justify-center items-center bg-red-200 rounded-full">
-                <p class="text-xl"><i class="fa fa-warning text-white"></i></p>
+@if(isOpen) {
+    <div class="fixed top-0 left-0 flex justify-center items-center transition-all visible h-screen w-full overflow-y-hidden" id="dialog">
+        <div class="bg-white rounded shadow-md p-8 flex flex-col gap-5">
+            <div class="flex justify-center items-center gap-5">
+                <div class="w-11 h-11 flex justify-center items-center bg-red-200 rounded-full">
+                    <p class="text-xl"><i class="fa fa-warning text-white"></i></p>
+                </div>
+                <div class="flex-grow">
+                    <h2 class="text-xl text-red-500">Do you want really delete this item ?</h2>
+                </div>
             </div>
-            <div class="flex-grow">
-                <h2 class="text-xl text-red-500">Do you want really delete this item ?</h2>
+            <div class="text-right">
+                <button class="px-2 text-lg text-slate-500" (click)="emitResponse(false,false)">Cancel</button>
+                <button class="px-2 text-lg text-red-500" (click)="emitResponse(false,true)">Delete</button>
             </div>
-        </div>
-        <div class="text-right">
-            <button class="px-2 text-lg text-slate-500">Cancel</button>
-            <button class="px-2 text-lg text-red-500">Delete</button>
         </div>
     </div>
-</div>
+}

@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../../admin/service/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Account } from '../../../admin/models/Account';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-user',
@@ -68,7 +68,8 @@ export class ProfileUserComponent implements OnInit{
   constructor(
     private userService : UserService,
     private activeRoute : ActivatedRoute,
-    private route : Location
+    private route : Location,
+    private navigation : Router
   ) {}
 
   ngOnInit(): void {
@@ -161,7 +162,10 @@ export class ProfileUserComponent implements OnInit{
         this.generateAccount(),
         this.profilePic
       ).subscribe(
-        response => console.log(response),
+        response => {
+          console.log(response);
+          this.navigation.navigate(['/login']);
+        },
         error => alert("error")
       );
     }else {
@@ -192,7 +196,8 @@ export class ProfileUserComponent implements OnInit{
         provinceState : this.location.provinceState.value,
       },
       username : this.security.username.value,
-      password : this.security.newPassword.value
+      password : this.security.newPassword.value,
+      role : "USER"
       // auth : {
       //   username : this.security.username.value,
       //   password : this.security.newPassword.value

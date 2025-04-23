@@ -26,5 +26,6 @@ export interface Account {
     contact : Contact,
     location : Location,
     username : string,
-    password : string
+    password : string,
+    role : string,
 }

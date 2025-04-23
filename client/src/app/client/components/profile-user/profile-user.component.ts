@@ -191,6 +191,8 @@ export class ProfileUserComponent implements OnInit{
         city : this.location.city.value,
         provinceState : this.location.provinceState.value,
       },
+      username : this.security.username.value,
+      password : this.security.newPassword.value
       // auth : {
       //   username : this.security.username.value,
       //   password : this.security.newPassword.value

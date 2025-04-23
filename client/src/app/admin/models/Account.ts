@@ -1,9 +1,9 @@
 import { Gender } from "./chef"
 
-interface Auth {
-    username : string,
-    password : string
-}
+// interface Auth {
+//     username : string,
+//     password : string
+// }
 
 interface Contact {
     email : string,
@@ -25,5 +25,6 @@ export interface Account {
     gender : Gender | string | null
     contact : Contact,
     location : Location,
-    auth : Auth
+    username : string,
+    password : string
 }

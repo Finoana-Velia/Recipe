@@ -66,7 +66,7 @@ export class ProductComponent implements OnInit{
         this.productService.deleteProduct(event.id).subscribe(
           response => {
             console.log(response);
-            
+            location.reload();
           }
         );
       }

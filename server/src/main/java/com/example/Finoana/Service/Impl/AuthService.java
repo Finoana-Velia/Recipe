@@ -12,9 +12,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.example.Finoana.Dto.AccountResponseDto;
 import com.example.Finoana.Entity.Account;
 import com.example.Finoana.Exception.UsernameNotFoundException;
 import com.example.Finoana.Repository.AccountRepository;
+import static com.example.Finoana.Core.EntityMapper.toDto;
 
 import lombok.AllArgsConstructor;
 
@@ -23,7 +25,8 @@ import lombok.AllArgsConstructor;
 public class AuthService implements UserDetailsService{
 	
 	private AccountRepository accountRepository;
-
+	private final JwtService jwtService;
+	
 	@Override
 	public UserDetails loadUserByUsername(String identifier) {
 		Optional<Account> account = this.accountRepository.findByUsernameOrEmail(identifier);
@@ -35,6 +38,13 @@ public class AuthService implements UserDetailsService{
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
 		return authorities;
+	}
+	
+	public AccountResponseDto findUserAuthenticated(String token) {
+		String identifier = this.jwtService.extractUsername(token);
+		return this.accountRepository.findByUsernameOrEmail(identifier).map(
+				user -> toDto(user,AccountResponseDto.class))
+				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 	}
 
 }

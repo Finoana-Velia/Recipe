@@ -1,29 +1,68 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { catchError, map } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { ErrorHandlerService } from '../../core/services/error-handler.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private url = "http://localhost:8080/api/v1/accounts";
+  //private url = "http://localhost:8080/api/v1/accounts";
+  private url = environment.url + "accounts";
+  private token = environment.token;
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,private errorHandler : ErrorHandlerService) { }
 
   findAll(page = 0,size = 0) {
     let params = new HttpParams();
     params = params.set('page',page.toString());
     params = params.set('size',size.toString());
-    return this.http.get<any>(this.url,{params}).pipe(
-      map(response => {return response})
+
+    const options = {
+      params : params,
+      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+    };
+
+    return this.http.get<any>(this.url,options).pipe(
+      map(response => {return response}),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
   }
 
   findById(id : number) {
-    return this.http.get<any>(`${this.url}/${id}`).pipe(
-      map(response => {return response})
+    const options = {
+      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+    };
+
+    return this.http.get<any>(`${this.url}/${id}`,options).pipe(
+      map(response => {return response}),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
+  }
+
+  findUserAuthenticated() {
+    let params = new HttpParams();
+
+    const options = {
+      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`}),
+      params : params.set('identifier',this.token ? this.token : "")
+    };
+
+    return this.http.get<any>(`${this.url}/user`,options).pipe(
+      map(response => {return response}),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
+    )
   }
 
   createAccount(account : any, file : File) {
@@ -37,22 +76,38 @@ export class UserService {
   }
 
   updateAccount(id : number,account : any, file : File) {
+    const options = {
+      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+    }
+    
     const formData = new FormData();
     formData.append('profileUser',file);
     formData.append('accountRequest',JSON.stringify(account));
     
-    return this.http.put<any>(`${this.url}/${id}`,formData).pipe(
-      map(response => console.log(response))
+    return this.http.put<any>(`${this.url}/${id}`,formData,options).pipe(
+      map(response => console.log(response)),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
   }
 
   findProfile(id : number) {
-    return this.url + "profile?id=" + id;
+    return this.url + "/profile?id=" + id;
   }
 
   delete(id : number) {
-    return this.http.delete<void>(`${this.url}/${id}`).pipe(
-      map(response => console.log(response))
+    const options = {
+      headers : new HttpHeaders({ Authorozation : `Bearer ${this.token}`})
+    };
+
+    return this.http.delete<void>(`${this.url}/${id}`,options).pipe(
+      map(response => console.log(response)),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
     );
   }
 }

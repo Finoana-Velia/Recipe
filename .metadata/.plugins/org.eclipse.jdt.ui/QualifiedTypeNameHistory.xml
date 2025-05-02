@@ -15,7 +15,6 @@
     <fullyQualifiedTypeName name="jakarta.persistence.EnumType"/>
     <fullyQualifiedTypeName name="org.apache.commons.io.IOUtils"/>
     <fullyQualifiedTypeName name="jakarta.persistence.GenerationType"/>
-    <fullyQualifiedTypeName name="com.example.Finoana.Core.EntityMapper"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.PageRequest"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Notification"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.EntityType"/>
@@ -52,4 +51,5 @@
     <fullyQualifiedTypeName name="com.example.Finoana.Core.ErrorType"/>
     <fullyQualifiedTypeName name="org.modelmapper.internal.bytebuddy.asm.Advice.This"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Dto.AuthResponse"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Core.EntityMapper"/>
 </qualifiedTypeNameHistroy>

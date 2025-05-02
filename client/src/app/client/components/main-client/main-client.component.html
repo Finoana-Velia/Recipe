@@ -89,14 +89,18 @@
                 </ul>
                 <div class="relative">
                     <a class="flex justify-center items-center" (click)="toggleMenu()">
-                        <img src="images/chief3.png" alt="profile" width="50" height="50" class="rounded-full">
+                        @if(user.profilePicture) {
+                            <img [src]="getProfilePicture(user.id)" alt="profile" width="50" height="50" class="rounded-full">
+                        }@else {
+                            <img src="images/chief3.png" alt="profile" width="50" height="50" class="rounded-full">
+                        }
                     </a>
                     @if(menu) {
                         <ul class="absolute top-full right-0 mr-10 rounded-lg p-3 mt-1 shadow-md duration-300 bg-white z-100 min-w-[200px]">
                             <li>
                                 <a 
                                     class="text-xl flex items-center gap-x-4 cursor-pointer p-2 rounded hover:bg-gray-500 hover:text-white"
-                                    [routerLink]="['/user/profile', idUser]"
+                                    [routerLink]="['/user/profile', user.id]"
                                 >
                                     <i class="fa fa-user"></i>
                                     Edit Profile

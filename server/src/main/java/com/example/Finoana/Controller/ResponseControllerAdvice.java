@@ -31,7 +31,7 @@ public class ResponseControllerAdvice {
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException exception) {
 		Map<String, String> errorMessage = new HashMap<>();
-		errorMessage.put("eror", exception.getMessage());
+		errorMessage.put("error", exception.getMessage());
 		ErrorResponse errorResponse = ErrorResponse.builder()
 				.statusCode(404)
 				.errorType(ErrorType.RESOURCE_NOT_FOUND)

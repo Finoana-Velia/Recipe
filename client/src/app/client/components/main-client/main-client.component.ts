@@ -6,6 +6,7 @@ import { NotificationService } from '../../../core/services/notification.service
 import { ChefService } from '../../../admin/service/chef.service';
 import { ProductService } from '../../../admin/service/product.service';
 import { NgClass, NgForOf } from '@angular/common';
+import { UserService } from '../../../admin/service/user.service';
 
 @Component({
   selector: 'app-main-client',
@@ -20,10 +21,11 @@ import { NgClass, NgForOf } from '@angular/common';
   styleUrl: './main-client.component.css'
 })
 export class MainClientComponent {
-menu = false;
+
+  user! : any;
+  menu = false;
   notification = false;
   cartContent = false;
-  idUser : number = 1;
   notifList! : any;
   isAll : boolean = false;
 
@@ -31,11 +33,24 @@ menu = false;
     private recipeService : RecipeService,
     private notificationService : NotificationService,
     private productService : ProductService,
-    private chefService : ChefService
+    private chefService : ChefService,
+    private userService : UserService
   ){}
 
   ngOnInit(): void {
-    this.notificationService.notificationForClient(0,5,1).subscribe(
+    // this.notificationService.notificationForClient(0,5,1).subscribe(
+    //   response => this.notifList = response.content
+    // );
+    this.userService.findUserAuthenticated().subscribe(
+      response => {
+        this.user = response;
+        this.getNotifications(this.user.id);
+      }
+    );
+  }
+
+  getNotifications(id : number) {
+    this.notificationService.notificationForClient(0,5,id).subscribe(
       response => this.notifList = response.content
     );
   }
@@ -77,6 +92,10 @@ menu = false;
   viewLess() {
     this.isAll = !this.isAll
     this.ngOnInit();
+  }
+
+  getProfilePicture(id : number) {
+    return this.userService.findProfile(id);
   }
 
 

@@ -115,7 +115,8 @@ public class DataInitializer implements CommandLineRunner{
 				.firstName("Jane")
 				.lastName("Dowson")
 				.birthDate(new Date())
-				.gender(Gender.MAN)
+				.profilePicture("Jane.png")
+				.gender(Gender.WOMAN)
 				.location(
 						Location.builder()
 						.address("42 Sunset Street")

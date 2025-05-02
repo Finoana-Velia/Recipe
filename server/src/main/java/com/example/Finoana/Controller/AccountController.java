@@ -21,6 +21,7 @@ import com.example.Finoana.Core.EmailSender;
 import com.example.Finoana.Dto.AccountRequestDto;
 import com.example.Finoana.Dto.AccountResponseDto;
 import com.example.Finoana.Service.AccountService;
+import com.example.Finoana.Service.Impl.AuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static com.example.Finoana.Core.FileManagement.*;
@@ -36,6 +37,7 @@ import lombok.AllArgsConstructor;
 public class AccountController {
 
 	private final AccountService accountService;
+	private final AuthService authService;
 	private final EmailSender emailSender;
 	
 	@GetMapping
@@ -49,16 +51,24 @@ public class AccountController {
 		return ResponseEntity.status(HttpStatus.OK).body(accounts);
 	}
 	
+	
 	@GetMapping("/{id}")
+	//@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<AccountResponseDto> findById(@PathVariable Long id){
 		AccountResponseDto account = this.accountService.findById(id);
+		return ResponseEntity.status(HttpStatus.OK).body(account);
+	}
+	
+	@GetMapping("/user")
+	public ResponseEntity<AccountResponseDto> findUserAuthenticated(@RequestParam(defaultValue="")String identifier) {
+		AccountResponseDto account = this.authService.findUserAuthenticated(identifier);
 		return ResponseEntity.status(HttpStatus.OK).body(account);
 	}
 	
 	@GetMapping("/profile")
 	@ResponseBody
 	public byte[] getProfile(Long id) throws Exception {
-		File file = getFile(id,"accounts");
+		File file = getFile(id,"account");
 		return IOUtils.toByteArray(new FileInputStream(file));
 	}
 	

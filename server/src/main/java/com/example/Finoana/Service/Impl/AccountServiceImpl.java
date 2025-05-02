@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 public class AccountServiceImpl implements AccountService{
 	
 	private AccountRepository accountRepository;
-	private final CryptConfig passwordEncoder; 
+	private final CryptConfig passwordEncoder;
 
 	@Override
 	public AccountResponseDto findById(Long id) {
@@ -49,6 +49,12 @@ public class AccountServiceImpl implements AccountService{
 					Account accountEntity = toEntity(account,Account.class);
 					if(accountEntity.getProfilePicture() == null) {
 						accountEntity.setProfilePicture(accountFound.getProfilePicture());
+					}
+					if(accountEntity.getPassword() != null) {
+						accountEntity.setPassword(accountFound.getPassword());
+					}else {
+						String passwordHashed = this.passwordEncoder.passwordEncoder().encode(accountEntity.getPassword());
+						accountEntity.setPassword(passwordHashed);
 					}
 					accountEntity.setCreatedAt(accountFound.getCreatedAt());
 					accountEntity.setUpdatedAt(LocalDateTime.now());

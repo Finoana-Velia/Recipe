@@ -46,6 +46,7 @@ public class SecurityConfig {
 //					auth.requestMatchers("/api/v1/chefs","/api/v1/chefs/profile").hasRole("ADMIN");
 					auth.requestMatchers("/api/v1/products", "/api/v1/products/image").permitAll();
 					auth.requestMatchers("/api/v1/chefs","/api/v1/chefs/profile").permitAll();
+					auth.requestMatchers("/api/v1/accounts/profile").permitAll();
 					auth.anyRequest().authenticated();
 				})
 				.exceptionHandling(ex -> ex

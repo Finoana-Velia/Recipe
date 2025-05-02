@@ -110,7 +110,7 @@ export class ProfileUserComponent implements OnInit{
               }),
             }),
             auth : new FormGroup({
-              username : new FormControl("",{
+              username : new FormControl(response.username,{
                 nonNullable : true,
                 validators : Validators.required
               }),
@@ -174,11 +174,17 @@ export class ProfileUserComponent implements OnInit{
         this.generateAccount(),
         this.profilePic
       ).subscribe(
-        
+        response => {
+          this.navigation.navigate(['/user']);
+        }
       )
     }
   }
 
+  loadProfilPicture(id : number)  {
+    return this.userService.findProfile(id);
+  }
+  
   generateAccount() : Partial<Account> {
     return {
       firstName : this.personnal.firstName.value,

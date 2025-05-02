@@ -81,10 +81,6 @@ export class AuthService {
   public isAuthorized(allowedRole : string[]) : boolean{
     const user = this.currentUserValue;
     if(!user) return false;
-    console.log("user role : ");
-    console.log(user.role);
-    console.log("role parameter :");
-    console.log(allowedRole);
     return user.role.some(role => allowedRole.includes(role.authority))
   }
 

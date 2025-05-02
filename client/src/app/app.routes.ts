@@ -51,7 +51,7 @@ export const routes: Routes = [
         data : { roles : ['ROLE_USER']},
         children : [
             { path : "" , component : MarketPlaceComponent},
-            { path : "cart", component : CartComponent},
+            { path : "cart/:id", component : CartComponent},
             { path : "favorite" , component  : FavoriteComponent},
             { path : "profile" , component : ProfileUserComponent},
             { path : "profile/:id", component : ProfileUserComponent}

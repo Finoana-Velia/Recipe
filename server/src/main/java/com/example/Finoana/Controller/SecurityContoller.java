@@ -1,5 +1,6 @@
 package com.example.Finoana.Controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -40,10 +41,14 @@ public class SecurityContoller {
 				));
 		if(authentication.isAuthenticated()) {
 			//return authentication.getAuthorities()+" " + this.jwtService.tokenGenerator(authentication.getName());
+			String tokenGenerated = this.jwtService.tokenGenerator(authentication.getName());
+			Date tokenExpirationDate = this.jwtService.extractExpiration(tokenGenerated);
+			
 			return ResponseEntity.status(HttpStatus.OK).body(
 					AuthResponse.builder()
-					.token(this.jwtService.tokenGenerator(authentication.getName()))
+					.token(tokenGenerated)
 					.role(authentication.getAuthorities())
+					.expiration(tokenExpirationDate)
 					.build()
 					);
 		}else {

@@ -1,6 +1,7 @@
 package com.example.Finoana.Dto;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -17,4 +18,5 @@ public class AuthResponse {
 
 	private String token;
 	private Collection<? extends GrantedAuthority> role;
+	private Date expiration;
 }

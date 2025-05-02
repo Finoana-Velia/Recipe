@@ -4,7 +4,7 @@ import { NgForOf } from '@angular/common';
 import { RecipeService } from '../../services/recipe.service';
 import { InvoiceService } from '../../services/invoice.service';
 import { ProductService } from '../../../admin/service/product.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '../../util/FormatDate';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -24,6 +24,7 @@ export class CartComponent implements OnInit{
   discount! : number;
   dialog : boolean = false;
   idInvoice! : number;
+  idUser! : number;
 
   _deliveryForm = new FormGroup({
     deliveryAdress : new FormControl("",{
@@ -36,11 +37,15 @@ export class CartComponent implements OnInit{
     private recipeService : RecipeService,
     private invoiceService : InvoiceService,
     private productService : ProductService,
-    private router : Router
+    private router : Router,
+    private activeRoute : ActivatedRoute
   ) {}
   
   
   ngOnInit(): void {
+    if(this.activeRoute.snapshot.params['id']) {
+      this.idUser = this.activeRoute.snapshot.params['id'];
+    }
     this.updateInvoice();
     this.cartContent = this.invoiceService.getCart();
   }
@@ -50,7 +55,7 @@ export class CartComponent implements OnInit{
   }
 
   updateInvoice() {
-    this.invoice = this.invoiceService.getInvoice(this.deliveryAddress);
+    this.invoice = this.invoiceService.getInvoice(this.deliveryAddress,this.idUser);
     this.discount = this.invoiceService.getDiscount();
   }
 
@@ -72,7 +77,7 @@ export class CartComponent implements OnInit{
   onSubmit() {
     if(this.invoiceService.getCart().length != 0 && !this._deliveryForm.invalid){
       this.invoiceService.sendInvoiceRequest(
-        this.invoiceService.getInvoice(this.deliveryAddress)
+        this.invoiceService.getInvoice(this.deliveryAddress,this.idUser)
       ).subscribe(
         response => this.exportInvoice(response.id)
       );

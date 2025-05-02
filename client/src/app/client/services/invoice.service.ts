@@ -1,16 +1,19 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { InvoiceRequest } from '../models/Invoice';
 import { formatDate } from '../util/FormatDate';
 import { PageResponse } from '../../core/models/PageResponse';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvoiceService {
 
-  private url = "http://localhost:8080/api/v1/invoices";
+  // private url = "http://localhost:8080/api/v1/invoices";
+  private url = environment.url + "invoices";
+  private token = environment.token;
 
   private cart : {
     id : number,
@@ -35,7 +38,12 @@ export class InvoiceService {
     params = params.set('page', page.toString());
     params = params.set('size', size.toString());
 
-    return this.http.get<any>(this.url, {params}).pipe(
+    const options = {
+      headers : new HttpHeaders({ Authorization : "Bearer " + this.token}),
+      params : params
+    }
+
+    return this.http.get<any>(this.url, options).pipe(
       map(response => {return response})
     );
   }
@@ -85,7 +93,10 @@ export class InvoiceService {
   }
 
   sendInvoiceRequest(invoice : any) {
-    return this.http.post<any>(this.url,invoice).pipe(
+    const options = {
+      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`}),
+    }
+    return this.http.post<any>(this.url,invoice,options).pipe(
       map(response => {
         this.cart = [];
         this.productIds = [];
@@ -95,11 +106,14 @@ export class InvoiceService {
     );
   }
 
-  exportRequest(id : number) : Observable<Blob> {
-    return this.http.get(`${this.url}/export/${id}`, {responseType : 'blob'});
+  exportRequest(id : number) {
+    return this.http.get(`${this.url}/export/${id}`, {
+      responseType : 'blob',
+      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+    });
   }
 
-  getInvoice(address : string) : InvoiceRequest {
+  getInvoice(address : string,idUser : number) : InvoiceRequest {
     const deliveryFee = 5;
     const subtotal = this.cart.reduce((sum, item) => 
       sum + item.price*item.quantity,0
@@ -117,7 +131,7 @@ export class InvoiceService {
       discount : discountValue,
       deliveryFee : deliveryFee,
       productIds : this.productIds,
-      idAccount : 1,
+      idAccount : idUser,
     }
   }
 

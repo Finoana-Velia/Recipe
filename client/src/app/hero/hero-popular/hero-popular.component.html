@@ -16,87 +16,25 @@
         </p>
     </div>
 
-    <swiper-container loop="true" slides-per-view="4" class="w-full mt-16">
-        <swiper-slide *ngFor="let product of products.content">
-            <div class="flex flex-1 flex-col w-full max-sm:w-full">
-                <img 
-                    [src]="findImage(product.id)" 
-                    [alt]="product.image"
-                    class="w-[280px] h-[280px] object-cover object-center rounded-[20px]"
-                />
-                <div class="mt-8 flex justify-start gap-2.5">
-                    <i class="fa fa-star text-lime-400"></i>
-                    <p class="text-xl leading-normal text-gray">4.5</p>
+    @if(products) {
+        <swiper-container loop="true" slides-per-view="4" class="w-full mt-16">
+            <swiper-slide *ngFor="let product of products.content">
+                <div class="flex flex-1 flex-col w-full max-sm:w-full">
+                    <img 
+                        [src]="findImage(product.id)" 
+                        [alt]="product.image"
+                        class="w-[280px] h-[280px] object-cover object-center rounded-[20px]"
+                    />
+                    <div class="mt-8 flex justify-start gap-2.5">
+                        <i class="fa fa-star text-lime-400"></i>
+                        <p class="text-xl leading-normal text-gray">4.5</p>
+                    </div>
+                    <h3 class="mt-2 text-2xl leading-normal font-semibold">{{product.name}}</h3>
+                    <p class="mt-2 font-semibold text-lime-300 text-2xl leading-normal">$ {{product.price}}</p>
                 </div>
-                <h3 class="mt-2 text-2xl leading-normal font-semibold">{{product.name}}</h3>
-                <p class="mt-2 font-semibold text-lime-300 text-2xl leading-normal">$ {{product.price}}</p>
-            </div>
-        </swiper-slide>
-    </swiper-container>
-    <!-- <div class="mt-16 grid 
-    lg:grid-cols-4 
-    md:grid-cols-3
-    sm:grid-cols-2
-    grid-cols-1
-    
-    sm:grap-4 gap-14
-    ">
-        <div class="flex flex-1 flex-col w-full max-sm:w-full">
-            <img 
-                src="images/Easy-Vegan-Pad-Thai_3680.jpg" 
-                alt="image"
-                class="w-[280px] h-[280px] object-cover object-center rounded-[20px]"
-            />
-            <div class="mt-8 flex justify-start gap-2.5">
-                <i class="fa fa-star text-lime-400"></i>
-                <p class="text-xl leading-normal text-gray">4.5</p>
-            </div>
-            <h3 class="mt-2 text-2xl leading-normal font-semibold">Pad thai Easy vegan</h3>
-            <p class="mt-2 font-semibold text-lime-300 text-2xl leading-normal">$ 200.00</p>
-        </div>
-
-        <div class="flex flex-1 flex-col w-full max-sm:w-full">
-            <img 
-                src="images/fd3520b_253654938-page-84-poireaux-vinaigrette-copie.jpg" 
-                alt="image"
-                class="w-[280px] h-[280px] object-cover object-center rounded-[20px]"
-            />
-            <div class="mt-8 flex justify-start gap-2.5">
-                <i class="fa fa-star text-lime-400"></i>
-                <p class="text-xl leading-normal text-gray">4.5</p>
-            </div>
-            <h3 class="mt-2 text-2xl leading-normal font-semibold">Vegan rolls</h3>
-            <p class="mt-2 font-semibold text-lime-300 text-2xl leading-normal">$ 175.00</p>
-        </div>
-
-        <div class="flex flex-1 flex-col w-full max-sm:w-full">
-            <img 
-                src="images/top-recettes-mars-2022-intro-mobile-1649250827.jpg" 
-                alt="image"
-                class="w-[280px] h-[280px] object-cover object-center rounded-[20px]"
-            />
-            <div class="mt-8 flex justify-start gap-2.5">
-                <i class="fa fa-star text-lime-400"></i>
-                <p class="text-xl leading-normal text-gray">4.5</p>
-            </div>
-            <h3 class="mt-2 text-2xl leading-normal font-semibold">Chicken bowls</h3>
-            <p class="mt-2 font-semibold text-lime-300 text-2xl leading-normal">$ 500.00</p>
-        </div>
-
-        <div class="flex flex-1 flex-col w-full max-sm:w-full">
-            <img 
-                src="images/Recette_de_Nouilles_Sautees_aux_Legumes.webp" 
-                alt="image"
-                class="w-[280px] h-[280px] object-cover object-center rounded-[20px]"
-            />
-            <div class="mt-8 flex justify-start gap-2.5">
-                <i class="fa fa-star text-lime-400"></i>
-                <p class="text-xl leading-normal text-gray">4.5</p>
-            </div>
-            <h3 class="mt-2 text-2xl leading-normal font-semibold">Noodle vegetable</h3>
-            <p class="mt-2 font-semibold text-lime-300 text-2xl leading-normal">$ 200.00</p>
-        </div>
-
-        
-    </div> -->
+            </swiper-slide>
+        </swiper-container>
+    }@else {
+        <app-loading></app-loading>
+    }
 </section>

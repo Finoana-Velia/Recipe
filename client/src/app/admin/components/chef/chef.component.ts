@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { PaginationComponent } from '../../../core/components/pagination/pagination.component';
 import { PageResponse, Pagination } from '../../../core/models/PageResponse';
 import { ChefService } from '../../service/chef.service';
+import { LoadingComponent } from '../../../core/components/loading/loading.component';
 
 @Component({
   selector: 'app-chef',
@@ -12,7 +13,8 @@ import { ChefService } from '../../service/chef.service';
     PaginationComponent,
     RouterLink,
     NgForOf,
-    FormsModule
+    FormsModule,
+    LoadingComponent
   ],
   templateUrl: './chef.component.html',
   styleUrl: './chef.component.css'

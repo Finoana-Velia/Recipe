@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { PageResponse, Pagination } from '../../../core/models/PageResponse';
 import { ProductService } from '../../service/product.service';
 import { DangerDialogComponent, DialogResponse } from '../../../core/components/danger-dialog/danger-dialog.component';
+import { LoadingComponent } from '../../../core/components/loading/loading.component';
 
 @Component({
   selector: 'app-product',
@@ -14,7 +15,8 @@ import { DangerDialogComponent, DialogResponse } from '../../../core/components/
     RouterLink,
     NgForOf,
     FormsModule,
-    DangerDialogComponent
+    DangerDialogComponent,
+    LoadingComponent
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'

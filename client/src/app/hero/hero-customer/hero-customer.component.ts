@@ -26,16 +26,4 @@ export class HeroCustomerComponent implements OnInit{
   getProfile(id : number) {
     return this.chefService.findProfile(id);
   }
-  // customers = [
-  //   {
-  //     completeName : "John Doe",
-  //     rate : 7.5,
-  //     imgUrl : "images/chief3.png"
-  //   },
-  //   {
-  //     completeName : "Joe Dowson",
-  //     rate : 8.5,
-  //     imgUrl : "images/chief2.png"
-  //   }
-  // ]
 }

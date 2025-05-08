@@ -7,6 +7,7 @@ import { ChefService } from '../../../admin/service/chef.service';
 import { ProductService } from '../../../admin/service/product.service';
 import { NgClass, NgForOf } from '@angular/common';
 import { UserService } from '../../../admin/service/user.service';
+import { AuthService } from '../../../visitor/services/auth.service';
 
 @Component({
   selector: 'app-main-client',
@@ -34,7 +35,8 @@ export class MainClientComponent {
     private notificationService : NotificationService,
     private productService : ProductService,
     private chefService : ChefService,
-    private userService : UserService
+    private userService : UserService,
+    private authService : AuthService
   ){}
 
   ngOnInit(): void {
@@ -96,6 +98,10 @@ export class MainClientComponent {
 
   getProfilePicture(id : number) {
     return this.userService.findProfile(id);
+  }
+
+  logout() {
+    this.authService.signOut();
   }
 
 

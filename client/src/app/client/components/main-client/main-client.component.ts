@@ -8,6 +8,7 @@ import { ProductService } from '../../../admin/service/product.service';
 import { NgClass, NgForOf } from '@angular/common';
 import { UserService } from '../../../admin/service/user.service';
 import { AuthService } from '../../../visitor/services/auth.service';
+import { LoadingComponent } from '../../../core/components/loading/loading.component';
 
 @Component({
   selector: 'app-main-client',
@@ -16,7 +17,8 @@ import { AuthService } from '../../../visitor/services/auth.service';
     NgForOf,
     FooterComponent,
     RouterOutlet,
-    RouterLink
+    RouterLink,
+    LoadingComponent
   ],
   templateUrl: './main-client.component.html',
   styleUrl: './main-client.component.css'
@@ -46,6 +48,7 @@ export class MainClientComponent {
     this.userService.findUserAuthenticated().subscribe(
       response => {
         this.user = response;
+        location.reload;
         this.getNotifications(this.user.id);
       }
     );

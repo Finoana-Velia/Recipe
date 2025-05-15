@@ -7873,3 +7873,28 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.springdoc
 2025-05-08 11:47:39,807 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Updating Gradle version information cache failed. Using outdated cache.
 2025-05-13 14:20:06,750 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
 2025-05-13 14:20:08,872 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Updating Gradle version information cache failed. Using outdated cache.
+2025-05-15 09:54:41,846 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-05-15 09:55:52,278 [Worker-0: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
+2025-05-15 09:55:52,354 [Worker-0: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src/main/resources to target/classes
+2025-05-15 09:55:52,373 [Worker-0: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/finoana/Projects/Movie/backMovie/src/test/resources
+2025-05-15 09:55:58,408 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
+2025-05-15 09:55:58,472 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src/main/resources to target/classes
+2025-05-15 09:55:58,490 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/finoana/Projects/hiring/src/test/resources
+2025-05-15 09:56:14,450 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
+2025-05-15 09:56:14,549 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 3 resources from src/main/resources to target/classes
+2025-05-15 09:56:14,576 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/finoana/Projects/E-commerce/server/src/test/resources
+2025-05-15 09:57:19,255 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
+2025-05-15 09:57:19,360 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 3 resources from src/main/resources to target/classes
+2025-05-15 09:57:19,390 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/finoana/Projects/E-commerce/server/src/test/resources
+2025-05-15 09:57:21,731 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
+2025-05-15 09:57:21,761 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 3 resources from src/main/resources to target/classes
+2025-05-15 09:57:21,784 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/finoana/Projects/E-commerce/server/src/test/resources
+2025-05-15 10:12:30,616 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
+2025-05-15 10:12:30,645 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 3 resources from src/main/resources to target/classes
+2025-05-15 10:12:30,698 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/finoana/Projects/E-commerce/server/src/test/resources
+2025-05-15 10:16:56,773 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
+2025-05-15 10:16:56,803 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 3 resources from src/main/resources to target/classes
+2025-05-15 10:16:56,818 [Worker-14: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/finoana/Projects/E-commerce/server/src/test/resources
+2025-05-15 10:17:12,575 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
+2025-05-15 10:17:12,589 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 3 resources from src/main/resources to target/classes
+2025-05-15 10:17:12,601 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /home/finoana/Projects/E-commerce/server/src/test/resources

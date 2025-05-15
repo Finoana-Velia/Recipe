@@ -47,6 +47,8 @@ public class DataInitializer implements CommandLineRunner{
 				.availability(true)
 				.category(Category.DRINKS)
 				.chef(chef1)
+				.ingredients(List.of("amaretto","lemon juice","simple syrup",
+						"egg white","lemon slice garnish","brandied cherry"))
 				.build(),
 				Product.builder()
 				.name("Moscow mule")
@@ -55,6 +57,8 @@ public class DataInitializer implements CommandLineRunner{
 				.availability(true)
 				.category(Category.DRINKS)
 				.chef(chef1)
+				.ingredients(List.of("premium vodka", "lime juice","ginger beer",
+						"lime and mint"))
 				.build(),
 				Product.builder()
 				.name("Ice cream caramel")
@@ -63,6 +67,8 @@ public class DataInitializer implements CommandLineRunner{
 				.availability(false)
 				.category(Category.DISHS)
 				.chef(chef2)
+				.ingredients(List.of("Butter and borwn sugar","heavy cream","egg yolks"
+						,"whole milk","granulated sugar","salt","vanilla exgtract"))
 				.build()));
 	}
 	

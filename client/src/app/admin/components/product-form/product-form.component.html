@@ -19,9 +19,10 @@
             <form 
                 [formGroup]="_productForm"
                 (ngSubmit)="onSubmit()"
-                class="grid grid-cols-2 gap-2 max-md:grid-cols-1 pr-5"
+                
             >
-                <input #image type="file" (change)="onSelectFile($event)" formControlName="image" hidden>
+                <div class="grid grid-cols-2 gap-2 max-md:grid-cols-1 pr-5"> 
+                    <input #image type="file" (change)="onSelectFile($event)" formControlName="image" hidden>
                 <div>
                     <input 
                         type="text" 
@@ -50,8 +51,6 @@
                             .00
                         </div>
                     </div>
-                </div>
-                <div>
                     <select formControlName="category" class="px-5 py-2 bg-gray-100 outline-none w-full my-2">
                         <option value="">Specialities...</option>
                         <option value="DRINKS">Drinks</option>
@@ -69,7 +68,29 @@
                             <option value="null">no chef for the moment</option>
                         }
                     </select>
-                    <div class="flex items-center justify-around">
+                </div>
+                <div>
+                    <div formArrayName="ingredients" class="my-2">
+                        <div class="flex justify-center items-center gap-2">
+                            <label>Ingredient(s) :</label>
+                            <button type="button" class="bg-green-500 text-white p-1 rounded" (click)="addIngredients()">
+                                <i class="fa fa-plus"></i> Add
+                            </button>
+                        </div>
+                        <div *ngFor="let ingredient of ingredients ; let i = index">
+                            <div class="flex justify-center items-center relative">
+                                <input type="text" class="px-5 py-2 bg-gray-100 outline-none w-full my-2" 
+                                [formControlName]="i" [value]="ingredient.value">
+                                <button type="button" class="absolute right-0 bg-red-500 text-white p-2" (click)="removeIngredients(i)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                    </div>
+                </div>
+                    
+                </div>
+                </div>
+                <div class="flex items-center text-right my-5">
                         <button type="submit" class="bg-blue-600 text-white mx-1 rounded-[10px] px-5 py-2">
                             <i class="fa fa-save"></i>
                             Save
@@ -78,7 +99,6 @@
                             Cancel
                         </button>
                     </div>
-                </div>
             </form>
         </div>
     </div>

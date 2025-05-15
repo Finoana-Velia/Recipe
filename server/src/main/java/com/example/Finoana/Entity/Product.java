@@ -1,6 +1,7 @@
 package com.example.Finoana.Entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
@@ -39,6 +40,8 @@ public class Product {
 	
 	@Enumerated(EnumType.STRING)
 	private Category category;
+	
+	private List<String> ingredients;
 	
 	@ManyToOne
 	@JoinColumn(name = "chef_id")

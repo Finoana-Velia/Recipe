@@ -1,5 +1,7 @@
 package com.example.Finoana.Dto;
 
+import java.util.List;
+
 import com.example.Finoana.Entity.Category;
 
 import lombok.AllArgsConstructor;
@@ -17,5 +19,6 @@ public class ProductRequestDto {
 	private String image;
 	private Category category;
 	private boolean availability;
+	private List<String> ingredients;
 	private Long idChef;
 }

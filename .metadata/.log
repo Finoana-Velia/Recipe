@@ -10483,3 +10483,154 @@ END
 
 !ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-13 14:20:00.911
 !MESSAGE Boot project ADDED: server
+!SESSION 2025-05-14 10:01:21.554 -----------------------------------------------
+eclipse.buildId=4.34.0.202411281622
+java.version=21.0.5
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.springframework.boot.ide.branding.sts4
+
+!ENTRY ch.qos.logback.classic 1 0 2025-05-14 10:01:34.267
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-05-14 10:01:48.638
+!MESSAGE Logback config file: /home/finoana/Projects/E-commerce/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.7.0.20241001-1350.xml
+
+!ENTRY org.eclipse.ui 2 0 2025-05-14 10:01:50.836
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-05-14 10:01:50.837
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.eclipse.ui 2 0 2025-05-14 10:01:52.366
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-05-14 10:01:52.367
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2025-05-14 10:02:06.034
+!MESSAGE Command list starting LS: org.springframework.tooling.boot.ls
+START:
+/opt/sts-4.27.0.RELEASE/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_21.0.5.v20241023-1957/jre/bin/java
+-Dsts.lsp.client=eclipse
+-Xmx1024m
+-XX:TieredStopAtLevel=1
+-Dspring.config.location=classpath:/application.properties
+-Xlog:jni+resolve=off
+-XX:ErrorFile=/home/finoana/Projects/E-commerce/.metadata/.plugins/org.springframework.tooling.boot.ls/fatal-error-spring-boot_1747206126028
+-Dlanguageserver.hover-timeout=225
+-jar
+/opt/sts-4.27.0.RELEASE/plugins/org.springframework.tooling.boot.ls_1.59.0.202411281450/servers/spring-boot-language-server/spring-boot-language-server-1.59.0-SNAPSHOT-exec.jar
+END
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-14 10:02:06.036
+!MESSAGE DelegatingStreamConnectionProvider - Starting Boot LS
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2025-05-14 10:02:06.066
+!MESSAGE Started org.springframework.tooling.boot.ls LS process 6341
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-14 10:02:14.356
+!MESSAGE Boot project ADDED: backMovie
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-14 10:02:14.369
+!MESSAGE Starting Boot LS...
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-14 10:02:14.394
+!MESSAGE Started Boot LS process
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-14 10:02:14.466
+!MESSAGE Boot project ADDED: hiring
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-14 10:02:14.489
+!MESSAGE Boot project ADDED: server
+
+!ENTRY org.eclipse.jface 2 0 2025-05-14 10:02:24.573
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2025-05-14 10:02:24.573
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.jdt.ui.navigate.open.type"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.lsp4e.symbolinworkspace"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SESSION 2025-05-15 09:53:11.191 -----------------------------------------------
+eclipse.buildId=4.34.0.202411281622
+java.version=21.0.5
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.springframework.boot.ide.branding.sts4
+
+!ENTRY ch.qos.logback.classic 1 0 2025-05-15 09:53:24.915
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-05-15 09:53:36.935
+!MESSAGE Logback config file: /home/finoana/Projects/E-commerce/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.7.0.20241001-1350.xml
+
+!ENTRY org.eclipse.ui 2 0 2025-05-15 09:53:39.274
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-05-15 09:53:39.274
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.eclipse.ui 2 0 2025-05-15 09:53:40.747
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-05-15 09:53:40.747
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2025-05-15 09:53:57.905
+!MESSAGE Command list starting LS: org.springframework.tooling.boot.ls
+START:
+/opt/sts-4.27.0.RELEASE/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_21.0.5.v20241023-1957/jre/bin/java
+-Dsts.lsp.client=eclipse
+-Xmx1024m
+-XX:TieredStopAtLevel=1
+-Dspring.config.location=classpath:/application.properties
+-Xlog:jni+resolve=off
+-XX:ErrorFile=/home/finoana/Projects/E-commerce/.metadata/.plugins/org.springframework.tooling.boot.ls/fatal-error-spring-boot_1747292037903
+-Dlanguageserver.hover-timeout=225
+-jar
+/opt/sts-4.27.0.RELEASE/plugins/org.springframework.tooling.boot.ls_1.59.0.202411281450/servers/spring-boot-language-server/spring-boot-language-server-1.59.0-SNAPSHOT-exec.jar
+END
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-15 09:53:57.907
+!MESSAGE DelegatingStreamConnectionProvider - Starting Boot LS
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2025-05-15 09:53:57.957
+!MESSAGE Started org.springframework.tooling.boot.ls LS process 3509
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-15 09:54:08.166
+!MESSAGE Boot project ADDED: backMovie
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-15 09:54:08.167
+!MESSAGE Starting Boot LS...
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-15 09:54:08.177
+!MESSAGE Started Boot LS process
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-15 09:54:08.283
+!MESSAGE Boot project ADDED: hiring
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-15 09:54:08.284
+!MESSAGE Boot project ADDED: server
+
+!ENTRY org.eclipse.lsp4e 2 0 2025-05-15 09:55:19.777
+!MESSAGE Timeout waiting for data to generate LS hover
+!STACK 0
+java.util.concurrent.TimeoutException
+	at java.base/java.util.concurrent.CompletableFuture.timedGet(CompletableFuture.java:1960)
+	at java.base/java.util.concurrent.CompletableFuture.get(CompletableFuture.java:2095)
+	at org.eclipse.lsp4e.jdt.LSJavaHoverProvider.getHoverInfo2(LSJavaHoverProvider.java:66)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:130)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)

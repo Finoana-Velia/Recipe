@@ -7,6 +7,7 @@ export interface ProductRequest {
     image : string;
     availability : boolean;
     category : Category | string;
+    ingredients : string[];
     idChef : number | null;
 }
 
@@ -17,5 +18,6 @@ export interface ProductResponse {
     image : string;
     availability : boolean;
     category : Category | string ;
+    ingredients : string[],
     chef : Chef;
 }

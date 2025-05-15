@@ -1,6 +1,6 @@
 import { Location, NgForOf } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Chef } from '../../models/chef';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChefService } from '../../service/chef.service';
@@ -46,7 +46,8 @@ _productForm = new FormGroup({
   chef : new FormControl<number|null>(null,{
     nonNullable : true,
     validators : Validators.required
-  })
+  }),
+  ingredients : new FormArray([])
 });
 
 constructor(
@@ -86,12 +87,21 @@ ngOnInit(): void {
           chef : new FormControl<number | null>(response.chef ? response.chef.id : null,{
             nonNullable : true,
             validators : Validators.required
-          })
+          }),
+          ingredients : new FormArray([])
         });
+        this.setIngredients(response.ingredients)
         this.url = this.productService.getImage(this.id);
       }
     )
   }
+}
+
+setIngredients(array : string[]){
+  array.forEach((value) => {
+    const control = new FormControl(value);
+    (this._productForm.get('ingredients') as FormArray).push(control);
+  })
 }
 
 activeInputFile(){
@@ -146,6 +156,15 @@ generatedProductValue() : Partial<ProductRequest> {
   }
 }
 
+addIngredients() {
+  const control = new FormControl("");
+  (<FormArray>this._productForm.get('ingredients')).push(control);
+}
+
+removeIngredients(index : number) {
+  (<FormArray>this._productForm.get('ingredients')).removeAt(index);
+}
+
 get name() {
   return this._productForm.controls.name.value;
 }
@@ -168,5 +187,9 @@ get chef() {
 
 get imageValue() {
   return this._productForm.controls.image.value;
+}
+
+get ingredients() {
+  return (<FormArray>this._productForm.get('ingredients')).controls;
 }
 }

@@ -1,69 +1,153 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Modal, Button, Touchable } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { CameraIcon, PhotoIcon, TrashIcon, UserIcon, XMarkIcon } from 'react-native-heroicons/outline';
+import * as ImagePicker from 'expo-image-picker';
+import tw from 'twrnc';
+import { useState } from "react";
 
 export default function RegsiterScreen() {
+
+    const [image, setImage] = useState();
+    const [display, setDisplay] = useState(false);
+
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const deleteImage = () => {
+        setImage(null);
+        setDisplay(false);
+        setModalVisible(false);
+    }
+
+    const uploadImage = async (mode = "") => {
+        try {
+            let result = {};
+            if(mode === 'gallery') {
+                await ImagePicker.requestMediaLibraryPermissionsAsync();
+                result = ImagePicker.launchImageLibraryAsync({
+                    mediaTypes : ImagePicker.MediaTypeOptions.Images,
+                    allowsEditing : true,
+                    aspect : [1,1],
+                    quality :1
+                });
+            }else {
+                await ImagePicker.requestCameraPermissionsAsync();
+                result = ImagePicker.launchCameraAsync({
+                    cameraType : ImagePicker.CameraType.back,
+                    allowsEditing : true,
+                    aspect : [1,1],
+                    quality : 1
+                });
+            }
+            
+
+            if(!result.canceled) {
+                setImage((await result).assets[0].uri);
+                setDisplay(true);
+            }
+            setModalVisible(false);
+        } catch(error) {}
+    };
+
+    
+
     return (
-        <View style={styles.container}>
-            <View style={{ flex : 1, marginHorizontal : 20}}>
-                <View style={{marginVertical : 20}}>
+        <ScrollView
+            style={tw`bg-white flex p-5`}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{paddingBottom : 5}}
+        >
+            <Text style={tw`my-8 text-xl font-bold`}>Create an account</Text>
+            <View style={tw`flex flex-row items-center gap-2`}>
+                <UserIcon size={28} />
+                <Text>Personal Info</Text>
+            </View>
 
-                </View>
-                <Text style={styles.title}>Create an account</Text>
-                <Text style={styles.paragraph}>Fill the field</Text>
-
-                <View style={{marginTop : 20}}>
-                <View class={styles.formGroup}>
-                    <Text style={styles.label}>Email</Text>
-                    <TextInput
-                        style={styles.formControl}
-                        placeholder="Enter your mail address"
-                        keyboardType="email-address"
-                    />
-                </View>
-
-                <View class={styles.formGroup}>
-                    <Text style={styles.label}>Phone number</Text>
-                    <View style={styles.formWrapper}>
-                        <Text style={{width : '10%'}}>+261</Text>
-                        <TextInput
-                            placeholder="Enter your phone number"
-                            keyboardType="numeric"
-                            style={styles.formNumeric}
-                        />
-                    </View>
-                </View>
-
-                <View class={styles.formGroup}>
-                    <Text style={styles.label}>Password</Text>
-                    <TextInput
-                        style={styles.formControl}
-                        placeholder="Enter your password"
-                        secureTextEntry
-                    />
-                </View>
+            <View style={tw`w-full flex justify-center items-center my-2`}>
+                <View style={tw`relative border-2 border-slate-200 w-[35] h-[35] rounded-full`}>
+                    {display ? <Image
+                        source={{ uri : image}}
+                        style={tw`w-full h-full object-cover object-center rounded-full`}
+                    /> : <Image
+                        source={require('../assets/User_icon_2.svg.png')}
+                        style={tw`w-full h-full object-cover object-center`}
+                    />}
+                    {/* <TouchableOpacity 
+                        style={tw`absolute bottom-0 right-0 bg-white rounded-full p-1 border-2 border-lime-200`}
+                        onPress={uploadImage}
+                    >
+                        <CameraIcon size={30} style={tw`text-lime-500`}/>
+                    </TouchableOpacity> */}
+                    <TouchableOpacity 
+                        style={tw`absolute bottom-0 right-0 bg-white rounded-full p-1 border-2 border-lime-200`}
+                        onPress={() => setModalVisible(true)}
+                    >
+                        <CameraIcon size={30} style={tw`text-lime-500`}/>
+                    </TouchableOpacity>
                 </View>
             </View>
-        </View>
+
+            <Modal
+                transparent 
+                visible={modalVisible}
+                onRequestClose={() => setModalVisible(false)}
+                animationType="fade"
+            >
+                <View style={styles.modalBackground}>
+                    <View style={tw`relative bg-white w-[80%] p-5 rounded shadow-xl gap-5`}>
+                        <Text style={tw`text-center text-xl font-bold`}>Profile photo</Text>
+                        <View style={tw`flex flex-row justify-center items-center gap-5`}>
+                            <TouchableOpacity
+                                onPress={() => uploadImage()}
+                                style={tw`bg-slate-100 rounded flex justify-center items-center w-20 border border-slate-300`}
+                            >
+                                <CameraIcon size={50} strokeWidth={2} color="#84cc16" />
+                                <Text>Camera</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => uploadImage('gallery')}
+                                style={tw`bg-slate-100 rounded flex justify-center items-center w-20 border border-slate-300`}
+                            >
+                                <PhotoIcon size={50} strokeWidth={2} color="#84cc16" />
+                                <Text style={tw`text-center`}>Gallery</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => deleteImage()}
+                                style={tw`bg-slate-100 rounded flex justify-center items-center w-20 border border-slate-300`}
+                            >
+                                <TrashIcon size={50} strokeWidth={2} color="#84cc16" />
+                                <Text style={tw`text-center`}>Delete</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity style={tw`absolute top-0 right-0`} onPress={() => setModalVisible(false)}>
+                            <XMarkIcon size={20} strokeWidth={2} color="#000"/>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+
+    
+            <View style={tw`mx-2`}>
+                <Text style={styles.label}>First name</Text>
+                <TextInput 
+                    style={styles.formControl}
+                    placeholder="First name"
+                />
+            </View>
+            <View style={tw`mx-2`}>
+                <Text style={styles.label}>Last name</Text>
+                <TextInput 
+                    style={styles.formControl}
+                    placeholder="Last name"
+                />
+            </View>
+            
+
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    container : {
-        flex : 1,
-        backgroundColor : '#FFF'
-    },
-    title : {
-        fontSize : 20,
-        fontWeight : 'bold',
-        marginVertical : 10,
-        color : 'black'
-    },
-    paragraph : {
-        fontSize : 15,
-        color : 'black'
-    },
-    formGroup : {
-        marginBottom : 20,
-    },
+    
     label : {
         fontSize : 15,
         fontWeight : 400,
@@ -92,5 +176,12 @@ const styles = StyleSheet.create({
         width : '90%',
         borderRightColor : 'black',
         height : "100%"
+    },
+
+    modalBackground : {
+        flex : 1,
+        backgroundColor : 'rgba(0,0,0,.5)', 
+        justifyContent : 'center',
+        alignItems : 'center'
     }
 })

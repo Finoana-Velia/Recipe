@@ -5,6 +5,7 @@ import { Invoice } from '../../models/Invoice';
 import { ProductService } from '../../../admin/service/product.service';
 import { InvoiceService } from '../../services/invoice.service';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     NgClass,
     NgForOf,
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './new-recipe.component.html',
   styleUrl: './new-recipe.component.css',

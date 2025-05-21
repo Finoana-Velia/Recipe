@@ -22,6 +22,7 @@ import { InternalServerComponent } from './core/components/internal-server/inter
 import { UnauthorizedComponent } from './core/components/unauthorized/unauthorized.component';
 import { authGuard } from './core/guard/auth.guard';
 import { accessGuard } from './core/guard/access.guard';
+import { ProductDetailsComponent } from './client/components/product-details/product-details.component';
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
@@ -54,7 +55,8 @@ export const routes: Routes = [
             { path : "cart/:id", component : CartComponent},
             { path : "favorite" , component  : FavoriteComponent},
             { path : "profile" , component : ProfileUserComponent},
-            { path : "profile/:id", component : ProfileUserComponent}
+            { path : "profile/:id", component : ProfileUserComponent},
+            { path : "product/:id", component : ProductDetailsComponent}
         ]
     },
 

@@ -1,0 +1,58 @@
+@if(product) {
+    <section class="w-full gap-10 min-h-screen max-container pt-28 px-5">
+        <button class="text-lime-950 text-2xl mx-5" routerLink="/user">
+            <i class="fa fa-chevron-left"></i> Back
+        </button>
+
+        <div class="mt-5 grid grid-cols-[2fr_1fr] gap-2 max-lg:grid-cols-1 h-full">
+            <div class="bg-white shadow-lg p-5">
+                
+                <div class="flex justify-between w-full">
+                    <div class="w-[150px] h-[200px] rounded bg-slate-500 flex items-center justify-center">
+                        @if(product.image) {
+                            <img [src]="findImage(product.id)" [alt]="product.image" class="w-full h-full object-cover object-center rounded">
+                        }@else {
+                            <p class="text-black text-lg">
+                                <i class="fa fa-image"></i>
+                            </p>
+                        }
+                    </div>
+                    <div class="w-3/5 gap-10">
+                        <h3 class="text-3xl text-lime-500 font-bold">{{product.name}}</h3>
+                        <div class="flex gap-2"><p class="text-lime-500 text-2xl"><i class="fa fa-star"></i> <span class="text-black font-semibold">4.5</span></p></div>
+                        <p>Category : <span class="text-lime-500 font-bold">{{product.category}}</span></p>
+                    </div>
+                    <div class="flex flex-col justify-center items-center w-1/5 gap-5">
+                        <button class="text-red-500 text-3xl"><i class="fa fa-heart-o"></i></button>
+                        <button class="p-2 rounded bg-lime-500 text-white">
+                            <i class="fa fa-cart-plus"></i>
+                            Add to cart
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <h5 class="text-lg font-bold">Ingredients :</h5>
+                    <p class="text-lime-500 font-bold" *ngFor="let ingredient of product.ingredients">{{ingredient}}</p>
+                </div>
+            </div>
+
+            <div class="h-full bg-white shadow-lg p-5">
+                <div class="flex items-center justify-center">
+                    <div class="w-[150px] h-[150px] rounded-full bg-slate-500">
+                        @if(product.chef.profile) {
+                            <img [src]="findProfile(product.chef.id)" [alt]="product.chef.profile" class="w-full h-full rounded-full object-cover object-center">
+                        }
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-center">{{product.chef.name}}</h3>
+                <p class="font-bold text-center">{{product.chef.gender}}</p>
+                <p class="text-lime-500 font-bold text-center">{{product.category}}</p>
+                <h5 class="font-bold">Description :</h5>
+                <p>{{product.chef.description}}</p>
+            </div>
+        </div>
+    </section>
+}@else {
+    <app-loading></app-loading>
+}

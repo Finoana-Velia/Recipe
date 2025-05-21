@@ -10,7 +10,7 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui velit adipisci beatae sequi mollitia exercitationem natus officia necessitatibus, dolorem sed. Esse atque ea quod! Mollitia earum doloribus rem aspernatur deserunt?</p>
         </div>
         <swiper-container loop="true" slides-per-view="3" class="w-full xl:w-[50%]"> 
-            <swiper-slide *ngFor="let product of recipes">
+            <swiper-slide *ngFor="let product of recipes" class="cursor-pointer" [title]="product.name" [routerLink]="['/user/product',product.id]">
                 <div class="w-[150px] h-[200px] bg-gray-500 rounded">
                     <img [src]="findProductImage(product.id)" alt="image"
                     class="w-full h-full object-cover object-center rounded">

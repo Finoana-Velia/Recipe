@@ -140,14 +140,84 @@ export default function RegsiterScreen() {
                     placeholder="Last name"
                 />
             </View>
+
+            <View style={tw`mx-2`}>
+                <Text style={styles.label}>Email address</Text>
+                <TextInput 
+                    placeholder="Enter your mail address"
+                    style={styles.formControl}
+                    keyboardType="email-address"
+                />
+            </View>
+
+            <View style={tw`mx-2`}>
+                <Text style={styles.label}>Password</Text>
+                <TextInput 
+                    secureTextEntry
+                    style={styles.formControl}
+                    placeholder="Last name"
+                />
+            </View>
+
+            <View style={tw`mx-2`}>
+                <Text style={styles.label}>Birthdate</Text>
+                <TextInput 
+                    style={styles.formControl}
+                    placeholder="dd/mm/YYYY"
+                />
+            </View>
+
+            <View style={tw`mx-2`}>
+                <Text style={styles.label}>Postal code</Text>
+                <TextInput 
+                    style={styles.formControl}
+                    placeholder="Postal code"
+                />
+            </View>
             
+            {/* <View class={styles.formGroup}>
++                    <Text style={styles.label}>Phone number</Text>
++                    <View style={styles.formWrapper}>
++                        <Text style={{width : '10%'}}>+261</Text>
++                        <TextInput
++                            placeholder="Enter your phone number"
++                            keyboardType="numeric"
++                            style={styles.formNumeric}
++                        />
+                     </View>
+                 </View> */}
+            <View style={tw`mx-2`}>
+                <Text style={styles.label}>Phone number</Text>
+                <View style={styles.formWrapper}>
+                    <Text style={{ width : '10%'}}>+261</Text>
+                    {/* <TextInput
+                        placeholder="Enter your phone number"
+                        keyboardType="numeric"
+                        style={styles.formNumeric}
+                        formNumeric : {
+                            borderWidth : 1,
+                            width : '90%',
+                            borderRightColor : 'black',
+                            height : "100%",
+                            border : 'none'
+                        },
+                    /> */}
+                    <TextInput
+                        placeholder="Enter your phone number"
+                        keyboardType="numeric"
+                        style={tw`border-l w-[90%] h-full`}
+                    />
+                </View>
+            </View>
 
         </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    
+//     +    formGroup : {
+// +        marginBottom : 20,
+// +    },
     label : {
         fontSize : 15,
         fontWeight : 400,
@@ -171,12 +241,13 @@ const styles = StyleSheet.create({
         justifyContent : "space-between",
         alignItems : 'center'
     },
-    formNumeric : {
-        borderWidth : 1,
-        width : '90%',
-        borderRightColor : 'black',
-        height : "100%"
-    },
+    // formNumeric : {
+    //     borderWidth : 1,
+    //     width : '90%',
+    //     borderRightColor : 'black',
+    //     height : "100%",
+    //     border : 'none'
+    // },
 
     modalBackground : {
         flex : 1,

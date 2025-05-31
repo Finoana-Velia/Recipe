@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductResponse } from '../../../admin/models/product';
 import { ProductService } from '../../../admin/service/product.service';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LoadingComponent } from '../../../core/components/loading/loading.component';
 import { ChefService } from '../../../admin/service/chef.service';
 import { NgForOf } from '@angular/common';

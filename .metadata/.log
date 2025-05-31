@@ -10988,3 +10988,6 @@ END
 
 !ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-31 16:31:01.917
 !MESSAGE Boot project ADDED: server
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-05-31 16:36:32.209
+!MESSAGE Classpath changed for project: backMovie

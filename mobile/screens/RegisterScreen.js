@@ -57,10 +57,10 @@ export default function RegsiterScreen() {
             contentContainerStyle={{paddingBottom : 5}}
         >
             <Text style={tw`my-8 text-xl font-bold`}>Create an account</Text>
-            <View style={tw`flex flex-row items-center gap-2`}>
+            {/* <View style={tw`flex flex-row items-center gap-2`}>
                 <UserIcon size={28} />
                 <Text>Personal Info</Text>
-            </View>
+            </View> */}
 
             <View style={tw`w-full flex justify-center items-center my-2`}>
                 <View style={tw`relative border-2 border-slate-200 w-[35] h-[35] rounded-full`}>

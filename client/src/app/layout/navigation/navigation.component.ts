@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../visitor/services/auth.service';
 import { UserService } from '../../admin/service/user.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-navigation',
@@ -18,6 +19,7 @@ export class NavigationComponent implements OnInit{
 
   constructor(
     private router : Router,
+    private location : Location,
     private authService : AuthService,
     private userService : UserService
   ){}
@@ -41,6 +43,10 @@ export class NavigationComponent implements OnInit{
 
   profilePicture(id : number) {
     return this.userService.findProfile(id);
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

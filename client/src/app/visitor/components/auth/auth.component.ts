@@ -23,16 +23,6 @@ export class AuthComponent {
   isAllValueIncorrect : boolean = false;
   showPassword : boolean = false;
 
-  // signInForm = new FormGroup({
-  //   username : new FormControl('', {
-  //     nonNullable : true,
-  //     validators : Validators.required
-  //   }),
-  //   password : new FormControl('',{
-  //     nonNullable : true,
-  //     validators : Validators.required
-  //   })
-  // });
   signInForm = new FormGroup({
     username : new FormControl('', { nonNullable : true, validators : Validators.required}),
     password : new FormControl('', { nonNullable : true, validators : Validators.required})
@@ -69,12 +59,4 @@ export class AuthComponent {
   showText() {
     this.showPassword = !this.showPassword;
   }
-
-  // get username() {
-  //   return this.signInForm.controls.username;
-  // }
-
-  // get password() {
-  //   return this.signInForm.controls.password;
-  // }
 }

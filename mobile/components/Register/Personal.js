@@ -6,7 +6,7 @@ import { CameraIcon, PhotoIcon, TrashIcon, UserIcon, XMarkIcon } from "react-nat
 
 import * as ImagePicker from 'expo-image-picker';
 import tw from 'twrnc';
-import SelectDropdown from "react-native-select-dropdown";
+import RNPickerSelect from 'react-native-picker-select';
 
 export default function Personal() {
     const navigation = useNavigation();
@@ -50,8 +50,6 @@ export default function Personal() {
             toggleModal(false);
         } catch(error) {}
     }
-
-   const countries = ['France', 'Espagne', 'Italie', 'Allemagne', 'Canada'];
 
 
     return (
@@ -141,6 +139,15 @@ export default function Personal() {
                 />
             </View>
 
+            <RNPickerSelect
+            onValueChange={(value) => console.log(value)}
+            items={[
+                { label : "Man", value : "MAN"},
+                { label : "Woman", value : "WOMAN"},
+                { label : "Other", value : "OTHER"}
+            ]}
+            style={styles.formControl}
+            />
             {/* <View style={tw`mx-2`}>
                 <Text style={styles.label}>Last name</Text>
                 <TextInput 

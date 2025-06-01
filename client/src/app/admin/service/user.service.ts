@@ -48,12 +48,12 @@ export class UserService {
     );
   }
 
-  findUserAuthenticated() {
+  findUserAuthenticated(identifier : string | null) {
     let params = new HttpParams();
 
     const options = {
       headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`}),
-      params : params.set('identifier',this.token ? this.token : "")
+      params : params.set('identifier',identifier ? identifier : "")
     };
 
     return this.http.get<any>(`${this.url}/user`,options).pipe(

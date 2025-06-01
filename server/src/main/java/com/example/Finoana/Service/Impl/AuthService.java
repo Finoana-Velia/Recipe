@@ -40,8 +40,7 @@ public class AuthService implements UserDetailsService{
 		return authorities;
 	}
 	
-	public AccountResponseDto findUserAuthenticated(String token) {
-		String identifier = this.jwtService.extractUsername(token);
+	public AccountResponseDto findUserAuthenticated(String identifier) {
 		return this.accountRepository.findByUsernameOrEmail(identifier).map(
 				user -> toDto(user,AccountResponseDto.class))
 				.orElseThrow(() -> new UsernameNotFoundException("User not found"));

@@ -1,12 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { Button, StyleSheet, TextInput } from "react-native";
+import { Button, Platform, Pressable, StyleSheet, TextInput } from "react-native";
 import { Image, Modal, Text, TouchableOpacity, View } from "react-native";
 import { CameraIcon, PhotoIcon, TrashIcon, UserIcon, XMarkIcon } from "react-native-heroicons/outline";
 
 import * as ImagePicker from 'expo-image-picker';
 import tw from 'twrnc';
 import RNPickerSelect from 'react-native-picker-select';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function Personal() {
     const navigation = useNavigation();
@@ -51,7 +52,38 @@ export default function Personal() {
         } catch(error) {}
     }
 
+    const [dateOfBirth, setDateOfBirth] = useState("");
+    const [date, setDate] = useState(new Date());
+    const [show, setShow] = useState(false); 
 
+    const toggleDatePicker = () => {
+        setShow(!show);
+    }
+
+    const onChange = ({ type }, selectedDate) => {
+        if(type == "set") {
+            const currentDate = selectedDate;
+            setDate(currentDate);
+
+            if(Platform.OS === "android") {
+                toggleDatePicker();
+                setDateOfBirth(currentDate.toDateString());
+            }
+            
+            
+            // if(Plateform.OS === "android") {
+            //     toggleDatePicker();
+            //     setDateOfBirth(currentDate.toDateString());
+            // }
+        }else {
+            toggleDatePicker();
+        }
+    }
+
+    const confirmDateOnIos = () => {
+        setDateOfBirth(date.toDateString());
+        toggleDatePicker();
+    }
     return (
         <View style={tw`bg-white w-full h-full`}>
             <View style={tw`flex flex-row items-center gap-2`}>
@@ -131,23 +163,66 @@ export default function Personal() {
                     placeholder="First name"
                 />
             </View>
+
             <View style={tw`mx-2`}>
-                <Text style={styles.label}>Last name</Text>
-                <TextInput 
-                    style={styles.formControl}
-                    placeholder="First name"
-                />
+                <Text style={styles.label}>Date of birth</Text>
+                
+                {show && (
+                    <DateTimePicker
+                        value={date}
+                        mode="date" //"time" ou "datetime"
+                        display="spinner" // "spinner", "calendar" , "default"
+                        onChange={onChange}
+                        style={{height : 120, marginTop : -10}}
+                    />
+                )}
+
+                {show && Platform.OS === "ios" && (
+                    <View style={tw`flex-row justify-around`}>
+                        <TouchableOpacity
+                            style={tw`p-3 bg-slate-200 rounded`}
+                            onPress={toggleDatePicker}
+                        >
+                            <Text>Cancel</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={tw`p-3 bg-blue-500 rounded`}
+                            onPress={confirmDateOnIos}
+                        >
+                            <Text>Confirm</Text>
+                        </TouchableOpacity>
+                    </View>
+                )}
+
+                {!show && (
+                    <Pressable onPress={toggleDatePicker}>
+                        <TextInput
+                            style={styles.formControl}
+                            placeholder="Birth date"
+                            value={dateOfBirth}
+                            onChangeText={setDateOfBirth}
+                            editable={false}
+                            onPressIn={toggleDatePicker}
+                        />
+                    </Pressable>
+                )}
+               
             </View>
 
-            <RNPickerSelect
-            onValueChange={(value) => console.log(value)}
-            items={[
-                { label : "Man", value : "MAN"},
-                { label : "Woman", value : "WOMAN"},
-                { label : "Other", value : "OTHER"}
-            ]}
-            style={styles.formControl}
-            />
+            <View style={tw`mx-2`}>
+                <Text style={styles.label}>Gender</Text>
+                <View style={tw`border rounded`}>
+                <RNPickerSelect
+                    placeholder={{label : "select gender", value : null}}
+                    onValueChange={(value) => console.log(value)}
+                    items={[
+                        { label : "Man", value : "MAN"},
+                        { label : "Woman", value : "WOMAN"},
+                        { label : "Other", value : "OTHER"}
+                    ]}
+                />
+                </View>
+            </View>
             {/* <View style={tw`mx-2`}>
                 <Text style={styles.label}>Last name</Text>
                 <TextInput 

@@ -45,13 +45,16 @@ export class MainClientComponent {
     // this.notificationService.notificationForClient(0,5,1).subscribe(
     //   response => this.notifList = response.content
     // );
-    this.userService.findUserAuthenticated().subscribe(
+    if(this.authService.currentUserValue?.username) {
+      this.userService.findUserAuthenticated(this.authService.currentUserValue.username).subscribe(
       response => {
         this.user = response;
         location.reload;
         this.getNotifications(this.user.id);
       }
     );
+    }
+    
   }
 
   getNotifications(id : number) {

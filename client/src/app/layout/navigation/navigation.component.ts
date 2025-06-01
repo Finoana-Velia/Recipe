@@ -25,8 +25,8 @@ export class NavigationComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    if(this.authService.isAuthChecked() && this.authService.isAuth) {
-      this.userService.findUserAuthenticated().subscribe(
+    if(this.authService.isAuthChecked() && this.authService.isAuth && this.authService.currentUserValue?.username) {
+      this.userService.findUserAuthenticated(this.authService.currentUserValue.username).subscribe(
         response => this.user = response
       );
     }

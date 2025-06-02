@@ -12,7 +12,7 @@ export class UserService {
   //private url = "http://localhost:8080/api/v1/accounts";
   private url = environment.url + "accounts";
   //private token = environment.token;
-  private token = environment.token;
+  private token = localStorage.getItem("token");
 
   constructor(private http : HttpClient,private errorHandler : ErrorHandlerService) { }
 

@@ -13,7 +13,7 @@ export class InvoiceService {
 
   // private url = "http://localhost:8080/api/v1/invoices";
   private url = environment.url + "invoices";
-  private token = environment.token;
+  private token = localStorage.getItem("token");
 
   private cart : {
     id : number,

@@ -14,7 +14,7 @@ export class ProductService {
   //private url = "http://localhost:8080/api/v1/products";
 
   private url = environment.url + "products";
-  private token = environment.token;
+  private token = localStorage.getItem("token");
 
   constructor(private http : HttpClient, private errorHandler : ErrorHandlerService) { }
 

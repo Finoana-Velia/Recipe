@@ -13,7 +13,7 @@ export class ChefService {
 
   //private url = "http://localhost:8080/api/v1/chefs";
   private url = environment.url + "chefs";
-  private token = environment.token;
+  private token = localStorage.getItem("token");
 
   constructor(
     private http : HttpClient,

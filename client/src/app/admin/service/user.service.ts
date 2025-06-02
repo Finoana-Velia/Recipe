@@ -11,6 +11,7 @@ export class UserService {
 
   //private url = "http://localhost:8080/api/v1/accounts";
   private url = environment.url + "accounts";
+  //private token = environment.token;
   private token = environment.token;
 
   constructor(private http : HttpClient,private errorHandler : ErrorHandlerService) { }
@@ -49,20 +50,28 @@ export class UserService {
   }
 
   findUserAuthenticated(identifier : string | null) {
-    let params = new HttpParams();
-
     const options = {
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`}),
-      params : params.set('identifier',identifier ? identifier : "")
-    };
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + localStorage.getItem('token')})
+    }
 
-    return this.http.get<any>(`${this.url}/user`,options).pipe(
+    return this.http.get<any>(`${this.url}/user?identifier=${identifier}`,options).pipe(
       map(response => {return response}),
       catchError(error => {
+        console.log(error);
         this.errorHandler.handleError(error);
-        throw new Error("Error during the request processing");
+        throw new Error("Error during the request sending");
       })
-    )
+    );
+    // let params = new HttpParams();
+
+    // const options = {
+    //   headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`}),
+    //   params : params.set('identifier',identifier ? identifier : "")
+    // };
+
+    // return this.http.get<any>(`${this.url}/user`,options).pipe(
+    //   map(response => {return response})
+    // )
   }
 
   createAccount(account : any, file : File) {

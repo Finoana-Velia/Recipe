@@ -25,10 +25,11 @@ export class NavigationComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    if(this.authService.isAuthChecked() && this.authService.isAuth && this.authService.currentUserValue?.username) {
-      this.userService.findUserAuthenticated(this.authService.currentUserValue.username).subscribe(
-        response => this.user = response
-      );
+    if(this.authService.isAuthChecked() && this.authService.isAuth) {
+      if(this.authService.currentUserValue?.username) {
+        this.userService.findUserAuthenticated(this.authService.currentUserValue.username)
+        .subscribe(response => this.user = response);
+      }
     }
   }
 
@@ -46,7 +47,11 @@ export class NavigationComponent implements OnInit{
   }
 
   goBack() {
-    this.location.back();
+    if(this.authService.isAuthorized(["ROLE_USER"])) {
+      this.router.navigate(['/user']);
+    }else {
+      this.router.navigate(['/auth']);
+    }
   }
 
 }

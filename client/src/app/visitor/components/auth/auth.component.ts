@@ -28,7 +28,9 @@ export class AuthComponent {
     password : new FormControl('', { nonNullable : true, validators : Validators.required})
   })
 
-  constructor(private authService : AuthService,private router : Router) {}
+  constructor(
+    private authService : AuthService,
+    private router : Router) {}
 
   signIn() {
     if(!this.signInForm.invalid) {

@@ -61,6 +61,9 @@ public class AccountController {
 	
 	@GetMapping("/user")
 	public ResponseEntity<AccountResponseDto> findUserAuthenticated(@RequestParam(defaultValue="")String identifier) {
+		System.out.println("#################################");
+		System.out.println(identifier + " called this method");
+		System.out.println("##################################");
 		AccountResponseDto account = this.authService.findUserAuthenticated(identifier);
 		return ResponseEntity.status(HttpStatus.OK).body(account);
 	}

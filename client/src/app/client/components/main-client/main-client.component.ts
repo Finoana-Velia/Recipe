@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FooterComponent } from '../../../layout/footer/footer.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
@@ -23,7 +23,7 @@ import { LoadingComponent } from '../../../core/components/loading/loading.compo
   templateUrl: './main-client.component.html',
   styleUrl: './main-client.component.css'
 })
-export class MainClientComponent {
+export class MainClientComponent implements OnInit{
 
   user! : any;
   menu = false;
@@ -45,11 +45,11 @@ export class MainClientComponent {
     // this.notificationService.notificationForClient(0,5,1).subscribe(
     //   response => this.notifList = response.content
     // );
+    
     if(this.authService.currentUserValue?.username) {
       this.userService.findUserAuthenticated(this.authService.currentUserValue.username).subscribe(
       response => {
         this.user = response;
-        location.reload;
         this.getNotifications(this.user.id);
       }
     );

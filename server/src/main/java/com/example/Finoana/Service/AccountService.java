@@ -12,5 +12,7 @@ public interface AccountService {
 	AccountResponseDto findById(Long id);
 	AccountResponseDto createAccount(AccountRequestDto account);
 	AccountResponseDto updateAccount(Long id,AccountRequestDto account);
+	AccountResponseDto addProductFavorite(Long idUser,Long idProduct);
+	AccountResponseDto retireProductFavorite(Long idUser, Long idProduct);
 
 }

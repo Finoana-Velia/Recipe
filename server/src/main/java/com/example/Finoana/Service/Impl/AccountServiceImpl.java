@@ -8,12 +8,16 @@ import com.example.Finoana.Configuration.CryptConfig;
 import com.example.Finoana.Dto.AccountRequestDto;
 import com.example.Finoana.Dto.AccountResponseDto;
 import com.example.Finoana.Entity.Account;
+import com.example.Finoana.Entity.Product;
 import com.example.Finoana.Exception.ResourceNotFoundException;
 import com.example.Finoana.Repository.AccountRepository;
+import com.example.Finoana.Repository.ProductRepository;
 import com.example.Finoana.Service.AccountService;
 import static com.example.Finoana.Core.EntityMapper.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 
@@ -22,6 +26,7 @@ import lombok.AllArgsConstructor;
 public class AccountServiceImpl implements AccountService{
 	
 	private AccountRepository accountRepository;
+	private final ProductRepository productRepository;
 	private final CryptConfig passwordEncoder;
 
 	@Override
@@ -72,5 +77,43 @@ public class AccountServiceImpl implements AccountService{
 				account -> toDto(account,AccountResponseDto.class)
 				);
 	}
+
+	@Override
+	public AccountResponseDto addProductFavorite(Long idUser, Long idProduct) {
+		return this.accountRepository.findById(idUser).map(
+				product -> {
+					Set<Product> productFavorites = product.getFavorites();
+					productFavorites.add(this.findProductById(idProduct));
+					product.setFavorites(productFavorites);
+					Account saveChanges = this.accountRepository.save(product);
+					return toDto(saveChanges, AccountResponseDto.class);
+				}
+				).orElseThrow(
+						() -> new ResourceNotFoundException("Account : " + idUser + " not found")
+						);
+	}
+	
+	@Override
+	public AccountResponseDto retireProductFavorite(Long idUser, Long idProduct) {
+		return this.accountRepository.findById(idUser).map(
+				product -> {
+					Set<Product> productFavorites = product.getFavorites();
+					productFavorites.remove(this.findProductById(idProduct));
+					product.setFavorites(productFavorites);
+					Account saveChanges = this.accountRepository.save(product);
+					return toDto(saveChanges,AccountResponseDto.class);
+				}
+				).orElseThrow(
+						() -> new ResourceNotFoundException("Account : " + idUser + " not found")
+						);
+	}
+	
+	private Product findProductById(Long id) {
+		return this.productRepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException("Product : " + id + " doesn't exists!")
+				);
+	}
+
+	
 
 }

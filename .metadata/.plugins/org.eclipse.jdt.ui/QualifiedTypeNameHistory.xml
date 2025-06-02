@@ -8,7 +8,6 @@
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Gender"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="java.util.Locale.Category"/>
-    <fullyQualifiedTypeName name="com.example.Finoana.Dto.AccountResponseDto"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Account"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Location"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Entity.Contact"/>
@@ -52,4 +51,5 @@
     <fullyQualifiedTypeName name="org.modelmapper.internal.bytebuddy.asm.Advice.This"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Dto.AuthResponse"/>
     <fullyQualifiedTypeName name="com.example.Finoana.Core.EntityMapper"/>
+    <fullyQualifiedTypeName name="com.example.Finoana.Dto.AccountResponseDto"/>
 </qualifiedTypeNameHistroy>

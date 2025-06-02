@@ -61,10 +61,26 @@ public class AccountController {
 	
 	@GetMapping("/user")
 	public ResponseEntity<AccountResponseDto> findUserAuthenticated(@RequestParam(defaultValue="")String identifier) {
-		System.out.println("#################################");
-		System.out.println(identifier + " called this method");
-		System.out.println("##################################");
 		AccountResponseDto account = this.authService.findUserAuthenticated(identifier);
+		return ResponseEntity.status(HttpStatus.OK).body(account);
+	}
+	
+	@GetMapping("/add")
+	@PreAuthorize("hasAuthority('ROLE_USER')")
+	public ResponseEntity<AccountResponseDto> addToFavorite(
+			@RequestParam(defaultValue="0") Long idProduct,
+			@RequestParam(defaultValue="0") Long idUser) {
+		AccountResponseDto account = this.accountService.addProductFavorite(idUser, idProduct);
+		return ResponseEntity.status(HttpStatus.OK).body(account);
+	}
+	
+	@GetMapping("/retire")
+	@PreAuthorize("hasAuthority('ROLE_USER')")
+	public ResponseEntity<AccountResponseDto> retireToFavorite(
+			@RequestParam(defaultValue="0")Long idProduct,
+			@RequestParam(defaultValue="0")Long idUser
+			) {
+		AccountResponseDto account = this.accountService.retireProductFavorite(idUser, idProduct);
 		return ResponseEntity.status(HttpStatus.OK).body(account);
 	}
 	

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { NgForOf } from '@angular/common';
 import { TextTruncatorPipe } from '../../pipes/text-truncator.pipe';
+import { ProductService } from '../../../admin/service/product.service';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../../admin/service/user.service';
+import { InvoiceService } from '../../services/invoice.service';
 
 @Component({
   selector: 'app-favorite',
@@ -15,19 +19,41 @@ import { TextTruncatorPipe } from '../../pipes/text-truncator.pipe';
 export class FavoriteComponent implements OnInit{
 
   favorites! : any[];
+  idUser! : number;
 
-  constructor(private recipeService : RecipeService){}
+  constructor(
+    private recipeService : RecipeService,
+
+    private invoiceService : InvoiceService,
+    private productService : ProductService,
+    private activeRoute : ActivatedRoute,
+    private userService : UserService
+  ){}
 
   ngOnInit(): void {
-    this.favorites = this.recipeService.getFavorites();
+    if(this.activeRoute.snapshot.params['id']) {
+      this.idUser = this.activeRoute.snapshot.params['id'];
+      this.userService.findById(this.idUser).subscribe(
+        response => this.favorites = response.favorites
+      );
+    }
+    //this.favorites = this.recipeService.getFavorites();
   }
 
   addToCart(product : any) {
-    this.recipeService.addToCart(product);
+    this.invoiceService.addToCart(product);
   }
 
-  toggleFavorite(product : any) {
-    this.recipeService.toggleFavorite(product);
+  // toggleFavorite(product : any) {
+  //   this.recipeService.toggleFavorite(product);
+  // }
+
+  retireToFavorite(id : number) {
+    this.userService.retireToFavorite(this.idUser,id).subscribe();
+  }
+
+  findProductImage(id : number) {
+    return this.productService.getImage(id);
   }
 
 }

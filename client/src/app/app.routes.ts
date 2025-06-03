@@ -53,7 +53,8 @@ export const routes: Routes = [
         children : [
             { path : "" , component : MarketPlaceComponent},
             { path : "cart/:id", component : CartComponent},
-            { path : "favorite" , component  : FavoriteComponent},
+            { path : "favorite/:id", component : FavoriteComponent},
+            // { path : "favorite" , component  : FavoriteComponent},
             { path : "profile" , component : ProfileUserComponent},
             { path : "profile/:id", component : ProfileUserComponent},
             { path : "product/:id", component : ProductDetailsComponent}

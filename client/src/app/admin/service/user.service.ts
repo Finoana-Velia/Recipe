@@ -23,7 +23,7 @@ export class UserService {
 
     const options = {
       params : params,
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + localStorage.getItem('token')})
     };
 
     return this.http.get<any>(this.url,options).pipe(
@@ -35,9 +35,47 @@ export class UserService {
     );
   }
 
+  addToFavorite(idUser : number,idProduct : number) {
+    let params = new HttpParams();
+    params = params.set('idUser',idUser.toString());
+    params = params.set('idProduct',idProduct.toString());
+
+    const options = {
+      params : params,
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + localStorage.getItem('token')})
+    };
+
+    return this.http.get<any>(`${this.url}/add`,options).pipe(
+      map(response => console.log(response)),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
+    );
+  }
+
+  retireToFavorite(idUser : number,idProduct : number) {
+    let params = new HttpParams();
+    params = params.set('idUser',idUser.toString());
+    params = params.set('idProduct',idProduct.toString());
+
+    const options = {
+      params : params,
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + localStorage.getItem('token')})
+    };
+
+    return this.http.get<any>(`${this.url}/retire`,options).pipe(
+      map(response => console.log(response)),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
+    );
+  }
+
   findById(id : number) {
     const options = {
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + localStorage.getItem('token')})
     };
 
     return this.http.get<any>(`${this.url}/${id}`,options).pipe(
@@ -86,7 +124,7 @@ export class UserService {
 
   updateAccount(id : number,account : any, file : File) {
     const options = {
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + localStorage.getItem('token')})
     }
     
     const formData = new FormData();
@@ -106,9 +144,10 @@ export class UserService {
     return this.url + "/profile?id=" + id;
   }
 
+
   delete(id : number) {
     const options = {
-      headers : new HttpHeaders({ Authorozation : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + localStorage.getItem('token')})
     };
 
     return this.http.delete<void>(`${this.url}/${id}`,options).pipe(

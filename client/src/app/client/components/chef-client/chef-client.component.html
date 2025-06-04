@@ -1,4 +1,5 @@
-@if(chefs.length !== 0) {
+@if(chefs) {
+    @if(chefs.length !== 0) {
     <section 
     id="chefs"
     class="w-full gap-10 max-container "
@@ -21,4 +22,7 @@
     </div>
 </section>
 
+}
+}@else {
+    <app-loading></app-loading>
 }

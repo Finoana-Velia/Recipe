@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ChefService } from '../../../admin/service/chef.service';
 import { NgForOf } from '@angular/common';
+import { LoadingComponent } from '../../../core/components/loading/loading.component';
 
 @Component({
   selector: 'app-chef-client',
   imports: [
-    NgForOf
+    NgForOf,
+    LoadingComponent
   ],
   templateUrl: './chef-client.component.html',
   styleUrl: './chef-client.component.css'

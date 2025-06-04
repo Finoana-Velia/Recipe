@@ -82,8 +82,11 @@
                         {{rec.price}}
                     </p>
                     <div class="w-full flex justify-between items-center">
-                        <button class="font-bold text-rose-500" (click)="addFavorite(rec)">
-                            <i [ngClass]="isFavorite(rec.id)"></i>
+                        <!-- <button class="font-bold text-rose-500" (click)="addFavorite(rec)"> -->
+
+                        <button class="font-bold text-rose-500" (click)="toggleFavorite(rec.id)">
+                            <!-- <i [ngClass]="isFavorite(rec.id)"></i> -->
+                            <i class="fa fa-heart"></i>
                         </button>
                         @if(rec.availability) {
                             <button 

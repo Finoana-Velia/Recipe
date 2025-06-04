@@ -6,6 +6,8 @@ import { ProductService } from '../../../admin/service/product.service';
 import { InvoiceService } from '../../services/invoice.service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../../visitor/services/auth.service';
+import { UserService } from '../../../admin/service/user.service';
 
 
 @Component({
@@ -28,11 +30,14 @@ export class NewRecipeComponent implements OnInit, AfterViewInit{
   favorites! : any[];
   recipesActive! : any;
   search : string = "";
+  userConnected ! : any;
   
   constructor(
     private recipeService : RecipeService,
     private productService : ProductService,
-    private invoiceService : InvoiceService
+    private invoiceService : InvoiceService,
+    private authService : AuthService,
+    private userService : UserService
   ){}
 
  ngAfterViewInit() {
@@ -48,6 +53,18 @@ export class NewRecipeComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
 
+    if(this.authService.currentUserValue?.username) {
+      this.userService.findUserAuthenticated(this.authService.currentUserValue.username)
+      .subscribe(
+        response => {
+          this.userConnected = response;
+          this.favorites = this.userConnected.favorites;
+          console.log(this.userConnected);
+          console.log(this.userConnected.favorites);
+          console.log(this.favorites);
+        }
+      );
+    }
     this.productService.findAll("",0,0).subscribe(
       response => {
         this.recipes = response.content;
@@ -56,7 +73,7 @@ export class NewRecipeComponent implements OnInit, AfterViewInit{
       }
     )
     // this.recipes = this.recipeService.findAll().filter(item => item.category == this.isActive);
-    this.favorites = this.recipeService.getFavorites();
+    // this.favorites = this.recipeService.getFavorites();
   }
 
   toggleActive(type : string) {
@@ -81,10 +98,27 @@ export class NewRecipeComponent implements OnInit, AfterViewInit{
     this.favorites = this.recipeService.getFavorites();
   }
 
+  toggleFavorite(id : number) {
+    console.log("favorite list : " + this.favorites);
+    console.log("id item : " + id);
+    // const favoriteItem = this.favorites.find(item => item.id === id);
+    // if(favoriteItem) {
+    //   this.userService.retireToFavorite(this.userConnected.id,id).subscribe();
+    //   let index = this.favorites.findIndex(item => item.id === id);
+    //   this.favorites.splice(index,1);
+    //   console.log(this.favorites);
+    // }else {
+    //   this.userService.addToFavorite(this.userConnected.id,id).subscribe();
+    //   this.favorites.push(favoriteItem);
+    //   console.log(this.favorites);
+    // }
+  }
+
   isFavorite(id : number) {
     const icon = "fa fa-heart";
-    const favorite = this.recipeService.getFavorites()
-    .find(item => item.id == id);
+    // const favorite = this.favorites
+    // .find(item => item.id == id);
+    const favorite = this.favorites.find(item => item.id === id);
     if(favorite) {
       return icon;
     }

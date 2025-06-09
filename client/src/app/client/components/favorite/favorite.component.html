@@ -3,7 +3,8 @@
         <h1 class="text-center text-4xl font-bold text-lime-400">Your favorites products</h1>
         <div class="flex flex-wrap w-full justify-center itmes-center px-5 py-10 gap-10">
 
-            <div class="flex w-[350px] h-[150px] shadow-xl rounded" *ngFor="let fav of favorites">
+            @if(favorites.length != 0) {
+                <div class="flex w-[350px] h-[150px] shadow-xl rounded" *ngFor="let fav of favorites">
                 <div class="w-[150px] h-[150px]">
                     <img 
                         [src]="findProductImage(fav.id)" 
@@ -20,12 +21,19 @@
                         <i class="fa fa-dollar"></i>
                         {{fav.price}}
                     </h6>
-                    <button class="bg-lime-500 mt-1 px-2 py-1 text-white rounded" (click)="addToCart(fav)">
-                        <i class="fa fa-cart-plus"></i>
-                        Add to cart
-                    </button>
+                    @if(fav.availability) {
+                        <button class="bg-lime-500 mt-1 px-2 py-1 text-white rounded" (click)="addToCart(fav)">
+                            <i class="fa fa-cart-plus"></i>
+                            Add to cart
+                        </button>
+                    }@else {
+                        <p class="text-xl font-bold text-red-500 cursor-default">SOLD OUT</p>
+                    }
                 </div>
             </div>
+            }@else {
+                <p class="text-center text-2xm font-bold">No items are present here yet</p>
+            }
 
             
         </div>

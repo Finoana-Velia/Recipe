@@ -59,16 +59,12 @@ export class NewRecipeComponent implements OnInit, AfterViewInit{
         response => {
           this.userConnected = response;
           this.favorites = this.userConnected.favorites;
-          console.log(this.userConnected);
-          console.log(this.userConnected.favorites);
-          console.log(this.favorites);
         }
       );
     }
     this.productService.findAll("",0,0).subscribe(
       response => {
         this.recipes = response.content;
-        console.log(this.recipes);
         this.recipesActive = this.recipes.filter(item => item.category == this.isActive);
       }
     )
@@ -98,20 +94,20 @@ export class NewRecipeComponent implements OnInit, AfterViewInit{
     this.favorites = this.recipeService.getFavorites();
   }
 
-  toggleFavorite(id : number) {
-    console.log("favorite list : " + this.favorites);
-    console.log("id item : " + id);
-    // const favoriteItem = this.favorites.find(item => item.id === id);
-    // if(favoriteItem) {
-    //   this.userService.retireToFavorite(this.userConnected.id,id).subscribe();
-    //   let index = this.favorites.findIndex(item => item.id === id);
-    //   this.favorites.splice(index,1);
-    //   console.log(this.favorites);
-    // }else {
-    //   this.userService.addToFavorite(this.userConnected.id,id).subscribe();
-    //   this.favorites.push(favoriteItem);
-    //   console.log(this.favorites);
-    // }
+  toggleFavorite(product : any) {
+    const favoriteItem = this.favorites.find(item => item.id === product.id);
+    if(favoriteItem) {
+      this.userService.retireToFavorite(this.userConnected.id,product.id).subscribe(
+        response => console.log("Retire succeed")
+      );
+      let index = this.favorites.findIndex(item => item.id == favoriteItem.id);
+      this.favorites.splice(index,1);
+    }else {
+      this.userService.addToFavorite(this.userConnected.id,product.id).subscribe(
+        response => console.log("Add succeed")
+      );
+      this.favorites.push(product);
+    }
   }
 
   isFavorite(id : number) {

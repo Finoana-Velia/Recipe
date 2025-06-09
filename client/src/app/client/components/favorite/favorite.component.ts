@@ -50,6 +50,8 @@ export class FavoriteComponent implements OnInit{
 
   retireToFavorite(id : number) {
     this.userService.retireToFavorite(this.idUser,id).subscribe();
+    let index = this.favorites.findIndex(item => item.id === id);
+    this.favorites.splice(index,1);
   }
 
   findProductImage(id : number) {

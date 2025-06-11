@@ -80,6 +80,9 @@ public class InvoiceController {
 			@RequestBody InvoiceRequestDto invoice
 			){
 		invoice.setId(id);
+		System.out.println("#############");
+		System.out.println(invoice);
+		System.out.println("#############");
 		InvoiceResponseDto invoiceResponse = this.invoiceService.updateInvoice(id, invoice);
 		return ResponseEntity.status(HttpStatus.OK).body(invoiceResponse);
 	}

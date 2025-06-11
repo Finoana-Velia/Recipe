@@ -1,10 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-export interface DialogResponse {
-  id : number;
-  state : boolean;
-  response : boolean;
-}
+import { DialogResponse } from '../../models/DialogResponse';
 
 @Component({
   selector: 'app-danger-dialog',

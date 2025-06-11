@@ -23,6 +23,7 @@ import { UnauthorizedComponent } from './core/components/unauthorized/unauthoriz
 import { authGuard } from './core/guard/auth.guard';
 import { accessGuard } from './core/guard/access.guard';
 import { ProductDetailsComponent } from './client/components/product-details/product-details.component';
+import { TicketsListComponent } from './admin/components/tickets-list/tickets-list.component';
 
 export const routes: Routes = [
     { path : "", component : MainHeroComponent},
@@ -44,7 +45,8 @@ export const routes: Routes = [
             { path : 'product/drinks', component : DrinkListComponent},
             { path : 'product/noodles', component : NoodleListComponent},
             { path : 'product/form', component : ProductFormComponent},
-            { path : 'product/form/:id', component : ProductFormComponent}
+            { path : 'product/form/:id', component : ProductFormComponent},
+            { path : 'tickets', component : TicketsListComponent}
         ]
     },
     { path : "user", component : MainClientComponent,

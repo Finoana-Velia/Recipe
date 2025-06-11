@@ -5,8 +5,9 @@ import { NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PageResponse, Pagination } from '../../../core/models/PageResponse';
 import { ProductService } from '../../service/product.service';
-import { DangerDialogComponent, DialogResponse } from '../../../core/components/danger-dialog/danger-dialog.component';
+import { DangerDialogComponent } from '../../../core/components/danger-dialog/danger-dialog.component';
 import { LoadingComponent } from '../../../core/components/loading/loading.component';
+import { DialogResponse } from '../../../core/models/DialogResponse';
 
 @Component({
   selector: 'app-product',

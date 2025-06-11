@@ -1,0 +1,72 @@
+<div class="flex justify-between items-center max-sm:block">
+    <h2 class="text-3xl font-bold text-sky-900">Tickets List</h2>
+    <form class="flex justify-center items-center relative">
+        <input type="text" placeholder="Ticket's reference"
+        class="bg-white px-5 py-2 text-xl w-full rounded-full"
+        name="search">
+        <button class="absolute right-3">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+</div>
+
+<div class="mt-5">
+    <div class="min-h-[350px] w-full bg-white shadow-xl p-1">
+        @if(pageResponse) {
+            <table class="w-full">
+                <thead class="fon-bold text-xl bg-sky-400">
+                    <th>Status</th>
+                    <th>Reference</th>
+                    <th>Address</th>
+                    <th>Client</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    @if(pageResponse.content.length == 0) {
+                        <p>No tickets register for the moment</p>
+                    }@else {
+                        <tr class="h-[70px] py-2 border-b border-gray-200" *ngFor="let ticket of pageResponse.content">
+                                @if(ticket.delivered) {
+                                    <td><p class="text-2xl text-green-500"><i class="fa fa-check-circle-o"></i></p></td>
+                                }@else {
+                                    <td><p class="text-2xl text-blue-500"><i class="fa fa-clock-o"></i></p></td>
+                                }
+                                <td>{{ticket.reference}}</td>
+                                <td>{{ticket.deliveryAdress}}</td>
+                                <td>{{ticket.account.firstName + ' ' + ticket.account.lastName}}</td>
+                                <td>
+                                    <div class="flex justify-center items-center gap-2">
+                                        <a class="bg-teal-500 text-white rounded flex justify-center items-center w-7 h-7 mx-1">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a class="bg-slate-500 text-white rounded flex justify-center items-center w-7 h-7 mx-1" (click)="exportTicket(ticket.id)">
+                                            <i class="fa fa-file-pdf-o"></i>
+                                        </a>
+                                        <a 
+                                            (click)="updateTicket(ticket.id,ticket)"
+                                            class="bg-green-500 text-white rounded flex justify-center items-center w-7 h-7 mx-1">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+                                        <a 
+                                            (click)="toggleDialogDanger(ticket.id)"
+                                            class="bg-red-500 text-white rounded flex justify-center items-center w-7 h-7 mx-1">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                    }
+                </tbody>
+            </table>
+        }@else {
+            <app-loading></app-loading>
+        }
+        @if(pageResponse) {
+            <app-pagination (data)="dataFromPagination($event)"
+            [pagination]="pageResponse"></app-pagination>
+        }
+
+        <app-danger-dialog [isOpen]="dialogDanger" [id]="idSelected" (dialogResponse)="dataFromDialogDanger($event)"></app-danger-dialog>
+        <app-dialog-confirm [isOpen]="dialogConfirm" [id]="idSelected" (dialogResponse)="dataFromDialogConfirm($event)"></app-dialog-confirm>
+    </div>
+</div>

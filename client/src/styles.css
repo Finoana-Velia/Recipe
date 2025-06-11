@@ -19,3 +19,7 @@ tr {
 tr:hover {
     background : #ecfccd;
 }
+
+.dialog {
+    background : rgba(77,77,77,0.7);
+}

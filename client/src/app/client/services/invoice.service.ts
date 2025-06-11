@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { InvoiceRequest } from '../models/Invoice';
+import { catchError, map, Observable } from 'rxjs';
+import { Invoice, InvoiceRequest } from '../models/Invoice';
 import { formatDate } from '../util/FormatDate';
 import { PageResponse } from '../../core/models/PageResponse';
 import { environment } from '../../environments/environment';
+import { ErrorHandlerService } from '../../core/services/error-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,10 @@ export class InvoiceService {
 
   private discount = 0;
 
-  constructor(private http : HttpClient) { }
+  constructor(
+    private http : HttpClient,
+    private errorHandler : ErrorHandlerService
+  ) { }
 
   findAll(reference = "", page = 0, size = 0) {
     let params = new HttpParams();
@@ -44,8 +48,41 @@ export class InvoiceService {
     }
 
     return this.http.get<any>(this.url, options).pipe(
-      map(response => {return response})
+      map(response => {return response}),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing")
+      })
     );
+  }
+
+  findById(id : number) {
+    const options = {
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + this.token})
+    };
+
+    return this.http.get<any>(`${this.url}/${id}`,options).pipe(
+      map(response => {return response}),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
+    )
+  }
+
+  updateInvoice(id : number,invoice : InvoiceRequest) {
+    console.log("invoivce before sending to the server");
+    console.log(invoice);
+    const options = {
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + this.token})
+    };
+    return this.http.put<any>(`${this.url}/${id}`,invoice,options).pipe(
+      map(response => {return response}),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
+    )
   }
   
   getCart() {
@@ -133,6 +170,22 @@ export class InvoiceService {
       productIds : this.productIds,
       idAccount : idUser,
     }
+  }
+
+
+
+  deleteInvoice(id : number) {
+    const options = {
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + this.token})
+    };
+
+    return this.http.delete<void>(`${this.url}/${id}`,options).pipe(
+      map(response => console.log(response)),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
+    )
   }
 
 }

@@ -1,0 +1,17 @@
+@if(isOpen) {
+    <div class="fixed top-0 left-0 flex justify-center items-center transition-all visible w-full h-screen overflow-y-hidden dialog">
+    <div class="bg-white rounded shadow-md p-8 flex flex-col gap-5">
+        <div class="flex-grow">
+            <div class="w-11 h-11 flex justify-center items-center bg-blue-300 rounded-full">
+                <p class="text-xl"><i class="fa fa-info-circle text-white"></i></p>
+            </div>
+            <h2 class="text-xl text-blue-500">Do you want to confirm your action ?</h2>
+        </div>
+        <div class="text-right">
+        <button class="px-2 text-lg text-slate-500" (click)="emitResponse(false,false)">Cancel</button>
+        <button class="px-2 text-lg text-blue-500" (click)="emitResponse(false,true)">Confirm</button>
+    </div>
+    </div>
+    
+</div>
+}

@@ -49,7 +49,7 @@ public class InvoiceController {
 	public ResponseEntity<Page<InvoiceResponseDto>> searchInvoice(
 			@RequestParam(defaultValue="")String reference,
 			@RequestParam(defaultValue="0")int page,
-			@RequestParam(defaultValue="0")int size
+			@RequestParam(defaultValue="10")int size
 			){
 		PageRequest request = PageRequest.of(page,size == 0 ? Integer.MAX_VALUE : size);
 		Page<InvoiceResponseDto> invoices = this.invoiceService.searchInvoiceByReference(reference, request);
@@ -73,6 +73,13 @@ public class InvoiceController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(invoiceResponse);
 	}
 	
+	@GetMapping("/confirm/{id}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	public ResponseEntity<InvoiceResponseDto> confirmDelivery(@PathVariable Long id) {
+		InvoiceResponseDto invoiceResponse = this.invoiceService.confirmDelivery(id);
+		return ResponseEntity.status(HttpStatus.OK).body(invoiceResponse);
+	}
+	
 	@PutMapping("/{id}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<InvoiceResponseDto> update(
@@ -80,9 +87,6 @@ public class InvoiceController {
 			@RequestBody InvoiceRequestDto invoice
 			){
 		invoice.setId(id);
-		System.out.println("#############");
-		System.out.println(invoice);
-		System.out.println("#############");
 		InvoiceResponseDto invoiceResponse = this.invoiceService.updateInvoice(id, invoice);
 		return ResponseEntity.status(HttpStatus.OK).body(invoiceResponse);
 	}

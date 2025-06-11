@@ -70,14 +70,12 @@ export class InvoiceService {
     )
   }
 
-  updateInvoice(id : number,invoice : InvoiceRequest) {
-    console.log("invoivce before sending to the server");
-    console.log(invoice);
+  confirmDelivery(id :number) {
     const options = {
       headers : new HttpHeaders({ Authorization : 'Bearer ' + this.token})
     };
-    return this.http.put<any>(`${this.url}/${id}`,invoice,options).pipe(
-      map(response => {return response}),
+    return this.http.get<any>(`${this.url}/confirm/${id}`,options).pipe(
+      map(response => console.log(response)),
       catchError(error => {
         this.errorHandler.handleError(error);
         throw new Error("Error during the request processing");

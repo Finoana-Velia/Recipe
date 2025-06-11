@@ -64,7 +64,7 @@ export class TicketsListComponent implements OnInit{
     this.idSelected = id;
   }
 
-  toggleDialogConform(id : number) {
+  toggleDialogConfirm(id : number) {
     this.dialogConfirm = true;
     this.idSelected = id;
   }
@@ -84,55 +84,9 @@ export class TicketsListComponent implements OnInit{
   dataFromDialogConfirm(event : DialogResponse) {
     this.dialogConfirm = event.state;
     if(event.response && event.id) {
-      this.invoiceService.findById(event.id).subscribe(
-        response => {
-          this.ticket = response;
-          if(this.ticket) {
-            this.ticket.delivered = true;
-            this.updateTicket(event.id,this.ticket);
-          }
-        }
-      );
-    }
-  }
-
-  updateTicket(id : number, invoice : any) {
-    console.log("Invoice has been sent :");
-    invoice.isDelivered = true;
-    console.log(this.generateInvoiceRequest(invoice));
-    this.invoiceService.updateInvoice(
-      id,this.generateInvoiceRequest(invoice)).subscribe(
-        response => {
-          console.log(response);
-          //location.reload();
-        }
+      this.invoiceService.confirmDelivery(event.id).subscribe(
+        response => location.reload()
       )
-  }
-
-  generateInvoiceRequest(invoice : any) : InvoiceRequest {
-    return {
-      reference : invoice.reference,
-      date : invoice.date,
-      deliveryAdress : invoice.deliveryAdress,
-      isDelivered : invoice.isDelivered,
-      subtotal : invoice.subtotal,
-      total : invoice.total,
-      discount : invoice.discount,
-      deliveryFee : invoice.deliveryFee,
-      productIds : this.extractProductIds(invoice.products),
-      idAccount : invoice.account.id,
-
     }
   }
-
-  extractProductIds(products : any[]) {
-    let ids : number[] = [];
-    products.forEach(product => {
-      ids.push(product.id);
-    });
-    return ids;
-  }
-
-
-
 }

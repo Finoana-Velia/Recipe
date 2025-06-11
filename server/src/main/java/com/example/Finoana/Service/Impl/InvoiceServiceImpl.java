@@ -73,6 +73,17 @@ public class InvoiceServiceImpl implements InvoiceService{
 		this.generateNotification(invoiceSaved, OperationType.CREATE);	
 		return toDto(invoiceSaved, InvoiceResponseDto.class);
 	}
+	
+	@Override
+	public InvoiceResponseDto confirmDelivery(Long id) {
+		return this.invoiceRepository.findById(id).map(
+				invoice -> {
+					invoice.setDelivered(true);
+					Invoice invoiceSaved = this.invoiceRepository.save(invoice);
+					return toDto(invoiceSaved,InvoiceResponseDto.class);
+				})
+				.orElseThrow(() -> new ResourceNotFoundException("Invoice : " + id + " not found"));
+	}
 
 	@Override
 	public InvoiceResponseDto updateInvoice(Long id, InvoiceRequestDto invoice) {
@@ -139,6 +150,8 @@ public class InvoiceServiceImpl implements InvoiceService{
 				.message(message)
 				.build());
 	}
+
+	
 	
 
 }

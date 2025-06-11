@@ -12,6 +12,7 @@ public interface InvoiceService {
 	InvoiceResponseDto findById(Long id);
 	InvoiceResponseDto createInvoice(InvoiceRequestDto invoice);
 	InvoiceResponseDto updateInvoice(Long id,InvoiceRequestDto invoice);
+	InvoiceResponseDto confirmDelivery(Long id);
 	void deleteById(Long id);
 
 }

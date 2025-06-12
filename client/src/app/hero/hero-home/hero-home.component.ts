@@ -6,7 +6,6 @@ import { LoadingComponent } from '../../core/components/loading/loading.componen
   selector: 'app-hero-home',
   imports: [
     RouterLink,
-    LoadingComponent
   ],
   templateUrl: './hero-home.component.html',
   styleUrl: './hero-home.component.css'

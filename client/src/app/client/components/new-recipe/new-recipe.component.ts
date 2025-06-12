@@ -5,7 +5,7 @@ import { Invoice } from '../../models/Invoice';
 import { ProductService } from '../../../admin/service/product.service';
 import { InvoiceService } from '../../services/invoice.service';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../visitor/services/auth.service';
 import { UserService } from '../../../admin/service/user.service';
 
@@ -37,7 +37,8 @@ export class NewRecipeComponent implements OnInit, AfterViewInit{
     private productService : ProductService,
     private invoiceService : InvoiceService,
     private authService : AuthService,
-    private userService : UserService
+    private userService : UserService,
+    private router : Router
   ){}
 
  ngAfterViewInit() {
@@ -131,4 +132,7 @@ export class NewRecipeComponent implements OnInit, AfterViewInit{
     );
   }
 
+  redirectToDetails(id : number) {
+    this.router.navigate(['/user/product',id]);
+  }
 }

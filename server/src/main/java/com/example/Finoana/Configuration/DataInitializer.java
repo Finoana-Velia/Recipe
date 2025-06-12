@@ -31,9 +31,9 @@ public class DataInitializer implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		this.generateAccount();
-		this.generateChef();
-		this.generateProduct(chefRepository);
+//		this.generateAccount();
+//		this.generateChef();
+//		this.generateProduct(chefRepository);
 	}
 	
 	private void generateProduct(ChefRepository chefRepository) {

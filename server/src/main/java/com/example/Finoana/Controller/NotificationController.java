@@ -26,7 +26,6 @@ public class NotificationController {
 	private final NotificationService notificationService;
 	
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<Page<NotificationDto>> findAll(
 			@RequestParam(defaultValue="0") int page,
 			@RequestParam(defaultValue="5")int size

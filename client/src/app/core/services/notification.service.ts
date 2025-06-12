@@ -11,7 +11,7 @@ export class NotificationService {
 
   // private url = "http://localhost:8080/api/v1/notifications";
   private url = environment.url + "notifications";
-  private token = environment.token;
+  private token = localStorage.getItem("token");
 
   constructor(private http : HttpClient) { }
 

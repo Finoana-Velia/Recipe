@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
@@ -19,7 +19,7 @@ import { LoadingComponent } from '../../../core/components/loading/loading.compo
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit,AfterViewInit{
 
   invoices! : any[];
   invoice! : any;
@@ -37,23 +37,27 @@ export class DashboardComponent implements OnInit{
     private productService : ProductService
   ) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.invoiceService.findAll().subscribe(
       response => {
         this.invoices = response.content;
         const events : any[] = [];
-        this.invoices.forEach((data : any) => {
-          events.push({
-            id : data.id,
-            title : data.reference,
-            date : data.date,
-            color : data.delivered ? 'green' : 'blue'
-          })
-        });
-        this.options = { events : events};
+        if(this.invoices.length !== 0) {
+          this.invoices.forEach((data : any) => {
+            events.push({
+              id : data.id,
+              title : data.reference,
+              date : data.date,
+              color : data.delivered ? 'green' : 'blue'
+            })
+          });
+          this.options = { events : events};
+        }
       }
     );
+  }
 
+  ngOnInit(): void {
     this.productService.findAll().subscribe(
       response => this.products = response
     );

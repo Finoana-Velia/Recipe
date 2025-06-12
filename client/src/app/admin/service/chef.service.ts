@@ -37,7 +37,7 @@ export class ChefService {
 
   findById(id : number) {
     const options = {
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : `Bearer ` + localStorage.getItem("token")})
     }
     return this.http.get<Chef>(`${this.url}/${id}`, options).pipe(
       map(response => {return response})
@@ -56,7 +56,7 @@ export class ChefService {
     });
 
     const options = {
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : `Bearer ` + localStorage.getItem("token")})
     }
     
     return this.http.post<Chef>(this.url,formData,options).pipe(
@@ -78,7 +78,7 @@ export class ChefService {
     });
 
     const options = {
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : `Bearer `+ localStorage.getItem("token")})
     }
 
     return this.http.put<Chef>(`${this.url}/${id}`,formData,options).pipe(
@@ -96,7 +96,7 @@ export class ChefService {
 
   deleteChef(id : number) {
     const options = {
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : `Bearer ` + localStorage.getItem("token")})
     }
 
     return this.http.delete<void>(`${this.url}/${id}`,options).pipe(

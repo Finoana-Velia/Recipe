@@ -36,7 +36,7 @@ export class InvoiceService {
     private errorHandler : ErrorHandlerService
   ) { }
 
-  findAll(reference = "", page = 0, size = 0) {
+  findAll(reference = "", page = 0, size = 10) {
     let params = new HttpParams();
     params = params.set('reference', reference.toString());
     params = params.set('page', page.toString());

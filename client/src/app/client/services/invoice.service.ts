@@ -43,7 +43,7 @@ export class InvoiceService {
     params = params.set('size', size.toString());
 
     const options = {
-      headers : new HttpHeaders({ Authorization : "Bearer " + this.token}),
+      headers : new HttpHeaders({ Authorization : "Bearer " + localStorage.getItem("token")}),
       params : params
     }
 
@@ -58,7 +58,7 @@ export class InvoiceService {
 
   findById(id : number) {
     const options = {
-      headers : new HttpHeaders({ Authorization : 'Bearer ' + this.token})
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + localStorage.getItem("token")})
     };
 
     return this.http.get<any>(`${this.url}/${id}`,options).pipe(
@@ -72,7 +72,7 @@ export class InvoiceService {
 
   statistic() {
     const options = {
-      headers : new HttpHeaders({ Authorization : 'Bearer ' + this.token})
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + localStorage.getItem("token")})
     };
 
     return this.http.get<Statistics>(`${this.url}/statistics`,options).pipe(
@@ -86,7 +86,7 @@ export class InvoiceService {
 
   confirmDelivery(id :number) {
     const options = {
-      headers : new HttpHeaders({ Authorization : 'Bearer ' + this.token})
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + localStorage.getItem("token")})
     };
     return this.http.get<any>(`${this.url}/confirm/${id}`,options).pipe(
       map(response => console.log(response)),
@@ -188,7 +188,7 @@ export class InvoiceService {
 
   deleteInvoice(id : number) {
     const options = {
-      headers : new HttpHeaders({ Authorization : 'Bearer ' + this.token})
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + localStorage.getItem("token")})
     };
 
     return this.http.delete<void>(`${this.url}/${id}`,options).pipe(

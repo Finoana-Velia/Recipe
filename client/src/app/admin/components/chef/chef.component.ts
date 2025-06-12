@@ -52,4 +52,13 @@ export class ChefComponent implements OnInit{
       );
     }
 
+    deleteChef(id :number) {
+      if(confirm("Are you sure to delete this item ?")) {
+        this.chefService.deleteChef(id).subscribe(
+          response =>location.reload()
+        );
+        
+      }
+    }
+
 }

@@ -19,3 +19,9 @@ export interface InvoiceRequest {
     productIds : any[],
     idAccount : number,
 }
+
+export interface Statistics {
+    averageEaring : number,
+    todaysOrder : number,
+    dailyUser : number
+}

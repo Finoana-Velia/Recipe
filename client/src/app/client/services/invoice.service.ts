@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
-import { Invoice, InvoiceRequest } from '../models/Invoice';
+import { Invoice, InvoiceRequest, Statistics } from '../models/Invoice';
 import { formatDate } from '../util/FormatDate';
 import { PageResponse } from '../../core/models/PageResponse';
 import { environment } from '../../environments/environment';
@@ -63,6 +63,20 @@ export class InvoiceService {
 
     return this.http.get<any>(`${this.url}/${id}`,options).pipe(
       map(response => {return response}),
+      catchError(error => {
+        this.errorHandler.handleError(error);
+        throw new Error("Error during the request processing");
+      })
+    )
+  }
+
+  statistic() {
+    const options = {
+      headers : new HttpHeaders({ Authorization : 'Bearer ' + this.token})
+    };
+
+    return this.http.get<Statistics>(`${this.url}/statistics`,options).pipe(
+      map(response => { return response}),
       catchError(error => {
         this.errorHandler.handleError(error);
         throw new Error("Error during the request processing");
@@ -185,5 +199,7 @@ export class InvoiceService {
       })
     )
   }
+
+
 
 }

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.example.Finoana.Dto.InvoiceRequestDto;
 import com.example.Finoana.Dto.InvoiceResponseDto;
+import com.example.Finoana.Dto.StatisticDto;
 
 public interface InvoiceService {
 	
@@ -13,6 +14,7 @@ public interface InvoiceService {
 	InvoiceResponseDto createInvoice(InvoiceRequestDto invoice);
 	InvoiceResponseDto updateInvoice(Long id,InvoiceRequestDto invoice);
 	InvoiceResponseDto confirmDelivery(Long id);
+	StatisticDto invoiceStatistic();
 	void deleteById(Long id);
 
 }

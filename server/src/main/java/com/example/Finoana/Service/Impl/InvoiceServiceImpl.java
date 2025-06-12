@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.Finoana.Dto.InvoiceRequestDto;
 import com.example.Finoana.Dto.InvoiceResponseDto;
+import com.example.Finoana.Dto.StatisticDto;
 import com.example.Finoana.Entity.Account;
 import com.example.Finoana.Entity.EntityType;
 import com.example.Finoana.Entity.Invoice;
@@ -21,6 +22,7 @@ import com.example.Finoana.Service.NotificationService;
 
 import static com.example.Finoana.Core.EntityMapper.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -149,6 +151,15 @@ public class InvoiceServiceImpl implements InvoiceService{
 				.entityType(EntityType.INVOICE)
 				.message(message)
 				.build());
+	}
+
+	@Override
+	public StatisticDto invoiceStatistic() {
+		return StatisticDto.builder()
+				.averageEaring(this.invoiceRepository.averageEaring())
+				.todaysOrder(this.invoiceRepository.todaysOrder(LocalDate.now()))
+				.dailyUser(this.invoiceRepository.dailyUser())
+				.build();
 	}
 
 	

@@ -27,6 +27,7 @@ import com.example.Finoana.Core.EmailSender;
 import com.example.Finoana.Core.PdfGenerator;
 import com.example.Finoana.Dto.InvoiceRequestDto;
 import com.example.Finoana.Dto.InvoiceResponseDto;
+import com.example.Finoana.Dto.StatisticDto;
 import com.example.Finoana.Service.InvoiceService;
 
 import static com.example.Finoana.Core.FileManagement.registerDocument;
@@ -115,6 +116,12 @@ public class InvoiceController {
 				.build());
 		
 		return new ResponseEntity<>(pdfBytes,headers,HttpStatus.OK);
+	}
+	
+	@GetMapping("/statistics")
+	public ResponseEntity<StatisticDto> statistics() {
+		StatisticDto statistics = this.invoiceService.invoiceStatistic();
+		return ResponseEntity.status(HttpStatus.OK).body(statistics);
 	}
 
 }

@@ -40,7 +40,7 @@ export class ProductService {
 
     const options = {
       params : params,
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : `Bearer ` + localStorage.getItem("token")})
     };
 
     return this.http.get<PageResponse>(`${this.url}/category/${category}`, options).pipe(
@@ -55,7 +55,7 @@ export class ProductService {
 
   findById(id : number) {
     const options = {
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : `Bearer ` + localStorage.getItem("token")})
     };
 
     return this.http.get<ProductResponse>(`${this.url}/${id}`,options).pipe(
@@ -73,7 +73,7 @@ export class ProductService {
     formData.append("product",JSON.stringify(product));
 
     const options = {
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : `Bearer ` + localStorage.getItem("token")})
     }
 
     return this.http.post<any>(this.url,formData,options).pipe(
@@ -91,7 +91,7 @@ export class ProductService {
     formData.append("productDto",JSON.stringify(product));
 
     const options = {
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : `Bearer ` + localStorage.getItem("token")})
     };
 
     return this.http.put<any>(this.url + `/${id}`,formData, options).pipe(
@@ -109,7 +109,7 @@ export class ProductService {
 
   deleteProduct(id : number) {
     const options = {
-      headers : new HttpHeaders({ Authorization : `Bearer ${this.token}`})
+      headers : new HttpHeaders({ Authorization : `Bearer ` + localStorage.getItem("token")})
     }
 
     return this.http.delete<void>(`${this.url}/${id}`,options).pipe(

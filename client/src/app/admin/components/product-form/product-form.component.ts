@@ -64,6 +64,7 @@ ngOnInit(): void {
   );
   if(this.activatedRoute.snapshot.params['id']){
     this.id = this.activatedRoute.snapshot.params['id'];
+    this.url = this.productService.getImage(this.id);
     this.productService.findById(this.id).subscribe(
       response => {
         this._productForm = new FormGroup({
@@ -91,7 +92,6 @@ ngOnInit(): void {
           ingredients : new FormArray([])
         });
         this.setIngredients(response.ingredients)
-        this.url = this.productService.getImage(this.id);
       }
     )
   }
@@ -152,7 +152,8 @@ generatedProductValue() : Partial<ProductRequest> {
     price : this.price,
     category : this.category,
     availability : this.availability,
-    idChef : this.chef
+    idChef : this.chef,
+    ingredients : this._productForm.value.ingredients
   }
 }
 

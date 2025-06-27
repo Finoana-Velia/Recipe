@@ -14,14 +14,11 @@ const Stack = createStackNavigator();
 
 export default function RegisterNavigation() {
     return (
-        <View style={tw`bg-white flex p-5 w-full h-full`}>
-            <Text style={tw`my-8 text-xl font-bold`}>Create an account</Text>
-            <Stack.Navigator initialRouteName="personal" screenOptions={{headerShown : false}}>
-                <Stack.Screen name="personal" component={Personal}/>
-                <Stack.Screen name="location" component={Location} />
-                <Stack.Screen name="contact" component={Contact} />
-                <Stack.Screen name="security" component={Security} />
-            </Stack.Navigator>
-        </View>
+        <Stack.Navigator initialRouteName="personal" screenOptions={{headerShown : false}}>
+            <Stack.Screen name="personal" component={Personal}/>
+            <Stack.Screen name="location" component={Location} />
+            <Stack.Screen name="contact" component={Contact} />
+            <Stack.Screen name="security" component={Security} />
+        </Stack.Navigator>
     )
 }

@@ -1,24 +1,29 @@
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Modal, Button, Touchable,
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Modal, Button, Pressable,
     KeyboardAvoidingView,Platform
  } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { CameraIcon, PhotoIcon, TrashIcon, UserIcon, XMarkIcon } from 'react-native-heroicons/outline';
 import * as ImagePicker from 'expo-image-picker';
-import tw from 'twrnc';
+import tw, { style } from 'twrnc';
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+
+import DateTimePicker from '@react-native-community/datetimepicker';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default function RegsiterScreen() {
 
-    const [image, setImage] = useState();
+    const navigation = useNavigation();
+
     const [display, setDisplay] = useState(false);
-
-    const [modalVisible, setModalVisible] = useState(false);
-
+    const [image, setImage] = useState();
+    const [modal,toggleModal] = useState(false);
+    
     const deleteImage = () => {
         setImage(null);
         setDisplay(false);
-        setModalVisible(false);
-    }
+        toggleModal(false);
+    } 
 
     const uploadImage = async (mode = "") => {
         try {
@@ -29,7 +34,7 @@ export default function RegsiterScreen() {
                     mediaTypes : ImagePicker.MediaTypeOptions.Images,
                     allowsEditing : true,
                     aspect : [1,1],
-                    quality :1
+                    quality : 1
                 });
             }else {
                 await ImagePicker.requestCameraPermissionsAsync();
@@ -38,214 +43,199 @@ export default function RegsiterScreen() {
                     allowsEditing : true,
                     aspect : [1,1],
                     quality : 1
-                });
+                })
             }
-            
 
             if(!result.canceled) {
                 setImage((await result).assets[0].uri);
                 setDisplay(true);
             }
-            setModalVisible(false);
-        } catch(error) {}
-    };
+            toggleModal(false);
+        }catch(error) {}
+    }
 
-    
+    const [dateOfBirth, setDateOfBirth] = useState("");
+    const [date, setDate] = useState(new Date());
+    const [show , setShow] = useState(false);
+
+    const toggleDatePicker = () => {
+        setShow(!show);
+    }
+
+    const onChange = ({type}, selectDate) => {
+        if(type == "set") {
+            const currentDate = selectDate;
+            setDate(currentDate);
+            if(Platform.OS === "android") {
+                toggleDatePicker();
+                setDateOfBirth(currentDate.toDateString());
+            }
+        }else {
+            toggleDatePicker();
+        }
+    }
+
+    const confirmDateOnIos = () => {
+        setDateOfBirth(date.toDateString());
+        toggleDatePicker();
+    }
 
     return (
         <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
         >
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            {/* <TextInput
-            placeholder="Entrez un texte"
-            style={{
-                height: 40,
-                width: '80%',
-                borderColor: 'gray',
-                borderWidth: 1,
-                marginBottom: 20,
-                paddingHorizontal: 10,
-            }}
-            /> */}
-            <View style={tw`mx-2`}>
+        <View style={{ flex: 1, justifyContent : 'center',alignItems: 'center', paddingHorizontal : 10}}>
+            <Text style={tw`font-bold text-xl`}>Create an user</Text>
+            <View style={tw`w-full flex flex-row items-center gap-2`}>
+                <UserIcon size={28}/>
+                <Text>Personal info</Text>
+            </View>
+            <View style={tw`flex justify-center items-center my-2`}>
+                <View style={tw`relative border-2 border-lime-200 w-[35] h-[35] rounded-full`}>
+                    {display ? <Image
+                        source={{ uri : image }}
+                        style={tw`w-full h-full object-cover object-center rounded-full`}
+                    /> : <Image
+                        source={require('../assets/User_icon_2.svg.png')}
+                        style={tw`w-fukk h-full object-cover object-center rounded-full`}
+                    />}
+                    <TouchableOpacity
+                        style={tw`absolute bottom-0 right-0 bg-white rounded-full p-1 border-2 border-lime-200`}
+                        onPress={() => toggleModal(true)}
+                    >
+                        <CameraIcon size={30} style={tw`text-lime-500`}/>
+                    </TouchableOpacity>
+                </View>
+            </View>
+                    
+            <Modal
+                transparent
+                visible={modal}
+                animationType="fade"
+                onRequestClose={() => toggleModal(false)}
+            >
+                <View style={styles.modalBackground}>
+                    <View style={tw`relative bg-white w-[80%] p-5 rounded shadow-xl gap-5`}>
+                        <Text style={tw`text-center text-xl font-bold`}>Profile photo</Text>
+                        <View style={tw`flex flex-row justify-center items-center gap-5`}>
+                            <TouchableOpacity
+                                onPress={() => uploadImage()}
+                                style={tw`bg-slate-100 rounded flex justify-center items-center w-20 border-slate-300`}
+                            >
+                                <CameraIcon size={50} strokeWidth={2} color='#84cc16'/>
+                                <Text>Camera</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => uploadImage('gallery')}
+                                style={tw`bg-slate-100 rounded flex justify-center items-center w-20 border-slate-300`}
+                            >
+                                <PhotoIcon size={50} strokeWidth={2} color='#84cc16'/>
+                                <Text>Gallery</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => deleteImage()}
+                                style={tw`bg-slate-100 rounded flex justify-center items-center w-20 border-slate-300`}
+                            >
+                                <TrashIcon size={50} strokeWidth={2} color='#84cc16'/>
+                                <Text>Delete</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <TouchableOpacity
+                            style={tw`absolute top-0 right-0`}
+                            onPress={() => toggleModal(false)}
+                        >
+                            <XMarkIcon size={20} color="#000" />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+
+
+            <View style={tw`mx-2 w-full`}>
                 <Text style={styles.label}>First name</Text>
                 <TextInput 
                     style={styles.formControl}
                     placeholder="First name"
                 />
             </View>
-            <Button title="Valider" onPress={() => {}} />
+            <View style={tw`mx-2 w-full`}>
+                <Text style={styles.label}>Last name</Text>
+                <TextInput 
+                    style={styles.formControl}
+                    placeholder="Last name"
+                />
+            </View>
+
+            <View style={tw`mx-2 w-full`}>
+                <Text style={styles.label}>Date of birth</Text>
+               {show && (
+                <DateTimePicker
+                    value={date}
+                    mode="date" // "time" or "datetime"
+                    display="sipnner" // "spinner" or "calendar", "default"
+                    onChange={onChange}
+                    style={{height : 120, martinTop : -10}}
+                />
+               )}
+               {show && Platform.OS === "ios" && (
+                    <View style={tw`flex-row justify-around`}>
+                        <TouchableOpacity
+                            style={tw`p-3 bg-slate-200 rounded`}
+                            onPress={toggleDatePicker}
+                        >
+                            <Text>Cancel</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={tw`p-3 bg-blue-500 rounded`}
+                            onPress={confirmDateOnIos}
+                        >
+                            <Text>Confirm</Text>
+                        </TouchableOpacity>
+                    </View>
+               )}
+
+               {!show && (
+                    <Pressable onPress={toggleDatePicker}>
+                        <TextInput
+                            style={styles.formControl}
+                            placeholder="Birth date"
+                            value={dateOfBirth}
+                            onChangeText={setDateOfBirth}
+                            editable={false}
+                            onPressIn={toggleDatePicker}
+                        />
+                    </Pressable>
+               )}
+            </View>
+
+            <View style={tw`mx-2 w-full`}>
+                <Text style={styles.label}>Gender</Text>
+                <View style={tw`border rounded`}>
+                    <RNPickerSelect
+                        placeholder={{label : "Select gender", value : null}}
+                        onValueChange={(value) => console.log(value)}
+                        items={[
+                            {label : "Man", value : "MAN"},
+                            {label : "Woman", value : "WOMAN"},
+                        ]}
+                    />
+                </View>
+            </View>
+            
+            <View style={tw`px-2 my-3 w-full`}>
+                <TouchableOpacity
+                    style={tw`p-3 bg-lime-500 rounded`}
+                >
+                    <Text style={tw`text-center text-white font-bold`}>Next</Text>
+                </TouchableOpacity>
+            </View>
         </View>
         </KeyboardAvoidingView>
-//         <ScrollView
-//             style={tw`bg-white flex p-5`}
-//             showsVerticalScrollIndicator={false}
-//             contentContainerStyle={{paddingBottom : 5}}
-//         >
-//             <Text style={tw`my-8 text-xl font-bold`}>Create an account</Text>
-//             {/* <View style={tw`flex flex-row items-center gap-2`}>
-//                 <UserIcon size={28} />
-//                 <Text>Personal Info</Text>
-//             </View> */}
-
-//             <View style={tw`w-full flex justify-center items-center my-2`}>
-//                 <View style={tw`relative border-2 border-slate-200 w-[35] h-[35] rounded-full`}>
-//                     {display ? <Image
-//                         source={{ uri : image}}
-//                         style={tw`w-full h-full object-cover object-center rounded-full`}
-//                     /> : <Image
-//                         source={require('../assets/User_icon_2.svg.png')}
-//                         style={tw`w-full h-full object-cover object-center`}
-//                     />}
-//                     {/* <TouchableOpacity 
-//                         style={tw`absolute bottom-0 right-0 bg-white rounded-full p-1 border-2 border-lime-200`}
-//                         onPress={uploadImage}
-//                     >
-//                         <CameraIcon size={30} style={tw`text-lime-500`}/>
-//                     </TouchableOpacity> */}
-//                     <TouchableOpacity 
-//                         style={tw`absolute bottom-0 right-0 bg-white rounded-full p-1 border-2 border-lime-200`}
-//                         onPress={() => setModalVisible(true)}
-//                     >
-//                         <CameraIcon size={30} style={tw`text-lime-500`}/>
-//                     </TouchableOpacity>
-//                 </View>
-//             </View>
-
-//             <Modal
-//                 transparent 
-//                 visible={modalVisible}
-//                 onRequestClose={() => setModalVisible(false)}
-//                 animationType="fade"
-//             >
-//                 <View style={styles.modalBackground}>
-//                     <View style={tw`relative bg-white w-[80%] p-5 rounded shadow-xl gap-5`}>
-//                         <Text style={tw`text-center text-xl font-bold`}>Profile photo</Text>
-//                         <View style={tw`flex flex-row justify-center items-center gap-5`}>
-//                             <TouchableOpacity
-//                                 onPress={() => uploadImage()}
-//                                 style={tw`bg-slate-100 rounded flex justify-center items-center w-20 border border-slate-300`}
-//                             >
-//                                 <CameraIcon size={50} strokeWidth={2} color="#84cc16" />
-//                                 <Text>Camera</Text>
-//                             </TouchableOpacity>
-//                             <TouchableOpacity
-//                                 onPress={() => uploadImage('gallery')}
-//                                 style={tw`bg-slate-100 rounded flex justify-center items-center w-20 border border-slate-300`}
-//                             >
-//                                 <PhotoIcon size={50} strokeWidth={2} color="#84cc16" />
-//                                 <Text style={tw`text-center`}>Gallery</Text>
-//                             </TouchableOpacity>
-//                             <TouchableOpacity
-//                                 onPress={() => deleteImage()}
-//                                 style={tw`bg-slate-100 rounded flex justify-center items-center w-20 border border-slate-300`}
-//                             >
-//                                 <TrashIcon size={50} strokeWidth={2} color="#84cc16" />
-//                                 <Text style={tw`text-center`}>Delete</Text>
-//                             </TouchableOpacity>
-//                         </View>
-//                         <TouchableOpacity style={tw`absolute top-0 right-0`} onPress={() => setModalVisible(false)}>
-//                             <XMarkIcon size={20} strokeWidth={2} color="#000"/>
-//                         </TouchableOpacity>
-//                     </View>
-//                 </View>
-//             </Modal>
-
-    
-//             <View style={tw`mx-2`}>
-//                 <Text style={styles.label}>First name</Text>
-//                 <TextInput 
-//                     style={styles.formControl}
-//                     placeholder="First name"
-//                 />
-//             </View>
-//             <View style={tw`mx-2`}>
-//                 <Text style={styles.label}>Last name</Text>
-//                 <TextInput 
-//                     style={styles.formControl}
-//                     placeholder="Last name"
-//                 />
-//             </View>
-
-//             <View style={tw`mx-2`}>
-//                 <Text style={styles.label}>Email address</Text>
-//                 <TextInput 
-//                     placeholder="Enter your mail address"
-//                     style={styles.formControl}
-//                     keyboardType="email-address"
-//                 />
-//             </View>
-
-//             <View style={tw`mx-2`}>
-//                 <Text style={styles.label}>Password</Text>
-//                 <TextInput 
-//                     secureTextEntry
-//                     style={styles.formControl}
-//                     placeholder="Last name"
-//                 />
-//             </View>
-
-//             <View style={tw`mx-2`}>
-//                 <Text style={styles.label}>Birthdate</Text>
-//                 <TextInput 
-//                     style={styles.formControl}
-//                     placeholder="dd/mm/YYYY"
-//                 />
-//             </View>
-
-//             <View style={tw`mx-2`}>
-//                 <Text style={styles.label}>Postal code</Text>
-//                 <TextInput 
-//                     style={styles.formControl}
-//                     placeholder="Postal code"
-//                 />
-//             </View>
-            
-//             {/* <View class={styles.formGroup}>
-// +                    <Text style={styles.label}>Phone number</Text>
-// +                    <View style={styles.formWrapper}>
-// +                        <Text style={{width : '10%'}}>+261</Text>
-// +                        <TextInput
-// +                            placeholder="Enter your phone number"
-// +                            keyboardType="numeric"
-// +                            style={styles.formNumeric}
-// +                        />
-//                      </View>
-//                  </View> */}
-//             <View style={tw`mx-2`}>
-//                 <Text style={styles.label}>Phone number</Text>
-//                 <View style={styles.formWrapper}>
-//                     <Text style={{ width : '10%'}}>+261</Text>
-//                     {/* <TextInput
-//                         placeholder="Enter your phone number"
-//                         keyboardType="numeric"
-//                         style={styles.formNumeric}
-//                         formNumeric : {
-//                             borderWidth : 1,
-//                             width : '90%',
-//                             borderRightColor : 'black',
-//                             height : "100%",
-//                             border : 'none'
-//                         },
-//                     /> */}
-//                     <TextInput
-//                         placeholder="Enter your phone number"
-//                         keyboardType="numeric"
-//                         style={tw`border-l w-[90%] h-full`}
-//                     />
-//                 </View>
-//             </View>
-
-//         </ScrollView>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
-//     +    formGroup : {
-// +        marginBottom : 20,
-// +    },
     label : {
         fontSize : 15,
         fontWeight : 400,
@@ -269,14 +259,6 @@ const styles = StyleSheet.create({
         justifyContent : "space-between",
         alignItems : 'center'
     },
-    // formNumeric : {
-    //     borderWidth : 1,
-    //     width : '90%',
-    //     borderRightColor : 'black',
-    //     height : "100%",
-    //     border : 'none'
-    // },
-
     modalBackground : {
         flex : 1,
         backgroundColor : 'rgba(0,0,0,.5)', 

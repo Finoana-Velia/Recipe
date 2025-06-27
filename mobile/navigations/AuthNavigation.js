@@ -4,6 +4,7 @@ import WelcomeScreen from "../screens/WelcomeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterNavigation from "./RegisterNavigation";
 import RegsiterScreen from "../screens/RegisterScreen";
+import TabNavigation from "./TabNavigation";
 // import RegsiterScreen from "../screens/RegisterScreen";
 
 
@@ -16,6 +17,7 @@ export default function AuthNavigation() {
                 <Stack.Screen name="Welcome" component={WelcomeScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="Register" component={RegisterNavigation} />
+                <Stack.Screen name="Home" component={TabNavigation} />
                 {/* <Stack.Screen name="Register" component={RegsiterScreen} /> */}
             </Stack.Navigator>
         </NavigationContainer>

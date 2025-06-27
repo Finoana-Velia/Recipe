@@ -40,6 +40,7 @@ export default function LoginScreen() {
                 </TouchableOpacity>
                 <View style={tw`px-2 w-full`}>
                     <TouchableOpacity
+                        onPress={() => navigation.navigate('Home')}
                         style={tw`p-3 bg-lime-500 rounded`}
                     >
                         <Text style={tw`text-center text-white font-bold`}>Connect</Text>

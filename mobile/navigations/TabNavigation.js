@@ -3,18 +3,30 @@ import RecipeList from "../screens/RecipeList";
 import Favorite from "../screens/Favorite";
 import Cart from "../screens/Cart";
 
+import { HeartIcon, HomeIcon, ShoppingCartIcon, } from "react-native-heroicons/outline";
+
+import tw from 'twrnc';
+import TabCustom from "../components/tabNavigation/TabCustom";
+
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigation() {
     return (
         <Tab.Navigator
             screenOptions={{headerShown : false}}
+            tabBar={props => <TabCustom {...props}/>}
         >
             <Tab.Screen
                 name="List"
                 component={RecipeList}
                 options={{
-                    tabBarLabel : 'Home'
+                    tabBarLabel : 'Home',
+                    tabBarIcon : () => {
+                        return (
+                            // <HomeIcon size={25} strokeWidth={2} color='#222'/>
+                            <HomeIcon size={25} strokeWidth={2} color='#222'/>
+                        )
+                    }
                 }}
             />
 
@@ -22,7 +34,12 @@ export default function TabNavigation() {
                 name="Favorite"
                 component={Favorite}
                 options={{
-                    tabBarLabel : "Favorite"
+                    tabBarLabel : "Favorite",
+                    tabBarIcon : () => {
+                        return(
+                            <HeartIcon size={25} strokeWidth={2} color='#222' />
+                        )
+                    }
                 }}
             />
 
@@ -30,7 +47,12 @@ export default function TabNavigation() {
                 name="Cart"
                 component={Cart}
                 options={{
-                    tabBarLabel : "Cart"
+                    tabBarLabel : "Cart",
+                    tabBarIcon : () => {
+                        return (
+                            <ShoppingCartIcon size={25} strokeWidth={2} color='#222'/>
+                        )
+                    }
                 }}
             />
         </Tab.Navigator>

@@ -9,7 +9,7 @@ export const Category = [
     },
     {
         label : "Noodles",
-        value : "NOOLDES"
+        value : "NOODLES"
     },
     {
         label : "Pizzas",

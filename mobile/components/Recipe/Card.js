@@ -5,6 +5,7 @@ import Cached from "../../helpers/Image";
 import { recipeImage } from "../../API/RecipeAPI";
 
 export default function Card({item, index, navigation}) {
+    
     let pair = item.i%2 == 0;
     let impair = item.i%3 == 0;
 
@@ -22,22 +23,6 @@ export default function Card({item, index, navigation}) {
                 }}
                 sharedTransitionStyle={recipe.name}
             >
-                {/* <Cached decorator={{
-                    width : '100%',
-                    height : impair ? 150 : 250,
-                    backgroundColor : 'silver',
-                    borderRadius : 35,
-                }} url={{ uri : recipeImage(item.id)}}/> */}
-                {/* <Image
-                    // source={{uri : recipeImage(item.id)}}
-                    source={{ uri : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png'}}
-                    style={{
-                        width : '100%',
-                        height : impair ? 150 : 250,
-                        backgroundColor : 'silver',
-                        borderRadius : 35,
-                    }}
-                /> */}
                 <Cached
                     decorator={{
                         width : '100%',

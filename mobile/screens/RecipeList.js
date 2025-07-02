@@ -13,22 +13,49 @@ import Card from '../components/Recipe/Card';
 
 export default function RecipeList() {
 
-    const [data, setData] = useState(null);
+    const [response, setResponse] = useState(null);
+    const [data, setData] = useState([]);
+
+    const [text, setText] = useState("");
 
     useEffect(() => {
         searchRecipe("").then(
             response => {
                 setTimeout(() => {
-                    setData(response);
+                    setResponse(response);
+                    setData(response.content);
                 },2000)
             }
         );
     },[]);
 
+    const filterRecipeList = (category = "") => {
+        searchRecipe("").then(response => {
+            if(category !== "") {
+                setData(response.content.filter(item => item.category === category));
+            }else {
+                setData(response.content);
+            }
+        })
+    }
+
+    const onSearch = (text) => {
+        searchRecipe(text).then(response => {
+            setResponse(response);
+            setData(response.content);
+        })
+    }
+
+    const onLoad = () => {
+        searchRecipe(text)
+    }
+
     return (
         <View style={tw`mt-10 px-2`}>
             <StatusBar style='dark'/>
-            <ScrollView>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+            >
                 <View style={tw`w-full flex flex-row justify-between items-center`}>
                     <Image
                         source={require('../assets/User_icon_2.svg.png')}
@@ -55,21 +82,30 @@ export default function RecipeList() {
                     <ScrollView
                         horizontal
                         showsHorizontalScrollIndicator={false}
-                        contentContainerStyle={tw`py-2 w-full flex items-center`}
+                        contentContainerStyle={tw`py-5`}
+                        // contentContainerStyle={tw`py-5 w-full flex items-center`}
                     >
+                        <TouchableOpacity
+                            onPress={() => filterRecipeList()}
+                            style={tw`bg-lime-500 rounded-full py-1 px-5 flex justify-center items-center mx-1`}
+                        >
+                                <Text style={tw`text-white`}>All</Text>
+                        </TouchableOpacity>
                         {Category.map((category,index) => {
                             return (
                                 <TouchableOpacity
                                     key={index}
-                                    style={tw`bg-lime-500 rounded-full p-1 flex justify-center items-center mx-1`}
+                                    onPress={() => filterRecipeList(category.value)}
+                                    style={tw`bg-lime-500 rounded-full py-1 px-5 flex justify-center items-center mx-1`}
                                 >
                                     <Text style={tw`text-white`}>{category.label}</Text>
                                 </TouchableOpacity>
                             )
                         })}
+
                     </ScrollView>
                 </Animated.View>
-                {data ? <List recipes={data.content}/> : <Loading />}
+                {response ? <List recipes={data}/> : <Loading />}
             </ScrollView>
         </View>
     );

@@ -13,7 +13,7 @@ export default function List({recipes}) {
             keyExtractor={(item) => item.id}
             numColumns={2}
             showsHorizontalScrollIndicator={false}
-            renderItem={(item, index) => <Card item={item} inedex={index} navigation={navigation}/>}
+            renderItem={(item, index) => <Card item={item} navigation={navigation}/>}
             onEndReachedThreshold={0.1}
             style={tw`pb-30`}
         />   

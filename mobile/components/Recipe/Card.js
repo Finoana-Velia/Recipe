@@ -4,7 +4,7 @@ import tw from 'twrnc';
 import Cached from "../../helpers/Image";
 import { recipeImage } from "../../API/RecipeAPI";
 
-export default function Card({item, index, navigation}) {
+export default function Card({item, navigation}) {
     
     let pair = item.i%2 == 0;
     let impair = item.i%3 == 0;
@@ -12,9 +12,12 @@ export default function Card({item, index, navigation}) {
     const recipe = item.item
 
     return (
-        <TouchableOpacity>
+        <TouchableOpacity
+            // onPress={() => navigation.navigate('Detail', recipe.id)}
+            onPress={() => navigation.navigate('Detail',recipe)}
+        >
             <Animated.View
-                entering={FadeInDown.delay(index*100).duration(600).springify().damping(2)}
+                entering={FadeInDown.delay(item.i*100).duration(600).springify().damping(12)}
                 style={{
                     flex : 1,
                     width : '100%',

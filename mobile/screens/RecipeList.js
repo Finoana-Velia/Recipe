@@ -47,7 +47,10 @@ export default function RecipeList() {
     }
 
     const onLoad = () => {
-        searchRecipe(text)
+        searchRecipe(text).then(response => {
+            setResponse(response);
+            setData(response.content);
+        })
     }
 
     return (
@@ -68,11 +71,13 @@ export default function RecipeList() {
                     <BellIcon size="30" strokeWidth={2} color='black'/>
                 </View>
                 
-                <View style={tw`flex flex-row bounded bg-slate-200`}>
+                <View style={tw`flex flex-row rounded bg-slate-200`}>
                     <TextInput
+                        onChangeText={(text) => onSearch(text)}
+                        onSubmitEditing={() => onLoad}
                         placeholder='Search'
                         placeholderTextColor={'gray'}
-                        style={tw`text-xl flex pl-2 rounded`}
+                        style={tw`text-xl flex pl-2 rounded w-[90%]`}
                     />
                     <MagnifyingGlassIcon size={20} strokeWidth={3} 
                     color='gray' style={tw`rounded-full my-auto`}/>

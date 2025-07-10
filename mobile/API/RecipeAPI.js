@@ -1,5 +1,5 @@
-// const baseURl = "http://192.168.88.249:8080";
-const baseURl = "http://192.168.42.227:8080";
+const baseURl = "http://192.168.88.249:8080";
+// const baseURl = "http://192.168.42.227:8080";
 
 const recipeUrl = baseURl + "/api/v1/products";
 const chefUrl = baseURl + "/api/v1/chefs";

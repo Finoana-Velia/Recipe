@@ -5,18 +5,13 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import AuthNavigation from './navigations/AuthNavigation';
 
 import tw from 'twrnc';
+import { Provider } from 'react-redux';
+import Store from './reducer/ConfigureFavorite';
 
 export default function App() {
   return (
-    <AuthNavigation />
+    <Provider store={Store}>
+      <AuthNavigation />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

@@ -6,8 +6,9 @@ import tw from 'twrnc';
 import Cached from '../helpers/Image';
 import { findById, recipeImage,chefImage } from '../API/RecipeAPI';
 import { ChevronLeftIcon, HeartIcon, ShoppingCartIcon } from 'react-native-heroicons/outline';
+import { connect } from 'react-redux';
 
-export default function RecipeDetails(props) {
+function RecipeDetails(props) {
     
     // const id = props.route.params;
     const recipe = props.route.params;
@@ -22,10 +23,16 @@ export default function RecipeDetails(props) {
     //     },1000))
     // });
 
+    const toggleFavorite = () => {
+        const action = { type : 'TOGGLE_FAVORITE', value : recipe};
+        console.log("props");
+        console.log(props);
+        props.dispatch(action);
+        console.log(props.dispatch(action));
+        setFavorite(!isFavorite);
+    }
+
     return (
-        // <View style={tw`w-full h-full items-center justify-center`}>
-        //     <Text>Detail screen</Text>
-        // </View>
         <ScrollView
             showsVerticalScrollIndicator={false}
             contentContainerStyle={tw`flex`}
@@ -42,7 +49,10 @@ export default function RecipeDetails(props) {
                 onPress={() => navigation.goBack()}>
                     <ChevronLeftIcon size={28} strokeWidth={4.5} style={tw`text-lime-500`}/>
                 </TouchableOpacity>
-                <TouchableOpacity style={tw`p-2 bg-white rounded-full m-5 flex justify-center items-center`}>
+                <TouchableOpacity 
+                // onPress={() => setFavorite(!isFavorite)}
+                onPress={toggleFavorite}
+                style={tw`p-2 bg-white rounded-full m-5 flex justify-center items-center`}>
                     <HeartIcon size={28} strokeWidth={4.5} style={isFavorite ? tw`text-red-500` : tw`text-slate-500`}/>
                 </TouchableOpacity>
             </View>
@@ -70,7 +80,7 @@ export default function RecipeDetails(props) {
                 </View>
                 <View style={tw`mt-1`}>
                     <Text style={tw`text-xl font-bold`}>Chef</Text>
-                    <View style={tw`flex flex-row justify-content items-center gap-2`}>
+                    <View style={tw`flex flex-row items-center gap-2`}>
                         <Image
                             style={tw`w-20 h-20 rounded-full bg-slate-300`}
                             source={{uri : chefImage(recipe.chef.id)}}
@@ -95,3 +105,12 @@ const styles = StyleSheet.create({
         backgroundColor : 'silver'
     }
 })
+
+const mapStateToProps = (state) => {
+    return {
+        favorites : state.favorites
+    }
+}
+
+export default connect(mapStateToProps)(RecipeDetails);
+

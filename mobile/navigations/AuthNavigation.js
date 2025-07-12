@@ -6,6 +6,7 @@ import RegisterNavigation from "./RegisterNavigation";
 import RegsiterScreen from "../screens/RegisterScreen";
 import TabNavigation from "./TabNavigation";
 import RecipeDetails from "../screens/RecipeDetails";
+import Notification from "../screens/Notification";
 // import RegsiterScreen from "../screens/RegisterScreen";
 
 
@@ -20,6 +21,7 @@ export default function AuthNavigation() {
                 <Stack.Screen name="Register" component={RegisterNavigation} />
                 <Stack.Screen name="Home" component={TabNavigation} />
                 <Stack.Screen name="Detail" component={RecipeDetails} />
+                <Stack.Screen name="Notification" component={Notification} />
                 {/* <Stack.Screen name="Register" component={RegsiterScreen} /> */}
             </Stack.Navigator>
         </NavigationContainer>

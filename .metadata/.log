@@ -4303,3 +4303,172 @@ END
 
 !ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-10 15:39:47.334
 !MESSAGE Started Boot LS process
+!SESSION 2025-07-11 08:59:59.278 -----------------------------------------------
+eclipse.buildId=4.34.0.202411281622
+java.version=21.0.5
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.springframework.boot.ide.branding.sts4
+
+!ENTRY ch.qos.logback.classic 1 0 2025-07-11 09:00:28.823
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-07-11 09:01:13.661
+!MESSAGE Logback config file: /home/finoana/Public/Projects/E-commerce/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.7.0.20241001-1350.xml
+
+!ENTRY org.eclipse.ui 2 0 2025-07-11 09:01:22.080
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-07-11 09:01:22.080
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.eclipse.ui 2 0 2025-07-11 09:01:24.423
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-07-11 09:01:24.423
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2025-07-11 09:01:50.646
+!MESSAGE Command list starting LS: org.springframework.tooling.boot.ls
+START:
+/opt/sts-4.27.0.RELEASE/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_21.0.5.v20241023-1957/jre/bin/java
+-Dsts.lsp.client=eclipse
+-Xmx1024m
+-XX:TieredStopAtLevel=1
+-Dspring.config.location=classpath:/application.properties
+-Xlog:jni+resolve=off
+-XX:ErrorFile=/home/finoana/Public/Projects/E-commerce/.metadata/.plugins/org.springframework.tooling.boot.ls/fatal-error-spring-boot_1752213710641
+-Dlanguageserver.hover-timeout=225
+-jar
+/opt/sts-4.27.0.RELEASE/plugins/org.springframework.tooling.boot.ls_1.59.0.202411281450/servers/spring-boot-language-server/spring-boot-language-server-1.59.0-SNAPSHOT-exec.jar
+END
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-11 09:01:50.680
+!MESSAGE DelegatingStreamConnectionProvider - Starting Boot LS
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2025-07-11 09:01:50.858
+!MESSAGE Started org.springframework.tooling.boot.ls LS process 4025
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-11 09:02:10.045
+!MESSAGE Boot project ADDED: server
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-11 09:02:10.046
+!MESSAGE Starting Boot LS...
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-11 09:02:10.092
+!MESSAGE Started Boot LS process
+!SESSION 2025-07-12 09:05:13.743 -----------------------------------------------
+eclipse.buildId=4.34.0.202411281622
+java.version=21.0.5
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.springframework.boot.ide.branding.sts4
+
+!ENTRY ch.qos.logback.classic 1 0 2025-07-12 09:05:24.880
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-07-12 09:05:44.545
+!MESSAGE Logback config file: /home/finoana/Public/Projects/E-commerce/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.7.0.20241001-1350.xml
+
+!ENTRY org.eclipse.ui 2 0 2025-07-12 09:05:48.100
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-07-12 09:05:48.100
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.eclipse.ui 2 0 2025-07-12 09:05:50.495
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-07-12 09:05:50.496
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2025-07-12 09:06:09.116
+!MESSAGE Command list starting LS: org.springframework.tooling.boot.ls
+START:
+/opt/sts-4.27.0.RELEASE/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_21.0.5.v20241023-1957/jre/bin/java
+-Dsts.lsp.client=eclipse
+-Xmx1024m
+-XX:TieredStopAtLevel=1
+-Dspring.config.location=classpath:/application.properties
+-Xlog:jni+resolve=off
+-XX:ErrorFile=/home/finoana/Public/Projects/E-commerce/.metadata/.plugins/org.springframework.tooling.boot.ls/fatal-error-spring-boot_1752300369107
+-Dlanguageserver.hover-timeout=225
+-jar
+/opt/sts-4.27.0.RELEASE/plugins/org.springframework.tooling.boot.ls_1.59.0.202411281450/servers/spring-boot-language-server/spring-boot-language-server-1.59.0-SNAPSHOT-exec.jar
+END
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-12 09:06:09.117
+!MESSAGE DelegatingStreamConnectionProvider - Starting Boot LS
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2025-07-12 09:06:09.236
+!MESSAGE Started org.springframework.tooling.boot.ls LS process 3672
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-12 09:06:21.735
+!MESSAGE Boot project ADDED: server
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-12 09:06:21.739
+!MESSAGE Starting Boot LS...
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2025-07-12 09:06:21.750
+!MESSAGE Started Boot LS process
+
+!ENTRY org.eclipse.jface 2 0 2025-07-12 09:06:38.715
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2025-07-12 09:06:38.716
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.jdt.ui.navigate.open.type"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		WorkbenchHandlerServiceHandler("org.eclipse.lsp4e.symbolinworkspace"),
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.core.jobs 2 2 2025-07-12 09:06:48.840
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.lsp4e.operations.diagnostics.LSPDiagnosticsToMarkers$2 RUNNING
+	 at java.base/java.lang.Object.wait0(Native Method)
+	 at java.base/java.lang.Object.wait(Object.java:366)
+	 at org.eclipse.core.internal.jobs.Semaphore.acquire(Semaphore.java:45)
+	 at org.eclipse.core.internal.jobs.OrderedLock.doAcquire(OrderedLock.java:191)
+	 at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:125)
+	 at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:100)
+	 at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:87)
+	 at org.eclipse.core.internal.resources.WorkManager.checkIn(WorkManager.java:125)
+	 at org.eclipse.core.internal.resources.Workspace.prepareOperation(Workspace.java:2407)
+	 at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:40)
+	 at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.jobs 2 2 2025-07-12 09:06:48.841
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.lsp4e.operations.diagnostics.LSPDiagnosticsToMarkers$2 RUNNING
+	 at java.base/java.lang.Object.wait0(Native Method)
+	 at java.base/java.lang.Object.wait(Object.java:366)
+	 at org.eclipse.core.internal.jobs.Semaphore.acquire(Semaphore.java:45)
+	 at org.eclipse.core.internal.jobs.OrderedLock.doAcquire(OrderedLock.java:191)
+	 at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:125)
+	 at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:100)
+	 at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:87)
+	 at org.eclipse.core.internal.resources.WorkManager.checkIn(WorkManager.java:125)
+	 at org.eclipse.core.internal.resources.Workspace.prepareOperation(Workspace.java:2407)
+	 at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:40)
+	 at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.jobs 2 2 2025-07-12 09:06:48.859
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.lsp4e.operations.diagnostics.LSPDiagnosticsToMarkers$2 RUNNING
+	 at java.base/java.lang.Object.wait0(Native Method)
+	 at java.base/java.lang.Object.wait(Object.java:366)
+	 at org.eclipse.core.internal.jobs.Semaphore.acquire(Semaphore.java:45)
+	 at org.eclipse.core.internal.jobs.OrderedLock.doAcquire(OrderedLock.java:191)
+	 at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:125)
+	 at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:100)
+	 at org.eclipse.core.internal.jobs.OrderedLock.acquire(OrderedLock.java:87)
+	 at org.eclipse.core.internal.resources.WorkManager.checkIn(WorkManager.java:125)
+	 at org.eclipse.core.internal.resources.Workspace.prepareOperation(Workspace.java:2407)
+	 at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:40)
+	 at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)

@@ -9,6 +9,7 @@ import { searchRecipe } from '../API/RecipeAPI';
 import Loading from '../components/Loading';
 import List from '../components/Recipe/List';
 import Card from '../components/Recipe/Card';
+import Header from '../components/Header';
 
 
 export default function RecipeList() {
@@ -59,7 +60,7 @@ export default function RecipeList() {
             <ScrollView
                 showsVerticalScrollIndicator={false}
             >
-                <View style={tw`w-full flex flex-row justify-between items-center`}>
+                {/* <View style={tw`w-full flex flex-row justify-between items-center`}>
                     <Image
                         source={require('../assets/User_icon_2.svg.png')}
                         style={tw`w-15 h-15 rounded-full`}
@@ -69,7 +70,8 @@ export default function RecipeList() {
                         style={tw`w-20 h-20 rounded`}
                     />
                     <BellIcon size="30" strokeWidth={2} color='black'/>
-                </View>
+                </View> */}
+                <Header />
                 
                 <View style={tw`flex flex-row rounded bg-slate-200`}>
                     <TextInput

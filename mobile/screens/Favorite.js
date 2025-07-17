@@ -40,7 +40,7 @@ function Favorite(props) {
     );
 
     return (
-        <View style={tw`mt-10 px-2`}>
+        <View style={tw`mt-10 px-2 pb-60`}>
             <Header />
             <Text style={tw`text-center text-lime-500 text-2xl font-bold`}>Favorites</Text>
             {props.favorites.length !== 0 ? 

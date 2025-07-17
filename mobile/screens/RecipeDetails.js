@@ -25,10 +25,7 @@ function RecipeDetails(props) {
 
     const toggleFavorite = () => {
         const action = { type : 'TOGGLE_FAVORITE', value : recipe};
-        console.log("props");
-        console.log(props);
         props.dispatch(action);
-        console.log(props.dispatch(action));
         setFavorite(!isFavorite);
     }
 

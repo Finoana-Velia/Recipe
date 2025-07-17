@@ -33,7 +33,6 @@ function Card(props) {
         const action = { type : 'TOGGLE_FAVORITE', value : recipe};
         props.dispatch(action);
         setFavorite(!isFavorite);
-        console.log(props.dispatch);
 
     }
 

@@ -5,7 +5,6 @@ import Cart from "../screens/Cart";
 
 import { HeartIcon, HomeIcon, ShoppingCartIcon, } from "react-native-heroicons/outline";
 
-import tw from 'twrnc';
 import TabCustom from "../components/tabNavigation/TabCustom";
 
 const Tab = createBottomTabNavigator();
@@ -33,6 +32,7 @@ export default function TabNavigation() {
             <Tab.Screen
                 name="Favorite"
                 component={Favorite}
+                // component={FavoriteList}
                 options={{
                     tabBarLabel : "Favorite",
                     tabBarIcon : () => {

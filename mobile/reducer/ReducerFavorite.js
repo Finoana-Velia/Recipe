@@ -7,13 +7,13 @@ export default function toggleFavorite(state = initialStateFavorite, action) {
         case 'TOGGLE_FAVORITE' : 
             const favoriteIndex = state.favorites.findIndex(item => item.id === action.value.id);
             if(favoriteIndex !== -1) {
-                //delete into the favorite
+                //remove item from the favorite
                 nextState = {
                     ...state,
-                    favorites : [...state.favorites.filter((item,index) => index !== favoriteIndex),action.value]
+                    favorites : state.favorites.filter((item,index) => index !== favoriteIndex)
                 }
             }else {
-                // add item into the favorite
+                // add item to the favorite
                 nextState = {
                     ...state,
                     favorites : [...state.favorites,action.value]

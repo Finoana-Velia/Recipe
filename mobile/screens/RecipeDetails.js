@@ -66,6 +66,7 @@ function RecipeDetails(props) {
                     </TouchableOpacity>
                 </View>
                 <Text style={tw`text-slate-400 font-bold`}>{recipe.category}</Text>
+                <Text style={tw`text-lime-400 font-bold mt-2 text-xl`}>${recipe.price}</Text>
                 <View style={tw`mt-1`}>
                     <Text style={tw`text-xl font-bold`}>Ingredients</Text>
                     {recipe.ingredients ? 

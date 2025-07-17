@@ -6,7 +6,7 @@ import AuthNavigation from './navigations/AuthNavigation';
 
 import tw from 'twrnc';
 import { Provider } from 'react-redux';
-import Store from './reducer/ConfigureFavorite';
+import Store from './reducer/Configuration';
 
 export default function App() {
   return (

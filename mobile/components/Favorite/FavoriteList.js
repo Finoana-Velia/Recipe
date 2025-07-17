@@ -54,13 +54,13 @@ const ListItem = ({item}) => {
         </Swipeable>
     )
 }
- function FavoriteList(props) {
-
+ function FavoriteList({recipes}) {
 
     return (
         <GestureHandlerRootView style={tw`flex pb-90`}>
             <FlatList
-                data={props.favroites}
+                // data={props.favroites}
+                data={recipes}
                 keyExtractor={item => item.id}
                 renderItem={({item}) => <ListItem item={item}/>}
             />
@@ -69,10 +69,12 @@ const ListItem = ({item}) => {
     
 };
 
-const mapStateToProps = state => {
-    return {
-        favroites : state.favorites
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         favroites : state.favorites
+//     }
+// }
 
-export default connect(mapStateToProps)(FavoriteList);
+// export default connect(mapStateToProps)(FavoriteList);
+export default FavoriteList;
+

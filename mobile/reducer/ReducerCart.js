@@ -1,18 +1,46 @@
-const initalStateCart = {cart : [],subtotal : 0, discount : 0, deliveryFee : 5,total : deliveryFee};
+import { ADD_TO_CART, DECREMENT, EMPTY_CART, REMOVE_TO_CART } from "./CartActions";
 
-export default function ToggleCart(state = initalStateCart,  action){
-    let nextState;
+const initialState = { cart : []};
 
-    switch(actionn.type) {
-        case 'TOGGLE_ITEM':
-            const findItem = state.cart.findIndex(item => item.id === action.value.id);
-            if(findItem !== -1) {
-                // just increment number count
-                // nextState = {
-                //     subtotal : state.subtotal + item.value.price,
-                //     discount : if(cart.length )
+export default function ReducerCart(state = initialState, action) {
+    switch(action.type) {
+        case ADD_TO_CART : 
+            const recipe = action.payload;
+            const exist = state.cart.find(item => item.id === recipe.id);
 
-                // }
+            if(exist) {
+                return {
+                    ...state,
+                    cart : state.cart.map(item => 
+                        item.id === recipe.id ?
+                        {...item,quantity : item.quantity + 1} : item
+                    )
+                };
+            }else {
+                return {
+                    ...state,
+                    cart : [...state.cart, {...recipe, quantity : 1 }]
+                };
             }
+        case REMOVE_TO_CART : 
+            return {
+                ...state,
+                cart : state.cart.filter(item => item.id !== action.payload)
+            };
+        case DECREMENT : 
+            return {
+                ...state,
+                cart : state.cart.map(item =>
+                    item.id === action.payload ? 
+                    {...item, quantity : item.quantity > 1 ? item.quantity - 1 : 1} : item
+                ).filter(item => item.quantity !== 0)
+            };
+        case EMPTY_CART : 
+            return {
+                ...state,
+                cart : []
+            };
+        default :
+            return state;
     }
 }

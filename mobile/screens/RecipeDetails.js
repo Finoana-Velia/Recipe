@@ -8,6 +8,8 @@ import { findById, recipeImage,chefImage } from '../API/RecipeAPI';
 import { ChevronLeftIcon, HeartIcon, ShoppingCartIcon } from 'react-native-heroicons/outline';
 import { connect } from 'react-redux';
 
+import { addToCart } from '../reducer/CartActions';
+
 function RecipeDetails(props) {
     
     // const id = props.route.params;
@@ -27,6 +29,11 @@ function RecipeDetails(props) {
         const action = { type : 'TOGGLE_FAVORITE', value : recipe};
         props.dispatch(action);
         setFavorite(!isFavorite);
+    }
+    
+    const add = () => {
+        const action = addToCart(recipe);
+        props.dispatch(action);
     }
 
     return (
@@ -59,6 +66,7 @@ function RecipeDetails(props) {
                         {recipe.name}
                     </Text>
                     <TouchableOpacity
+                        onPress={add}
                         style={tw`p-1 bg-lime-500 rounded flex flex-row items-center`}
                     >
                         <ShoppingCartIcon size={28} strokeWidth={2} style={tw`text-white`}/>
@@ -106,7 +114,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        favorites : state.favorites
+        favorites : state.favorites,
     }
 }
 

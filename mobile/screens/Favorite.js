@@ -6,12 +6,14 @@ import FavoriteList from '../components/Favorite/FavoriteList';
 
 function Favorite(props) {
 
+    const recipes = props.favorites.favorites;
+
     return (
         <View style={tw`mt-10 px-2`}>
             <Header />
             <Text style={tw`text-center text-lime-500 text-2xl font-bold`}>Favorites</Text>
-            {props.favorites.length !== 0 ? 
-            <FavoriteList />
+            {recipes.length !== 0 ? 
+            <FavoriteList recipes={recipes}/>
             : <View style={tw`w-full h-[50%] flex justify-center items-center`}>
                     <Text>No more favorite recipes yet</Text>
                 </View>}
@@ -21,7 +23,7 @@ function Favorite(props) {
 
 const mapStateToProps = state => {
     return {
-        favorites : state.favorites
+        favorites : state.favorites,
     }
 }
 

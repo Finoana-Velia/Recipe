@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet} from 'react-native';
 import { TouchableOpacity } from "react-native";
-import { HeartIcon, HomeIcon, ShoppingCartIcon } from "react-native-heroicons/outline";
+import { HeartIcon, HomeIcon, ShoppingCartIcon, UserIcon } from "react-native-heroicons/outline";
 
 export default function TabCustom({state, descriptors, navigation}) {
 
@@ -16,6 +16,11 @@ export default function TabCustom({state, descriptors, navigation}) {
         } else if(name == 'Cart') {
             return (
                 <ShoppingCartIcon size={30} {...props}/>
+            )
+        }
+        else if(name == 'Profile') {
+            return (
+                <UserIcon size={30} {...props} />
             )
         }
     }

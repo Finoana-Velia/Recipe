@@ -60,8 +60,8 @@ export default function Cart() {
         <View style={tw`mt-10 px-2`}>
             <Header />
             <Text style={tw`flex jsustify-center items-center mt-2 text-2xl font-bold`}><ShoppingCartIcon strokeWidth={2.5}/> Cart</Text>
-            <View style={tw`relative w-full`}>
-                {cartItems ? <View style={tw`flex p-2`}>
+            <View style={tw`relative w-full h-[80%] pb-25`}>
+                {cartItems.length !== 0 ? <View style={tw`flex p-2`}>
                     <FlatList 
                         data={cartItems}
                         keyExtractor={item => item.id}
@@ -71,20 +71,20 @@ export default function Cart() {
                 <View style={tw`w-full h-full flex justify-center items-center h-[76%]`}>
                     <Text>None contained in the cart for the moment</Text>
                 </View>}
-                
-            </View>
-            <View style={tw`flex flex-row justify-between`}>
-                <View>
-                    <Text>Subtotal : 5 $</Text>
-                    <Text>Discount : 5 $</Text>
-                    <Text>Total : 10 $</Text>
+                <View style={tw`flex flex-row justify-between`}>
+                    <View>
+                        <Text>Subtotal : 5 $</Text>
+                        <Text>Discount : 5 $</Text>
+                        <Text>Total : 10 $</Text>
+                    </View>
+                    <TouchableOpacity
+                        style={tw`flex justify-center items-center bg-lime-500 rounded-full w-11 h-11 shadow`}
+                    >
+                        <TruckIcon size={30} style={tw`text-white`}/>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                    style={tw`flex justify-center items-center bg-lime-500 rounded-full w-11 h-11 shadow`}
-                >
-                    <TruckIcon size={30} style={tw`text-white`}/>
-                </TouchableOpacity>
             </View>
+            
         </View>
     );
 };

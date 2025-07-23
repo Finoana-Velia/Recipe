@@ -3,9 +3,11 @@ import RecipeList from "../screens/RecipeList";
 import Favorite from "../screens/Favorite";
 import Cart from "../screens/Cart";
 
-import { HeartIcon, HomeIcon, ShoppingCartIcon, } from "react-native-heroicons/outline";
+import { HeartIcon, HomeIcon, ShoppingCartIcon, UserIcon, } from "react-native-heroicons/outline";
 
 import TabCustom from "../components/tabNavigation/TabCustom";
+import ProfileScreen from "../screens/ProfileScreen";
+import DrawerNavigation from "./DrawerNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -51,6 +53,19 @@ export default function TabNavigation() {
                     tabBarIcon : () => {
                         return (
                             <ShoppingCartIcon size={25} strokeWidth={2} color='#222'/>
+                        )
+                    }
+                }}
+            />
+
+            <Tab.Screen
+                name="Profile"
+                component={DrawerNavigation}
+                options={{
+                    tabBarLabel : "Profile",
+                    tabBarIcon : () => {
+                        return (
+                            <UserIcon size={25} strokeWidth={2} color="#222"/>
                         )
                     }
                 }}

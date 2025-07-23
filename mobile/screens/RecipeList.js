@@ -60,17 +60,6 @@ export default function RecipeList() {
             <ScrollView
                 showsVerticalScrollIndicator={false}
             >
-                {/* <View style={tw`w-full flex flex-row justify-between items-center`}>
-                    <Image
-                        source={require('../assets/User_icon_2.svg.png')}
-                        style={tw`w-15 h-15 rounded-full`}
-                    />
-                    <Image
-                        source={require('../assets/Ginyard-removebg-preview.png')}
-                        style={tw`w-20 h-20 rounded`}
-                    />
-                    <BellIcon size="30" strokeWidth={2} color='black'/>
-                </View> */}
                 <Header />
                 
                 <View style={tw`flex flex-row rounded bg-slate-200`}>
@@ -84,7 +73,6 @@ export default function RecipeList() {
                     <MagnifyingGlassIcon size={20} strokeWidth={3} 
                     color='gray' style={tw`rounded-full my-auto`}/>
                 </View>
-                {/* <CategoryComponent /> */}
                 <Animated.View entering={FadeInDown.duration(500).springify()}>
                     <ScrollView
                         horizontal

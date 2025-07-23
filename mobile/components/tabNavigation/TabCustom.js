@@ -18,7 +18,7 @@ export default function TabCustom({state, descriptors, navigation}) {
                 <ShoppingCartIcon size={30} {...props}/>
             )
         }
-        else if(name == 'Profile') {
+        else if(name == 'User') {
             return (
                 <UserIcon size={30} {...props} />
             )

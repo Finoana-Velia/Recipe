@@ -59,7 +59,7 @@ export default function Cart() {
     return (
         <View style={tw`mt-10 px-2`}>
             <Header />
-            <Text style={tw`flex jsustify-center items-center mt-2 text-2xl font-bold`}><ShoppingCartIcon strokeWidth={2.5}/> Cart</Text>
+            <Text style={tw`flex justify-center items-center mt-2 text-2xl font-bold`}><ShoppingCartIcon strokeWidth={2.5}/> Cart</Text>
             <View style={tw`relative w-full h-[80%] pb-25`}>
                 {cartItems.length !== 0 ? <View style={tw`flex p-2`}>
                     <FlatList 
@@ -68,7 +68,7 @@ export default function Cart() {
                         renderItem={renderItem}
                     />
                 </View> : 
-                <View style={tw`w-full h-full flex justify-center items-center h-[76%]`}>
+                <View style={tw`w-full h-full flex justify-center items-center h-full`}>
                     <Text>None contained in the cart for the moment</Text>
                 </View>}
                 <View style={tw`flex flex-row justify-between`}>

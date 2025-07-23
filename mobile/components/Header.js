@@ -8,10 +8,14 @@ export default function Header() {
 
     return (
         <View style={tw`w-full flex flex-row justify-between items-center`}>
-            <Image
-                source={require('../assets/User_icon_2.svg.png')}
-                style={tw`w-15 h-15 rounded-full`}
-            />
+            <TouchableOpacity
+                onPress={() => navigation.openDrawer()}
+            >
+                <Image
+                    source={require('../assets/User_icon_2.svg.png')}
+                    style={tw`w-15 h-15 rounded-full`}
+                />
+            </TouchableOpacity>
             <Image
                 source={require('../assets/Ginyard-removebg-preview.png')}
                 style={tw`w-20 h-20 rounded`}

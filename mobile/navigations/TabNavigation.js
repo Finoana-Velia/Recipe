@@ -58,18 +58,18 @@ export default function TabNavigation() {
                 }}
             />
 
-            <Tab.Screen
-                name="Profile"
+            {/* <Tab.Screen
+                name="User"
                 component={DrawerNavigation}
                 options={{
-                    tabBarLabel : "Profile",
+                    tabBarLabel : "User",
                     tabBarIcon : () => {
                         return (
                             <UserIcon size={25} strokeWidth={2} color="#222"/>
                         )
                     }
                 }}
-            />
+            /> */}
         </Tab.Navigator>
     );
 }

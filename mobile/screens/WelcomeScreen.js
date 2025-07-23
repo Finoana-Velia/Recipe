@@ -58,7 +58,7 @@ export default function WelcomeScreen() {
                     <TouchableOpacity
                         onPress={() => navigation.navigate('Register')}
                     >
-                        <Text style={tw`text-md text-white font-bold`}>Sign Up</Text>
+                        <Text style={tw`text-white font-bold`}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -7,9 +7,29 @@ import Cached from '../helpers/Image';
 import { recipeImage } from '../API/RecipeAPI';
 import { addToCart, decrement, removeToCart } from '../reducer/CartActions';
 import { Swipeable } from 'react-native-gesture-handler';
+import { useEffect, useState } from 'react';
 
 export default function Cart() {
     const cartItems = useSelector(state => state.cart.cart);
+
+    const [subtotal, setSubtotal] = useState(0);
+    const [deliveryFee, setDeliveryFee] = useState(5);
+    const [discount, setDiscount] = useState(0);
+    const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        let numberOfElement = 0;
+        cartItems.forEach(element => {
+            numberOfElement += element.quantity;
+        });
+        setDiscount(numberOfElement);
+        let subtotalValue = 0;
+        cartItems.forEach(element => {
+            subtotalValue += element.price
+        });
+        setSubtotal(subtotalValue);
+        
+    });
 
     const dispatcher = useDispatch();
     
@@ -21,6 +41,13 @@ export default function Cart() {
             <TrashIcon style={tw`text-white`}/>
         </TouchableOpacity>
     )
+
+    const increment = (item) => {
+        dispatcher(addToCart(item));
+        setDiscount(discount + 1);
+        setSubtotal(subtotal + item.price);
+    }
+    
 
     const renderItem = ({item}) => (
         <Swipeable renderRightActions={() => deleteFromCart(item.id)}>
@@ -34,7 +61,7 @@ export default function Cart() {
                     url={{ uri : recipeImage(item.id) }}
                 />
                 <View style={tw`w-[50%] flex flex-col gap-2 pl-1`}>
-                    <Text style={tw`text-lime-500 text-md font-bold`}>{item.name}</Text>
+                    <Text style={tw`text-lime-500 font-bold`}>{item.name}</Text>
                     <Text style={tw`text-slate-400 font-bold`}>{item.category}</Text>
                     <Text style={tw`text-lime-400 font-bold`}>$ {item.price}</Text>
                 </View>
@@ -47,7 +74,8 @@ export default function Cart() {
                     </TouchableOpacity>
                     <Text>{item.quantity}</Text>
                     <TouchableOpacity
-                        onPress={() => dispatcher(addToCart(item))} 
+                        // onPress={() => dispatcher(addToCart(item))} 
+                        onPress={() => increment(item)}
                         style={tw`flex bg-white justify-center items-center shadow rounded-full`}
                     >
                         <PlusIcon size={30}/>
@@ -73,7 +101,8 @@ export default function Cart() {
                 </View>}
                 <View style={tw`flex flex-row justify-between`}>
                     <View>
-                        <Text>Subtotal : 5 $</Text>
+                        <Text>Elements : {discount}</Text>
+                        <Text>Subtotal : {subtotal} $</Text>
                         <Text>Discount : 5 $</Text>
                         <Text>Total : 10 $</Text>
                     </View>

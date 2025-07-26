@@ -10,29 +10,26 @@ import { Swipeable } from 'react-native-gesture-handler';
 import { useEffect, useState } from 'react';
 
 export default function Cart() {
-    const cartItems = useSelector(state => state.cart.cart);
-
-    const [subtotal, setSubtotal] = useState(0);
-    const [deliveryFee, setDeliveryFee] = useState(5);
-    const [discount, setDiscount] = useState(0);
-    const [total, setTotal] = useState(0);
-
-    useEffect(() => {
-        let numberOfElement = 0;
-        cartItems.forEach(element => {
-            numberOfElement += element.quantity;
-        });
-        setDiscount(numberOfElement);
-        let subtotalValue = 0;
-        cartItems.forEach(element => {
-            subtotalValue += element.price
-        });
-        setSubtotal(subtotalValue);
-        
-    });
-
+    const cartItems = useSelector((state) => state.cart.cart);
     const dispatcher = useDispatch();
+
+    let subtotal = 0;
+    let totalQuantity = 0;
+    if(cartItems.length !== 0) {
+        subtotal = cartItems.reduce((sum, product) => sum + product.price*product.quantity,0);
+        totalQuantity = cartItems.reduce((sum, product) => sum + product.quantity);
+    }
     
+    let deliveryFee = 5;
+    let discount = 0;
+    let discountValue = 0;
+    if(totalQuantity === 10) {
+        discount = 5;
+        discountValue = 0.05 * (subtotal + deliveryFee);
+    }
+
+    const total = subtotal + deliveryFee - discountValue;
+
     const deleteFromCart = (id) => (
         <TouchableOpacity 
             style={tw`w-15 bg-red-500 flex justify-center items-center`}
@@ -44,8 +41,6 @@ export default function Cart() {
 
     const increment = (item) => {
         dispatcher(addToCart(item));
-        setDiscount(discount + 1);
-        setSubtotal(subtotal + item.price);
     }
     
 
@@ -101,10 +96,14 @@ export default function Cart() {
                 </View>}
                 <View style={tw`flex flex-row justify-between`}>
                     <View>
-                        <Text>Elements : {discount}</Text>
                         <Text>Subtotal : {subtotal} $</Text>
-                        <Text>Discount : 5 $</Text>
-                        <Text>Total : 10 $</Text>
+                        <View style={tw`gap-2 flex flex-row`}>
+                            <Text>Discount : </Text>
+                            <Text style={tw`text-slate-400`}>( {discount} %)</Text>
+                            <Text>{discountValue} $</Text>
+                        </View>
+                        <Text>Delivery fee : {deliveryFee} $</Text>
+                        <Text>Total : {total} $</Text>
                     </View>
                     <TouchableOpacity
                         style={tw`flex justify-center items-center bg-lime-500 rounded-full w-11 h-11 shadow`}

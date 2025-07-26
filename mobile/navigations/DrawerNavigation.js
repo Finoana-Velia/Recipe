@@ -1,8 +1,5 @@
-import { createDrawerNavigator, DrawerContentScrollView } from "@react-navigation/drawer";
-import ProfileScreen from "../screens/ProfileScreen";
-import TestScreen from "../screens/TestScreen";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import DrawerCustom from "../components/DrawerCustom";
-import { View } from "react-native";
 import TabNavigation from "./TabNavigation";
 
 const Drawer = createDrawerNavigator();

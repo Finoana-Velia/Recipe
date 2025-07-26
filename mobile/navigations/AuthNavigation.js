@@ -3,12 +3,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterNavigation from "./RegisterNavigation";
-import RegsiterScreen from "../screens/RegisterScreen";
-import TabNavigation from "./TabNavigation";
 import RecipeDetails from "../screens/RecipeDetails";
 import Notification from "../screens/Notification";
-import Personal from "../components/Register/Personal";
 import DrawerNavigation from "./DrawerNavigation";
+import Order from "../screens/Order";
 // import RegsiterScreen from "../screens/RegisterScreen";
 
 
@@ -24,7 +22,7 @@ export default function AuthNavigation() {
                 <Stack.Screen name="Home" component={DrawerNavigation} />
                 <Stack.Screen name="Detail" component={RecipeDetails} />
                 <Stack.Screen name="Notification" component={Notification} />
-                {/* <Stack.Screen name="Register" component={RegsiterScreen} /> */}
+                <Stack.Screen name="Order" component={Order} />
             </Stack.Navigator>
         </NavigationContainer>
     )

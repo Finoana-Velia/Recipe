@@ -8,32 +8,24 @@ import { useState } from "react";
 import { connect } from "react-redux";
 
 function Card(props) {
-    // console.log("");
-    // console.log(props);
-    // console.warn("Dispatch");
-    // console.log(props.dispatch);
-    // console.warn("favorites");
-    // console.log(props.favorites);
-    // console.warn("Item");
-    // console.log(props.item);
-    // console.warn("navigation");
-    // console.log(props.navigation);
-    // console.log("");
 
     const item = props.item;
     const navigation = props.navigation;
     const recipe = props.item.item;
-    
+
+    // console.log("name : " + recipe.name);
+    // console.log(props.favorites.favorites);
+
+    const isFavorite = props.favorites.favorites.findIndex(item => 
+        item.id === recipe.id
+    ) !== -1;
+
     let pair = item.i%2 == 0;
     let impair = item.i%3 == 0;
-
-    const [isFavorite, setFavorite] = useState(false);
 
     const toggleFavorite = () => {
         const action = { type : 'TOGGLE_FAVORITE', value : recipe};
         props.dispatch(action);
-        setFavorite(!isFavorite);
-
     }
 
     return (

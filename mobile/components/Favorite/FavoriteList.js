@@ -1,6 +1,6 @@
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { GestureHandlerRootView, Swipeable } from "react-native-gesture-handler";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
 import tw from 'twrnc';
 import Cached from "../../helpers/Image";
@@ -11,21 +11,22 @@ import { useNavigation } from "@react-navigation/native";
 const ListItem = ({item}) => {
 
     const navigation = useNavigation();
+    const dispatchAction = useDispatch();
     
     const renderAction = () => (
         <View style={tw`flex flex-row`}>
             <TouchableOpacity style={tw`w-24 justify-center items-center bg-lime-500`}>
-                {/* <Text style={tw`text-white`}>Edit</Text> */}
                 <ShoppingCartIcon style={tw`text-white`} size={30} strokeWidth={2}/>
             </TouchableOpacity>
         </View>
-    )
+    );
+
+    const toggleFavorite = () => {
+        dispatchAction({ type :'TOGGLE_FAVORITE', value : item});
+    }
 
     return (
         <Swipeable renderRightActions={renderAction} containerStyle={{ marginBottom : 2}}>
-            {/* <View style={tw`bg-slate-200 p-5`}>
-                <Text style={tw`text-xl font-bold`}>{item.name}</Text>
-            </View> */}
             <View style={tw`flex flex-row gap-2 border-b border-slate-200 py-2`}>
                 <Cached 
                     decorator={{
@@ -37,10 +38,12 @@ const ListItem = ({item}) => {
                 />
                 <View style={tw`flex gap-2`}>
                     <Text style={tw`text-lime-500 font-bold text-xl`}>{item.name}</Text>
-                    <Text style={tw`text-md text-slate-500 font-bold`}>{item.category}</Text>
+                    <Text style={tw`text-slate-500 font-bold`}>{item.category}</Text>
                     <View style={tw`flex flex-row gap-5`}>
                         <Text style={tw`text-lime-400 text-xl font-bold`}>${item.price}</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => toggleFavorite()}
+                        >
                             <HeartIcon size={25} strokeWidth={2} style={tw`text-red-500`}/>
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -69,12 +72,5 @@ const ListItem = ({item}) => {
     
 };
 
-// const mapStateToProps = state => {
-//     return {
-//         favroites : state.favorites
-//     }
-// }
-
-// export default connect(mapStateToProps)(FavoriteList);
 export default FavoriteList;
 

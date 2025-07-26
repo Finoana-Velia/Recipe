@@ -8,8 +8,12 @@ import { recipeImage } from '../API/RecipeAPI';
 import { addToCart, decrement, removeToCart } from '../reducer/CartActions';
 import { Swipeable } from 'react-native-gesture-handler';
 import { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Cart() {
+
+    const navigation = useNavigation();
+
     const cartItems = useSelector((state) => state.cart.cart);
     const dispatcher = useDispatch();
 
@@ -17,9 +21,9 @@ export default function Cart() {
     let totalQuantity = 0;
     if(cartItems.length !== 0) {
         subtotal = cartItems.reduce((sum, product) => sum + product.price*product.quantity,0);
-        totalQuantity = cartItems.reduce((sum, product) => sum + product.quantity);
+        totalQuantity = cartItems.reduce((sum, product) => sum + product.quantity,0);
     }
-    
+
     let deliveryFee = 5;
     let discount = 0;
     let discountValue = 0;
@@ -41,6 +45,7 @@ export default function Cart() {
 
     const increment = (item) => {
         dispatcher(addToCart(item));
+        
     }
     
 
@@ -91,7 +96,7 @@ export default function Cart() {
                         renderItem={renderItem}
                     />
                 </View> : 
-                <View style={tw`w-full h-full flex justify-center items-center h-full`}>
+                <View style={tw`w-full h-[90%] flex justify-center items-center`}>
                     <Text>None contained in the cart for the moment</Text>
                 </View>}
                 <View style={tw`flex flex-row justify-between`}>
@@ -106,6 +111,14 @@ export default function Cart() {
                         <Text>Total : {total} $</Text>
                     </View>
                     <TouchableOpacity
+                        onPress={() => navigation.navigate('Order',{
+                            cart : cartItems,
+                            subtotal : subtotal,
+                            discount : discount,
+                            discountValue : discountValue,
+                            deliveryFee : deliveryFee,
+                            total : total
+                        })}
                         style={tw`flex justify-center items-center bg-lime-500 rounded-full w-11 h-11 shadow`}
                     >
                         <TruckIcon size={30} style={tw`text-white`}/>

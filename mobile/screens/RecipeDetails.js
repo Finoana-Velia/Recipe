@@ -14,21 +14,25 @@ function RecipeDetails(props) {
     
     // const id = props.route.params;
     const recipe = props.route.params;
+    // console.log(props.favorites.favorites);
 
     // const [recipe, setRecipe] = useState(null);
-    const [isFavorite, setFavorite] = useState(false);
+    // const [isFavorite, setFavorite] = useState(false);
     const navigation = useNavigation();
+
+    const isFavorite = props.favorites.favorites.findIndex(item =>
+        item.id === recipe.id
+    ) !== - 1;
 
     // useEffect(() => {
     //     findById(id).then(response => setTimeout(() => {
-    //         console.log(response)
+    //         setRecipe(response);
     //     },1000))
     // });
 
     const toggleFavorite = () => {
         const action = { type : 'TOGGLE_FAVORITE', value : recipe};
         props.dispatch(action);
-        setFavorite(!isFavorite);
     }
     
     const add = () => {

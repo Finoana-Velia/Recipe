@@ -110,19 +110,21 @@ export default function Cart() {
                         <Text>Delivery fee : {deliveryFee} $</Text>
                         <Text>Total : {total} $</Text>
                     </View>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate('Order',{
-                            cart : cartItems,
-                            subtotal : subtotal,
-                            discount : discount,
-                            discountValue : discountValue,
-                            deliveryFee : deliveryFee,
-                            total : total
-                        })}
-                        style={tw`flex justify-center items-center bg-lime-500 rounded-full w-11 h-11 shadow`}
-                    >
+                    {cartItems.length !== 0 ? 
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('Order',{
+                                cart : cartItems,
+                                subtotal : subtotal,
+                                discount : discount,
+                                discountValue : discountValue,
+                                deliveryFee : deliveryFee,
+                                total : total
+                            })}
+                            style={tw`flex justify-center items-center bg-lime-500 rounded-full w-11 h-11 shadow`}
+                        >
                         <TruckIcon size={30} style={tw`text-white`}/>
-                    </TouchableOpacity>
+                    </TouchableOpacity> : <View></View>
+                    }
                 </View>
             </View>
             
